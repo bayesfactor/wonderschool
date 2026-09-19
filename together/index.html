@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Japan Desk — work together | Wonderschool</title>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+.hub .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px;margin:20px 0;}
+.role{background:var(--surface-1);border:1px solid var(--edge);border-top:5px solid var(--accent);
+  border-radius:14px;padding:18px 20px;}
+.role.r1{border-top-color:var(--g2);}
+.role.r2{border-top-color:var(--g4);}
+.role.r3{border-top-color:var(--accent-2);}
+.role.r4{border-top-color:var(--g6);}
+.role .band{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px;}
+.role .rname{font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.15;}
+.role p{font-size:14.5px;margin:0 0 10px;}
+.role ul{margin:0 0 4px;padding-left:19px;}
+.role li{font-size:14px;line-height:1.55;color:var(--text-secondary);margin-bottom:6px;}
+.role .power{font-size:13.5px;color:var(--text-primary);border-top:1px solid var(--edge);
+  padding-top:9px;margin-top:10px;}
+.hub .steps{counter-reset:s;list-style:none;padding:0;margin:16px 0;}
+.hub .steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:16px;
+  font-size:15.5px;line-height:1.6;color:var(--text-secondary);max-width:66ch;}
+.hub .steps li::before{content:counter(s);position:absolute;left:0;top:-1px;
+  width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;
+  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
+.hub .steps li b{color:var(--text-primary);}
+.chartplan{background:var(--surface-1);border:1px solid var(--edge);border-radius:12px;
+  padding:16px;margin:18px 0;font-family:"SF Mono",Menlo,Consolas,monospace;
+  font-size:12.5px;line-height:1.75;color:var(--text-secondary);white-space:pre;overflow-x:auto;}
+.timing{width:100%;border-collapse:collapse;font-size:14.5px;margin:14px 0;}
+.timing td,.timing th{border-bottom:1px solid var(--edge);padding:8px 6px;text-align:left;
+  color:var(--text-secondary);}
+.timing th{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-muted);}
+.timing td:first-child{white-space:nowrap;color:var(--text-primary);font-weight:600;width:1%;padding-right:18px;}
+@media print{
+  @page{size:letter portrait;margin:0.55in 0.6in;}
+  body.hub{background:#fff;color:#14140f;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
+  .hub main{max-width:none;padding:0;}
+  .hub p,.hub .lede{max-width:none;color:#33322d;}
+  .hub h1{font-size:26pt;margin-bottom:8px;}
+  .hub h2{font-size:14pt;margin:16px 0 6px;padding-bottom:4px;
+    border-bottom:1.5px solid #14140f;break-after:avoid;}
+  .hub p{font-size:10.2pt;line-height:1.5;margin-bottom:7px;}
+  .hub .lede{font-size:11.5pt;line-height:1.5;}
+  .kicker{font-size:8.5pt;letter-spacing:2.4px;}
+  .note{border-left-color:#8a1f1f;break-inside:avoid;}
+  .note p{font-size:10pt;}
+  .hub .roles{grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
+  .role{break-inside:avoid;border:1.5px solid #14140f;border-top-width:4px;padding:11px 13px;}
+  .role .band{font-size:8pt;letter-spacing:1.8px;}
+  .role .rname{font-size:14pt;margin-bottom:5px;}
+  .role p{font-size:9.6pt;margin-bottom:6px;}
+  .role li{font-size:9.4pt;line-height:1.42;margin-bottom:3px;color:#33322d;}
+  .role .power{font-size:9.4pt;padding-top:6px;margin-top:6px;border-top:1px solid #c4c4bb;}
+  .chartplan{font-size:9pt;line-height:1.55;border:1.5px solid #14140f;padding:11px;break-inside:avoid;}
+  .hub .steps li{font-size:10.2pt;line-height:1.5;margin-bottom:9px;padding-left:34px;max-width:none;}
+  .hub .steps li::before{width:23px;height:23px;font-size:11px;background:#14140f;}
+  .timing{font-size:10pt;break-inside:avoid;}
+  .timing td,.timing th{padding:4px 5px;border-bottom:1px solid #c4c4bb;color:#33322d;}
+  .site-bar{display:none !important;}
+  footer{font-size:9pt;}
+}
+</style>
+</head>
+<body class="hub">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/together/">Work together</a>
+  <span class="spacer"></span>
+  <button class="printbtn" onclick="window.print()">Print</button>
+</nav>
+
+<main>
+  <p class="kicker">Grades 2–6 together · 2 to 4 students · about 25 minutes</p>
+  <h1>The Japan Desk</h1>
+  <p class="lede">One wall chart about Japan. Four jobs. Nobody can finish their job without somebody else's —
+  which is the point. The second grader is not helping the sixth grader; the sixth grader cannot write a word
+  until the second grader has drawn the space for it.</p>
+
+  <div class="note">
+    <p><strong>You need:</strong> one large sheet of paper (tape two together if you have none), pencils and
+    colored pencils, and the printed Country Cards. Everything else comes out of what each of you already did
+    in your own lesson.</p>
+  </div>
+
+  <h2>Warm-up: the island guess</h2>
+  <p>Everybody writes a number on a scrap of paper — <em>how many islands is Japan?</em> — then all reveal at
+  once. Closest wins. Nobody is allowed to say their guess out loud first, because the youngest will copy the
+  oldest and then nobody learns anything. The answer is at the bottom of this page, upside down in your head:
+  <strong>14,125</strong>, recounted in 2023, up from the 6,852 Japan had been claiming for thirty-five years.
+  Ask the winner <em>why</em> a country loses track of seven thousand islands.</p>
+
+  <h2>The four jobs</h2>
+
+  <div class="roles">
+    <div class="role r1">
+      <div class="band">Grades 2–3</div>
+      <div class="rname">The Illustrator</div>
+      <p>You own everything anyone can see. You decide the layout, which means you decide how much room each
+      person gets.</p>
+      <ul>
+        <li>Draw Japan: four big islands in a curve, tiny dots all around.</li>
+        <li>Draw a torii gate and Mount Fuji somewhere on the chart.</li>
+        <li>Write the chart's headings in kanji where you know one — 山 mountain, 川 river, 日 sun, 人 person.</li>
+        <li>Write a haiku across the top: five beats, seven beats, five beats.</li>
+      </ul>
+      <p class="power"><strong>Your power:</strong> you rule the layout. If someone wants more space they have
+      to ask you, and you can say no.</p>
+    </div>
+
+    <div class="role r2">
+      <div class="band">Grades 3–4</div>
+      <div class="rname">The Quartermaster</div>
+      <p>You run the Country Cards deck and you supply every number that goes on the chart. No number reaches
+      the wall except through you.</p>
+      <ul>
+        <li>Deal the cards and find <strong>three categories where Japan beats the USA</strong>.</li>
+        <li>Find <strong>three where Japan loses</strong>.</li>
+        <li>Hand each number to the Fact-checker on a slip with the category written on it.</li>
+      </ul>
+      <p class="power"><strong>Your power:</strong> the Analyst cannot write the verdict until you have
+      delivered at least four approved numbers. They have to wait for you.</p>
+    </div>
+
+    <div class="role r3">
+      <div class="band">Grades 4–5</div>
+      <div class="rname">The Fact-checker</div>
+      <p>Nothing goes on the chart without a source written next to it. Not the drawings — the claims.</p>
+      <ul>
+        <li>For every number, write where it came from and what year it is from.</li>
+        <li>If nobody can say where a number came from, it does not go up. Cross it out.</li>
+        <li>Catch at least one claim that somebody assumed rather than checked.</li>
+      </ul>
+      <p class="power"><strong>Your power:</strong> a veto over everyone, including the oldest person at the
+      table. Use it at least twice or you are not doing the job.</p>
+    </div>
+
+    <div class="role r4">
+      <div class="band">Grades 5–6</div>
+      <div class="rname">The Analyst</div>
+      <p>You write the verdict at the bottom of the chart. Two sentences, and a third that argues against you.</p>
+      <ul>
+        <li>Sentence 1: is Japan a <strong>rich</strong> country? Commit — no "it depends".</li>
+        <li>Sentence 2: is Japan a <strong>free</strong> country? Same rule.</li>
+        <li>Sentence 3: the strongest argument that you are wrong.</li>
+      </ul>
+      <p class="power"><strong>Your power:</strong> none. You have to persuade the Illustrator to give you
+      space and wait for the Quartermaster's numbers. That is the job.</p>
+    </div>
+  </div>
+
+  <h2>How the chart is laid out</h2>
+  <div class="chartplan">┌──────────────────────────────────────────────────┐
+│  haiku  (Illustrator)                            │
+├───────────────────────────┬──────────────────────┤
+│                           │  BY THE NUMBERS      │
+│    map of Japan           │  Japan wins: 1 2 3   │
+│    torii · Mount Fuji     │  Japan loses: 1 2 3  │
+│    (Illustrator)          │  (Quartermaster)     │
+│                           │  every line stamped  │
+│                           │  ✓ by Fact-checker   │
+├───────────────────────────┴──────────────────────┤
+│  VERDICT  (Analyst)                              │
+│  Rich? ___  Free? ___  But I might be wrong: ___ │
+└──────────────────────────────────────────────────┘</div>
+
+  <h2>Running it</h2>
+  <ol class="steps">
+    <li><b>Assign jobs by age, oldest to the Analyst.</b> If two students are close in age, let them pick —
+    but nobody does the job they did last time.</li>
+    <li><b>Illustrator draws first, alone, for five minutes.</b> Everyone else reads their own material and
+    gets their material ready. The chart has to exist before anyone can argue about it.</li>
+    <li><b>Quartermaster and Fact-checker work as a pair</b> for eight minutes. Numbers get found, sourced,
+    and either approved or killed. Expect arguments. Arguments are the lesson.</li>
+    <li><b>Analyst writes last</b>, with five minutes, using only approved numbers. If the Quartermaster was
+    slow, the Analyst writes a shorter verdict. Do not rescue them.</li>
+    <li><b>Challenge round, five minutes.</b> Rules below.</li>
+  </ol>
+
+  <h2>Challenge round</h2>
+  <p>The teacher asks questions about Japan and anybody may answer. <strong>A correct answer from the youngest
+  student is worth three points; from the oldest, one point.</strong> Announce this rule before the group work
+  starts, not after — it makes the older students teach the younger ones during the activity, because that is
+  how their team wins.</p>
+  <p>Ten questions that work at every age: How many islands? Name two of the four big ones. What is a torii?
+  What is the most popular sport? How many sumo tournaments a year? What year was Nintendo founded? Who invented
+  Pokémon? What is Japan's rank by total economy? What is its rank by money per person? Why are those two
+  different?</p>
+
+  <h2>If you have fewer than four students</h2>
+  <table class="timing">
+    <tr><th>Students</th><th>How to split the jobs</th></tr>
+    <tr><td>Three</td><td>Illustrator · Quartermaster · Analyst. The <strong>teacher</strong> plays
+      Fact-checker and is deliberately annoying about sources.</td></tr>
+    <tr><td>Two</td><td>Younger takes Illustrator + Quartermaster. Older takes Fact-checker + Analyst —
+      which means they must fact-check their own evidence before using it, which is harder and fairer.</td></tr>
+  </table>
+
+  <h2>Timing</h2>
+  <table class="timing">
+    <tr><th>Time</th><th>What happens</th></tr>
+    <tr><td>0–3 min</td><td>Island guess, reveal, argue about why</td></tr>
+    <tr><td>3–5 min</td><td>Jobs assigned, challenge-round scoring rule announced</td></tr>
+    <tr><td>5–10 min</td><td>Illustrator draws; everyone else gathers material</td></tr>
+    <tr><td>10–18 min</td><td>Quartermaster finds numbers, Fact-checker approves or kills them</td></tr>
+    <tr><td>18–23 min</td><td>Analyst writes the verdict; Illustrator finishes the haiku</td></tr>
+    <tr><td>23–28 min</td><td>Challenge round, younger answers worth triple</td></tr>
+  </table>
+
+  <div class="note">
+    <p><strong>What success looks like:</strong> at least one number got crossed off the chart for having no
+    source, at least one older student explained something to a younger one without being asked, and the
+    verdict at the bottom contains a real argument against itself. A beautiful chart with unsourced numbers
+    on it is a failed chart.</p>
+  </div>
+
+  <footer>
+    Materials: <a href="/grade-2/japan-passport.html">passport</a> ·
+    <a href="/grade-4/japan-cards.html">country cards</a> ·
+    <a href="/grade-4/japan-quest.html">quest</a> ·
+    <a href="/grade-6/japan-dossier.html">dossier</a> ·
+    <a href="/grade-6/japan-data-desk.html">data desk</a>
+  </footer>
+</main>
+</body>
+</html>

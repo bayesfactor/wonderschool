@@ -1,0 +1,99 @@
+/* Wonderschool — shared site shell.
+   Content documents (passport, cards, dossier) bring their own body styles;
+   this file only styles the chrome around them plus the hub pages. */
+
+:root{
+  color-scheme:light;
+  --surface-0:#f4f4f1;
+  --surface-1:#fcfcfb;
+  --edge:#dedbd2;
+  --text-primary:#0b0b0b;
+  --text-secondary:#52514e;
+  --text-muted:#7c7a72;
+  --accent:#2a78d6;
+  --accent-2:#eb6834;
+  --g2:#1baf7a;
+  --g4:#2a78d6;
+  --g6:#4a3aa7;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --surface-0:#121211;
+    --surface-1:#1a1a19;
+    --edge:#34342f;
+    --text-primary:#ffffff;
+    --text-secondary:#c3c2b7;
+    --text-muted:#8e8d84;
+    --accent:#3987e5;
+    --accent-2:#d95926;
+    --g2:#199e70;
+    --g4:#3987e5;
+    --g6:#9085e9;
+  }
+}
+
+/* ---------- site bar (sits above any content document) ---------- */
+.site-bar{
+  font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+  background:var(--surface-1);
+  border-bottom:1px solid var(--edge);
+  padding:10px 18px;
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  position:sticky;top:0;z-index:100;
+}
+.site-bar a{color:var(--text-secondary);text-decoration:none;font-size:14px;}
+.site-bar a:hover{color:var(--text-primary);}
+.site-bar .brand{font-weight:700;color:var(--text-primary);font-size:15px;letter-spacing:-.2px;}
+.site-bar .sep{color:var(--text-muted);font-size:13px;}
+.site-bar .spacer{flex:1;}
+.site-bar .printbtn{
+  font:inherit;font-size:13.5px;padding:6px 13px;border-radius:9px;cursor:pointer;
+  border:1px solid var(--edge);background:transparent;color:var(--text-secondary);}
+.site-bar .printbtn:hover{border-color:var(--text-muted);color:var(--text-primary);}
+@media print{ .site-bar{display:none !important;} }
+
+/* ---------- hub pages ---------- */
+body.hub{
+  margin:0;padding:0;background:var(--surface-0);color:var(--text-primary);
+  font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;
+}
+.hub main{max-width:940px;margin:0 auto;padding:34px 18px 80px;}
+.hub .kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin:0 0 8px;}
+.hub h1{font-size:clamp(30px,6vw,46px);margin:0 0 12px;letter-spacing:-1px;line-height:1.05;}
+.hub h2{font-size:22px;margin:34px 0 10px;}
+.hub p{line-height:1.65;color:var(--text-secondary);margin:0 0 14px;max-width:64ch;}
+.hub .lede{font-size:17px;max-width:60ch;}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin:24px 0;}
+.card{
+  display:block;text-decoration:none;color:inherit;
+  background:var(--surface-1);border:1px solid var(--edge);border-left:5px solid var(--accent);
+  border-radius:14px;padding:20px;transition:.14s;
+}
+.card:hover{transform:translateY(-2px);border-color:var(--text-muted);box-shadow:0 6px 22px rgba(0,0,0,.09);}
+.card.g2{border-left-color:var(--g2);}
+.card.g4{border-left-color:var(--g4);}
+.card.g6{border-left-color:var(--g6);}
+.card .grade{font-size:11px;letter-spacing:2.4px;text-transform:uppercase;color:var(--text-muted);margin-bottom:6px;}
+.card .title{font-size:20px;font-weight:700;margin-bottom:6px;line-height:1.2;}
+.card .desc{font-size:14.5px;color:var(--text-secondary);line-height:1.55;margin:0;}
+.card .meta{font-size:12.5px;color:var(--text-muted);margin-top:10px;}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:14px;margin:18px 0 8px;}
+.tile{
+  display:block;text-decoration:none;color:inherit;
+  background:var(--surface-1);border:1px solid var(--edge);border-radius:12px;padding:16px 18px;transition:.14s;
+}
+.tile:hover{border-color:var(--accent);transform:translateY(-1px);}
+.tile .t{font-size:16.5px;font-weight:600;margin-bottom:4px;}
+.tile .d{font-size:13.5px;color:var(--text-secondary);line-height:1.5;margin:0;}
+.tile .tag{display:inline-block;font-size:10.5px;letter-spacing:1.6px;text-transform:uppercase;
+  color:var(--text-muted);border:1px solid var(--edge);border-radius:20px;padding:2px 9px;margin-bottom:8px;}
+
+.note{border-left:3px solid var(--accent-2);padding:2px 0 2px 16px;margin:20px 0;}
+.note p{font-size:14.5px;margin:0;}
+
+.hub footer{border-top:1px solid var(--edge);margin-top:48px;padding-top:18px;
+  font-size:12.5px;color:var(--text-muted);line-height:1.7;max-width:70ch;}
+.hub footer a{color:var(--text-secondary);}

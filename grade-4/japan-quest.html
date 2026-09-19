@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Japan Quest | Wonderschool</title>
+<style>
+:root{
+  --bg:#0e1626; --panel:#16223a; --panel2:#1d2b47; --edge:#2e4368;
+  --ink:#eaf0fb; --dim:#9db0d0; --gold:#f5c451; --good:#41d19a; --bad:#f2647a;
+  --z1:#4ec9a0; --z2:#5aa9f0; --z3:#f5b13d; --z4:#b98df0; --z5:#f2707f;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);
+  font-family:"Trebuchet MS",Verdana,system-ui,sans-serif;}
+body{min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:14px;}
+#app{width:100%;max-width:780px;}
+h1{font-size:clamp(30px,7vw,52px);margin:0;letter-spacing:-1px;line-height:1;}
+h2{font-size:clamp(20px,4.4vw,28px);margin:0 0 6px;}
+p{line-height:1.6;}
+.card{background:var(--panel);border:2px solid var(--edge);border-radius:16px;padding:18px;margin-bottom:14px;}
+.hidden{display:none !important;}
+button{font-family:inherit;font-size:16px;cursor:pointer;border-radius:12px;border:2px solid var(--edge);
+  background:var(--panel2);color:var(--ink);padding:12px 16px;transition:.12s;}
+button:hover:not(:disabled){border-color:var(--gold);transform:translateY(-1px);}
+button:disabled{opacity:.55;cursor:default;}
+.btn-main{background:var(--gold);color:#14203a;border-color:var(--gold);font-weight:bold;font-size:18px;padding:14px 26px;}
+.btn-main:hover{filter:brightness(1.08);}
+/* HUD */
+#hud{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;
+  background:var(--panel);border:2px solid var(--edge);border-radius:14px;padding:10px 14px;margin-bottom:14px;}
+.stat{font-size:14px;color:var(--dim);}
+.stat b{color:var(--ink);font-size:19px;display:block;}
+.stat b.gold{color:var(--gold);}
+/* map */
+.zonegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:12px;}
+.zone{border:2px solid var(--edge);border-radius:14px;padding:16px;background:var(--panel2);
+  text-align:left;display:flex;flex-direction:column;gap:6px;}
+.zone .ztitle{font-size:19px;font-weight:bold;}
+.zone .zdesc{font-size:13.5px;color:var(--dim);line-height:1.45;}
+.zone .zmeta{font-size:12.5px;color:var(--dim);margin-top:4px;}
+.zone.done{opacity:.72;}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block;margin-right:5px;}
+/* question */
+.qtag{font-size:12px;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.qtext{font-size:clamp(18px,3.6vw,23px);line-height:1.45;margin:0 0 16px;}
+.opts{display:grid;gap:10px;}
+.opt{text-align:left;padding:14px 16px;font-size:16.5px;line-height:1.4;}
+.opt.correct{background:rgba(65,209,154,.18);border-color:var(--good);}
+.opt.wrong{background:rgba(242,100,122,.16);border-color:var(--bad);}
+/* guess */
+.guessrow{display:flex;gap:10px;align-items:center;flex-wrap:wrap;}
+input[type=number]{font-family:inherit;font-size:22px;padding:12px 14px;width:220px;border-radius:12px;
+  border:2px solid var(--edge);background:var(--panel2);color:var(--ink);}
+.unit{font-size:17px;color:var(--dim);}
+.hintbar{font-size:14px;color:var(--dim);margin-top:10px;}
+/* order */
+.pool,.slots{display:flex;flex-direction:column;gap:8px;margin:10px 0;}
+.slot{border:2px dashed var(--edge);border-radius:12px;padding:12px 14px;font-size:16px;color:var(--dim);
+  display:flex;align-items:center;gap:10px;min-height:50px;}
+.slot .num{background:var(--edge);border-radius:8px;width:28px;height:28px;display:flex;
+  align-items:center;justify-content:center;font-size:14px;color:var(--ink);flex:none;}
+.slot.filled{border-style:solid;color:var(--ink);cursor:pointer;}
+.slot.ok{border-color:var(--good);background:rgba(65,209,154,.13);}
+.slot.no{border-color:var(--bad);background:rgba(242,100,122,.12);}
+/* match */
+.matchwrap{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.mcol{display:flex;flex-direction:column;gap:8px;}
+.mitem{padding:12px;font-size:15px;line-height:1.35;text-align:left;}
+.mitem.sel{border-color:var(--gold);background:rgba(245,196,81,.15);}
+.mitem.paired{border-color:var(--gold);background:rgba(245,196,81,.10);cursor:pointer;}
+.mitem.mok{border-color:var(--good);background:rgba(65,209,154,.16);cursor:default;}
+.mitem.mno{border-color:var(--bad);background:rgba(242,100,122,.14);cursor:default;}
+/* feedback */
+.fb{border-radius:14px;padding:16px;margin-top:14px;border:2px solid;font-size:16px;line-height:1.6;}
+.fb.good{border-color:var(--good);background:rgba(65,209,154,.1);}
+.fb.bad{border-color:var(--bad);background:rgba(242,100,122,.09);}
+.fb .verdict{font-size:19px;font-weight:bold;margin-bottom:6px;}
+.fb .pts{float:right;color:var(--gold);font-weight:bold;}
+/* final */
+.rank{font-size:clamp(28px,6vw,42px);color:var(--gold);font-weight:bold;margin:8px 0;}
+.badges{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0;}
+.badge{border:2px solid var(--edge);border-radius:12px;padding:9px 13px;font-size:14px;}
+.badge.earned{border-color:var(--gold);color:var(--gold);}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px;}
+td{padding:7px 4px;border-bottom:1px solid var(--edge);}
+td:last-child{text-align:right;color:var(--gold);font-weight:bold;}
+.foot{font-size:12.5px;color:var(--dim);text-align:center;margin-top:8px;line-height:1.6;}
+@media(max-width:520px){.matchwrap{grid-template-columns:1fr;}}
+</style>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+<style>.site-bar{background:#16223a;border-bottom-color:#2e4368;}.site-bar a{color:#9db0d0;}.site-bar a:hover{color:#eaf0fb;}.site-bar .brand{color:#eaf0fb;}.site-bar .sep{color:#5a6b8a;}.site-bar .printbtn{border-color:#2e4368;color:#9db0d0;}</style><nav class="site-bar"><a class="brand" href="/">Wonderschool</a><span class="sep">/</span><a href="/grade-4/">4th grade</a><span class="sep">/</span><a href="/grade-4/japan/">Japan</a><span class="spacer"></span><a href="/grade-4/japan-cards.html">Country cards &rarr;</a></nav>
+<div id="app">
+
+<!-- TITLE -->
+<div id="title" class="card" style="text-align:center;padding:34px 20px;">
+  <p style="letter-spacing:5px;font-size:13px;color:var(--dim);margin:0 0 8px;">FIELD AGENT BRIEFING</p>
+  <h1>JAPAN QUEST</h1>
+  <p style="font-size:18px;color:var(--dim);margin:14px 0 22px;line-height:1.6;">
+    Five zones. Fifteen challenges. Every answer teaches you something,<br>
+    even the ones you get wrong.</p>
+  <button class="btn-main" onclick="startGame()">START THE QUEST</button>
+  <p class="foot" style="margin-top:22px;">
+    Scoring: 100 points for a correct answer &middot; +25 streak bonus for every answer in a row after the first<br>
+    Estimation challenges score by how close you get. You cannot lose points.</p>
+</div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div class="stat">SCORE <b class="gold" id="hScore">0</b></div>
+  <div class="stat">STREAK <b id="hStreak">0</b></div>
+  <div class="stat">SOLVED <b id="hSolved">0 / 15</b></div>
+  <div class="stat">RANK <b id="hRank">Tourist</b></div>
+</div>
+
+<!-- MAP -->
+<div id="map" class="hidden">
+  <div class="card">
+    <h2>Choose your zone</h2>
+    <p style="color:var(--dim);margin:0 0 14px;font-size:15px;">Any order you like. Clear all five to finish the quest.</p>
+    <div class="zonegrid" id="zoneGrid"></div>
+  </div>
+</div>
+
+<!-- QUESTION -->
+<div id="quiz" class="hidden">
+  <div class="card">
+    <p class="qtag" id="qTag"></p>
+    <p class="qtext" id="qText"></p>
+    <div id="qBody"></div>
+    <div id="qFeedback"></div>
+    <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap;">
+      <button id="qSubmit" class="btn-main" onclick="submitAnswer()">Check answer</button>
+      <button id="qNext" class="btn-main hidden" onclick="nextQuestion()">Next &rarr;</button>
+      <button id="qBack" onclick="toMap()">Back to map</button>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL -->
+<div id="final" class="hidden">
+  <div class="card" style="text-align:center;">
+    <p style="letter-spacing:5px;font-size:13px;color:var(--dim);margin:0;">QUEST COMPLETE</p>
+    <div class="rank" id="fRank"></div>
+    <p style="font-size:22px;margin:0;">Final score: <b id="fScore" style="color:var(--gold);"></b> out of <span id="fMax"></span></p>
+    <div class="badges" id="fBadges" style="justify-content:center;"></div>
+    <div style="text-align:left;">
+      <h2 style="margin-top:18px;">Zone scores</h2>
+      <table id="fTable"></table>
+      <h2 style="margin-top:22px;">Boss round — no points, just glory</h2>
+      <p style="font-size:16px;line-height:1.7;color:var(--dim);">
+        Pick <b style="color:var(--ink)">one</b> thing Japan invented and write three sentences:
+        what it is, what people did <i>before</i> it existed, and what would break tomorrow if it vanished.
+        Hard mode: pick one nobody in your class would think of.</p>
+    </div>
+    <button class="btn-main" onclick="location.reload()">Play again</button>
+  </div>
+</div>
+
+<p class="foot">All facts checked September 2026. Sources: IMF, Heritage Foundation, Freedom House,
+OECD PISA, Japan Statistics Bureau, Nobel Prize records.</p>
+</div>
+
+<script>
+/* ============================ DATA ============================ */
+const ZONES = [
+  {id:"land",  name:"Land &amp; Islands",  color:"var(--z1)", desc:"How big is Japan, really? Rocks, volcanoes, and a country that lost count of itself."},
+  {id:"people",name:"People &amp; Words",  color:"var(--z2)", desc:"123 million people, three alphabets, and a religion statistic that adds up to 149%."},
+  {id:"money", name:"Money &amp; Machines",color:"var(--z3)", desc:"The 4th-biggest economy on Earth. Cars, robots, and the zipper on your jacket."},
+  {id:"rules", name:"Rules &amp; Rulers",  color:"var(--z4)", desc:"An emperor with no power, a prime minister nobody voted for directly, and freedom scores."},
+  {id:"minds", name:"Inventors' Hall",     color:"var(--z5)", desc:"32 Nobel Prizes, one battery, one blue light, and the guy who invented Pokémon."}
+];
+
+const QUESTIONS = {
+land:[
+ {type:"guess", q:"Japan is made of islands. In 2023 Japan recounted them with new maps. How many islands did they find?",
+  answer:14125, unit:"islands", lo:1000, hi:50000,
+  hint:"The old official number, used for 35 years, was 6,852.",
+  why:"<b>14,125 islands.</b> The Geospatial Information Authority of Japan recounted using modern mapping and found more than double the old figure of 6,852. Nothing new appeared &mdash; the maps just got sharper. Lesson: a number is only as good as the tool that measured it."},
+
+ {type:"mc", q:"Japan's total area is 377,975 km&sup2;. Which US state is closest in size?",
+  opts:["Rhode Island","Montana","Texas","Alaska"], correct:1,
+  why:"<b>Montana</b> (380,800 km&sup2;) is almost exactly the same size. Now the shocking part: Montana has about 1.1 million people. Japan has about <b>123 million</b> &mdash; roughly 110 times as many, in the same amount of space."},
+
+ {type:"mc", q:"About what fraction of Japan is covered in forest?",
+  opts:["About 1/10","About 1/3","About 2/3","Almost none &mdash; it is all cities"], correct:2,
+  why:"<b>About two-thirds (68%).</b> Japan is one of the most forested rich countries on Earth. The reason is mountains &mdash; they are too steep to build on, so they stayed wooded. Everybody crowds onto the flat parts, which is why Japanese cities feel so packed."}
+],
+
+people:[
+ {type:"guess", q:"How many people live in Japan?",
+  answer:123000000, unit:"people", lo:1000000, hi:1000000000,
+  hint:"The USA has about 342 million. Japan has fewer.",
+  why:"<b>About 123 million</b> &mdash; 11th most in the world. That is roughly one person in Japan for every three in the USA, packed into an area the size of Montana. Japan's population is also <i>shrinking</i> by a few hundred thousand every year."},
+
+ {type:"mc", q:"Japanese students learn kanji &mdash; characters that began as pictures. How many new kanji does a 4th grader in Japan learn in one school year?",
+  opts:["12","48","202","1,026"], correct:2,
+  why:"<b>202 new kanji in 4th grade alone.</b> The full schedule: 80 in 1st grade, 160 in 2nd, 200 in 3rd, 202 in 4th, 193 in 5th, 191 in 6th &mdash; <b>1,026 by the end of elementary school</b>, and 2,136 by the end of high school. And that is on top of two other alphabets (hiragana and katakana, 46 characters each) that they also have to know."},
+
+ {type:"mc", q:"Official statistics say 70% of Japanese people are Shinto AND 70% are Buddhist. That adds to 140%. Meanwhile, surveys find that about 70% say they have NO religion. How can all three be true?",
+  opts:[
+   "Somebody made an error &mdash; percentages cannot go over 100",
+   "The official count uses shrine and temple records, and most families are on both lists; the survey asks what people personally believe",
+   "Japanese people change religion twice a year",
+   "The survey only asked children"],
+  correct:1,
+  why:"<b>Different questions get different answers.</b> Shrines and temples count families on their rolls &mdash; most Japanese families have a Shinto shrine for weddings and a Buddhist temple for funerals, so they land on <i>both</i> lists. Surveys ask 'what do you personally believe?' and most people say 'nothing in particular.' Neither number is a lie. This is why a good researcher always asks <i>how was this counted?</i> before trusting a statistic."}
+],
+
+money:[
+ {type:"order", q:"Put these four countries in order by the size of their whole economy (nominal GDP), BIGGEST first. Tap them in order.",
+  items:["United States &mdash; $32.4 trillion","China &mdash; $20.9 trillion","Germany &mdash; $5.5 trillion","Japan &mdash; $4.4 trillion"],
+  correct:[0,1,2,3],
+  why:"USA, China, Germany, <b>Japan</b> &mdash; Japan is the <b>4th-largest economy on Earth</b> (IMF, April 2026). Right behind it: the UK at $4.26 trillion and India at $4.15 trillion. Those three are so close that the order flips around from year to year just because currencies move."},
+
+ {type:"mc", q:"Japan is 4th in total economy size but only <b>39th</b> in money per person. How is that possible?",
+  opts:[
+   "One of the two numbers must be wrong",
+   "Japan has a big total because it has a lot of people; split up per person it is smaller than the total suggests",
+   "Japan gives most of its money away",
+   "Per-person numbers only count adults"],
+  correct:1,
+  why:"<b>Total vs. per person.</b> Japan's whole economy is $4.38 trillion, but divide it among 123 million people and you get <b>$35,703 each &mdash; 39th in the world</b>. A country can be enormous and only moderately rich per person. When somebody says a country is 'rich,' always ask: rich in total, or rich per person? They are completely different claims."},
+
+ {type:"match", q:"Match each Japanese company to what it actually dominates. Tap one on the left, then its match on the right.",
+  left:["Toyota","Shimano","YKK","Nintendo"],
+  right:["The world's biggest carmaker by number of vehicles sold","Most of the world's bicycle gears and brakes","Roughly half of all the zippers on Earth","Founded 1889 making paper playing cards"],
+  why:"Japan is famous for cars and games, but its quiet strength is <b>parts nobody thinks about</b>. Shimano gears are on most bikes in the world. YKK is stamped on about half of all zippers &mdash; check your own jacket right now. Japan also builds around <b>45% of the world's industrial robots</b>, and makes many of the chemicals and silicon wafers that every computer chip on Earth depends on."}
+],
+
+rules:[
+ {type:"mc", q:"Japan has an Emperor, Naruhito. How much political power does he have?",
+  opts:["He rules the country and makes the laws","He can veto any law he dislikes","None &mdash; the constitution calls him a symbol","He commands the military only"],
+  correct:2,
+  why:"<b>None.</b> Japan's 1947 constitution calls the Emperor 'the symbol of the State and of the unity of the People.' He opens parliament and greets foreign leaders, but he cannot make, block, or change a single law. Real power sits with the elected <b>National Diet</b> &mdash; 465 seats in the lower house, 248 in the upper house."},
+
+ {type:"mc", q:"How do Japanese voters choose their Prime Minister?",
+  opts:[
+   "They vote for the PM directly, like a US president",
+   "They do not &mdash; they elect the Diet, and the Diet picks the PM",
+   "The Emperor picks whoever he wants",
+   "The previous PM chooses a successor"],
+  correct:1,
+  why:"<b>Voters never vote for a Prime Minister.</b> They elect members of the Diet; the Diet then chooses the PM from among themselves. That is why Japan's PM can change without any election happening. The current PM is <b>Sanae Takaichi</b>, who took office on 21 October 2025 &mdash; Japan's <b>first woman Prime Minister</b>. Then in February 2026 her party won 316 of 465 seats, the biggest lower-house win in Japanese history."},
+
+ {type:"guess", q:"Freedom House scores every country from 0 to 100 on political freedom &mdash; free elections, free speech, fair courts. What score did Japan get in 2026?",
+  answer:96, unit:"out of 100", lo:0, hi:100,
+  hint:"Japan got a perfect 40 out of 40 on political rights.",
+  why:"<b>96 out of 100 &mdash; 'Free.'</b> Perfect 40/40 on political rights, 56/60 on civil liberties. But Japan does much less well on <b>economic</b> freedom: the Heritage Foundation's 2026 index puts it <b>30th out of 176</b> with a score of 70.3, barely clearing the 70.0 line for 'Mostly Free.' Same country, two kinds of freedom, two very different results. Which kind matters more is a real argument that adults have."}
+],
+
+minds:[
+ {type:"match", q:"Match each Japanese inventor to what they made. Tap one on the left, then its match on the right.",
+  left:["Akira Yoshino","Satoshi Tajiri","Masahiro Hara","Momofuku Ando"],
+  right:["The lithium-ion battery &mdash; Nobel Prize 2019","Pok&eacute;mon, inspired by collecting bugs as a kid","The QR code &mdash; and he let everyone use it free","Instant ramen noodles, 1958"],
+  why:"Every one of these is in your life. <b>Yoshino's battery</b> is inside your phone, laptop, and every electric car. <b>Hara</b> invented the QR code at a car-parts company in 1994 and deliberately never charged for it, which is why it is everywhere. And Japan has won <b>32 Nobel Prizes</b> &mdash; 12 in physics, 9 in chemistry, 6 in medicine, 3 in literature, 2 for peace."},
+
+ {type:"mc", q:"Three Japanese scientists won the 2014 Nobel Prize in Physics for inventing the blue LED. Red and green LEDs already existed. Why did one missing color matter so much?",
+  opts:[
+   "Blue is the brightest color",
+   "Red + green + blue makes white &mdash; without blue there is no white LED light",
+   "Blue LEDs use no electricity",
+   "It was mostly for decoration"],
+  correct:1,
+  why:"<b>Red + green + blue = white.</b> Red and green LEDs were invented in the 1960s, but blue took <i>thirty more years</i> &mdash; the materials kept failing. The moment Akasaki, Amano and Nakamura cracked it in the 1990s, cheap white LED lighting became possible. Lighting is roughly a fifth of the world's electricity use, and LEDs use a small fraction of what old bulbs did. One missing color was holding up the entire planet's light bill."},
+
+ {type:"order", q:"Put these Japanese inventions in the order they were invented, OLDEST first. Tap them in order.",
+  items:["Instant ramen noodles","The Shinkansen bullet train","The karaoke machine","The QR code"],
+  correct:[0,1,2,3],
+  why:"Instant ramen <b>1958</b> &rarr; bullet train <b>1964</b> (opened days before the Tokyo Olympics, running 130 mph when other trains managed 80) &rarr; karaoke <b>1971</b> (Daisuke Inoue never patented it and made almost nothing) &rarr; QR code <b>1994</b>. Four inventions in 36 years that changed how the world eats, travels, sings, and pays."}
+]
+};
+
+const RANKS = [
+  {min:0,    name:"Tourist"},
+  {min:500,  name:"Traveler"},
+  {min:900,  name:"Explorer"},
+  {min:1300, name:"Scholar"},
+  {min:1700, name:"Sensei"},
+  {min:2050, name:"Grand Master of Japan"}
+];
+
+/* ============================ STATE ============================ */
+let S = {score:0, streak:0, solved:0, zoneScore:{}, zoneDone:{}, curZone:null, curIdx:0,
+         answered:false, pick:null, order:[], pairs:{}, selLeft:null};
+const TOTAL_Q = Object.values(QUESTIONS).reduce((a,b)=>a+b.length,0);
+const MAX_SCORE = (function(){ // 100 base each + streak bonuses if perfect run
+  let t=0, st=0;
+  for(let i=0;i<TOTAL_Q;i++){ t += 100 + (st>0?st*25:0); st++; if(st>4) st=4; }
+  return t;
+})();
+
+const $ = id => document.getElementById(id);
+
+/* ============================ FLOW ============================ */
+function startGame(){
+  ZONES.forEach(z=>{S.zoneScore[z.id]=0; S.zoneDone[z.id]=false;});
+  $("title").classList.add("hidden");
+  $("hud").classList.remove("hidden");
+  toMap();
+}
+
+function toMap(){
+  $("quiz").classList.add("hidden");
+  $("final").classList.add("hidden");
+  $("map").classList.remove("hidden");
+  renderHUD();
+  const g = $("zoneGrid"); g.innerHTML = "";
+  ZONES.forEach(z=>{
+    const b = document.createElement("button");
+    b.className = "zone" + (S.zoneDone[z.id] ? " done" : "");
+    b.innerHTML =
+      `<div class="ztitle"><span class="dot" style="background:${z.color}"></span>${z.name}</div>
+       <div class="zdesc">${z.desc}</div>
+       <div class="zmeta">${QUESTIONS[z.id].length} challenges &middot; ${
+         S.zoneDone[z.id] ? "CLEARED &mdash; "+S.zoneScore[z.id]+" pts" : "not started"}</div>`;
+    b.onclick = ()=>enterZone(z.id);
+    g.appendChild(b);
+  });
+  if(ZONES.every(z=>S.zoneDone[z.id])) showFinal();
+}
+
+function enterZone(id){
+  S.curZone = id; S.curIdx = 0;
+  $("map").classList.add("hidden");
+  $("quiz").classList.remove("hidden");
+  renderQuestion();
+}
+
+function renderHUD(){
+  $("hScore").textContent = S.score;
+  $("hStreak").textContent = S.streak;
+  $("hSolved").textContent = S.solved + " / " + TOTAL_Q;
+  $("hRank").textContent = rankFor(S.score);
+}
+function rankFor(sc){ let r=RANKS[0].name; RANKS.forEach(x=>{if(sc>=x.min) r=x.name;}); return r; }
+
+/* ============================ RENDER ============================ */
+function renderQuestion(){
+  const z = ZONES.find(x=>x.id===S.curZone);
+  const q = QUESTIONS[S.curZone][S.curIdx];
+  S.answered=false; S.pick=null; S.order=[]; S.pairs={}; S.selLeft=null;
+
+  $("qTag").innerHTML = z.name + " &middot; challenge " + (S.curIdx+1) + " of " + QUESTIONS[S.curZone].length;
+  $("qText").innerHTML = q.q;
+  $("qFeedback").innerHTML = "";
+  $("qSubmit").classList.remove("hidden");
+  $("qSubmit").disabled = true;
+  $("qNext").classList.add("hidden");
+
+  const body = $("qBody"); body.innerHTML = "";
+
+  if(q.type==="mc"){
+    const wrap = document.createElement("div"); wrap.className="opts";
+    q.opts.forEach((o,i)=>{
+      const b=document.createElement("button"); b.className="opt"; b.innerHTML=o;
+      b.onclick=()=>{ if(S.answered) return;
+        S.pick=i; [...wrap.children].forEach(c=>c.style.borderColor="");
+        b.style.borderColor="var(--gold)"; $("qSubmit").disabled=false; };
+      wrap.appendChild(b);
+    });
+    body.appendChild(wrap);
+  }
+
+  else if(q.type==="guess"){
+    const d=document.createElement("div"); d.className="guessrow";
+    d.innerHTML = `<input type="number" id="gInput" placeholder="your guess" min="${q.lo}" max="${q.hi}">
+                   <span class="unit">${q.unit}</span>`;
+    body.appendChild(d);
+    const h=document.createElement("p"); h.className="hintbar";
+    h.innerHTML = "Clue: " + q.hint + "<br>Closer = more points. Within 5% scores the full 100.";
+    body.appendChild(h);
+    const inp = $("gInput");
+    inp.oninput = ()=>{ $("qSubmit").disabled = inp.value===""; };
+    inp.onkeydown = e=>{ if(e.key==="Enter" && !$("qSubmit").disabled) submitAnswer(); };
+  }
+
+  else if(q.type==="order"){
+    const slots=document.createElement("div"); slots.className="slots"; slots.id="oSlots";
+    const pool =document.createElement("div"); pool.className="pool";  pool.id="oPool";
+    body.appendChild(slots); body.appendChild(pool);
+    S.shuffled = q.items.map((t,i)=>({t,i})).sort(()=>Math.random()-0.5);
+    drawOrder(q);
+  }
+
+  else if(q.type==="match"){
+    const w=document.createElement("div"); w.className="matchwrap";
+    const L=document.createElement("div"); L.className="mcol"; L.id="mL";
+    const R=document.createElement("div"); R.className="mcol"; R.id="mR";
+    w.appendChild(L); w.appendChild(R); body.appendChild(w);
+    S.rightOrder = q.right.map((t,i)=>({t,i})).sort(()=>Math.random()-0.5);
+    drawMatch(q);
+  }
+}
+
+function drawOrder(q){
+  const slots=$("oSlots"), pool=$("oPool");
+  slots.innerHTML=""; pool.innerHTML="";
+  for(let i=0;i<q.items.length;i++){
+    const s=document.createElement("div");
+    const placed = S.order[i];
+    s.className = "slot" + (placed!==undefined ? " filled":"");
+    s.innerHTML = `<span class="num">${i+1}</span><span>${placed!==undefined ? q.items[placed] : "tap a card below"}</span>`;
+    if(placed!==undefined && !S.answered) s.onclick=()=>{ S.order.splice(i,1); drawOrder(q); syncOrderBtn(q); };
+    slots.appendChild(s);
+  }
+  S.shuffled.forEach(o=>{
+    if(S.order.includes(o.i)) return;
+    const b=document.createElement("button"); b.className="opt"; b.innerHTML=o.t;
+    b.onclick=()=>{ if(S.answered) return; if(S.order.length<q.items.length){ S.order.push(o.i); drawOrder(q); syncOrderBtn(q);} };
+    pool.appendChild(b);
+  });
+}
+function syncOrderBtn(q){ $("qSubmit").disabled = S.order.length !== q.items.length; }
+
+function drawMatch(q){
+  const L=$("mL"), R=$("mR");
+  L.innerHTML=""; R.innerHTML="";
+  q.left.forEach((t,i)=>{
+    const b=document.createElement("button");
+    const paired = S.pairs[i]!==undefined;
+    let mark = paired ? " paired" : "";
+    if(S.answered && paired) mark = (S.pairs[i]===i) ? " mok" : " mno";
+    b.className="mitem"+mark+(S.selLeft===i?" sel":"");
+    b.innerHTML = t + (S.answered && paired && S.pairs[i]!==i
+      ? ' <span style="color:var(--good);font-size:12.5px;display:block;margin-top:4px;">correct match: '
+        + q.right[i] + '</span>' : '');
+    if(!paired && !S.answered) b.onclick=()=>{ S.selLeft = (S.selLeft===i?null:i); drawMatch(q); };
+    L.appendChild(b);
+  });
+  S.rightOrder.forEach(o=>{
+    const usedBy = Object.keys(S.pairs).find(k=>S.pairs[k]===o.i);
+    const b=document.createElement("button");
+    let mark = (usedBy!==undefined) ? " paired" : "";
+    if(S.answered && usedBy!==undefined) mark = (Number(usedBy)===o.i) ? " mok" : " mno";
+    b.className="mitem"+mark;
+    b.innerHTML=o.t;
+    if(usedBy===undefined && !S.answered) b.onclick=()=>{
+      if(S.selLeft===null) return;
+      S.pairs[S.selLeft]=o.i; S.selLeft=null; drawMatch(q);
+      $("qSubmit").disabled = Object.keys(S.pairs).length !== q.left.length;
+    };
+    else if(usedBy!==undefined && !S.answered) b.onclick=()=>{ delete S.pairs[usedBy]; drawMatch(q); $("qSubmit").disabled=true; };
+    R.appendChild(b);
+  });
+}
+
+/* ============================ SCORING ============================ */
+function submitAnswer(){
+  if(S.answered) return;
+  const q = QUESTIONS[S.curZone][S.curIdx];
+  let pts=0, ok=false, verdict="";
+
+  if(q.type==="mc"){
+    ok = (S.pick===q.correct);
+    const btns=[...$("qBody").querySelectorAll(".opt")];
+    btns.forEach((b,i)=>{ b.style.borderColor="";
+      if(i===q.correct) b.classList.add("correct");
+      else if(i===S.pick) b.classList.add("wrong"); });
+    pts = ok?100:0;
+    verdict = ok?"Correct":"Not this time";
+  }
+
+  else if(q.type==="guess"){
+    const g = parseFloat($("gInput").value);
+    const r = (g>0) ? Math.max(g,q.answer)/Math.min(g,q.answer) : Infinity;
+    if(r<=1.05){pts=100; verdict="Bullseye";}
+    else if(r<=1.25){pts=75; verdict="Very close";}
+    else if(r<=2){pts=50; verdict="In the right ballpark";}
+    else if(r<=5){pts=25; verdict="Off, but not wildly";}
+    else {pts=0; verdict="Way off";}
+    ok = pts>=50;
+    verdict += " &mdash; the answer is " + q.answer.toLocaleString() + " " + q.unit;
+    $("gInput").disabled=true;
+  }
+
+  else if(q.type==="order"){
+    const right = S.order.filter((v,i)=>v===q.correct[i]).length;
+    ok = right===q.correct.length;
+    pts = Math.round(100*right/q.correct.length);
+    verdict = ok ? "Perfect order" : right+" of "+q.correct.length+" in the right place";
+    const slots=[...$("oSlots").children];
+    slots.forEach((s,i)=>s.classList.add(S.order[i]===q.correct[i]?"ok":"no"));
+  }
+
+  else if(q.type==="match"){
+    let right=0;
+    for(let i=0;i<q.left.length;i++) if(S.pairs[i]===i) right++;
+    ok = right===q.left.length;
+    pts = Math.round(100*right/q.left.length);
+    verdict = ok ? "All four matched" : right+" of "+q.left.length+" matched";
+  }
+
+  // streak bonus
+  let bonus=0;
+  if(pts>=100){ bonus = Math.min(S.streak,4)*25; S.streak++; }
+  else { S.streak=0; }
+  const gained = pts+bonus;
+  S.score += gained;
+  S.zoneScore[S.curZone] += gained;
+  S.solved++;
+  S.answered=true;
+  if(q.type==="match") drawMatch(q);
+
+  const fb=document.createElement("div");
+  fb.className="fb "+(ok?"good":"bad");
+  fb.innerHTML = `<span class="pts">+${gained}${bonus?" (incl. +"+bonus+" streak)":""}</span>
+                  <div class="verdict">${verdict}</div>${q.why}`;
+  $("qFeedback").innerHTML=""; $("qFeedback").appendChild(fb);
+
+  $("qSubmit").classList.add("hidden");
+  $("qNext").classList.remove("hidden");
+  $("qNext").textContent = (S.curIdx+1 < QUESTIONS[S.curZone].length) ? "Next challenge →" : "Finish zone →";
+  renderHUD();
+}
+
+function nextQuestion(){
+  S.curIdx++;
+  if(S.curIdx >= QUESTIONS[S.curZone].length){
+    S.zoneDone[S.curZone]=true;
+    toMap();
+  } else renderQuestion();
+}
+
+function showFinal(){
+  $("map").classList.add("hidden");
+  $("quiz").classList.add("hidden");
+  $("final").classList.remove("hidden");
+  $("fRank").textContent = rankFor(S.score);
+  $("fScore").textContent = S.score;
+  $("fMax").textContent = MAX_SCORE;
+  const bd=$("fBadges"); bd.innerHTML="";
+  ZONES.forEach(z=>{
+    const earned = S.zoneScore[z.id] >= 250;
+    const b=document.createElement("div");
+    b.className="badge"+(earned?" earned":"");
+    b.innerHTML = (earned?"★ ":"☆ ") + z.name;
+    bd.appendChild(b);
+  });
+  const t=$("fTable"); t.innerHTML="";
+  ZONES.forEach(z=>{
+    const tr=document.createElement("tr");
+    tr.innerHTML = `<td>${z.name}</td><td>${S.zoneScore[z.id]} pts</td>`;
+    t.appendChild(tr);
+  });
+}
+</script>
+</body>
+</html>

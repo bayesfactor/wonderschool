@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Data Desk — Japan | Wonderschool</title>
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+:root{
+  color-scheme:light;
+  --surface-0:#f4f4f1; --surface-1:#fcfcfb; --edge:#dedbd2;
+  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7c7a72;
+  --series-1:#2a78d6; --series-2:#eb6834; --grid:#e6e4dc; --nodata:#b9b7ad;
+  --flag:#8a1f1f;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --surface-0:#121211; --surface-1:#1a1a19; --edge:#34342f;
+    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8e8d84;
+    --series-1:#3987e5; --series-2:#d95926; --grid:#2a2a26; --nodata:#4e4d47;
+    --flag:#e08a8a;
+  }
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--surface-0);color:var(--text-primary);
+  font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;}
+main{max-width:980px;margin:0 auto;padding:26px 16px 70px;}
+header.page-head{margin-bottom:22px;}
+.kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin:0 0 6px;}
+h1{font-size:clamp(26px,5vw,38px);margin:0 0 8px;letter-spacing:-.5px;line-height:1.1;}
+h2{font-size:20px;margin:0 0 6px;}
+p{line-height:1.65;color:var(--text-secondary);margin:0 0 12px;}
+.lede{font-size:16.5px;max-width:64ch;}
+.panel{background:var(--surface-1);border:1px solid var(--edge);border-radius:14px;padding:20px;margin-bottom:20px;}
+
+/* ---- metric chips ---- */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
+.chip{
+  font:inherit;font-size:14px;padding:9px 13px;border-radius:10px;cursor:pointer;
+  border:1px solid var(--edge);background:transparent;color:var(--text-secondary);
+  transition:.12s;display:inline-flex;align-items:center;gap:6px;
+}
+.chip:hover{border-color:var(--text-muted);color:var(--text-primary);}
+.chip[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-1);
+  border-color:var(--text-primary);font-weight:600;}
+.chip .q{font-size:10px;border:1px solid currentColor;border-radius:50%;
+  width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;opacity:.6;}
+.hoverhint{font-size:12.5px;color:var(--text-muted);margin:8px 0 18px;}
+
+/* ---- chart ---- */
+.chart-title{font-size:17px;font-weight:600;margin:0 0 2px;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+.chart-sub{font-size:13px;color:var(--text-muted);margin:0 0 16px;}
+.bar-row{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:12px;
+  margin-bottom:2px;padding:3px 0;border-radius:6px;position:relative;}
+.bar-row:hover{background:var(--grid);}
+.bar-label{font-size:13.5px;color:var(--text-secondary);text-align:right;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.bar-row.jp .bar-label{color:var(--text-primary);font-weight:700;}
+.bar-track{position:relative;display:flex;align-items:center;gap:8px;}
+.bar{height:19px;border-radius:0 4px 4px 0;background:var(--series-1);
+  transition:width .35s cubic-bezier(.4,0,.2,1);min-width:2px;}
+.bar-row.jp .bar{background:var(--series-2);}
+.bar.nodata,
+.bar-row.jp .bar.nodata{
+  background:repeating-linear-gradient(135deg,var(--nodata),var(--nodata) 3px,transparent 3px,transparent 7px);
+  border:1px dashed var(--nodata);border-radius:4px;height:17px;}
+.bar-val{font-size:13px;color:var(--text-secondary);white-space:nowrap;font-variant-numeric:tabular-nums;}
+.bar-row.jp .bar-val{color:var(--text-primary);font-weight:700;}
+.bar-val .yr{color:var(--text-muted);font-size:11.5px;margin-left:5px;}
+.bar-val .flag{color:var(--flag);font-weight:700;margin-left:5px;cursor:help;}
+.bar-val.none{color:var(--text-muted);font-style:italic;}
+
+/* reference line */
+.refline{position:absolute;top:0;bottom:0;border-left:2px dashed var(--text-muted);opacity:.65;}
+.reflabel{font-size:11.5px;color:var(--text-muted);margin-top:9px;}
+
+/* ---- about panel ---- */
+.about{border-top:1px solid var(--edge);margin-top:20px;padding-top:16px;}
+.about h3{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin:0 0 7px;}
+.about .def{font-size:15px;color:var(--text-primary);line-height:1.6;margin:0 0 10px;max-width:70ch;}
+.about .dir{font-size:14px;color:var(--text-secondary);margin:0 0 10px;}
+.about .src{font-size:13.5px;color:var(--text-secondary);margin:0;}
+.about .src a{color:var(--series-1);}
+.warn{border-left:3px solid var(--flag);background:color-mix(in srgb,var(--flag) 7%,transparent);
+  padding:10px 14px;margin:12px 0 0;border-radius:0 8px 8px 0;}
+.warn p{font-size:14px;margin:0;color:var(--text-primary);}
+
+/* ---- tooltip ---- */
+#tip{position:fixed;pointer-events:none;opacity:0;transition:opacity .1s;z-index:200;
+  background:var(--surface-1);border:1px solid var(--edge);border-radius:9px;padding:10px 13px;
+  font-size:13.5px;line-height:1.55;color:var(--text-primary);
+  box-shadow:0 4px 20px rgba(0,0,0,.2);max-width:300px;}
+#tip b{display:block;margin-bottom:3px;}
+#tip span{color:var(--text-secondary);}
+
+/* ---- table ---- */
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums;}
+th,td{padding:6px 7px;border-bottom:1px solid var(--edge);text-align:right;white-space:nowrap;}
+th:first-child,td:first-child{text-align:left;}
+th{font-size:10.5px;letter-spacing:.8px;text-transform:uppercase;color:var(--text-muted);
+  font-weight:600;border-bottom:1.5px solid var(--text-muted);}
+tr.jp td{background:color-mix(in srgb,var(--series-2) 13%,transparent);font-weight:700;color:var(--text-primary);}
+td.nd{color:var(--text-muted);font-style:italic;}
+.scroll{overflow-x:auto;}
+.toggle{font:inherit;font-size:13px;background:transparent;border:1px solid var(--edge);
+  border-radius:9px;padding:7px 12px;color:var(--text-secondary);cursor:pointer;}
+.toggle:hover{border-color:var(--text-muted);color:var(--text-primary);}
+.hidden{display:none;}
+
+.qbox{border:1px solid var(--edge);border-radius:12px;padding:16px 20px;margin-top:16px;}
+.qbox h3{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text-muted);margin:0 0 9px;}
+.qbox ol{margin:0;padding-left:20px;}
+.qbox li{font-size:14.5px;line-height:1.65;color:var(--text-secondary);margin-bottom:10px;}
+footer{border-top:1px solid var(--edge);padding-top:16px;font-size:12.5px;color:var(--text-muted);line-height:1.7;}
+footer a{color:var(--text-secondary);}
+@media(max-width:560px){ .bar-row{grid-template-columns:96px 1fr;gap:8px;} .bar-label{font-size:12px;} }
+</style>
+</head>
+<body>
+
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-6/">6th grade</a>
+  <span class="sep">/</span><a href="/grade-6/japan/">Japan</a>
+  <span class="spacer"></span>
+  <a href="/grade-6/japan-dossier.html">Paradox dossier →</a>
+</nav>
+
+<main>
+<header class="page-head">
+  <p class="kicker">Country Desk · Interactive</p>
+  <h1>Where does Japan rank?</h1>
+  <p class="lede">Ten measures, twelve countries, Japan in orange. Every measure was built by somebody, for a
+  purpose, using a definition they chose. Hover any measure to see what it actually counts, and follow the
+  source link to the people who counted it.</p>
+</header>
+
+<section class="panel">
+  <div class="filters" id="filters" role="group" aria-label="Choose a measure"></div>
+  <p class="hoverhint">Hover a measure (or tap it twice on a tablet) for its definition. The full definition,
+  the direction, and the source are always shown under the chart.</p>
+
+  <p class="chart-title" id="cTitle"></p>
+  <p class="chart-sub" id="cSub"></p>
+  <div id="chart"></div>
+  <p class="reflabel" id="cRef"></p>
+
+  <div class="about">
+    <h3>What this measure counts</h3>
+    <p class="def" id="aDef"></p>
+    <p class="dir" id="aDir"></p>
+    <p class="src" id="aSrc"></p>
+    <div id="aWarn"></div>
+  </div>
+
+  <div style="margin-top:18px;">
+    <button class="toggle" id="tblBtn">Show the whole table, all ten measures</button>
+    <div id="tblWrap" class="hidden scroll" style="margin-top:14px;"><table id="tbl"></table></div>
+  </div>
+</section>
+
+<section class="panel">
+  <h2>Questions</h2>
+  <div class="qbox">
+    <h3>Work through these with the chart open</h3>
+    <ol>
+      <li><strong>Fertility.</strong> A country needs about 2.1 children per woman to keep its population steady.
+      How many of these twelve are above that line? What does that tell you about the next fifty years —
+      and which country on this chart is in the most trouble?</li>
+      <li><strong>Two kinds of freedom.</strong> Japan scores 96 on political freedom and 70.3 on economic freedom.
+      Find a country that beats Japan on one and loses to it on the other. What does that pairing tell you that
+      either score alone does not?</li>
+      <li><strong>Gini and poverty are not the same thing.</strong> Find a country with a fairly low Gini but a
+      fairly high relative poverty rate. Read both definitions again and explain how that is possible.</li>
+      <li><strong>The broken chart.</strong> Switch to Literacy. Seven of the twelve countries have no number at all.
+      Why would UNESCO simply not publish a figure for Japan, the United States, or Canada? And where do you think
+      the famous "99%" comes from, if not from there?</li>
+      <li><strong>Years.</strong> Open the full table and look at the year attached to each figure. Find the two
+      measures whose years are furthest apart. What would you have to assume to put those two numbers in the
+      same sentence about "Japan today"?</li>
+      <li><strong>Build your own.</strong> Propose an eleventh measure you think matters more than any of these.
+      Write its definition in one sentence, precisely enough that two different people counting would get the
+      same answer. That precision is the hard part, and it is the whole job.</li>
+    </ol>
+  </div>
+</section>
+
+<footer>
+  <strong>Every figure here is linked to its source.</strong> Measures are not all from the same year and not all
+  from the same organisation — the year is shown beside every value, and mismatches are flagged in red. Compiled
+  20 September 2026 for Wonderschool.
+</footer>
+</main>
+
+<div id="tip" role="status" aria-live="polite"></div>
+
+<script>
+/* ============================================================
+   DATA — 12 countries × 10 measures.
+   Every value traced to the source linked in METRICS below.
+   null = the source publishes no figure for that country.
+   ============================================================ */
+const DATA = [
+  {c:"Japan",          jp:true,
+   pop:122.7, area:377975,   gdp:4380,  fert:1.15, gini:32.9, giniY:2013, pov:13.4, povY:2020, econ:70.3, econR:30,  pol:96, lit:null,  litY:null},
+  {c:"United States",
+   pop:341.8, area:9525067,  gdp:32380, fert:1.63, gini:41.5, giniY:2019, pov:18.9, povY:2024, econ:72.8, econR:22,  pol:81, lit:null,  litY:null},
+  {c:"China",
+   pop:1404.9,area:9596960,  gdp:20850, fert:1.01, gini:38.2, giniY:2019, pov:12.0, povY:2022, econ:48.3, econR:154, pol:9,  lit:96.7,  litY:2020},
+  {c:"India",
+   pop:1429.4,area:3287263,  gdp:4150,  fert:1.96, gini:35.7, giniY:2011, pov:3.4,  povY:2022, econ:52.5, econR:132, pol:62, lit:78.2,  litY:2024, povFlag:true},
+  {c:"Germany",
+   pop:83.5,  area:357581,   gdp:5450,  fert:1.36, gini:31.7, giniY:2018, pov:12.5, povY:2022, econ:71.7, econR:24,  pol:95, lit:null,  litY:null},
+  {c:"United Kingdom",
+   pop:69.5,  area:244376,   gdp:4260,  fert:1.55, gini:35.1, giniY:2017, pov:11.7, povY:2021, econ:70.4, econR:29,  pol:92, lit:null,  litY:null},
+  {c:"France",
+   pop:69.1,  area:643801,   gdp:3600,  fert:1.61, gini:32.4, giniY:2018, pov:11.9, povY:2023, econ:64.6, econR:65,  pol:89, lit:null,  litY:null},
+  {c:"Italy",
+   pop:58.9,  area:302068,   gdp:2740,  fert:1.18, gini:35.2, giniY:2018, pov:14.5, povY:2023, econ:63.3, econR:73,  pol:87, lit:99.35, litY:2019},
+  {c:"Brazil",
+   pop:214.2, area:8510346,  gdp:2636,  fert:1.61, gini:48.9, giniY:2020, pov:21.2, povY:2024, econ:52.4, econR:134, pol:73, lit:94.7,  litY:2024},
+  {c:"South Korea",
+   pop:51.1,  area:100432,   gdp:1931,  fert:0.75, gini:31.4, giniY:2016, pov:12.6, povY:2021, econ:73.7, econR:19,  pol:83, lit:97.97, litY:2008},
+  {c:"Canada",
+   pop:41.4,  area:9984670,  gdp:2507,  fert:1.25, gini:33.3, giniY:2017, pov:10.9, povY:2022, econ:75.6, econR:14,  pol:97, lit:null,  litY:null},
+  {c:"Australia",
+   pop:27.8,  area:7741220,  gdp:2124,  fert:1.48, gini:34.3, giniY:2018, pov:11.3, povY:2020, econ:80.1, econR:4,   pol:94, lit:null,  litY:null}
+];
+DATA.forEach(d => d.percap = (d.gdp * 1e9) / (d.pop * 1e6));
+
+const METRICS = [
+{
+  key:"pop", short:"People", title:"Population", unit:"Millions of people",
+  def:"How many people live in the country.",
+  dir:"Bigger bar = more people. Nothing about a population total tells you whether those people are rich, healthy, young or old.",
+  srcName:"UN World Population Prospects and national statistical offices, 2025–26 estimates",
+  srcUrl:"https://population.un.org/wpp/",
+  fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:1})+"M",
+  tip:v=>Math.round(v*1e6).toLocaleString()+" people",
+  chipDef:"How many people live in the country."
+},
+{
+  key:"area", short:"Land area", title:"Land area", unit:"Square kilometres, land plus inland water",
+  def:"Everything inside the country's borders — land plus its lakes and rivers.",
+  dir:"Bigger bar = more ground. It counts ground, not usable ground: about two-thirds of Japan is mountain forest that nobody can build on or farm, and most of Canada's area is arctic.",
+  srcName:"National land-survey agencies, compiled in the UN Demographic Yearbook",
+  srcUrl:"https://unstats.un.org/unsd/demographic-social/products/dyb/",
+  fmt:v=>(v/1000).toLocaleString(undefined,{maximumFractionDigits:0})+"k km²",
+  tip:v=>v.toLocaleString()+" km²",
+  chipDef:"Everything inside the country's borders, land plus lakes and rivers."
+},
+{
+  key:"gdp", short:"Economy (total)", title:"Total economy", unit:"Nominal GDP, billions of US dollars",
+  def:"The value of everything the country makes and sells in one year, priced in US dollars at today's exchange rate.",
+  dir:"Bigger bar = bigger economy overall. Because it is priced in dollars, this number moves when currencies move even if nothing real changes.",
+  srcName:"IMF World Economic Outlook, April 2026",
+  srcUrl:"https://www.imf.org/en/Publications/WEO",
+  fmt:v=>"$"+(v/1000).toFixed(2)+"T",
+  tip:v=>"$"+v.toLocaleString()+" billion",
+  chipDef:"The value of everything a country makes and sells in a year."
+},
+{
+  key:"percap", short:"Economy per person", title:"Economy per person", unit:"Total GDP ÷ population, US dollars",
+  def:"The total economy divided by the number of people. It is an average, not what anyone actually earns.",
+  dir:"Bigger bar = more economic output per head. A country where everyone earns $35,000 and a country where half earn $70,000 and half earn nothing produce the identical bar — which is why the Gini and poverty measures exist.",
+  srcName:"Calculated from IMF World Economic Outlook, April 2026. Japan's officially reported figure is $35,703, 39th in the world",
+  srcUrl:"https://www.imf.org/en/Publications/WEO",
+  fmt:v=>"$"+Math.round(v).toLocaleString(),
+  tip:v=>"$"+Math.round(v).toLocaleString()+" per person per year",
+  chipDef:"The total economy divided by the number of people. An average, not a wage."
+},
+{
+  key:"fert", short:"Fertility rate", title:"Fertility rate", unit:"Average children per woman, 2024",
+  def:"The average number of children a woman would have in her lifetime if today's birth rates stayed the same.",
+  dir:"A country needs about 2.1 to keep its population steady without immigration. Every country on this chart is below that line. Higher is not 'better' and lower is not 'better' — but a country far below 2.1 will have far fewer working-age people in forty years.",
+  srcName:"World Bank, indicator SP.DYN.TFRT.IN, 2024",
+  srcUrl:"https://data.worldbank.org/indicator/SP.DYN.TFRT.IN",
+  fmt:v=>v.toFixed(2),
+  tip:v=>v.toFixed(2)+" children per woman",
+  ref:2.1, refLabel:"Dashed line at 2.1 — the rate a population needs just to replace itself.",
+  chipDef:"Average children per woman. About 2.1 keeps a population steady."
+},
+{
+  key:"gini", short:"Gini index", title:"Gini index — how unevenly income is split", unit:"0 to 100, year varies by country",
+  def:"A single number for how unevenly income is shared out. 0 would mean everybody earns exactly the same; 100 would mean one person earns everything and nobody else earns anything.",
+  dir:"Bigger bar = more unequal. Sorted most unequal first. Real countries mostly land between 25 and 55, so small differences matter more than they look.",
+  srcName:"World Bank, indicator SI.POV.GINI. Each country's year is shown beside its value",
+  srcUrl:"https://data.worldbank.org/indicator/SI.POV.GINI",
+  fmt:v=>v.toFixed(1),
+  tip:v=>"Gini "+v.toFixed(1)+" (0 = perfectly equal, 100 = one person has it all)",
+  yearKey:"giniY",
+  warn:"The years run from 2011 (India) to 2020 (Brazil). Japan's figure is from 2013 — over a decade old. These are not snapshots of the same moment."
+},
+{
+  key:"pov", short:"Relative poverty", title:"Relative poverty", unit:"% living on under half their country's median income",
+  def:"The share of people living on less than half of what a typical person in their own country lives on. It measures being poor compared with your neighbours, not compared with the world.",
+  dir:"Bigger bar = more people poor relative to their own country. This is why a rich country can still have a high poverty rate: the United States, the wealthiest country here per person, also has the second-highest relative poverty.",
+  srcName:"World Bank, indicator SI.DST.50MD. Each country's year is shown beside its value",
+  srcUrl:"https://data.worldbank.org/indicator/SI.DST.50MD",
+  fmt:v=>v.toFixed(1)+"%",
+  tip:v=>v.toFixed(1)+"% below half the national median",
+  yearKey:"povY",
+  flagKey:"povFlag",
+  flagNote:"India's figure is built from what households consume, not what they earn. It is not comparable to the others and should not be read as 'India has almost no poverty'.",
+  warn:"Two problems at once. (1) India's 3.4% is consumption-based, not income-based — a different measurement entirely, marked with a red flag. (2) Four countries' own national statistics offices publish higher numbers than the World Bank does for the same country: Japan's own ministry says 15.4%, not 13.4%; South Korea says 15.3%, not 12.6%. Neither side is lying; they use different equivalence scales. Never mix the two sources in one column."
+},
+{
+  key:"econ", short:"Economic freedom", title:"Economic freedom", unit:"Score out of 100, Heritage Foundation 2026",
+  def:"A 0–100 score for how easy it is to start a business, own property, trade across borders, and keep what you earn.",
+  dir:"Bigger bar = freer by this definition. 80+ is rated 'Free', 70–79.9 'Mostly Free', under 50 'Repressed'. Japan scores 70.3 and clears the 'Mostly Free' line by three-tenths of a point.",
+  srcName:"Heritage Foundation, 2026 Index of Economic Freedom, 176 countries ranked",
+  srcUrl:"https://www.heritage.org/index/",
+  fmt:v=>v.toFixed(1),
+  tip:(v,d)=>"Score "+v.toFixed(1)+" — ranked "+d.econR+" of 176 worldwide",
+  warn:"This is an index, not a measurement. Somebody decided which things to count and how much each one should weigh. A different set of choices produces a different league table — which is exactly what happens when you switch to the next measure."
+},
+{
+  key:"pol", short:"Political freedom", title:"Political freedom", unit:"Score out of 100, Freedom House 2026",
+  def:"A 0–100 score for free and fair elections, free speech and press, independent courts, and the right to protest and organise.",
+  dir:"Bigger bar = freer by this definition. Freedom House labels 70+ roughly 'Free'. Note how differently the countries sort here compared with economic freedom — these two measures share a word and almost nothing else.",
+  srcName:"Freedom House, Freedom in the World 2026",
+  srcUrl:"https://freedomhouse.org/countries/freedom-world/scores",
+  fmt:v=>v.toFixed(0),
+  tip:v=>v+" out of 100",
+  warn:"Also an index, and also an expert judgement rather than a count: Freedom House analysts assign these scores. They move year to year — the United States fell from 84 to 81 in this edition."
+},
+{
+  key:"lit", short:"Literacy", title:"Adult literacy rate — the chart with holes in it", unit:"% of people aged 15+ who can read and write a simple sentence",
+  def:"The share of people aged 15 and over who can read and write, with understanding, a short simple sentence about their everyday life.",
+  dir:"Bigger bar = more adults literate by that definition. But look at how many countries have no bar at all. That absence is the most important thing on this page.",
+  srcName:"UNESCO Institute for Statistics via the World Bank, indicator SE.ADT.LITR.ZS",
+  srcUrl:"https://data.worldbank.org/indicator/SE.ADT.LITR.ZS",
+  fmt:v=>v.toFixed(1)+"%",
+  tip:v=>v.toFixed(1)+"% of adults",
+  yearKey:"litY",
+  warn:"UNESCO publishes no literacy figure at all for Japan, the United States, Germany, the United Kingdom, France, Canada or Australia — it stops estimating once a country is assumed to have universal basic literacy. So the famous \"Japan has 99% literacy\" is not a survey result and not even an estimate. It is a gap that secondary sources filled in. Japan's last real national literacy measurement was in 1948. Meanwhile South Korea's 97.97% is from 2008, eighteen years stale. When somebody quotes you a literacy rate for a rich country, ask them who measured it and when."
+}
+];
+
+const $ = id => document.getElementById(id);
+const tip = $("tip");
+let current = METRICS[0];
+
+/* ---------- chips ---------- */
+const fil = $("filters");
+METRICS.forEach((m,i)=>{
+  const b = document.createElement("button");
+  b.className = "chip";
+  b.setAttribute("aria-pressed", i===0 ? "true" : "false");
+  b.innerHTML = m.short + '<span class="q">?</span>';
+  b.onclick = ()=>{
+    [...fil.children].forEach(c=>c.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    draw(m);
+    hideTip();
+  };
+  const show = e=>showTip(e, m.short, m.chipDef);
+  b.addEventListener("mouseenter", show);
+  b.addEventListener("mousemove", show);
+  b.addEventListener("mouseleave", hideTip);
+  fil.appendChild(b);
+});
+
+function showTip(e, title, body){
+  tip.innerHTML = "<b>"+title+"</b><span>"+body+"</span>";
+  tip.style.opacity = 1;
+  const x = Math.min(e.clientX + 14, window.innerWidth - 320);
+  const y = Math.min(e.clientY + 16, window.innerHeight - 110);
+  tip.style.left = Math.max(8,x) + "px";
+  tip.style.top  = Math.max(8,y) + "px";
+}
+function hideTip(){ tip.style.opacity = 0; }
+
+/* ---------- chart ---------- */
+function draw(m){
+  current = m;
+  $("cTitle").textContent = m.title;
+  $("cSub").textContent   = m.unit;
+  $("aDef").textContent   = m.def;
+  $("aDir").textContent   = m.dir;
+  $("aSrc").innerHTML     = "Source: " + m.srcName +
+     ' — <a href="'+m.srcUrl+'" target="_blank" rel="noopener">open the data'+
+     ' <span aria-hidden="true">&#8599;</span></a>';
+  $("aWarn").innerHTML    = m.warn ? '<div class="warn"><p>'+m.warn+'</p></div>' : "";
+  $("cRef").textContent   = m.ref ? m.refLabel : "";
+
+  const withData = DATA.filter(d=>d[m.key]!=null).sort((a,b)=>b[m.key]-a[m.key]);
+  const without  = DATA.filter(d=>d[m.key]==null);
+  const rows = withData.concat(without);
+  const max  = withData.length ? withData[0][m.key] : 1;
+  const scaleMax = m.ref ? Math.max(max, m.ref*1.06) : max;
+
+  const chart = $("chart");
+  chart.innerHTML = "";
+
+  rows.forEach((d,i)=>{
+    const row = document.createElement("div");
+    row.className = "bar-row" + (d.jp ? " jp" : "");
+    const has = d[m.key]!=null;
+    const pct = has ? Math.max(0.4, (d[m.key]/scaleMax)*100) : 100;
+    const yr  = (m.yearKey && d[m.yearKey]) ? '<span class="yr">'+d[m.yearKey]+'</span>' : "";
+    const flagged = m.flagKey && d[m.flagKey];
+    const flag = flagged ? '<span class="flag" title="Not comparable — see the warning below">&#9873; not comparable</span>' : "";
+
+    row.innerHTML =
+      '<div class="bar-label">'+d.c+'</div>'+
+      '<div class="bar-track">'+
+        (has ? '<div class="bar" style="width:0%"></div>'
+             : '<div class="bar nodata" style="width:0%"></div>')+
+        (has ? '<div class="bar-val">'+m.fmt(d[m.key])+yr+flag+'</div>'
+             : '<div class="bar-val none">no figure published</div>')+
+      '</div>';
+    chart.appendChild(row);
+
+    requestAnimationFrame(()=>{
+      const bar = row.querySelector(".bar");
+      bar.style.width = has ? pct+"%" : "34%";
+    });
+
+    const move = e=>{
+      const body = has
+        ? (typeof m.tip==="function" ? m.tip(d[m.key], d) : "")
+          + (m.yearKey && d[m.yearKey] ? "<br>Figure is from " + d[m.yearKey] : "")
+          + "<br>Rank " + (i+1) + " of " + withData.length + " countries that have a figure"
+          + (flagged ? "<br><em>Measured differently — not comparable.</em>" : "")
+        : "The source publishes no figure for this country. That is not the same as zero.";
+      showTip(e, d.c, body);
+    };
+    row.addEventListener("mousemove", move);
+    row.addEventListener("mouseleave", hideTip);
+  });
+
+  if(m.ref){
+    const track = chart.querySelector(".bar-track");
+    if(track){
+      const offset = track.getBoundingClientRect().left - chart.getBoundingClientRect().left;
+      const line = document.createElement("div");
+      line.className = "refline";
+      line.style.left = ((m.ref/scaleMax)*100) + "%";
+      chart.style.position = "relative";
+      const overlay = document.createElement("div");
+      overlay.style.cssText = "position:absolute;top:0;bottom:0;right:0;pointer-events:none;left:"+offset+"px;";
+      overlay.appendChild(line);
+      chart.appendChild(overlay);
+    }
+  }
+
+  buildTable();
+}
+
+/* ---------- full table ---------- */
+function buildTable(){
+  const t = $("tbl");
+  const head = "<tr><th>Country</th>" +
+    METRICS.map(m=>"<th>"+m.short+"</th>").join("") + "</tr>";
+  const body = DATA.map(d=>{
+    const cells = METRICS.map(m=>{
+      const v = d[m.key];
+      if(v==null) return '<td class="nd">no figure</td>';
+      const yr = (m.yearKey && d[m.yearKey]) ? ' <span style="color:var(--text-muted);font-size:11px">'+d[m.yearKey]+'</span>' : "";
+      return "<td>"+m.fmt(v)+yr+"</td>";
+    }).join("");
+    return '<tr class="'+(d.jp?"jp":"")+'"><td>'+d.c+"</td>"+cells+"</tr>";
+  }).join("");
+  t.innerHTML = head + body;
+}
+
+$("tblBtn").onclick = function(){
+  const w = $("tblWrap");
+  const hidden = w.classList.toggle("hidden");
+  this.textContent = hidden ? "Show the whole table, all ten measures" : "Hide the table";
+};
+
+draw(METRICS[0]);
+</script>
+</body>
+</html>

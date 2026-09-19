@@ -13,11 +13,14 @@ The git repository is already initialised and committed. You do the two steps th
 **2. Push, from Terminal on your Mac:**
 
 ```bash
-cd "~/Library/CloudStorage/GoogleDrive-timholme@gmail.com/My Drive/2026-27 sabbatical/wonderschool"
+cd ~/"Library/CloudStorage/GoogleDrive-timholme@gmail.com/My Drive/2026-27 sabbatical/wonderschool"
 git remote add origin https://github.com/YOUR-USERNAME/wonderschool.git
-git branch -M main
 git push -u origin main
 ```
+
+(The tilde sits outside the quotes on purpose — inside them bash treats it as a literal `~` and the `cd` fails.)
+
+The branch is already `main` and the first commit is already made, so there is nothing to add or commit before you push.
 
 **3. Import it at [vercel.com/new](https://vercel.com/new).** Pick the `wonderschool` repo. Vercel will detect a static site — leave every setting at its default (Framework Preset: Other, no build command, output directory blank). Click Deploy.
 

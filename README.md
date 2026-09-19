@@ -14,7 +14,7 @@ The git repository is already initialised and committed. You do the two steps th
 
 ```bash
 cd ~/"Library/CloudStorage/GoogleDrive-timholme@gmail.com/My Drive/2026-27 sabbatical/wonderschool"
-git remote add origin https://github.com/YOUR-USERNAME/wonderschool.git
+git remote add origin https://github.com/bayesfactor/wonderschool.git
 git push -u origin main
 ```
 

@@ -25,22 +25,22 @@ main{max-width:860px;}
   font-weight:700;font-size:14px;text-decoration:none;
   border:2px solid var(--edge-strong);color:var(--ink-3);background:var(--surface);transition:.2s var(--ease);}
 .rail a:hover{transform:translateY(-2px);border-color:var(--g2);color:var(--g2);}
-.rail a.done{background:var(--g2);border-color:var(--g2);color:#fff;}
+.rail a.done{background:var(--g2);border-color:var(--g2);color:var(--on-accent);}
 
 .station{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
   padding:32px 30px;margin-bottom:26px;box-shadow:var(--shadow-sm);scroll-margin-top:110px;}
 .station .num{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;
   letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:9px;}
-.station .num b{width:24px;height:24px;border-radius:50%;background:var(--g2);color:#fff;
+.station .num b{width:24px;height:24px;border-radius:50%;background:var(--g2);color:var(--on-accent);
   display:grid;place-items:center;font-size:12px;}
 .station h2{margin:0 0 12px;font-size:clamp(26px,4.5vw,36px);}
 .station p{font-size:17px;line-height:1.65;}
 .big-say{font-size:clamp(19px,2.6vw,22px);line-height:1.5;color:var(--ink);font-weight:500;}
 
 .paper{display:flex;gap:13px;align-items:flex-start;background:var(--gold-soft);
-  border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);
+  border:1px solid color-mix(in srgb,var(--gold-vivid) 45%,transparent);
   border-radius:var(--r);padding:15px 18px;margin:20px 0 4px;}
-.paper .ic{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gold);color:#3a2a06;
+.paper .ic{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gold-vivid);color:#3a2a06;
   display:grid;place-items:center;font-weight:800;font-size:15px;}
 .paper p{margin:0;font-size:15.5px;color:var(--ink);}
 
@@ -72,8 +72,8 @@ input[type=range]{width:100%;accent-color:var(--g2);height:30px;}
   gap:6px;padding:10px;border:2px solid var(--edge-strong);background:var(--surface);}
 .kface .ch{font-size:56px;line-height:1;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:var(--ink);}
 .kface .tap{font-size:11px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;}
-.kback{transform:rotateY(180deg);background:var(--g2);border-color:var(--g2);color:#fff;text-align:center;}
-.kback .ch{color:#fff;}
+.kback{transform:rotateY(180deg);background:var(--g2);border-color:var(--g2);color:var(--on-accent);text-align:center;}
+.kback .ch{color:var(--on-accent);}
 .kback .en{font-family:var(--font-display);font-size:21px;font-weight:800;}
 .kback .why{font-size:13px;line-height:1.4;opacity:.93;}
 
@@ -109,7 +109,7 @@ input[type=range]{width:100%;accent-color:var(--g2);height:30px;}
   font-weight:650;font-size:15.5px;padding:12px 22px;border-radius:99px;cursor:pointer;
   border:2px dashed var(--g2);background:transparent;color:var(--g2);transition:.2s var(--ease);}
 .stampbtn:hover{background:var(--g2-soft);transform:translateY(-2px);}
-.stampbtn.got{border-style:solid;background:var(--g2);color:#fff;}
+.stampbtn.got{border-style:solid;background:var(--g2);color:var(--on-accent);}
 .badge{text-align:center;background:linear-gradient(140deg,var(--g2-soft),var(--g4-soft) 70%,var(--g6-soft));
   border:2px solid var(--g2);border-radius:var(--r-xl);padding:34px 28px;margin-bottom:26px;}
 .badge h2{margin-top:0;}
@@ -117,7 +117,7 @@ input[type=range]{width:100%;accent-color:var(--g2);height:30px;}
 .st{aspect-ratio:1;border-radius:50%;border:3px dashed var(--edge-strong);display:grid;place-items:center;
   text-align:center;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--ink-3);
   padding:8px;background:var(--surface);transition:.35s var(--ease);}
-.st.got{border-style:solid;border-color:var(--g2);background:var(--g2);color:#fff;transform:rotate(-4deg) scale(1.04);}
+.st.got{border-style:solid;border-color:var(--g2);background:var(--g2);color:var(--on-accent);transform:rotate(-4deg) scale(1.04);}
 svg.torii{display:block;margin:18px auto 4px;max-width:250px;}
 </style>
 </head>

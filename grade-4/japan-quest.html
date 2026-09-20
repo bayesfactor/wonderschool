@@ -4,8 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Japan Quest | Wonderschool</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
 <style>
-:root{
+/* the quest sets its own palette on <body> so the shared :root tokens,
+   in either colour scheme, cannot leak into it */
+body{
   --bg:#0e1626; --panel:#16223a; --panel2:#1d2b47; --edge:#2e4368;
   --ink:#eaf0fb; --dim:#9db0d0; --gold:#f5c451; --good:#41d19a; --bad:#f2647a;
   --z1:#4ec9a0; --z2:#5aa9f0; --z3:#f5b13d; --z4:#b98df0; --z5:#f2707f;
@@ -89,14 +97,9 @@ td:last-child{text-align:right;color:var(--gold);font-weight:bold;}
 .foot{font-size:12.5px;color:var(--dim);text-align:center;margin-top:8px;line-height:1.6;}
 @media(max-width:520px){.matchwrap{grid-template-columns:1fr;}}
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/site.css">
 </head>
 <body>
-<style>.site-bar{background:#16223a;border-bottom-color:#2e4368;}.site-bar a{color:#9db0d0;}.site-bar a:hover{color:#eaf0fb;}.site-bar .brand{color:#eaf0fb;}.site-bar .sep{color:#5a6b8a;}.site-bar .printbtn{border-color:#2e4368;color:#9db0d0;}</style><nav class="site-bar"><a class="brand" href="/">Wonderschool</a><span class="sep">/</span><a href="/grade-4/">4th grade</a><span class="sep">/</span><a href="/grade-4/japan/">Japan</a><span class="spacer"></span><a href="/grade-4/japan-cards.html">Country cards &rarr;</a></nav>
+<style>.site-bar{background:#16223a;border-bottom-color:#2e4368;}.site-bar a{color:#b6c4dc;}.site-bar a:hover{color:#eaf0fb;}.site-bar .brand{color:#eaf0fb;}.site-bar .sep{color:#93a4c2;}.site-bar .printbtn{border-color:#2e4368;color:#b6c4dc;}</style><nav class="site-bar"><a class="brand" href="/">Wonderschool</a><span class="sep">/</span><a href="/grade-4/">4th grade</a><span class="sep">/</span><a href="/grade-4/japan/">Japan</a><span class="spacer"></span><a href="/grade-4/japan-cards.html">Country cards &rarr;</a></nav>
 <div id="app">
 
 <!-- TITLE -->

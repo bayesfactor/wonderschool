@@ -17,13 +17,21 @@
 
   --ink:#15140f;
   --ink-2:#4b4840;
-  --ink-3:#7d786c;
+  --ink-3:#6e6a5e;        /* 5.1:1 on --bg */
 
-  --g2:#1f9c78;   --g2-soft:#e4f5ee;
-  --g4:#2a78d6;   --g4-soft:#e3eefb;
+  /* Accents are text-safe: each clears 4.5:1 against both --bg and its own
+     -soft tint, which also makes white text on the solid colour pass. */
+  --g2:#12735a;   --g2-soft:#e4f5ee;
+  --g4:#1f68c2;   --g4-soft:#e3eefb;
   --g6:#6c4bd4;   --g6-soft:#ece6fb;
-  --hot:#e2572c;  --hot-soft:#fdeae2;
-  --gold:#e0a021; --gold-soft:#fcf0d8;
+  --hot:#bd3f0a;  --hot-soft:#fdeae2;
+  --gold:#8a6209; --gold-soft:#fcf0d8;
+
+  /* vivid variants: fills and graphics only, never text */
+  --g2-vivid:#1f9c78; --g4-vivid:#2a78d6; --g6-vivid:#7c5ce0;
+  --hot-vivid:#e2572c; --gold-vivid:#e0a021;
+
+  --on-accent:#ffffff;    /* text sitting on a solid accent */
 
   --accent:var(--g4);
   --accent-soft:var(--g4-soft);
@@ -46,12 +54,16 @@
     color-scheme:dark;
     --bg:#111110; --bg-2:#181816; --surface:#1c1c1a; --surface-2:#232320;
     --edge:#33332e; --edge-strong:#474740;
-    --ink:#f7f6f2; --ink-2:#c6c3b8; --ink-3:#8f8c81;
+    --ink:#f7f6f2; --ink-2:#c6c3b8; --ink-3:#a29e92;
     --g2:#3fc89c; --g2-soft:#10312a;
     --g4:#5aa2ef; --g4-soft:#132539;
     --g6:#a78bfa; --g6-soft:#221b3d;
     --hot:#f47a4f; --hot-soft:#3a1d14;
     --gold:#f0bc52; --gold-soft:#372a10;
+    --g2-vivid:#3fc89c; --g4-vivid:#5aa2ef; --g6-vivid:#a78bfa;
+    --hot-vivid:#f47a4f; --gold-vivid:#f0bc52;
+    /* accents are bright here, so text on them must be dark */
+    --on-accent:#0e0e0c;
     --shadow-sm:0 1px 2px rgba(0,0,0,.4);
     --shadow-md:0 4px 14px rgba(0,0,0,.45);
     --shadow-lg:0 10px 34px rgba(0,0,0,.55);
@@ -70,7 +82,7 @@ body{margin:0;background:var(--bg);color:var(--ink);
 h1,h2,h3,h4,.display{font-family:var(--font-display);font-weight:700;letter-spacing:-.02em;line-height:1.1;}
 a{color:var(--accent);}
 img,svg{max-width:100%;}
-::selection{background:var(--accent);color:#fff;}
+::selection{background:var(--accent);color:var(--on-accent);}
 :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px;}
 
 /* ---------- top bar ---------- */
@@ -89,7 +101,7 @@ img,svg{max-width:100%;}
 .site-bar .brand{font-family:var(--font-display);font-weight:800;color:var(--ink);
   font-size:16px;letter-spacing:-.03em;display:inline-flex;align-items:center;gap:7px;}
 .site-bar .brand::before{content:"";width:13px;height:13px;border-radius:50%;
-  background:conic-gradient(from 210deg,var(--g2),var(--g4),var(--g6),var(--hot),var(--g2));}
+  background:conic-gradient(from 210deg,var(--g2-vivid),var(--g4-vivid),var(--g6-vivid),var(--hot-vivid),var(--g2-vivid));}
 .site-bar .sep{color:var(--ink-3);}
 .site-bar .spacer{flex:1;}
 .site-bar .printbtn,.site-bar .barbtn{
@@ -160,7 +172,7 @@ a.tile:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:va
 /* ---------- buttons ---------- */
 .btn{display:inline-flex;align-items:center;gap:9px;font:inherit;font-weight:600;font-size:16px;
   padding:13px 24px;border-radius:99px;border:1px solid transparent;cursor:pointer;text-decoration:none;
-  background:var(--accent);color:#fff;transition:.18s var(--ease);box-shadow:var(--shadow-sm);}
+  background:var(--accent);color:var(--on-accent);transition:.18s var(--ease);box-shadow:var(--shadow-sm);}
 .btn:hover{transform:translateY(-2px);box-shadow:var(--shadow-md);filter:brightness(1.06);}
 .btn:active{transform:translateY(0);}
 .btn.ghost{background:var(--surface);color:var(--ink);border-color:var(--edge-strong);}
@@ -211,6 +223,23 @@ footer a{color:var(--ink-2);}
 .reveal.in{opacity:1;transform:none;}
 /* never hide content from a browser that is not running the script */
 @media (scripting:none){ .reveal{opacity:1;transform:none;} }
+
+/* ============================================================
+   The three print sheets simulate paper. They pin themselves to the
+   light palette so a viewer's dark-mode setting cannot bleed into
+   black ink on a white page.
+   ============================================================ */
+body.doc{
+  color-scheme:light;
+  --bg:#faf9f6; --bg-2:#f2f0ea; --surface:#ffffff; --surface-2:#f7f5f0;
+  --edge:#e6e2d8; --edge-strong:#cfc9bb;
+  --ink:#15140f; --ink-2:#4b4840; --ink-3:#6e6a5e;
+  --g2:#12735a; --g4:#1f68c2; --g6:#6c4bd4; --hot:#bd3f0a; --gold:#8a6209;
+  --on-accent:#ffffff;
+  --accent:var(--g4); --accent-soft:#e3eefb;
+  --shadow-sm:0 1px 2px rgba(20,18,12,.06);
+}
+body.doc .site-bar{background:#ffffff;border-bottom-color:#d8d4c8;}
 
 /* ============================================================
    Screen-first pages degrade to a clean black-and-white document

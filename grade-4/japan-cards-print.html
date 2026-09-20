@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Country Cards — print sheet | Wonderschool</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* print sheet: pin fonts so layout never depends on a webfont loading */
+  h1,h2,h3{font-family:inherit !important;}
+/* This is a PRINT artifact. Deliberately black and white. */
+html,body{background:#e9e9e9;color:#111;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;margin:0;}
+.page{width:8.5in;min-height:11in;background:#fff;margin:18px auto;padding:0.4in;
+  box-shadow:0 2px 10px rgba(0,0,0,.25);}
+.top{border-bottom:3px solid #111;padding-bottom:7px;margin-bottom:12px;
+  display:flex;justify-content:space-between;align-items:flex-end;}
+.top h1{font-family:inherit;font-size:19pt;margin:0;letter-spacing:-.3px;color:#111;}
+.eyebrow{font-size:8.5pt;letter-spacing:3px;text-transform:uppercase;color:#888;margin:0 0 3px;}
+.cutnote{font-size:9.5pt;color:#777;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:0.14in;}
+.card{border:3px solid #111;border-radius:12px;padding:9px 12px;height:2.95in;
+  display:flex;flex-direction:column;background:#fff;box-shadow:none;}
+.card::before{display:none;}
+.cname{font-family:inherit;font-size:19pt;font-weight:bold;line-height:1.1;margin-bottom:2px;color:#111;
+  letter-spacing:-.3px;}
+.cflagnote{font-size:8.5pt;color:#666;margin-bottom:7px;letter-spacing:1px;text-transform:uppercase;}
+.stat{display:flex;justify-content:space-between;align-items:baseline;
+  border-bottom:1.5px dotted #999;padding:5px 0;}
+.slabel{font-size:9.5pt;text-transform:uppercase;letter-spacing:.7px;color:#444;}
+.sval{font-size:13pt;font-weight:bold;white-space:nowrap;color:#111;}
+.srank{font-size:9pt;color:#555;margin-left:5px;font-weight:normal;}
+.cfoot{margin-top:auto;font-size:8.5pt;color:#555;line-height:1.35;padding-top:6px;}
+.cut{font-size:9pt;color:#888;text-align:center;margin-top:8px;}
+@media print{
+  html,body{background:#fff;}
+  @page{size:letter portrait;margin:0.4in;}
+  .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;
+    page-break-after:always;break-after:page;}
+  .page:last-child{page-break-after:auto;break-after:auto;}
+  .site-bar{display:none !important;}
+  .card{height:2.95in;}
+  .cut{margin-top:5px;}
+}
+</style>
+</head>
+<body class="doc">
+
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-4/japan-cards.html">Country Cards</a>
+  <span class="spacer"></span>
+  <button class="printbtn" onclick="window.print()">Print these 2 pages</button>
+</nav>
+
+<!-- ============ SHEET 1 ============ -->
+<section class="page">
+  <div class="top">
+    <div><p class="eyebrow">Wonderschool · Japan</p><h1>Country Cards — 1 of 2</h1></div>
+    <div class="cutnote">✂ Cut along the card borders</div>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="cname">JAPAN</div>
+      <div class="cflagnote">East Asia · island nation</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">122.7M<span class="srank">#11</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">377,975 km²<span class="srank">#62</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$4.38T<span class="srank">#4</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">70.3<span class="srank">#30</span></span></div>
+      <div class="cfoot">14,125 islands. Two-thirds forest. Builds about 45% of the world's industrial robots.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">UNITED STATES</div>
+      <div class="cflagnote">North America</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">341.8M<span class="srank">#3</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">9,525,067 km²<span class="srank">#4</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$32.38T<span class="srank">#1</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">72.8<span class="srank">#22</span></span></div>
+      <div class="cfoot">Biggest economy on Earth — bigger than #2 and #3 added together.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">CHINA</div>
+      <div class="cflagnote">East Asia</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">1,404.9M<span class="srank">#2</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">9,596,960 km²<span class="srank">#3</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$20.85T<span class="srank">#2</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">48.3<span class="srank">#154</span></span></div>
+      <div class="cfoot">Huge on three categories, near the bottom on the fourth. That gap is the whole story.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">INDIA</div>
+      <div class="cflagnote">South Asia</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">1,429.4M<span class="srank">#1</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">3,287,263 km²<span class="srank">#7</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$4.15T<span class="srank">#6</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">52.5<span class="srank">#132</span></span></div>
+      <div class="cfoot">Most people of any country — and 11 times more people than Japan for a similar-sized economy.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">GERMANY</div>
+      <div class="cflagnote">Western Europe</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">83.5M<span class="srank">#19</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">357,581 km²<span class="srank">#63</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$5.45T<span class="srank">#3</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">71.7<span class="srank">#24</span></span></div>
+      <div class="cfoot">Almost exactly Japan's size in land, but with 39 million fewer people.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">UNITED KINGDOM</div>
+      <div class="cflagnote">Western Europe · island nation</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">69.5M<span class="srank">#23</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">244,376 km²<span class="srank">#78</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$4.26T<span class="srank">#5</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">70.4<span class="srank">#29</span></span></div>
+      <div class="cfoot">Japan's closest rival on three of four categories. The #4/#5 spots swap around by the year.</div>
+    </div>
+
+  </div>
+  <p class="cut">✂ Cut along the card borders.</p>
+</section>
+
+<!-- ============ SHEET 2 ============ -->
+<section class="page">
+  <div class="top">
+    <div><p class="eyebrow">Wonderschool · Japan</p><h1>Country Cards — 2 of 2</h1></div>
+    <div class="cutnote">✂ Cut along the card borders</div>
+  </div>
+  <div class="grid">
+
+    <div class="card">
+      <div class="cname">FRANCE</div>
+      <div class="cflagnote">Western Europe</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">69.1M<span class="srank">#24</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">643,801 km²<span class="srank">#42</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$3.60T<span class="srank">#7</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">64.6<span class="srank">#65</span></span></div>
+      <div class="cfoot">Includes overseas territories, which is why the land number is bigger than you expect.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">ITALY</div>
+      <div class="cflagnote">Southern Europe</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">58.9M<span class="srank">#28</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">302,068 km²<span class="srank">#71</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.74T<span class="srank">#8</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">63.3<span class="srank">#73</span></span></div>
+      <div class="cfoot">A weak card in this deck — solid on Economy, beatable on everything else.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">BRAZIL</div>
+      <div class="cflagnote">South America</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">214.2M<span class="srank">#7</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">8,510,346 km²<span class="srank">#5</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.64T<span class="srank">#10</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">52.4<span class="srank">#134</span></span></div>
+      <div class="cfoot">Huge land, lots of people, and an economy smaller than Japan's — with 91 million MORE people.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">SOUTH KOREA</div>
+      <div class="cflagnote">East Asia · Japan's neighbour</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">51.1M<span class="srank">#34</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">100,432 km²<span class="srank">#107</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$1.93T<span class="srank">#15</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">73.7<span class="srank">#19</span></span></div>
+      <div class="cfoot">A quarter of Japan's land, and it beats Japan on economic freedom.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">CANADA</div>
+      <div class="cflagnote">North America</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">41.4M<span class="srank">#39</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">9,984,670 km²<span class="srank">#2</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.51T<span class="srank">#11</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">75.6<span class="srank">#14</span></span></div>
+      <div class="cfoot">26 times Japan's land area — and one third of Japan's population.</div>
+    </div>
+
+    <div class="card">
+      <div class="cname">AUSTRALIA</div>
+      <div class="cflagnote">Oceania · island continent</div>
+      <div class="stat"><span class="slabel">People</span><span class="sval">27.8M<span class="srank">#54</span></span></div>
+      <div class="stat"><span class="slabel">Land</span><span class="sval">7,741,220 km²<span class="srank">#6</span></span></div>
+      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.12T<span class="srank">#12</span></span></div>
+      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">80.1<span class="srank">#4</span></span></div>
+      <div class="cfoot">Fewest people in the deck, and the only card here rated fully "Free" on economic freedom.</div>
+    </div>
+
+  </div>
+  <p class="cut">✂ Cut along the card borders. Rules are online at wonderschool.vercel.app/grade-4/japan-cards.html</p>
+</section>
+
+</body>
+</html>

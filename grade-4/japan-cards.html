@@ -3,241 +3,203 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Country Cards | Wonderschool</title>
-<style>
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;background:#e9e9e9;color:#111;
-  font-family:"Trebuchet MS",Verdana,sans-serif;}
-.page{width:8.5in;min-height:11in;background:#fff;margin:16px auto;padding:0.4in;
-  box-shadow:0 2px 10px rgba(0,0,0,.25);}
-h1{font-size:28pt;margin:0 0 4px;}
-h2{font-size:17pt;margin:18px 0 6px;}
-p,li{font-size:12pt;line-height:1.6;}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:0.14in;}
-.card{border:3px solid #111;border-radius:12px;padding:10px 12px;height:3.25in;
-  display:flex;flex-direction:column;}
-.cname{font-size:19pt;font-weight:bold;line-height:1.1;margin-bottom:2px;}
-.cflagnote{font-size:8.5pt;color:#666;margin-bottom:7px;letter-spacing:1px;text-transform:uppercase;}
-.stat{display:flex;justify-content:space-between;align-items:baseline;
-  border-bottom:1.5px dotted #999;padding:5px 0;}
-.slabel{font-size:9.5pt;text-transform:uppercase;letter-spacing:.7px;color:#444;}
-.sval{font-size:13pt;font-weight:bold;white-space:nowrap;}
-.srank{font-size:9pt;color:#555;margin-left:5px;font-weight:normal;}
-.cfoot{margin-top:auto;font-size:8.5pt;color:#555;line-height:1.35;padding-top:6px;}
-.cut{font-size:9pt;color:#888;text-align:center;margin-top:8px;}
-.rules{border:3px solid #111;border-radius:12px;padding:16px 20px;}
-ol li{margin-bottom:9px;}
-.box{background:#f2f2f2;border-radius:10px;padding:12px 16px;margin:12px 0;font-size:12pt;line-height:1.6;}
-table{width:100%;border-collapse:collapse;font-size:10.5pt;margin-top:8px;}
-th,td{border:1px solid #bbb;padding:5px 6px;text-align:right;}
-th:first-child,td:first-child{text-align:left;}
-th{background:#eee;font-size:9.5pt;}
-tr.jp td{font-weight:bold;background:#f6f0dd;}
-@media print{
-  html,body{background:#fff;}
-  @page{size:letter portrait;margin:0.4in;}
-  .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;
-    page-break-after:always;break-after:page;}
-  .page:last-child{page-break-after:auto;break-after:auto;}
-  h1{font-size:23pt;}
-  h2{font-size:14pt;margin:11px 0 4px;}
-  p,li{font-size:10.4pt;line-height:1.45;margin-bottom:8px;}
-  ol li{margin-bottom:5px;}
-  .rules{padding:10px 14px;}
-  .box{padding:9px 13px;margin:9px 0;font-size:10.4pt;}
-  table{font-size:8.6pt;margin-top:5px;}
-  th,td{padding:2.4px 5px;}
-  th{font-size:8pt;}
-  .card{height:3.1in;}
-  .cut{margin-top:5px;}
-}
-</style>
+<title>Country Cards — 4th grade | Wonderschool</title>
+<meta name="description" content="Twelve country cards, four categories, and no best card. That is the point.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:900px;}
+.hero h1{font-size:clamp(36px,7.5vw,62px);
+  background:linear-gradient(100deg,var(--g4),var(--g6));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* category picker */
+.cats{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 6px;}
+.cats button{font:inherit;font-size:15px;font-weight:600;padding:11px 20px;border-radius:99px;
+  cursor:pointer;border:2px solid var(--edge-strong);background:var(--surface);color:var(--ink-2);
+  transition:.18s var(--ease);}
+.cats button:hover{border-color:var(--g4);color:var(--g4);transform:translateY(-2px);}
+.cats button[aria-pressed="true"]{background:var(--g4);border-color:var(--g4);color:#fff;}
+.catdef{font-size:15px;color:var(--ink-2);background:var(--g4-soft);border-radius:var(--r);
+  padding:14px 18px;margin:14px 0 22px;}
+
+/* league list */
+.league{display:grid;gap:8px;}
+.row{display:grid;grid-template-columns:38px 1fr auto;gap:14px;align-items:center;
+  background:var(--surface);border:1px solid var(--edge);border-radius:14px;padding:12px 16px;
+  transition:.35s var(--ease);}
+.row .pos{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--ink-3);text-align:center;}
+.row .nm{font-weight:600;font-size:16px;}
+.row .vl{font-variant-numeric:tabular-nums;font-weight:700;font-size:16px;color:var(--ink);white-space:nowrap;}
+.row.win{border-color:var(--gold);background:var(--gold-soft);box-shadow:var(--shadow-sm);}
+.row.win .pos{color:var(--gold);}
+.row.jp{border-color:var(--g4);}
+.row.jp .nm::before{content:"★ ";color:var(--g4);}
+.row .bar{grid-column:1 / -1;height:6px;border-radius:99px;background:var(--bg-2);overflow:hidden;margin-top:4px;}
+.row .bar i{display:block;height:100%;border-radius:99px;background:var(--g4);transition:width .5s var(--ease);}
+.row.win .bar i{background:var(--gold);}
+
+.rules{counter-reset:r;list-style:none;padding:0;margin:20px 0;}
+.rules li{counter-increment:r;position:relative;padding-left:46px;margin-bottom:16px;
+  font-size:16px;line-height:1.6;color:var(--ink-2);}
+.rules li::before{content:counter(r);position:absolute;left:0;top:-2px;width:31px;height:31px;
+  border-radius:50%;background:var(--g4);color:#fff;display:grid;place-items:center;
+  font-weight:700;font-size:14px;font-family:var(--font-display);}
+.rules li b{color:var(--ink);}
+.qa{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);margin:10px 0;overflow:hidden;}
+.qa summary{cursor:pointer;list-style:none;padding:15px 18px;font-weight:600;font-size:16px;color:var(--ink);
+  display:flex;gap:12px;align-items:center;}
+.qa summary::-webkit-details-marker{display:none;}
+.qa summary .chev{margin-left:auto;color:var(--g4);transition:transform .25s var(--ease);}
+.qa[open] summary .chev{transform:rotate(180deg);}
+.qa .body{padding:0 18px 16px;font-size:15.5px;line-height:1.6;color:var(--ink-2);}
+</style>
 </head>
-<body>
-<nav class="site-bar"><a class="brand" href="/">Wonderschool</a><span class="sep">/</span><a href="/grade-4/">4th grade</a><span class="sep">/</span><a href="/grade-4/japan/">Japan</a><span class="spacer"></span><a href="/grade-4/japan-quest.html">Play Japan Quest &rarr;</a><button class="printbtn" onclick="window.print()">Print the cards</button></nav>
+<body class="g4">
 
-<!-- RULES PAGE -->
-<section class="page">
-  <h1>COUNTRY CARDS</h1>
-  <p style="font-size:14pt;margin-top:0;">Where does Japan actually rank? Print, cut out 12 cards, and find out by beating someone.</p>
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-4/">4th grade</a>
+  <span class="sep">/</span><a href="/grade-4/japan/">Japan</a>
+  <span class="spacer"></span>
+  <a href="/grade-4/japan-cards-print.html">Print the 12 cards &rarr;</a>
+</nav>
 
-  <div class="rules">
-    <h2 style="margin-top:0;">How to play (2–4 players, 10 minutes)</h2>
-    <ol>
-      <li><strong>Deal all 12 cards</strong> face down, evenly. Nobody looks at anything except their own top card.</li>
-      <li>The player to the dealer's left goes first. They look at their top card and <strong>call out one category</strong>: People, Land, Economy, or Economic Freedom. Then they read their number out loud.</li>
-      <li>Everyone else reads <strong>the same category</strong> from their own top card.</li>
-      <li><strong>Highest number wins</strong> all the cards played. Put them at the bottom of your pile.</li>
-      <li>The winner calls the next category. <strong>Exact tie?</strong> Leave the cards in the middle; whoever wins the next round takes those too.</li>
-      <li>Play until one person holds every card, or until the timer runs out — then the biggest pile wins.</li>
-    </ol>
-  </div>
+<main>
+  <header class="hero">
+    <p class="kicker">Fourth grade · the card game</p>
+    <h1>Country Cards</h1>
+    <p class="lede">Twelve countries, four categories. Call a category, highest number wins.
+    <strong>There is no best card</strong> — and finding that out is the whole game.</p>
+  </header>
 
-  <div class="box">
-    <strong>The whole point of this game:</strong> there is no single "best country" card. India crushes everyone on People and loses badly on Economic Freedom. Canada is the second-biggest country on Earth and has fewer people than Tokyo's metro area. Japan is <strong>4th in Economy</strong> but only <strong>62nd in Land</strong> and <strong>30th in Economic Freedom</strong>. A country's rank changes completely depending on what you decide to measure — which is exactly what makes "which country is best?" a badly-formed question.
-  </div>
+  <h2>Try it here first</h2>
+  <p>Pick a category and watch the whole league table rearrange itself. The gold row is the winner.</p>
 
-  <h2>What the four numbers mean</h2>
-  <p style="margin:0 0 6px;"><strong>PEOPLE</strong> — how many people live there.<br>
-  <strong>LAND</strong> — total area in square kilometres.<br>
-  <strong>ECONOMY</strong> — nominal GDP: the total value of everything the country makes and sells in a year.<br>
-  <strong>ECONOMIC FREEDOM</strong> — a 0–100 score for how easy it is to start a business, own property, trade, and keep what you earn. 80+ is "Free"; 70–79.9 is "Mostly Free"; below 50 is "Repressed".</p>
+  <div class="cats" id="cats" role="group" aria-label="Choose a category"></div>
+  <p class="catdef" id="catdef"></p>
+  <div class="league" id="league"></div>
 
-  <h2>Cheat sheet (teacher copy — do not give to players first)</h2>
-  <table>
-    <tr><th>Country</th><th>People</th><th>Land km²</th><th>Economy</th><th>Ec. Freedom</th></tr>
-    <tr><td>India</td><td>1,429.4M (1)</td><td>3,287,263 (7)</td><td>$4.15T (6)</td><td>52.5 (132)</td></tr>
-    <tr><td>China</td><td>1,404.9M (2)</td><td>9,596,960 (3)</td><td>$20.85T (2)</td><td>48.3 (154)</td></tr>
-    <tr><td>United States</td><td>341.8M (3)</td><td>9,525,067 (4)</td><td>$32.38T (1)</td><td>72.8 (22)</td></tr>
-    <tr><td>Brazil</td><td>214.2M (7)</td><td>8,510,346 (5)</td><td>$2.64T (10)</td><td>52.4 (134)</td></tr>
-    <tr class="jp"><td>Japan</td><td>122.7M (11)</td><td>377,975 (62)</td><td>$4.38T (4)</td><td>70.3 (30)</td></tr>
-    <tr><td>Germany</td><td>83.5M (19)</td><td>357,581 (63)</td><td>$5.45T (3)</td><td>71.7 (24)</td></tr>
-    <tr><td>United Kingdom</td><td>69.5M (23)</td><td>244,376 (78)</td><td>$4.26T (5)</td><td>70.4 (29)</td></tr>
-    <tr><td>France</td><td>69.1M (24)</td><td>643,801 (42)</td><td>$3.60T (7)</td><td>64.6 (65)</td></tr>
-    <tr><td>Italy</td><td>58.9M (28)</td><td>302,068 (71)</td><td>$2.74T (8)</td><td>63.3 (73)</td></tr>
-    <tr><td>South Korea</td><td>51.1M (34)</td><td>100,432 (107)</td><td>$1.93T (15)</td><td>73.7 (19)</td></tr>
-    <tr><td>Canada</td><td>41.4M (39)</td><td>9,984,670 (2)</td><td>$2.51T (11)</td><td>75.6 (14)</td></tr>
-    <tr><td>Australia</td><td>27.8M (54)</td><td>7,741,220 (6)</td><td>$2.12T (12)</td><td>80.1 (4)</td></tr>
-  </table>
-  <p style="font-size:9.5pt;color:#555;margin-top:8px;">Population: national estimates 2025–26. Area: total land + inland water. Economy: IMF World Economic Outlook, April 2026. Economic Freedom: Heritage Foundation 2026 Index, 176 countries ranked.</p>
-</section>
+  <div class="note" id="insight" style="margin-top:22px;"><p></p></div>
 
-<!-- CARDS PAGE 1 -->
-<section class="page">
-  <div class="grid">
+  <h2>How to play on paper</h2>
+  <p><a class="btn" href="/grade-4/japan-cards-print.html">Print the 12 cards →</a></p>
+  <ol class="rules">
+    <li><b>Deal all 12 cards</b> face down, evenly between 2–4 players. Nobody looks at anything except
+    their own top card.</li>
+    <li>The player to the dealer's left goes first. They look at their top card and <b>call out one
+    category</b> — People, Land, Economy or Economic Freedom — then read their number out loud.</li>
+    <li>Everyone else reads <b>the same category</b> from their own top card.</li>
+    <li><b>Highest number wins</b> all the cards played. Put them at the bottom of your pile.</li>
+    <li>The winner calls the next category. <b>Exact tie?</b> Leave the cards in the middle; whoever wins the
+    next round takes those too.</li>
+    <li>Play until one person holds every card, or until the timer runs out — then the biggest pile wins.</li>
+  </ol>
 
-    <div class="card">
-      <div class="cname">JAPAN</div>
-      <div class="cflagnote">East Asia · island nation</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">122.7M<span class="srank">#11</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">377,975 km²<span class="srank">#62</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$4.38T<span class="srank">#4</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">70.3<span class="srank">#30</span></span></div>
-      <div class="cfoot">14,125 islands. Two-thirds forest. Builds about 45% of the world's industrial robots.</div>
-    </div>
+  <div class="note"><p><strong>Playing with a younger brother or sister?</strong> Pair the youngest with the
+  oldest and make the <em>younger</em> one call the category every time. The older one may advise but not
+  decide. That forces them to explain why a category is a good bet, which is the actual learning.</p></div>
 
-    <div class="card">
-      <div class="cname">UNITED STATES</div>
-      <div class="cflagnote">North America</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">341.8M<span class="srank">#3</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">9,525,067 km²<span class="srank">#4</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$32.38T<span class="srank">#1</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">72.8<span class="srank">#22</span></span></div>
-      <div class="cfoot">Biggest economy on Earth — bigger than #2 and #3 added together.</div>
-    </div>
+  <h2>Questions to argue about</h2>
+  <details class="qa"><summary>Which card is the best card? <span class="chev">⌄</span></summary>
+    <div class="body">There isn't one, and that's the lesson. Australia has the fewest people and the highest
+    <span class="gl" data-t="economic-freedom">economic freedom</span>. India has the most people and nearly the
+    lowest. Keep pushing until someone says "it depends which category you call."</div></details>
 
-    <div class="card">
-      <div class="cname">CHINA</div>
-      <div class="cflagnote">East Asia</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">1,404.9M<span class="srank">#2</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">9,596,960 km²<span class="srank">#3</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$20.85T<span class="srank">#2</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">48.3<span class="srank">#154</span></span></div>
-      <div class="cfoot">Huge on three categories, near the bottom on the fourth. That gap is the whole story.</div>
-    </div>
+  <details class="qa"><summary>Brazil has 91 million more people than Japan. Whose economy is bigger? <span class="chev">⌄</span></summary>
+    <div class="body">Japan's — $4.38 trillion against Brazil's $2.64 trillion. So more people does not
+    automatically mean more money.</div></details>
 
-    <div class="card">
-      <div class="cname">INDIA</div>
-      <div class="cflagnote">South Asia</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">1,429.4M<span class="srank">#1</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">3,287,263 km²<span class="srank">#7</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$4.15T<span class="srank">#6</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">52.5<span class="srank">#132</span></span></div>
-      <div class="cfoot">Most people of any country — and 11 times more people than Japan for a similar-sized economy.</div>
-    </div>
+  <details class="qa"><summary>Canada has 26 times more land than Japan. Who has more people? <span class="chev">⌄</span></summary>
+    <div class="body">Japan, by 81 million. Land doesn't mean people either.</div></details>
 
-    <div class="card">
-      <div class="cname">GERMANY</div>
-      <div class="cflagnote">Western Europe</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">83.5M<span class="srank">#19</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">357,581 km²<span class="srank">#63</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$5.45T<span class="srank">#3</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">71.7<span class="srank">#24</span></span></div>
-      <div class="cfoot">Almost exactly Japan's size in land, but with 39 million fewer people.</div>
-    </div>
+  <details class="qa"><summary>South Korea is a quarter of Japan's size and beats it on economic freedom. Is South Korea a better country? <span class="chev">⌄</span></summary>
+    <div class="body">Genuinely open — defend whichever side you take. The useful follow-up is: <em>what would
+    you need to know that isn't on these cards?</em> Life expectancy, safety, healthcare, pollution, happiness,
+    how much a house costs.</div></details>
 
-    <div class="card">
-      <div class="cname">UNITED KINGDOM</div>
-      <div class="cflagnote">Western Europe · island nation</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">69.5M<span class="srank">#23</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">244,376 km²<span class="srank">#78</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$4.26T<span class="srank">#5</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">70.4<span class="srank">#29</span></span></div>
-      <div class="cfoot">Japan's closest rival on three of four categories. The #4/#5 spots swap around by the year.</div>
-    </div>
+  <footer>
+    Population: national and UN estimates, 2025–26. Land area: total land plus inland water.
+    Economy: <span class="gl" data-t="imf">IMF</span> World Economic Outlook, April 2026, nominal GDP.
+    Economic freedom: <span class="gl" data-t="heritage">Heritage Foundation</span> 2026 Index, 176 countries ranked.
+  </footer>
+</main>
 
-  </div>
-  <p class="cut">✂ Cut along the card borders.</p>
-</section>
+<script src="/assets/glossary.js"></script>
+<script>
+const DATA = [
+  {c:"Japan",          jp:true, pop:122.7,  area:377975,  gdp:4380,  econ:70.3},
+  {c:"United States",  pop:341.8,  area:9525067, gdp:32380, econ:72.8},
+  {c:"China",          pop:1404.9, area:9596960, gdp:20850, econ:48.3},
+  {c:"India",          pop:1429.4, area:3287263, gdp:4150,  econ:52.5},
+  {c:"Germany",        pop:83.5,   area:357581,  gdp:5450,  econ:71.7},
+  {c:"United Kingdom", pop:69.5,   area:244376,  gdp:4260,  econ:70.4},
+  {c:"France",         pop:69.1,   area:643801,  gdp:3600,  econ:64.6},
+  {c:"Italy",          pop:58.9,   area:302068,  gdp:2740,  econ:63.3},
+  {c:"Brazil",         pop:214.2,  area:8510346, gdp:2636,  econ:52.4},
+  {c:"South Korea",    pop:51.1,   area:100432,  gdp:1931,  econ:73.7},
+  {c:"Canada",         pop:41.4,   area:9984670, gdp:2507,  econ:75.6},
+  {c:"Australia",      pop:27.8,   area:7741220, gdp:2124,  econ:80.1}
+];
+const CATS = [
+  {k:"pop",  n:"People", def:"How many people live there.",
+   fmt:v=>v.toLocaleString(undefined,{maximumFractionDigits:1})+"M",
+   say:"India and China are miles ahead of everybody. Japan is 5th of these twelve — and 11th in the whole world."},
+  {k:"area", n:"Land", def:"Total area in square kilometres, land plus lakes and rivers.",
+   fmt:v=>(v/1000).toLocaleString(undefined,{maximumFractionDigits:0})+"k km²",
+   say:"Canada wins by a mile and has almost nobody living in it. Japan drops to 8th here — it is a small country."},
+  {k:"gdp",  n:"Economy", def:"The value of everything the country makes and sells in one year, in US dollars.",
+   fmt:v=>"$"+(v/1000).toFixed(2)+"T",
+   say:"Japan jumps to 4th. Look at the gap between the USA and everybody else — it is bigger than #2 and #3 added together."},
+  {k:"econ", n:"Economic Freedom", def:"A 0–100 score for how easy it is to start a business, own property, trade, and keep what you earn.",
+   fmt:v=>v.toFixed(1),
+   say:"Everything reshuffles. Australia wins, China comes last, and Japan lands 7th — despite having the biggest economy of the four leaders here."}
+];
 
-<!-- CARDS PAGE 2 -->
-<section class="page">
-  <div class="grid">
+let cur = CATS[0];
+const catsEl = document.getElementById("cats");
+CATS.forEach((c,i)=>{
+  const b = document.createElement("button");
+  b.textContent = c.n;
+  b.setAttribute("aria-pressed", i===0 ? "true" : "false");
+  b.onclick = ()=>{
+    [...catsEl.children].forEach(x=>x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true");
+    cur = c; render();
+  };
+  catsEl.appendChild(b);
+});
 
-    <div class="card">
-      <div class="cname">FRANCE</div>
-      <div class="cflagnote">Western Europe</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">69.1M<span class="srank">#24</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">643,801 km²<span class="srank">#42</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$3.60T<span class="srank">#7</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">64.6<span class="srank">#65</span></span></div>
-      <div class="cfoot">Includes overseas territories, which is why the land number is bigger than you expect.</div>
-    </div>
-
-    <div class="card">
-      <div class="cname">ITALY</div>
-      <div class="cflagnote">Southern Europe</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">58.9M<span class="srank">#28</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">302,068 km²<span class="srank">#71</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.74T<span class="srank">#8</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">63.3<span class="srank">#73</span></span></div>
-      <div class="cfoot">A weak card in this deck — solid on Economy, beatable on everything else.</div>
-    </div>
-
-    <div class="card">
-      <div class="cname">BRAZIL</div>
-      <div class="cflagnote">South America</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">214.2M<span class="srank">#7</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">8,510,346 km²<span class="srank">#5</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.64T<span class="srank">#10</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">52.4<span class="srank">#134</span></span></div>
-      <div class="cfoot">Huge land, lots of people, and an economy smaller than Japan's — with 91 million MORE people.</div>
-    </div>
-
-    <div class="card">
-      <div class="cname">SOUTH KOREA</div>
-      <div class="cflagnote">East Asia · Japan's neighbour</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">51.1M<span class="srank">#34</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">100,432 km²<span class="srank">#107</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$1.93T<span class="srank">#15</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">73.7<span class="srank">#19</span></span></div>
-      <div class="cfoot">A quarter of Japan's land, and it beats Japan on economic freedom.</div>
-    </div>
-
-    <div class="card">
-      <div class="cname">CANADA</div>
-      <div class="cflagnote">North America</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">41.4M<span class="srank">#39</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">9,984,670 km²<span class="srank">#2</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.51T<span class="srank">#11</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">75.6<span class="srank">#14</span></span></div>
-      <div class="cfoot">26 times Japan's land area — and one third of Japan's population.</div>
-    </div>
-
-    <div class="card">
-      <div class="cname">AUSTRALIA</div>
-      <div class="cflagnote">Oceania · island continent</div>
-      <div class="stat"><span class="slabel">People</span><span class="sval">27.8M<span class="srank">#54</span></span></div>
-      <div class="stat"><span class="slabel">Land</span><span class="sval">7,741,220 km²<span class="srank">#6</span></span></div>
-      <div class="stat"><span class="slabel">Economy</span><span class="sval">$2.12T<span class="srank">#12</span></span></div>
-      <div class="stat"><span class="slabel">Ec. Freedom</span><span class="sval">80.1<span class="srank">#4</span></span></div>
-      <div class="cfoot">Fewest people in the deck, and the only card here rated fully "Free" on economic freedom.</div>
-    </div>
-
-  </div>
-  <p class="cut">✂ Cut along the card borders.</p>
-</section>
-
+function render(){
+  document.getElementById("catdef").textContent = cur.def;
+  document.querySelector("#insight p").textContent = cur.say;
+  const rows = [...DATA].sort((a,b)=>b[cur.k]-a[cur.k]);
+  const max = rows[0][cur.k];
+  const L = document.getElementById("league");
+  L.innerHTML = "";
+  rows.forEach((d,i)=>{
+    const r = document.createElement("div");
+    r.className = "row" + (i===0 ? " win" : "") + (d.jp ? " jp" : "");
+    r.innerHTML = '<div class="pos">'+(i+1)+'</div><div class="nm">'+d.c+'</div>'+
+                  '<div class="vl">'+cur.fmt(d[cur.k])+'</div>'+
+                  '<div class="bar"><i style="width:0"></i></div>';
+    L.appendChild(r);
+    setTimeout(()=>{ r.querySelector(".bar i").style.width = (d[cur.k]/max*100)+"%"; }, 30+i*22);
+  });
+}
+render();
+</script>
+<script>
+/* open every collapsible section before printing so nothing is lost on paper */
+window.addEventListener("beforeprint", () => {
+  document.querySelectorAll("details").forEach(d => { d.dataset.wasOpen = d.open ? "1" : ""; d.open = true; });
+});
+window.addEventListener("afterprint", () => {
+  document.querySelectorAll("details").forEach(d => { d.open = d.dataset.wasOpen === "1"; });
+});
+</script>
 </body>
 </html>

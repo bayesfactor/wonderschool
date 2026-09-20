@@ -5,9 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Wonderschool</title>
 <meta name="description" content="Lessons that feel like games. Second, fourth and sixth grade.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 </head>
-<body class="hub">
+<body class="">
 <nav class="site-bar">
   <a class="brand" href="/">Wonderschool</a>
   <span class="spacer"></span>
@@ -15,53 +19,59 @@
   <span class="sep">·</span>
   <a href="/print/">What to print</a>
 </nav>
-
 <main>
   <p class="kicker">Lessons that feel like games</p>
-  <h1>Wonderschool</h1>
-  <p class="lede">Pick your grade. Everything works on a tablet or a laptop, and every page
-  prints if you would rather have it on paper.</p>
+  <h1 style="background:linear-gradient(103deg,var(--g2),var(--g4) 45%,var(--g6) 90%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;">Wonderschool</h1>
+  <p class="lede">Pick a grade. Everything works on a tablet or a laptop — and only four pages of the
+  whole Japan unit ever need to touch a printer.</p>
 
   <div class="cards">
-    <a class="card g2" href="/grade-2/">
+    <a class="card g2 reveal" href="/grade-2/">
       <div class="grade">Second grade</div>
       <div class="title">Reading &amp; making</div>
-      <p class="desc">Stamp-collecting passports, picture-words, drawing, and poems you can count on your fingers.</p>
-      <div class="meta">1 lesson · Japan</div>
+      <p class="desc">Guess how many islands Japan has. Flip cards to find the picture hiding inside a kanji.
+      Write a poem with a counter that claps along with you.</p>
+      <div class="meta">1 lesson · Japan</div><span class="arrow">&rarr;</span>
     </a>
-    <a class="card g4" href="/grade-4/">
+    <a class="card g4 reveal" href="/grade-4/">
       <div class="grade">Fourth grade</div>
       <div class="title">Quests &amp; card games</div>
-      <p class="desc">Play for points and badges. Guess big numbers, rank countries, match inventors to inventions.</p>
-      <div class="meta">1 lesson · Japan</div>
+      <p class="desc">Five zones, fifteen challenges, points and badges. Then a card deck where the winning
+      card changes depending on which category you call.</p>
+      <div class="meta">1 lesson · Japan</div><span class="arrow">&rarr;</span>
     </a>
-    <a class="card g6" href="/grade-6/">
+    <a class="card g6 reveal" href="/grade-6/">
       <div class="grade">Sixth grade</div>
       <div class="title">Evidence &amp; argument</div>
-      <p class="desc">Real data with real contradictions in it. Take a position, then argue against yourself.</p>
-      <div class="meta">1 lesson · Japan</div>
+      <p class="desc">Real data with the contradictions left in. Ten measures across twelve countries, and one
+      statistic everybody quotes that nobody has ever measured.</p>
+      <div class="meta">1 lesson · Japan</div><span class="arrow">&rarr;</span>
     </a>
   </div>
 
-  <h2>Working as a group</h2>
-  <p>Everyone in the room can work on the same thing at the same time, with a different job each.</p>
+  <h2>Everyone together</h2>
+  <p>Four jobs, one wall chart, and nobody can finish without somebody else.</p>
   <div class="tiles">
-    <a class="tile" href="/together/">
-      <span class="tag">Grades 2–6 · up to 4 students</span>
+    <a class="tile reveal" href="/together/">
+      <span class="tag">Grades 2–6 · 2 to 4 students</span>
       <div class="t">The Japan Desk</div>
-      <p class="d">Four jobs, one wall chart. The youngest illustrates, the oldest writes the verdict, and the fact-checker can veto anybody.</p>
+      <p class="d">The youngest illustrates and controls the layout. The oldest writes the verdict and has no
+      power at all. The fact-checker can veto anybody.</p>
     </a>
-    <a class="tile" href="/print/">
+    <a class="tile reveal" href="/print/">
       <span class="tag">For the teacher</span>
       <div class="t">What to print</div>
-      <p class="d">Four pages for the whole Japan unit. Everything else is read on a screen and drawn on plain paper.</p>
+      <p class="d">Four pages for the entire unit, and a short reason next to each one explaining why it cannot
+      be done on a screen.</p>
     </a>
   </div>
 
   <footer>
-    Built for a class of four. Every figure on this site is linked to the organisation that published it —
+    Built for a class of four. Every figure on this site links to the organisation that published it —
     if you cannot find the source, treat the number as a rumour.
   </footer>
 </main>
+<script src="/assets/glossary.js"></script>
 </body>
 </html>

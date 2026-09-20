@@ -4,130 +4,139 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Japan Desk — work together | Wonderschool</title>
+<meta name="description" content="Four jobs, one wall chart, grades 2 to 6. Nobody can finish without somebody else.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
-.hub .roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:16px;margin:20px 0;}
-.role{background:var(--surface-1);border:1px solid var(--edge);border-top:5px solid var(--accent);
-  border-radius:14px;padding:18px 20px;}
-.role.r1{border-top-color:var(--g2);}
-.role.r2{border-top-color:var(--g4);}
-.role.r3{border-top-color:var(--accent-2);}
-.role.r4{border-top-color:var(--g6);}
-.role .band{font-size:11px;letter-spacing:2.2px;text-transform:uppercase;color:var(--text-muted);margin-bottom:5px;}
-.role .rname{font-size:20px;font-weight:700;margin-bottom:8px;line-height:1.15;}
-.role p{font-size:14.5px;margin:0 0 10px;}
+main{max-width:940px;}
+.hero h1{font-size:clamp(36px,7.5vw,62px);
+  background:linear-gradient(100deg,var(--g2),var(--g4) 45%,var(--g6));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* role cards */
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:26px 0;}
+.role{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-lg);
+  padding:24px 22px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease);}
+.role:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.role::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--rc);}
+.role.r1{--rc:var(--g2);} .role.r2{--rc:var(--g4);}
+.role.r3{--rc:var(--hot);} .role.r4{--rc:var(--g6);}
+.role .band{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rc);margin-bottom:6px;}
+.role .rname{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.02em;
+  margin-bottom:9px;line-height:1.1;}
+.role p{font-size:15px;margin:0 0 11px;}
 .role ul{margin:0 0 4px;padding-left:19px;}
-.role li{font-size:14px;line-height:1.55;color:var(--text-secondary);margin-bottom:6px;}
-.role .power{font-size:13.5px;color:var(--text-primary);border-top:1px solid var(--edge);
-  padding-top:9px;margin-top:10px;}
-.hub .steps{counter-reset:s;list-style:none;padding:0;margin:16px 0;}
-.hub .steps li{counter-increment:s;position:relative;padding-left:44px;margin-bottom:16px;
-  font-size:15.5px;line-height:1.6;color:var(--text-secondary);max-width:66ch;}
-.hub .steps li::before{content:counter(s);position:absolute;left:0;top:-1px;
-  width:30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;
-  display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;}
-.hub .steps li b{color:var(--text-primary);}
-.chartplan{background:var(--surface-1);border:1px solid var(--edge);border-radius:12px;
-  padding:16px;margin:18px 0;font-family:"SF Mono",Menlo,Consolas,monospace;
-  font-size:12.5px;line-height:1.75;color:var(--text-secondary);white-space:pre;overflow-x:auto;}
-.timing{width:100%;border-collapse:collapse;font-size:14.5px;margin:14px 0;}
-.timing td,.timing th{border-bottom:1px solid var(--edge);padding:8px 6px;text-align:left;
-  color:var(--text-secondary);}
-.timing th{font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:var(--text-muted);}
-.timing td:first-child{white-space:nowrap;color:var(--text-primary);font-weight:600;width:1%;padding-right:18px;}
-@media print{
-  @page{size:letter portrait;margin:0.55in 0.6in;}
-  body.hub{background:#fff;color:#14140f;
-    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
-  .hub main{max-width:none;padding:0;}
-  .hub p,.hub .lede{max-width:none;color:#33322d;}
-  .hub h1{font-size:26pt;margin-bottom:8px;}
-  .hub h2{font-size:14pt;margin:16px 0 6px;padding-bottom:4px;
-    border-bottom:1.5px solid #14140f;break-after:avoid;}
-  .hub p{font-size:10.2pt;line-height:1.5;margin-bottom:7px;}
-  .hub .lede{font-size:11.5pt;line-height:1.5;}
-  .kicker{font-size:8.5pt;letter-spacing:2.4px;}
-  .note{border-left-color:#8a1f1f;break-inside:avoid;}
-  .note p{font-size:10pt;}
-  .hub .roles{grid-template-columns:1fr 1fr;gap:10px;margin:12px 0;}
-  .role{break-inside:avoid;border:1.5px solid #14140f;border-top-width:4px;padding:11px 13px;}
-  .role .band{font-size:8pt;letter-spacing:1.8px;}
-  .role .rname{font-size:14pt;margin-bottom:5px;}
-  .role p{font-size:9.6pt;margin-bottom:6px;}
-  .role li{font-size:9.4pt;line-height:1.42;margin-bottom:3px;color:#33322d;}
-  .role .power{font-size:9.4pt;padding-top:6px;margin-top:6px;border-top:1px solid #c4c4bb;}
-  .chartplan{font-size:9pt;line-height:1.55;border:1.5px solid #14140f;padding:11px;break-inside:avoid;}
-  .hub .steps li{font-size:10.2pt;line-height:1.5;margin-bottom:9px;padding-left:34px;max-width:none;}
-  .hub .steps li::before{width:23px;height:23px;font-size:11px;background:#14140f;}
-  .timing{font-size:10pt;break-inside:avoid;}
-  .timing td,.timing th{padding:4px 5px;border-bottom:1px solid #c4c4bb;color:#33322d;}
-  .site-bar{display:none !important;}
-  footer{font-size:9pt;}
-}
+.role li{font-size:14.5px;line-height:1.5;color:var(--ink-2);margin-bottom:6px;}
+.role .power{margin-top:14px;padding-top:12px;border-top:1px solid var(--edge);font-size:14.5px;color:var(--ink);}
+.role .power b{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rc);margin-bottom:3px;}
+
+/* chart plan */
+.plan{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);
+  padding:20px;margin:22px 0;overflow-x:auto;}
+.plan pre{font-family:var(--font-mono);font-size:12.5px;line-height:1.7;color:var(--ink-2);margin:0;}
+
+/* steps */
+.steps{counter-reset:s;list-style:none;padding:0;margin:20px 0;}
+.steps li{counter-increment:s;position:relative;padding-left:48px;margin-bottom:18px;
+  font-size:16px;line-height:1.6;color:var(--ink-2);}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:32px;height:32px;
+  border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;
+  font-weight:700;font-size:15px;font-family:var(--font-display);}
+.steps li b{color:var(--ink);}
+
+/* timer */
+.timer{background:linear-gradient(145deg,var(--g4-soft),var(--g6-soft));
+  border:2px solid var(--g4);border-radius:var(--r-xl);padding:28px;margin:26px 0;text-align:center;}
+.clock{font-family:var(--font-display);font-size:clamp(50px,13vw,84px);font-weight:800;
+  letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink);}
+.phase{font-size:clamp(17px,2.4vw,21px);font-weight:650;color:var(--g4);margin:8px 0 2px;min-height:1.4em;}
+.phasenext{font-size:14px;color:var(--ink-3);min-height:1.3em;}
+.tbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
+.pbar{height:9px;border-radius:99px;background:color-mix(in srgb,var(--ink) 12%,transparent);
+  overflow:hidden;margin:18px 0 4px;}
+.pbar i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--g2),var(--g4),var(--g6));transition:width .5s linear;}
+.sched{display:grid;gap:6px;margin-top:16px;text-align:left;}
+.sched div{display:flex;gap:12px;font-size:14px;color:var(--ink-2);padding:7px 12px;border-radius:9px;
+  transition:.2s;}
+.sched div.now{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:var(--shadow-sm);}
+.sched div.done{opacity:.45;}
+.sched .tm{font-variant-numeric:tabular-nums;color:var(--ink-3);white-space:nowrap;min-width:64px;}
+
+table.simple{width:100%;border-collapse:collapse;font-size:15px;margin:16px 0;}
+table.simple td,table.simple th{padding:11px 10px;border-bottom:1px solid var(--edge);text-align:left;
+  color:var(--ink-2);vertical-align:top;}
+table.simple th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);}
+table.simple td:first-child{white-space:nowrap;color:var(--ink);font-weight:600;width:1%;padding-right:20px;}
 </style>
 </head>
-<body class="hub">
+<body class="g4">
+
 <nav class="site-bar">
   <a class="brand" href="/">Wonderschool</a>
-  <span class="sep">/</span><a href="/together/">Work together</a>
+  <span class="sep">/</span><a href="/together/">The Japan Desk</a>
   <span class="spacer"></span>
-  <button class="printbtn" onclick="window.print()">Print</button>
+  <a href="/together/role-cards.html">Role cards to print &rarr;</a>
 </nav>
 
 <main>
-  <p class="kicker">Grades 2–6 together · 2 to 4 students · about 25 minutes</p>
-  <h1>The Japan Desk</h1>
-  <p class="lede">One wall chart about Japan. Four jobs. Nobody can finish their job without somebody else's —
-  which is the point. The second grader is not helping the sixth grader; the sixth grader cannot write a word
-  until the second grader has drawn the space for it.</p>
+  <header class="hero">
+    <p class="kicker">Grades 2–6 · 2 to 4 students · about 25 minutes</p>
+    <h1>The Japan Desk</h1>
+    <p class="lede">One wall chart about Japan. Four jobs. Nobody can finish their job without somebody
+    else's — which is the point. The second grader is not helping the sixth grader; the sixth grader cannot
+    write a word until the second grader has drawn the space for it.</p>
+  </header>
 
-  <div class="note">
-    <p><strong>You need:</strong> one large sheet of paper (tape two together if you have none), pencils and
-    colored pencils, the printed <a href="/grade-4/japan-cards.html">Country Cards</a>, and the
-    <a href="/together/role-cards.html"><strong>role cards</strong></a> &mdash; one page, cut into four, one for
-    each student. Everything else comes out of what each of you already did in your own lesson.</p>
-  </div>
+  <div class="note"><p><strong>You need:</strong> one large sheet of paper (tape two together if you have none),
+  pencils and colored pencils, the printed <a href="/grade-4/japan-cards.html">Country Cards</a>, and the
+  <a href="/together/role-cards.html"><strong>role cards</strong></a> — one page, cut into four, one each.</p></div>
 
   <h2>Warm-up: the island guess</h2>
   <p>Everybody writes a number on a scrap of paper — <em>how many islands is Japan?</em> — then all reveal at
-  once. Closest wins. Nobody is allowed to say their guess out loud first, because the youngest will copy the
-  oldest and then nobody learns anything. The answer is at the bottom of this page, upside down in your head:
-  <strong>14,125</strong>, recounted in 2023, up from the 6,852 Japan had been claiming for thirty-five years.
-  Ask the winner <em>why</em> a country loses track of seven thousand islands.</p>
+  once. Closest wins. Nobody says their guess out loud first, because the youngest will copy the oldest and then
+  nobody learns anything. The answer is <strong>14,125</strong>, recounted in 2023, up from the 6,852 Japan had
+  been claiming for thirty-five years. Ask the winner <em>why</em> a country loses track of seven thousand islands.</p>
 
   <h2>The four jobs</h2>
-
   <div class="roles">
-    <div class="role r1">
+    <div class="role r1 reveal">
       <div class="band">Grades 2–3</div>
       <div class="rname">The Illustrator</div>
       <p>You own everything anyone can see. You decide the layout, which means you decide how much room each
       person gets.</p>
       <ul>
         <li>Draw Japan: four big islands in a curve, tiny dots all around.</li>
-        <li>Draw a torii gate and Mount Fuji somewhere on the chart.</li>
-        <li>Write the chart's headings in kanji where you know one — 山 mountain, 川 river, 日 sun, 人 person.</li>
-        <li>Write a haiku across the top: five beats, seven beats, five beats.</li>
+        <li>Draw a <span class="gl" data-t="torii">torii</span> gate and Mount Fuji somewhere on the chart.</li>
+        <li>Write headings in <span class="gl" data-t="kanji">kanji</span> where you know one — 山 mountain,
+        川 river, 日 sun, 人 person.</li>
+        <li>Write a <span class="gl" data-t="haiku">haiku</span> across the top.</li>
       </ul>
-      <p class="power"><strong>Your power:</strong> you rule the layout. If someone wants more space they have
-      to ask you, and you can say no.</p>
+      <p class="power"><b>Your power</b>You rule the layout. If someone wants more space they have to ask you,
+      and you can say no.</p>
     </div>
 
-    <div class="role r2">
+    <div class="role r2 reveal">
       <div class="band">Grades 3–4</div>
       <div class="rname">The Quartermaster</div>
-      <p>You run the Country Cards deck and you supply every number that goes on the chart. No number reaches
-      the wall except through you.</p>
+      <p>You run the Country Cards deck and supply every number that goes on the chart. No number reaches the
+      wall except through you.</p>
       <ul>
         <li>Deal the cards and find <strong>three categories where Japan beats the USA</strong>.</li>
         <li>Find <strong>three where Japan loses</strong>.</li>
         <li>Hand each number to the Fact-checker on a slip with the category written on it.</li>
       </ul>
-      <p class="power"><strong>Your power:</strong> the Analyst cannot write the verdict until you have
-      delivered at least four approved numbers. They have to wait for you.</p>
+      <p class="power"><b>Your power</b>The Analyst cannot write the verdict until you have delivered at least
+      four approved numbers. They have to wait for you.</p>
     </div>
 
-    <div class="role r3">
+    <div class="role r3 reveal">
       <div class="band">Grades 4–5</div>
       <div class="rname">The Fact-checker</div>
       <p>Nothing goes on the chart without a source written next to it. Not the drawings — the claims.</p>
@@ -136,26 +145,26 @@
         <li>If nobody can say where a number came from, it does not go up. Cross it out.</li>
         <li>Catch at least one claim that somebody assumed rather than checked.</li>
       </ul>
-      <p class="power"><strong>Your power:</strong> a veto over everyone, including the oldest person at the
-      table. Use it at least twice or you are not doing the job.</p>
+      <p class="power"><b>Your power</b>A veto over everyone, including the oldest person at the table.
+      Use it at least twice or you are not doing the job.</p>
     </div>
 
-    <div class="role r4">
+    <div class="role r4 reveal">
       <div class="band">Grades 5–6</div>
       <div class="rname">The Analyst</div>
       <p>You write the verdict at the bottom of the chart. Two sentences, and a third that argues against you.</p>
       <ul>
-        <li>Sentence 1: is Japan a <strong>rich</strong> country? Commit — no "it depends".</li>
-        <li>Sentence 2: is Japan a <strong>free</strong> country? Same rule.</li>
-        <li>Sentence 3: the strongest argument that you are wrong.</li>
+        <li><strong>Sentence 1:</strong> is Japan a <strong>rich</strong> country? Commit — no "it depends".</li>
+        <li><strong>Sentence 2:</strong> is Japan a <strong>free</strong> country? Same rule.</li>
+        <li><strong>Sentence 3:</strong> the strongest argument that you are wrong.</li>
       </ul>
-      <p class="power"><strong>Your power:</strong> none. You have to persuade the Illustrator to give you
-      space and wait for the Quartermaster's numbers. That is the job.</p>
+      <p class="power"><b>Your power</b>None. You have to persuade the Illustrator for space and wait for the
+      Quartermaster's numbers. That is the job.</p>
     </div>
   </div>
 
   <h2>How the chart is laid out</h2>
-  <div class="chartplan">┌──────────────────────────────────────────────────┐
+  <div class="plan"><pre>┌──────────────────────────────────────────────────┐
 │  haiku  (Illustrator)                            │
 ├───────────────────────────┬──────────────────────┤
 │                           │  BY THE NUMBERS      │
@@ -167,19 +176,32 @@
 ├───────────────────────────┴──────────────────────┤
 │  VERDICT  (Analyst)                              │
 │  Rich? ___  Free? ___  But I might be wrong: ___ │
-└──────────────────────────────────────────────────┘</div>
+└──────────────────────────────────────────────────┘</pre></div>
+
+  <h2>Run it with the timer</h2>
+  <div class="timer">
+    <div class="clock" id="clock">25:00</div>
+    <div class="phase" id="phase">Press start when everyone is sitting down</div>
+    <div class="phasenext" id="next"></div>
+    <div class="pbar"><i id="pbar"></i></div>
+    <div class="tbtns">
+      <button class="btn" id="startBtn">Start</button>
+      <button class="btn ghost" id="resetBtn">Reset</button>
+    </div>
+    <div class="sched" id="sched"></div>
+  </div>
 
   <h2>Running it</h2>
   <ol class="steps">
     <li><b>Assign jobs by age, oldest to the Analyst.</b> If two students are close in age, let them pick —
     but nobody does the job they did last time.</li>
-    <li><b>Illustrator draws first, alone, for five minutes.</b> Everyone else reads their own material and
-    gets their material ready. The chart has to exist before anyone can argue about it.</li>
-    <li><b>Quartermaster and Fact-checker work as a pair</b> for eight minutes. Numbers get found, sourced,
-    and either approved or killed. Expect arguments. Arguments are the lesson.</li>
-    <li><b>Analyst writes last</b>, with five minutes, using only approved numbers. If the Quartermaster was
-    slow, the Analyst writes a shorter verdict. Do not rescue them.</li>
-    <li><b>Challenge round, five minutes.</b> Rules below.</li>
+    <li><b>Illustrator draws first, alone, for five minutes.</b> Everyone else reads their own material and gets
+    ready. The chart has to exist before anyone can argue about it.</li>
+    <li><b>Quartermaster and Fact-checker work as a pair.</b> Numbers get found, sourced, and either approved or
+    killed. Expect arguments. Arguments are the lesson.</li>
+    <li><b>Analyst writes last</b>, using only approved numbers. If the Quartermaster was slow, the Analyst
+    writes a shorter verdict. Do not rescue them.</li>
+    <li><b>Challenge round.</b> Rules below.</li>
   </ol>
 
   <h2>Challenge round</h2>
@@ -193,39 +215,94 @@
   different?</p>
 
   <h2>If you have fewer than four students</h2>
-  <table class="timing">
+  <table class="simple">
     <tr><th>Students</th><th>How to split the jobs</th></tr>
-    <tr><td>Three</td><td>Illustrator · Quartermaster · Analyst. The <strong>teacher</strong> plays
-      Fact-checker and is deliberately annoying about sources.</td></tr>
-    <tr><td>Two</td><td>Younger takes Illustrator + Quartermaster. Older takes Fact-checker + Analyst —
-      which means they must fact-check their own evidence before using it, which is harder and fairer.</td></tr>
+    <tr><td>Three</td><td>Illustrator · Quartermaster · Analyst. The <strong>teacher</strong> plays Fact-checker
+      and is deliberately annoying about sources.</td></tr>
+    <tr><td>Two</td><td>Younger takes Illustrator + Quartermaster. Older takes Fact-checker + Analyst — which
+      means they must fact-check their own evidence before using it, which is harder and fairer.</td></tr>
   </table>
 
-  <h2>Timing</h2>
-  <table class="timing">
-    <tr><th>Time</th><th>What happens</th></tr>
-    <tr><td>0–3 min</td><td>Island guess, reveal, argue about why</td></tr>
-    <tr><td>3–5 min</td><td>Jobs assigned, challenge-round scoring rule announced</td></tr>
-    <tr><td>5–10 min</td><td>Illustrator draws; everyone else gathers material</td></tr>
-    <tr><td>10–18 min</td><td>Quartermaster finds numbers, Fact-checker approves or kills them</td></tr>
-    <tr><td>18–23 min</td><td>Analyst writes the verdict; Illustrator finishes the haiku</td></tr>
-    <tr><td>23–28 min</td><td>Challenge round, younger answers worth triple</td></tr>
-  </table>
-
-  <div class="note">
-    <p><strong>What success looks like:</strong> at least one number got crossed off the chart for having no
-    source, at least one older student explained something to a younger one without being asked, and the
-    verdict at the bottom contains a real argument against itself. A beautiful chart with unsourced numbers
-    on it is a failed chart.</p>
-  </div>
+  <div class="note"><p><strong>What success looks like:</strong> at least one number got crossed off the chart
+  for having no source, at least one older student explained something to a younger one without being asked,
+  and the verdict at the bottom contains a real argument against itself. A beautiful chart with unsourced
+  numbers on it is a failed chart.</p></div>
 
   <footer>
-    Materials: <a href="/grade-2/japan-passport.html">passport</a> ·
+    Materials: <a href="/grade-2/japan-passport.html">the journey</a> ·
     <a href="/grade-4/japan-cards.html">country cards</a> ·
     <a href="/grade-4/japan-quest.html">quest</a> ·
     <a href="/grade-6/japan-dossier.html">dossier</a> ·
-    <a href="/grade-6/japan-data-desk.html">data desk</a>
+    <a href="/grade-6/japan-data-desk.html">data desk</a> ·
+    <a href="/together/role-cards.html">role cards</a>
   </footer>
 </main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+const PHASES = [
+  [3,  "Island guess", "Everyone writes a number, then reveal together"],
+  [2,  "Assign the jobs", "Announce the challenge-round scoring rule now"],
+  [5,  "Illustrator draws alone", "Everyone else gets their material ready"],
+  [8,  "Quartermaster + Fact-checker", "Find numbers, source them, kill the unsourced ones"],
+  [5,  "Analyst writes the verdict", "Illustrator finishes the haiku"],
+  [5,  "Challenge round", "Youngest answers score three points, oldest one"]
+];
+const TOTAL = PHASES.reduce((a,p)=>a+p[0],0)*60;
+let left = TOTAL, running = false, tick = null;
+
+const $ = id => document.getElementById(id);
+const sched = $("sched");
+PHASES.forEach((p,i)=>{
+  const d = document.createElement("div");
+  d.innerHTML = '<span class="tm">'+p[0]+' min</span><span>'+p[1]+'</span>';
+  d.dataset.i = i; sched.appendChild(d);
+});
+
+function currentPhase(){
+  let elapsed = TOTAL - left, acc = 0;
+  for (let i=0;i<PHASES.length;i++){
+    acc += PHASES[i][0]*60;
+    if (elapsed < acc) return i;
+  }
+  return PHASES.length-1;
+}
+function render(){
+  const m = Math.floor(left/60), s = left%60;
+  $("clock").textContent = m + ":" + String(s).padStart(2,"0");
+  $("pbar").style.width = ((TOTAL-left)/TOTAL*100) + "%";
+  if (!running && left === TOTAL){
+    $("phase").textContent = "Press start when everyone is sitting down";
+    $("next").textContent = "";
+  } else if (left === 0){
+    $("phase").textContent = "Time. Put the pencils down.";
+    $("next").textContent = "";
+  } else {
+    const i = currentPhase();
+    $("phase").textContent = PHASES[i][1];
+    $("next").textContent = PHASES[i][2];
+    [...sched.children].forEach((d,j)=>{
+      d.classList.toggle("now", j===i);
+      d.classList.toggle("done", j<i);
+    });
+  }
+}
+$("startBtn").addEventListener("click", ()=>{
+  running = !running;
+  $("startBtn").textContent = running ? "Pause" : "Resume";
+  if (running){
+    tick = setInterval(()=>{ if(left>0){ left--; render(); } else { clearInterval(tick); running=false;
+      $("startBtn").textContent="Start"; render(); } }, 1000);
+  } else clearInterval(tick);
+  render();
+});
+$("resetBtn").addEventListener("click", ()=>{
+  clearInterval(tick); running=false; left=TOTAL;
+  $("startBtn").textContent="Start";
+  [...sched.children].forEach(d=>d.classList.remove("now","done"));
+  render();
+});
+render();
+</script>
 </body>
 </html>

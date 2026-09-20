@@ -2,385 +2,487 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Japan Discovery Passport | Wonderschool</title>
-<style>
-  :root{
-    --ink:#111;
-    --line:#444;
-    --soft:#888;
-    --trace:#c9c9c9;
-    --bg:#fff;
-  }
-  *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;background:#e9e9e9;color:var(--ink);
-    font-family:"Century Gothic","Verdana","Trebuchet MS",sans-serif;}
-  .page{
-    width:8.5in;min-height:11in;background:var(--bg);margin:18px auto;
-    padding:0.55in 0.6in;position:relative;box-shadow:0 2px 10px rgba(0,0,0,.25);
-  }
-  .pagenum{position:absolute;bottom:0.3in;right:0.6in;font-size:11pt;color:var(--soft);}
-  h1{font-size:40pt;line-height:1.05;margin:0 0 6px;letter-spacing:-1px;}
-  h2{font-size:23pt;margin:0 0 4px;}
-  .station{font-size:12pt;letter-spacing:3px;text-transform:uppercase;color:var(--soft);margin:0 0 2px;}
-  p,li{font-size:15pt;line-height:1.7;margin:0 0 12px;}
-  .big{font-size:18pt;line-height:1.6;}
-  .wow{font-weight:bold;}
-  .define{font-size:12.5pt;color:#333;border-left:4px solid var(--line);padding:6px 0 6px 12px;margin:14px 0;line-height:1.5;}
-  .task{border:3px solid var(--ink);border-radius:14px;padding:14px 16px;margin:16px 0;}
-  .task h3{margin:0 0 6px;font-size:16pt;}
-  .draw{border:3px dashed var(--line);border-radius:14px;height:3.0in;margin:12px 0;
-    display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px;
-    font-size:11pt;color:var(--soft);}
-  .draw.tall{height:4.1in;}
-  .draw.short{height:2.1in;}
-  .row{display:flex;gap:14px;}
-  .row > *{flex:1;}
-  .stamp{
-    width:1.55in;height:1.55in;border:4px dashed var(--line);border-radius:50%;
-    display:flex;align-items:center;justify-content:center;text-align:center;
-    font-size:10.5pt;color:var(--soft);line-height:1.3;margin-left:auto;
-  }
-  .stampwrap{display:flex;align-items:center;gap:18px;margin-top:10px;}
-  .stampwrap p{margin:0;}
-  .writeline{border-bottom:2.5px solid var(--line);height:0.48in;margin-bottom:6px;}
-  .writeline.wide{height:0.55in;}
-  .kanjigrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:12px 0;}
-  .kbox{border:2.5px solid var(--line);border-radius:10px;padding:8px 6px;text-align:center;}
-  .kchar{font-size:58pt;line-height:1;color:var(--trace);
-    font-family:"Hiragino Mincho ProN","Yu Mincho","MS Mincho",serif;}
-  .kchar.solid{color:var(--ink);font-size:40pt;}
-  .kname{font-size:12.5pt;font-weight:bold;margin-top:4px;}
-  .ksub{font-size:10pt;color:var(--soft);}
-  .tracerow{display:flex;justify-content:space-around;margin-top:6px;}
-  .tracerow span{font-size:30pt;color:var(--trace);
-    font-family:"Hiragino Mincho ProN","Yu Mincho","MS Mincho",serif;}
-  .fact{background:#f2f2f2;border-radius:12px;padding:12px 16px;margin:14px 0;font-size:14pt;line-height:1.6;}
-  .haikubox{border:3px solid var(--ink);border-radius:14px;padding:16px 18px;margin:14px 0;}
-  .syl{display:inline-block;border:2px solid var(--line);border-radius:8px;
-    width:0.42in;height:0.42in;margin-right:5px;vertical-align:middle;}
-  .sylrow{margin:10px 0 2px;font-size:12pt;color:var(--soft);}
-  ol.steps{padding-left:22px;}
-  ol.steps li{margin-bottom:14px;font-size:14pt;}
-  .badge{border:6px double var(--ink);border-radius:20px;padding:26px;text-align:center;margin-top:12px;}
-  .badgegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px;}
-  .badgegrid div{border:3px dashed var(--line);border-radius:50%;aspect-ratio:1;
-    display:flex;align-items:center;justify-content:center;font-size:10pt;color:var(--soft);text-align:center;padding:6px;}
-  .cover-art{border:4px solid var(--ink);border-radius:18px;height:4.4in;margin:18px 0;
-    display:flex;align-items:flex-end;justify-content:center;padding-bottom:10px;font-size:12pt;color:var(--soft);}
-  .note{font-size:11.5pt;color:#555;}
-  @media print{
-    html,body{background:#fff;}
-    @page{size:letter portrait;margin:0.4in 0.45in;}
-    .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;
-      page-break-after:always;break-after:page;}
-    .page:last-child{page-break-after:auto;break-after:auto;}
-    h1{font-size:33pt;}
-    h2{font-size:20pt;}
-    p,li{font-size:12pt;line-height:1.46;margin-bottom:7px;}
-    .big{font-size:13.5pt;line-height:1.42;}
-    .define{font-size:11pt;margin:10px 0;padding:5px 0 5px 10px;}
-    .fact{font-size:12pt;padding:9px 13px;margin:10px 0;}
-    .task{padding:10px 13px;margin:11px 0;}
-    .task h3{font-size:14pt;}
-    .draw{height:1.95in;margin:8px 0;}
-    .draw.tall{height:1.92in;}
-    .draw.short{height:1.25in;}
-    .stamp{width:1.25in;height:1.25in;border-width:3px;font-size:9pt;}
-    .stampwrap{margin-top:7px;}
-    .writeline{height:0.35in;}
-    .writeline.wide{height:0.40in;}
-    .kanjigrid{gap:7px;margin:9px 0;}
-    .kchar.solid{font-size:31pt;}
-    .kname{font-size:11pt;}
-    .ksub{font-size:8.5pt;}
-    .tracerow span{font-size:23pt;}
-    .haikubox{padding:9px 13px;margin:8px 0;}
-    .syl{width:0.36in;height:0.36in;}
-    .sylrow{margin:7px 0 2px;font-size:11pt;}
-    ol.steps li{font-size:11pt;margin-bottom:6px;line-height:1.45;}
-    .cover-art{height:3.3in;margin:14px 0;}
-    .badge{padding:14px;border-width:4px;}
-    .badgegrid{gap:9px;margin-top:10px;}
-    .badgegrid div{aspect-ratio:auto;width:1.05in;height:1.05in;margin:0 auto;font-size:9pt;border-width:2px;}
-    .pagenum{bottom:0;}
-  }
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Japan Discovery — 2nd grade | Wonderschool</title>
+<meta name="description" content="Six stations, six stamps. Islands, a volcano, picture-words, games, a red gate and a poem.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:860px;}
+.hero{text-align:center;padding:18px 0 6px;}
+.hero h1{font-size:clamp(44px,10vw,80px);margin:0 0 6px;
+  background:linear-gradient(115deg,var(--g2),var(--g4) 60%,var(--g6));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{font-size:clamp(17px,2.4vw,21px);color:var(--ink-2);max-width:32ch;margin:0 auto 22px;}
+
+.rail{position:sticky;top:52px;z-index:200;display:flex;gap:7px;justify-content:center;
+  flex-wrap:wrap;padding:11px 10px;margin:0 -10px 26px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-radius:99px;}
+.rail a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  font-weight:700;font-size:14px;text-decoration:none;
+  border:2px solid var(--edge-strong);color:var(--ink-3);background:var(--surface);transition:.2s var(--ease);}
+.rail a:hover{transform:translateY(-2px);border-color:var(--g2);color:var(--g2);}
+.rail a.done{background:var(--g2);border-color:var(--g2);color:#fff;}
+
+.station{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
+  padding:32px 30px;margin-bottom:26px;box-shadow:var(--shadow-sm);scroll-margin-top:110px;}
+.station .num{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:9px;}
+.station .num b{width:24px;height:24px;border-radius:50%;background:var(--g2);color:#fff;
+  display:grid;place-items:center;font-size:12px;}
+.station h2{margin:0 0 12px;font-size:clamp(26px,4.5vw,36px);}
+.station p{font-size:17px;line-height:1.65;}
+.big-say{font-size:clamp(19px,2.6vw,22px);line-height:1.5;color:var(--ink);font-weight:500;}
+
+.paper{display:flex;gap:13px;align-items:flex-start;background:var(--gold-soft);
+  border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);
+  border-radius:var(--r);padding:15px 18px;margin:20px 0 4px;}
+.paper .ic{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gold);color:#3a2a06;
+  display:grid;place-items:center;font-weight:800;font-size:15px;}
+.paper p{margin:0;font-size:15.5px;color:var(--ink);}
+
+.guess{background:var(--bg-2);border-radius:var(--r-lg);padding:22px;margin:20px 0;}
+.guess output{display:block;font-family:var(--font-display);font-size:clamp(38px,9vw,60px);
+  font-weight:800;letter-spacing:-.03em;color:var(--g2);text-align:center;line-height:1;}
+input[type=range]{width:100%;accent-color:var(--g2);height:30px;}
+.guessrow{display:flex;justify-content:space-between;font-size:12.5px;color:var(--ink-3);margin-top:-4px;}
+.verdict{margin-top:16px;font-size:16.5px;line-height:1.6;display:none;}
+.verdict.on{display:block;animation:pop .4s var(--ease);}
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px);}to{opacity:1;transform:none;}}
+
+.fuji{display:flex;align-items:flex-end;gap:14px;height:240px;margin:22px 0 8px;}
+.fbar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:8px;
+  cursor:pointer;background:none;border:0;padding:0;font:inherit;}
+.fbar .col{width:100%;border-radius:8px 8px 0 0;background:var(--edge-strong);
+  transition:height .8s var(--ease),filter .2s;min-height:4px;}
+.fbar.me .col{background:linear-gradient(180deg,var(--g4),var(--g2));}
+.fbar:hover .col{filter:brightness(1.12);}
+.fbar .lab{font-size:12px;color:var(--ink-3);text-align:center;line-height:1.25;}
+.fbar .val{font-size:13px;font-weight:700;color:var(--ink);min-height:1.2em;}
+
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:13px;margin:20px 0;}
+.kcard{perspective:900px;background:none;border:0;padding:0;cursor:pointer;height:158px;font:inherit;}
+.kinner{position:relative;width:100%;height:100%;transition:transform .55s var(--ease);transform-style:preserve-3d;}
+.kcard.flip .kinner{transform:rotateY(180deg);}
+.kface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;padding:10px;border:2px solid var(--edge-strong);background:var(--surface);}
+.kface .ch{font-size:56px;line-height:1;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:var(--ink);}
+.kface .tap{font-size:11px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;}
+.kback{transform:rotateY(180deg);background:var(--g2);border-color:var(--g2);color:#fff;text-align:center;}
+.kback .ch{color:#fff;}
+.kback .en{font-family:var(--font-display);font-size:21px;font-weight:800;}
+.kback .why{font-size:13px;line-height:1.4;opacity:.93;}
+
+.tl{position:relative;margin:22px 0 6px;padding-left:26px;}
+.tl::before{content:"";position:absolute;left:8px;top:6px;bottom:6px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,var(--g2),var(--g4),var(--g6));}
+.tl li{list-style:none;position:relative;margin-bottom:15px;}
+.tl li::before{content:"";position:absolute;left:-22px;top:7px;width:11px;height:11px;border-radius:50%;
+  background:var(--surface);border:3px solid var(--g4);}
+.tl .yr{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--g4);}
+.tl .wh{font-size:16.5px;color:var(--ink);}
+.tl .no{display:block;font-size:14.5px;color:var(--ink-3);}
+
+.haiku{background:var(--bg-2);border-radius:var(--r-lg);padding:22px;margin:20px 0;}
+.hline{margin-bottom:18px;}
+.hhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;
+  font-size:13px;color:var(--ink-3);}
+.beats{display:flex;gap:5px;margin-bottom:7px;}
+.beat{width:15px;height:15px;border-radius:5px;background:var(--edge-strong);transition:.25s var(--ease);}
+.beat.on{background:var(--g2);transform:scale(1.12);}
+.beat.over{background:var(--hot);}
+.hline input{width:100%;font:inherit;font-size:17px;padding:12px 14px;border-radius:12px;
+  border:2px solid var(--edge-strong);background:var(--surface);color:var(--ink);transition:border-color .2s;}
+.hline input:focus{outline:none;border-color:var(--g2);}
+.hline.ok input{border-color:var(--g2);background:var(--g2-soft);}
+.hcount{font-weight:700;font-variant-numeric:tabular-nums;}
+.hcount.ok{color:var(--g2);}
+.hcount.over{color:var(--hot);}
+.hdone{margin-top:6px;font-size:17px;font-weight:600;color:var(--g2);display:none;}
+.hdone.on{display:block;animation:pop .4s var(--ease);}
+
+.stampbtn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font:inherit;
+  font-weight:650;font-size:15.5px;padding:12px 22px;border-radius:99px;cursor:pointer;
+  border:2px dashed var(--g2);background:transparent;color:var(--g2);transition:.2s var(--ease);}
+.stampbtn:hover{background:var(--g2-soft);transform:translateY(-2px);}
+.stampbtn.got{border-style:solid;background:var(--g2);color:#fff;}
+.badge{text-align:center;background:linear-gradient(140deg,var(--g2-soft),var(--g4-soft) 70%,var(--g6-soft));
+  border:2px solid var(--g2);border-radius:var(--r-xl);padding:34px 28px;margin-bottom:26px;}
+.badge h2{margin-top:0;}
+.stamps{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:14px;margin:22px 0 6px;}
+.st{aspect-ratio:1;border-radius:50%;border:3px dashed var(--edge-strong);display:grid;place-items:center;
+  text-align:center;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--ink-3);
+  padding:8px;background:var(--surface);transition:.35s var(--ease);}
+.st.got{border-style:solid;border-color:var(--g2);background:var(--g2);color:#fff;transform:rotate(-4deg) scale(1.04);}
+svg.torii{display:block;margin:18px auto 4px;max-width:250px;}
+</style>
 </head>
-<body>
-<nav class="site-bar"><a class="brand" href="/">Wonderschool</a><span class="sep">/</span><a href="/grade-2/">2nd grade</a><span class="sep">/</span><a href="/grade-2/japan/">Japan</a><span class="spacer"></span><button class="printbtn" onclick="window.print()">Print the passport</button></nav>
+<body class="g2">
 
-<!-- ============ PAGE 1 : COVER ============ -->
-<section class="page">
-  <p class="station">Junior Explorer · Official Document</p>
-  <h1>JAPAN<br>DISCOVERY<br>PASSPORT</h1>
-  <p class="big">This passport belongs to:</p>
-  <div class="writeline wide"></div>
-  <p class="big" style="margin-top:14px;">Explorer since:</p>
-  <div class="writeline wide"></div>
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-2/">2nd grade</a>
+  <span class="sep">/</span><a href="/grade-2/japan/">Japan</a>
+  <span class="spacer"></span>
+  <a href="/grade-2/japan-explorer-sheet.html">Explorer Sheet &rarr;</a>
+</nav>
 
-  <div class="cover-art">Draw the flag of Japan here. It is a white flag with one big red circle in the middle. The circle is the sun.</div>
-
-  <div class="fact" style="margin-bottom:8px;"><strong>Read this on the screen.</strong> Do all of your drawing on
-  plain paper &mdash; as big as you like. The only page you need printed is the <strong>Explorer Sheet</strong>,
-  which has the kanji to trace, the haiku boxes, and your six stamps.</div>
-
-  <p class="note">Six stations. Six stamps. Fill them all and you earn the Explorer Badge.</p>
-  <div class="pagenum">1</div>
-</section>
-
-<!-- ============ PAGE 2 : STATION 1 ============ -->
-<section class="page">
-  <p class="station">Station 1</p>
-  <h2>Island Hunt</h2>
-
-  <p class="big">Japan is not one piece of land. Japan is a <span class="wow">chain of islands</span> in the Pacific Ocean.</p>
-
-  <p class="big">For many years, Japan said it had 6,852 islands. Then in 2023, mapmakers counted again with better maps. They found <span class="wow">14,125 islands</span>. Japan had lost track of more than seven thousand pieces of itself!</p>
-
-  <div class="fact"><strong>Try this:</strong> if you visited one island every single day, it would take you almost <strong>39 years</strong> to see them all.</div>
-
-  <p class="big">Four islands are much bigger than the rest. Almost everybody lives on these four.</p>
-
-  <div class="task">
-    <h3>Your job</h3>
-    <p style="margin-bottom:8px;">Draw Japan below. Make four big islands in a curve, like a banana, with lots of tiny dots around them. Then write these names on your four big islands:</p>
-    <p style="margin:0;"><strong>HONSHU</strong> (the biggest — Tokyo is here) · <strong>HOKKAIDO</strong> (the top one, snowy) · <strong>KYUSHU</strong> (the bottom one) · <strong>SHIKOKU</strong> (the smallest)</p>
+<main>
+  <div class="hero">
+    <p class="kicker">Junior Explorer · six stations</p>
+    <h1>Japan</h1>
+    <p class="sub">A country made of thousands of islands, where writing started as pictures.</p>
   </div>
 
-  <div class="draw">my map of Japan</div>
+  <nav class="rail" id="rail" aria-label="Stations">
+    <a href="#s1" data-s="1">1</a><a href="#s2" data-s="2">2</a><a href="#s3" data-s="3">3</a>
+    <a href="#s4" data-s="4">4</a><a href="#s5" data-s="5">5</a><a href="#s6" data-s="6">6</a>
+  </nav>
 
-  <div class="stampwrap">
-    <p class="big" style="flex:1;">Stamp earned!<br>Draw a little island in the circle.</p>
-    <div class="stamp">ISLAND<br>STAMP</div>
-  </div>
-  <div class="pagenum">2</div>
-</section>
+  <section class="station reveal" id="s1">
+    <p class="num"><b>1</b> Island Hunt</p>
+    <h2>How many islands is Japan?</h2>
+    <p class="big-say">Japan is not one piece of land. It is a chain of islands in the Pacific Ocean.
+    Move the slider to make your guess, then press the button.</p>
 
-<!-- ============ PAGE 3 : STATION 2 ============ -->
-<section class="page">
-  <p class="station">Station 2</p>
-  <h2>The Mountain That Is a Volcano</h2>
-
-  <p class="big">The tallest mountain in Japan is <span class="wow">Mount Fuji</span>. It is <span class="wow">12,389 feet</span> tall. That is more than two miles straight up.</p>
-
-  <p class="big">Mount Fuji is not just a mountain. It is a <span class="wow">volcano</span>, and it is still awake. It last erupted in the year <span class="wow">1707</span>.</p>
-
-  <div class="define"><strong>erupted</strong> — when a volcano bursts open and pushes out hot rock, ash, and smoke.</div>
-
-  <div class="fact"><strong>Math moment:</strong> this year is 2026. Take away 1707. How many years ago did Mount Fuji erupt? Write it here: ______________</div>
-
-  <p class="big">A Japanese artist named <span class="wow">Hokusai</span> loved Mount Fuji so much that he drew it thirty-six different times — in storms, in snow, behind a giant wave, from far away, from close up.</p>
-
-  <div class="task">
-    <h3>Your job</h3>
-    <p style="margin:0;">Be Hokusai. Draw the <em>same</em> mountain three times, but change the season each time. What is different in winter? What is different in spring?</p>
-  </div>
-
-  <div class="row">
-    <div class="draw short">WINTER</div>
-    <div class="draw short">SPRING</div>
-    <div class="draw short">SUMMER</div>
-  </div>
-
-  <div class="stampwrap">
-    <p class="big" style="flex:1;">Stamp earned!<br>Draw a tiny mountain with a snowy top.</p>
-    <div class="stamp">MOUNTAIN<br>STAMP</div>
-  </div>
-  <div class="pagenum">3</div>
-</section>
-
-<!-- ============ PAGE 4 : STATION 3 ============ -->
-<section class="page">
-  <p class="station">Station 3</p>
-  <h2>Words That Are Pictures</h2>
-
-  <p class="big">In English we have 26 letters. In Japan they use <span class="wow">three</span> different writing systems at the same time. One of them is called <span class="wow">kanji</span>, and kanji began as tiny pictures of real things.</p>
-
-  <p class="big">Look closely. Can you see the picture hiding inside each one?</p>
-
-  <div class="kanjigrid">
-    <div class="kbox"><div class="kchar solid">山</div><div class="kname">MOUNTAIN</div><div class="ksub">three peaks</div>
-      <div class="tracerow"><span>山</span><span>山</span></div></div>
-    <div class="kbox"><div class="kchar solid">川</div><div class="kname">RIVER</div><div class="ksub">water flowing down</div>
-      <div class="tracerow"><span>川</span><span>川</span></div></div>
-    <div class="kbox"><div class="kchar solid">日</div><div class="kname">SUN</div><div class="ksub">the sun in the sky</div>
-      <div class="tracerow"><span>日</span><span>日</span></div></div>
-    <div class="kbox"><div class="kchar solid">木</div><div class="kname">TREE</div><div class="ksub">trunk, branches, roots</div>
-      <div class="tracerow"><span>木</span><span>木</span></div></div>
-    <div class="kbox"><div class="kchar solid">火</div><div class="kname">FIRE</div><div class="ksub">a flame with sparks</div>
-      <div class="tracerow"><span>火</span><span>火</span></div></div>
-    <div class="kbox"><div class="kchar solid">人</div><div class="kname">PERSON</div><div class="ksub">two legs walking</div>
-      <div class="tracerow"><span>人</span><span>人</span></div></div>
-  </div>
-
-  <p class="big">Trace each gray one. Go slowly. Kanji are drawn in a special order, top to bottom and left to right.</p>
-
-  <div class="fact"><strong>Whoa:</strong> a second grader in Japan learns <strong>160 brand new kanji</strong> this year. They already learned 80 last year. By the end of sixth grade they know <strong>1,026</strong> of them.</div>
-
-  <div class="task">
-    <h3>Your job — the hard one</h3>
-    <p style="margin:0;">Invent your <em>own</em> kanji. Pick a word and draw a picture-word for it. Then be ready to explain why you drew it that way.</p>
-  </div>
-
-  <div class="row">
-    <div class="draw short">my kanji for RAIN</div>
-    <div class="draw short">my kanji for CAT</div>
-    <div class="draw short">my kanji for HAPPY</div>
-  </div>
-
-  <div class="stampwrap">
-    <p class="big" style="flex:1;">Stamp earned!<br>Write one kanji inside the circle.</p>
-    <div class="stamp">WRITING<br>STAMP</div>
-  </div>
-  <div class="pagenum">4</div>
-</section>
-
-<!-- ============ PAGE 5 : STATION 4 ============ -->
-<section class="page">
-  <p class="station">Station 4</p>
-  <h2>Games, Sports, and Surprises</h2>
-
-  <p class="big">The most popular sport in Japan is <span class="wow">baseball</span>. About 45 out of every 100 people follow it. Japan has 12 professional teams.</p>
-
-  <p class="big">The second most popular is <span class="wow">sumo</span>. Sumo wrestlers try to push each other out of a circle. There are <span class="wow">six big tournaments every year</span>, and each one lasts <span class="wow">15 days</span>.</p>
-
-  <p class="big">Third is soccer. Japan also invented four famous martial arts: <em>judo, karate, kendo,</em> and <em>aikido</em>.</p>
-
-  <div class="fact"><strong>Made in Japan.</strong> Instant ramen noodles (1958) · the bullet train (1964) · karaoke (1971) · the Walkman · emoji · the QR code · Pokémon · Mario.</div>
-
-  <p class="big">Here is the strangest one. The video game company <span class="wow">Nintendo</span> started in <span class="wow">1889</span> — that is 137 years ago. For its first hundred years it did not make video games at all. It made <span class="wow">paper playing cards</span>.</p>
-
-  <div class="task">
-    <h3>Your job</h3>
-    <p style="margin:0;">Invent a brand new game character. Not one you have seen before — a new one, from your own brain. Draw it. Give it a name. Write one sentence about its special power.</p>
-  </div>
-
-  <div class="draw tall">my character</div>
-
-  <p class="big" style="margin-bottom:4px;">Name:</p>
-  <div class="writeline"></div>
-  <p class="big" style="margin-bottom:4px;">Special power:</p>
-  <div class="writeline"></div>
-
-  <div class="stampwrap">
-    <p class="big" style="flex:1;">Stamp earned!</p>
-    <div class="stamp">GAME<br>STAMP</div>
-  </div>
-  <div class="pagenum">5</div>
-</section>
-
-<!-- ============ PAGE 6 : STATION 5 ============ -->
-<section class="page">
-  <p class="station">Station 5</p>
-  <h2>The Red Gate</h2>
-
-  <p class="big">All over Japan you will see a big gate made of two tall posts and two beams across the top. It is usually painted bright orange-red. It is called a <span class="wow">torii</span> (say it: TOR-ee-ee).</p>
-
-  <p class="big">A torii marks the front door of a <span class="wow">shrine</span>. When you walk through it, you are stepping out of the everyday world and into a special one. Japan has thousands of them. Some stand in forests. One famous one stands in the sea, and at high tide it looks like it is floating.</p>
-
-  <div class="define"><strong>shrine</strong> — a special place people visit to be quiet, say thank you, or make a wish.</div>
-
-  <p class="big">Here is something surprising. If you ask people in Japan "what is your religion?", about <span class="wow">7 out of 10</span> say they do not have one. But almost everyone still goes to a shrine at New Year to wish for a good year.</p>
-
-  <div class="fact"><strong>Think about it:</strong> can a person do something religious without being religious? What do <em>you</em> think? There is no wrong answer here.</div>
-
-  <div class="task">
-    <h3>Your job</h3>
-    <p style="margin:0;">Draw a torii gate. Two tall posts. Two beams across the top — the top one curves up at the ends like a smile. Then put your gate somewhere: in a forest, on a mountain, in the ocean. Color it red-orange.</p>
-  </div>
-
-  <div class="draw tall">my torii gate</div>
-
-  <div class="stampwrap">
-    <p class="big" style="flex:1;">Stamp earned!<br>Draw a tiny gate in the circle.</p>
-    <div class="stamp">GATE<br>STAMP</div>
-  </div>
-  <div class="pagenum">6</div>
-</section>
-
-<!-- ============ PAGE 7 : STATION 6 ============ -->
-<section class="page">
-  <p class="station">Station 6 · The Final Challenge</p>
-  <h2>Word Pictures</h2>
-
-  <p class="big">Japan gave the world a kind of poem called a <span class="wow">haiku</span> (say it: HIGH-koo). A haiku is very short. It is only three lines. But it has a rule.</p>
-
-  <div class="haikubox">
-    <p class="big" style="margin-bottom:8px;"><strong>The rule:</strong></p>
-    <p class="big" style="margin-bottom:4px;">Line 1 has <strong>5</strong> syllables</p>
-    <p class="big" style="margin-bottom:4px;">Line 2 has <strong>7</strong> syllables</p>
-    <p class="big" style="margin-bottom:0;">Line 3 has <strong>5</strong> syllables</p>
-  </div>
-
-  <div class="define"><strong>syllable</strong> — a beat in a word. Clap as you say it. <em>Ja-pan</em> = 2 claps. <em>Vol-ca-no</em> = 3 claps. <em>But-ter-fly</em> = 3 claps.</div>
-
-  <p class="big">A haiku usually catches one small moment in nature. Here is one:</p>
-
-  <div class="haikubox">
-    <p class="big" style="margin-bottom:2px;">Snow on the mountain</p>
-    <p class="big" style="margin-bottom:2px;">a thousand islands asleep</p>
-    <p class="big" style="margin-bottom:8px;">the train slides past, quiet</p>
-    <p class="note" style="margin:0;">Count the claps. 5, then 7, then 5.</p>
-  </div>
-
-  <div class="task">
-    <h3>Your job</h3>
-    <p style="margin:0;">Write your own haiku about Japan. Use a box for each syllable so you can count. Islands, a volcano, snow, a fast train, a red gate, an ocean wave — any of these can be your moment.</p>
-  </div>
-
-  <p class="sylrow">Line 1 — five<span style="margin-left:10px;"></span>
-    <span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span></p>
-  <div class="writeline"></div>
-
-  <p class="sylrow">Line 2 — seven<span style="margin-left:10px;"></span>
-    <span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span></p>
-  <div class="writeline"></div>
-
-  <p class="sylrow">Line 3 — five<span style="margin-left:10px;"></span>
-    <span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span><span class="syl"></span></p>
-  <div class="writeline"></div>
-
-  <div class="stampwrap">
-    <p class="big" style="flex:1;">Stamp earned!</p>
-    <div class="stamp">POET<br>STAMP</div>
-  </div>
-  <div class="pagenum">7</div>
-</section>
-
-<!-- ============ PAGE 8 : BADGE + ORIGAMI ============ -->
-<section class="page">
-  <p class="station">Final Page</p>
-  <h2>Explorer Badge</h2>
-
-  <div class="badge">
-    <p class="big" style="margin-bottom:6px;">This certifies that</p>
-    <div class="writeline wide" style="margin:0 auto 10px;width:70%;"></div>
-    <p class="big" style="margin-bottom:0;">has explored Japan,<br>read its picture-words,<br>and written a poem.</p>
-    <div class="badgegrid">
-      <div>ISLAND</div><div>MOUNTAIN</div><div>WRITING</div>
-      <div>GAME</div><div>GATE</div><div>POET</div>
+    <div class="guess">
+      <output id="gOut">7,000</output>
+      <input type="range" id="gIn" min="100" max="30000" step="100" value="7000"
+             aria-label="Your guess for how many islands Japan has">
+      <div class="guessrow"><span>100</span><span>30,000</span></div>
+      <button class="btn sm" id="gGo" style="margin-top:14px;">Show me the answer</button>
+      <div class="verdict" id="gVerdict"></div>
     </div>
-    <p class="note" style="margin-top:16px;">Color in each circle you earned.</p>
-  </div>
 
-  <h2 style="margin-top:26px;">Bonus: Fold a Paper Cup</h2>
-  <p class="big">This is real origami. When you are done, it actually holds water. Test it.</p>
-  <p class="big">Start with a <strong>square</strong> piece of paper.</p>
+    <p>Four islands are much bigger than all the rest. Almost everybody lives on these four:
+    <strong>Honshu</strong> (the biggest — Tokyo is here), <strong>Hokkaido</strong> (the snowy one at the top),
+    <strong>Kyushu</strong> (the one at the bottom) and <strong>Shikoku</strong> (the smallest).</p>
 
-  <ol class="steps">
-    <li>Fold the square in half to make a <strong>triangle</strong>. Point it down like an ice cream cone.</li>
-    <li>Take the <strong>bottom right</strong> corner. Fold it up and across to touch the middle of the <strong>left</strong> side. Press hard.</li>
-    <li>Take the <strong>bottom left</strong> corner. Fold it up and across to touch the middle of the <strong>right</strong> side. It should look like an envelope now.</li>
-    <li>You have two loose flaps at the top. Fold the <strong>front</strong> flap down toward you.</li>
-    <li>Flip it over. Fold the <strong>other</strong> flap down too.</li>
-    <li>Gently pull the two sides apart. It opens into a cup!</li>
-  </ol>
+    <div class="paper"><span class="ic">✎</span><p><strong>On your paper:</strong> draw Japan. Four big islands
+    in a curve, like a banana, with lots of tiny dots all around. Label the four big ones.</p></div>
 
-  <p class="note">If it leaks, your folds were not tight enough. Try again — that is what engineers do.</p>
-  <div class="pagenum">8</div>
-</section>
+    <button class="stampbtn" data-stamp="1">Collect the Island stamp</button>
+  </section>
 
+  <section class="station reveal" id="s2">
+    <p class="num"><b>2</b> The Mountain That Is a Volcano</p>
+    <h2>Mount Fuji is 12,389 feet tall</h2>
+    <p class="big-say">That is more than two miles straight up. And it is not just a mountain — it is a
+    <span class="gl" data-t="volcano">volcano</span>, and it is still awake. It last erupted in <strong>1707</strong>.</p>
+
+    <div class="fuji" id="fuji"></div>
+    <p style="font-size:13.5px;color:var(--ink-3);margin-top:0;">Tap a bar to see how tall it is.</p>
+    <p id="fujiSay" style="min-height:1.6em;font-weight:600;color:var(--g2);"></p>
+
+    <div class="note"><p><strong>Do the maths:</strong> this year is 2026. Mount Fuji erupted in 1707.
+    How many years ago was that? Work it out before you scroll on.</p></div>
+
+    <p>A Japanese artist called <strong>Hokusai</strong> loved this mountain so much that he drew it
+    <strong>thirty-six</strong> different times — in storms, in snow, behind a giant wave, near and far.</p>
+
+    <div class="paper"><span class="ic">✎</span><p><strong>On your paper:</strong> be Hokusai. Draw the same
+    mountain three times, and change the season each time. What is different in winter? In spring?</p></div>
+
+    <button class="stampbtn" data-stamp="2">Collect the Mountain stamp</button>
+  </section>
+
+  <section class="station reveal" id="s3">
+    <p class="num"><b>3</b> Words That Are Pictures</p>
+    <h2>Tap a card to find the picture</h2>
+    <p class="big-say">English has 26 letters. Japan uses <strong>three</strong> writing systems at the same time:
+    <span class="gl" data-t="hiragana">hiragana</span>, <span class="gl" data-t="katakana">katakana</span> and
+    <span class="gl" data-t="kanji">kanji</span>. Kanji began as tiny pictures of real things.
+    Can you spot the picture hiding in each one?</p>
+
+    <div class="kgrid" id="kgrid"></div>
+
+    <div class="note"><p><strong>Whoa:</strong> a second grader in Japan learns <strong>160 brand new kanji</strong>
+    this year, on top of the 80 they learned last year. By the end of sixth grade they know <strong>1,026</strong>.</p></div>
+
+    <div class="paper"><span class="ic">✎</span><p><strong>On your paper — the hard one:</strong> invent your
+    <em>own</em> kanji for <strong>rain</strong>, <strong>cat</strong> and <strong>happy</strong>. Then explain
+    to a grown-up why you drew it that way. Explaining it is the tricky part.</p></div>
+
+    <p style="font-size:15px;color:var(--ink-3);">Six of these kanji are printed on your Explorer Sheet so you
+    can trace them.</p>
+
+    <button class="stampbtn" data-stamp="3">Collect the Writing stamp</button>
+  </section>
+
+  <section class="station reveal" id="s4">
+    <p class="num"><b>4</b> Games, Sports and Surprises</p>
+    <h2>Japan made things you already love</h2>
+    <p class="big-say">The most popular sport in Japan is <strong>baseball</strong> — about 45 people out of
+    every 100 follow it. Second is <span class="gl" data-t="sumo">sumo</span>. Third is soccer.</p>
+
+    <ul class="tl">
+      <li><span class="yr">1889</span> <span class="wh">Nintendo is founded.</span>
+        <span class="no">For its first hundred years it made <strong>paper playing cards</strong>. No video games at all.</span></li>
+      <li><span class="yr">1958</span> <span class="wh">Instant ramen noodles.</span>
+        <span class="no">Invented by Momofuku Ando in a shed in his back garden.</span></li>
+      <li><span class="yr">1964</span> <span class="wh">The bullet train.</span>
+        <span class="no">The <span class="gl" data-t="shinkansen">Shinkansen</span> ran at 130 mph when other trains managed 80.</span></li>
+      <li><span class="yr">1971</span> <span class="wh">Karaoke.</span>
+        <span class="no">Daisuke Inoue never patented it and made almost no money from it.</span></li>
+      <li><span class="yr">1994</span> <span class="wh">The QR code.</span>
+        <span class="no">Masahiro Hara let everybody use it for free. That is why it is everywhere.</span></li>
+      <li><span class="yr">1996</span> <span class="wh">Pokémon.</span>
+        <span class="no">Satoshi Tajiri got the idea from collecting bugs as a boy.</span></li>
+    </ul>
+
+    <div class="paper"><span class="ic">✎</span><p><strong>On your paper:</strong> invent a brand new game
+    character. Not one you have seen before — a new one, out of your own brain. Draw it, name it, and write
+    one sentence about its special power.</p></div>
+
+    <button class="stampbtn" data-stamp="4">Collect the Game stamp</button>
+  </section>
+
+  <section class="station reveal" id="s5">
+    <p class="num"><b>5</b> The Red Gate</p>
+    <h2>Walking into a different world</h2>
+
+    <svg class="torii" viewBox="0 0 260 150" role="img" aria-label="A simple torii gate: two posts with two crossbeams">
+      <g fill="none" stroke="currentColor" stroke-width="7" stroke-linecap="round" style="color:var(--hot)">
+        <path d="M18 34 C 80 18, 180 18, 242 34"/>
+        <path d="M34 34 L 226 34"/>
+        <path d="M44 58 L 216 58"/>
+        <path d="M60 34 L 74 142"/>
+        <path d="M200 34 L 186 142"/>
+      </g>
+    </svg>
+
+    <p class="big-say">That is a <span class="gl" data-t="torii">torii</span> (say it: TOR-ee-ee). It marks the
+    front door of a shrine. Walk through it and you are stepping out of the everyday world and into a special one.</p>
+
+    <p>Japan has thousands of them. Some stand in deep forests. One famous one stands out in the sea, and at
+    high tide it looks like it is floating.</p>
+
+    <div class="note"><p><strong>Here is the surprising part.</strong> If you ask people in Japan
+    "what is your religion?", about <strong>7 out of 10</strong> say they do not have one. But almost everyone
+    still visits a shrine at New Year to wish for a good year.</p>
+    <p>So — <strong>can you do a religious thing without being religious?</strong> There is no wrong answer.
+    Second graders often have better answers to this than grown-ups.</p></div>
+
+    <div class="paper"><span class="ic">✎</span><p><strong>On your paper:</strong> draw a torii gate. Two tall
+    posts, two beams across the top, and the top one curves up at the ends like a smile. Then put your gate
+    somewhere — a forest, a mountain, the ocean. Colour it red-orange.</p></div>
+
+    <button class="stampbtn" data-stamp="5">Collect the Gate stamp</button>
+  </section>
+
+  <section class="station reveal" id="s6">
+    <p class="num"><b>6</b> The Final Challenge</p>
+    <h2>Write a haiku</h2>
+    <p class="big-say">A <span class="gl" data-t="haiku">haiku</span> is a very short Japanese poem. Three lines.
+    <strong>5 beats, then 7 beats, then 5 beats.</strong> Clap as you say each word: <em>Ja-pan</em> is 2 claps,
+    <em>vol-ca-no</em> is 3.</p>
+
+    <p style="font-size:15.5px;color:var(--ink-3);">Type below and the dots count your beats for you.
+    They turn green when the line is right.</p>
+
+    <div class="haiku">
+      <div class="hline" data-need="5">
+        <div class="hhead"><span>Line 1 — five beats</span><span><span class="hcount">0</span> / 5</span></div>
+        <div class="beats" aria-hidden="true"></div>
+        <input type="text" placeholder="Snow on the mountain" aria-label="Haiku line 1, five syllables">
+      </div>
+      <div class="hline" data-need="7">
+        <div class="hhead"><span>Line 2 — seven beats</span><span><span class="hcount">0</span> / 7</span></div>
+        <div class="beats" aria-hidden="true"></div>
+        <input type="text" placeholder="a thousand islands asleep" aria-label="Haiku line 2, seven syllables">
+      </div>
+      <div class="hline" data-need="5">
+        <div class="hhead"><span>Line 3 — five beats</span><span><span class="hcount">0</span> / 5</span></div>
+        <div class="beats" aria-hidden="true"></div>
+        <input type="text" placeholder="the train slides past, quiet" aria-label="Haiku line 3, five syllables">
+      </div>
+      <p class="hdone" id="hDone">★ That is a real haiku. Read it out loud.</p>
+    </div>
+
+    <p style="font-size:14.5px;color:var(--ink-3);">The counter is a helper, not a judge — it gets tricky words
+    wrong sometimes. Your ears are better than it is. If you clap it and it sounds right, it is right.</p>
+
+    <button class="stampbtn" data-stamp="6">Collect the Poet stamp</button>
+  </section>
+
+  <section class="badge reveal" id="badge">
+    <p class="kicker" style="color:var(--g2);">Explorer Badge</p>
+    <h2 id="badgeTitle">Collect all six stamps</h2>
+    <div class="stamps" id="stampRow">
+      <div class="st" data-st="1">ISLANDS</div>
+      <div class="st" data-st="2">MOUNTAIN</div>
+      <div class="st" data-st="3">WRITING</div>
+      <div class="st" data-st="4">GAMES</div>
+      <div class="st" data-st="5">GATE</div>
+      <div class="st" data-st="6">POET</div>
+    </div>
+    <p id="badgeMsg" style="margin-top:16px;"></p>
+    <button class="btn ghost sm" id="resetBtn" style="margin-top:6px;">Start again</button>
+  </section>
+
+  <section class="station reveal">
+    <p class="num"><b>+</b> Bonus</p>
+    <h2>Fold a paper cup</h2>
+    <p class="big-say">This is real origami. When you finish, it actually holds water. Test it at the sink.
+    Start with a <strong>square</strong> piece of paper.</p>
+    <ol style="font-size:16.5px;line-height:1.7;color:var(--ink-2);padding-left:22px;">
+      <li>Fold the square in half into a <strong>triangle</strong>. Point it down like an ice cream cone.</li>
+      <li>Take the <strong>bottom right</strong> corner. Fold it up and across to touch the middle of the
+        <strong>left</strong> side. Press hard.</li>
+      <li>Take the <strong>bottom left</strong> corner. Fold it up to touch the middle of the <strong>right</strong>
+        side. It should look like an envelope now.</li>
+      <li>Two loose flaps sit at the top. Fold the <strong>front</strong> one down toward you.</li>
+      <li>Flip it over. Fold the <strong>other</strong> flap down too.</li>
+      <li>Gently pull the two sides apart. It opens into a cup.</li>
+    </ol>
+    <p style="color:var(--ink-3);">If it leaks, your folds were not tight enough. Try again — that is exactly
+    what engineers do.</p>
+  </section>
+
+  <footer>
+    Facts checked September 2026. Island count: Geospatial Information Authority of Japan, 2023 recount.
+    Mount Fuji height and the 1707 eruption: Japan Meteorological Agency. Sport popularity: national
+    participation survey. Your stamps are remembered in this browser only.
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+/* ---------------- stamps ---------------- */
+const KEY = "ws-japan-g2-stamps";
+let got = new Set();
+try { got = new Set(JSON.parse(localStorage.getItem(KEY) || "[]")); } catch (e) {}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify([...got])); } catch (e) {} }
+
+function paint(){
+  document.querySelectorAll(".stampbtn").forEach(b=>{
+    const on = got.has(b.dataset.stamp);
+    b.classList.toggle("got", on);
+    b.textContent = on ? "✓ Stamp collected" : b.dataset.label;
+  });
+  document.querySelectorAll(".st").forEach(s=>s.classList.toggle("got", got.has(s.dataset.st)));
+  document.querySelectorAll("#rail a").forEach(a=>a.classList.toggle("done", got.has(a.dataset.s)));
+  const n = got.size;
+  document.getElementById("badgeTitle").textContent = n===6 ? "Explorer Badge earned!" : "Collect all six stamps";
+  document.getElementById("badgeMsg").textContent =
+    n===0 ? "No stamps yet. Start at station 1." :
+    n===6 ? "All six. You explored Japan, read its picture-words, and wrote a poem." :
+    n + " of 6 collected. Keep going.";
+}
+document.querySelectorAll(".stampbtn").forEach(b=>{
+  b.dataset.label = b.textContent;
+  b.addEventListener("click", ()=>{
+    got.has(b.dataset.stamp) ? got.delete(b.dataset.stamp) : got.add(b.dataset.stamp);
+    save(); paint();
+  });
+});
+document.getElementById("resetBtn").addEventListener("click", ()=>{ got.clear(); save(); paint(); });
+
+/* ---------------- station 1 ---------------- */
+const gIn=document.getElementById("gIn"), gOut=document.getElementById("gOut"), ANSWER=14125;
+gIn.addEventListener("input", ()=>{ gOut.textContent = (+gIn.value).toLocaleString(); });
+document.getElementById("gGo").addEventListener("click", ()=>{
+  const g=+gIn.value, off=Math.abs(g-ANSWER);
+  const v=document.getElementById("gVerdict");
+  const how = off<=500 ? "Wow — that is <strong>really close</strong>."
+            : off<=3000 ? "Good guess, not far off."
+            : g<ANSWER ? "Higher than that!" : "Lower than that!";
+  v.innerHTML = how + " Japan has <strong>14,125 islands</strong>.<br><br>" +
+    "Here is the strange part. For <strong>35 years</strong> Japan said it had 6,852. In 2023 mapmakers counted " +
+    "again with better maps and found more than twice as many. No new islands appeared — the maps just got " +
+    "sharper.<br><br><em>If you visited one island every single day, it would take you almost 39 years to see them all.</em>";
+  v.classList.add("on");
+  const t0=performance.now();
+  (function tick(now){
+    const p=Math.min(1,(now-t0)/900);
+    gOut.textContent = Math.round(g+(ANSWER-g)*(1-Math.pow(1-p,3))).toLocaleString();
+    if(p<1) requestAnimationFrame(tick);
+  })(t0);
+});
+
+/* ---------------- station 2 ---------------- */
+const FUJI=[
+  {n:"A 3-storey<br>house", f:33},
+  {n:"The Statue<br>of Liberty", f:305},
+  {n:"The Eiffel<br>Tower", f:1083},
+  {n:"Burj Khalifa<br>tallest building", f:2717},
+  {n:"Mount Fuji", f:12389, me:true}
+];
+const fujiEl=document.getElementById("fuji"), fujiSay=document.getElementById("fujiSay");
+const fmax=Math.max(...FUJI.map(d=>d.f));
+FUJI.forEach(d=>{
+  const b=document.createElement("button");
+  b.type="button"; b.className="fbar"+(d.me?" me":"");
+  b.setAttribute("aria-label", d.n.replace(/<br>/g," ")+", "+d.f.toLocaleString()+" feet");
+  b.innerHTML='<div class="val"></div><div class="col" style="height:0"></div><div class="lab">'+d.n+"</div>";
+  b.addEventListener("click", ()=>{
+    b.querySelector(".val").textContent = d.f.toLocaleString()+" ft";
+    fujiSay.textContent = d.n.replace(/<br>/g," ")+" — "+d.f.toLocaleString()+" feet"+
+      (d.me ? ". That is about "+(FUJI[4].f/FUJI[3].f).toFixed(1)+" times the tallest building on Earth." : ".");
+  });
+  fujiEl.appendChild(b);
+  setTimeout(()=>{ b.querySelector(".col").style.height = Math.max(3,(d.f/fmax)*100)+"%"; }, 160);
+});
+
+/* ---------------- station 3 ---------------- */
+const KANJI=[
+  ["山","MOUNTAIN","Three peaks in a row"],
+  ["川","RIVER","Three streams flowing down"],
+  ["日","SUN","The sun drawn in the sky"],
+  ["木","TREE","A trunk, branches and roots"],
+  ["火","FIRE","A flame with sparks flying off"],
+  ["人","PERSON","Two legs, mid-stride"],
+  ["雨","RAIN","Drops falling from a cloud"],
+  ["魚","FISH","Head, body, fins and tail"]
+];
+const kg=document.getElementById("kgrid");
+KANJI.forEach(([ch,en,why])=>{
+  const b=document.createElement("button");
+  b.type="button"; b.className="kcard";
+  b.setAttribute("aria-label","Kanji card. Tap to reveal what it means.");
+  b.innerHTML='<div class="kinner">'+
+    '<div class="kface"><div class="ch">'+ch+'</div><div class="tap">tap me</div></div>'+
+    '<div class="kface kback"><div class="ch" style="font-size:34px">'+ch+'</div>'+
+    '<div class="en">'+en+'</div><div class="why">'+why+'</div></div></div>';
+  b.addEventListener("click", ()=>b.classList.toggle("flip"));
+  kg.appendChild(b);
+});
+
+/* ---------------- station 6 ---------------- */
+function syllables(w){
+  w = w.toLowerCase().replace(/[^a-z]/g,"");
+  if(!w) return 0;
+  if(w.length<=3) return 1;
+  w = w.replace(/(?:[^laeiouy]es|ed|[^laeiouy]e)$/,"").replace(/^y/,"");
+  const m = w.match(/[aeiouy]{1,2}/g);
+  return m ? m.length : 1;
+}
+const countLine = s => s.trim().split(/\s+/).filter(Boolean).reduce((a,w)=>a+syllables(w),0);
+
+document.querySelectorAll(".hline").forEach(line=>{
+  const need=+line.dataset.need;
+  const beats=line.querySelector(".beats");
+  const input=line.querySelector("input");
+  const cnt=line.querySelector(".hcount");
+  for(let i=0;i<need;i++){ const s=document.createElement("span"); s.className="beat"; beats.appendChild(s); }
+  input.addEventListener("input", ()=>{
+    const n=countLine(input.value);
+    cnt.textContent=n;
+    cnt.className="hcount"+(n===need?" ok":n>need?" over":"");
+    line.classList.toggle("ok", n===need);
+    [...beats.children].forEach((b,i)=>{
+      b.className = "beat" + (n>need ? " on over" : (i<n ? " on" : ""));
+    });
+    const all=[...document.querySelectorAll(".hline")].every(l=>l.classList.contains("ok"));
+    document.getElementById("hDone").classList.toggle("on", all);
+  });
+});
+
+paint();
+</script>
 </body>
 </html>

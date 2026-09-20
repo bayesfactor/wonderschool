@@ -3,453 +3,744 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Japan: The Paradox File | Wonderschool</title>
+<title>Japan: The Paradox File — 6th grade | Wonderschool</title>
+<meta name="description" content="Five contradictions in Japan's data, every one of them true. Work out why the facts disagree.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
-*{box-sizing:border-box;}
-html,body{margin:0;padding:0;background:#e6e6e4;color:#14140f;
-  font-family:Georgia,"Times New Roman",serif;}
-.page{width:8.5in;min-height:11in;background:#fdfdfa;margin:16px auto;padding:0.6in 0.75in;
-  box-shadow:0 2px 12px rgba(0,0,0,.22);position:relative;}
-.stamp{position:absolute;top:0.42in;right:0.7in;border:2.5px solid #8a1f1f;color:#8a1f1f;
-  font-family:"Courier New",monospace;font-size:9.5pt;letter-spacing:2px;padding:4px 10px;
-  transform:rotate(3deg);font-weight:bold;}
-.kicker{font-family:"Courier New",monospace;font-size:10pt;letter-spacing:3px;
-  text-transform:uppercase;color:#6a6a5e;margin:0 0 6px;}
-h1{font-size:33pt;line-height:1.06;margin:0 0 10px;letter-spacing:-.6px;}
-h2{font-size:20pt;margin:0 0 8px;line-height:1.2;}
-h3{font-size:13pt;margin:18px 0 6px;font-family:"Courier New",monospace;
-  letter-spacing:1.5px;text-transform:uppercase;color:#6a6a5e;}
-p,li{font-size:12.2pt;line-height:1.72;margin:0 0 12px;}
-li{margin-bottom:8px;}
-.lead{font-size:14pt;line-height:1.65;}
-hr{border:0;border-top:2px solid #14140f;margin:20px 0;}
-hr.thin{border-top:1px solid #bbb;margin:16px 0;}
-table{width:100%;border-collapse:collapse;font-family:"Helvetica Neue",Arial,sans-serif;
-  font-size:10.5pt;margin:10px 0 16px;}
-th,td{border:1px solid #c4c4bb;padding:6px 8px;text-align:right;}
+main{max-width:900px;}
+.hero{padding:10px 0 4px;}
+.hero h1{font-size:clamp(38px,8vw,68px);line-height:1;margin-bottom:16px;}
+.hero h1 em{font-style:normal;display:block;
+  background:linear-gradient(100deg,var(--g6),var(--hot) 75%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* contradiction list on the hero */
+.contra{list-style:none;padding:0;margin:26px 0;display:grid;gap:11px;}
+.contra li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);padding:15px 18px;
+  font-size:16px;color:var(--ink-2);line-height:1.5;}
+.contra li b{color:var(--ink);}
+.contra .vs{font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.1em;
+  color:var(--hot);background:var(--hot-soft);border-radius:8px;padding:4px 9px;white-space:nowrap;}
+
+/* case nav */
+.casenav{position:sticky;top:52px;z-index:200;display:flex;gap:8px;overflow-x:auto;
+  padding:12px 4px;margin:0 -4px 8px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+  scrollbar-width:none;}
+.casenav::-webkit-scrollbar{display:none;}
+.casenav a{flex:none;font-size:13.5px;font-weight:600;text-decoration:none;white-space:nowrap;
+  padding:8px 15px;border-radius:99px;border:1px solid var(--edge-strong);
+  color:var(--ink-2);background:var(--surface);transition:.18s var(--ease);}
+.casenav a:hover{border-color:var(--g6);color:var(--g6);}
+.casenav a.here{background:var(--g6);border-color:var(--g6);color:#fff;}
+
+/* case file */
+.case{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
+  padding:34px 32px;margin-bottom:26px;box-shadow:var(--shadow-sm);scroll-margin-top:118px;
+  position:relative;overflow:hidden;}
+.case::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;
+  background:linear-gradient(90deg,var(--g6),var(--g4));}
+.case .cn{display:flex;align-items:center;gap:11px;margin-bottom:10px;}
+.case .cn span{font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);}
+.case .cn b{font-family:var(--font-display);font-size:34px;font-weight:800;line-height:1;
+  color:color-mix(in srgb,var(--g6) 30%,transparent);letter-spacing:-.04em;}
+.case h2{margin:0 0 14px;font-size:clamp(25px,4.2vw,36px);}
+.case p{font-size:16.5px;line-height:1.7;}
+.punch{font-size:clamp(18px,2.5vw,21px);line-height:1.5;color:var(--ink);font-weight:500;
+  border-left:4px solid var(--g6);padding-left:18px;margin:18px 0 22px;}
+h3.sec{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);margin:28px 0 10px;}
+
+/* data table */
+.tw{overflow-x:auto;margin:14px 0 8px;}
+table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--edge);}
+th{white-space:nowrap;}
+td:first-child{white-space:normal;min-width:11em;}
 th:first-child,td:first-child{text-align:left;}
-th{background:#ecece6;font-size:9.5pt;letter-spacing:.4px;text-transform:uppercase;}
-tr.hl td{background:#f6efd9;font-weight:bold;}
-td.nd,.nd{color:#8a8a7c;font-style:italic;}
-.box{border:2px solid #14140f;padding:14px 18px;margin:16px 0;}
-.box h4{margin:0 0 8px;font-size:12pt;font-family:"Courier New",monospace;
-  letter-spacing:1.6px;text-transform:uppercase;}
-.objection{border-left:6px solid #8a1f1f;background:#f7f1f1;padding:12px 18px;margin:16px 0;}
-.objection h4{margin:0 0 6px;font-size:11.5pt;font-family:"Courier New",monospace;
-  letter-spacing:1.5px;text-transform:uppercase;color:#8a1f1f;}
-.qs{background:#f0f0ea;padding:14px 18px 6px;margin:16px 0;}
-.qs ol{margin:0;padding-left:22px;}
-.qs li{font-size:12pt;line-height:1.65;margin-bottom:11px;}
-.ruled{border-bottom:1px solid #999;height:0.32in;margin-bottom:3px;}
-.small{font-size:10.5pt;color:#55554c;line-height:1.6;}
-.glossary dt{font-weight:bold;font-size:11.5pt;margin-top:10px;}
-.glossary dd{margin:2px 0 0;font-size:11.5pt;line-height:1.6;}
-.pagenum{position:absolute;bottom:0.35in;right:0.75in;font-family:"Courier New",monospace;
-  font-size:9.5pt;color:#8a8a7c;}
-.caseno{font-family:"Courier New",monospace;font-size:34pt;color:#d4d4c8;
-  position:absolute;top:0.5in;right:0.75in;line-height:1;}
-a{color:#14140f;}
-.srclist a{color:#1f4f8a;}
-@media print{
-  html,body{background:#fff;}
-  @page{size:letter portrait;margin:0.45in 0.6in;}
-  .page{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;
-    page-break-after:always;break-after:page;}
-  .page:last-child{page-break-after:auto;break-after:auto;}
-  h1{font-size:28pt;}
-  h2{font-size:17.5pt;margin-bottom:5px;}
-  h3{font-size:10.5pt;margin:10px 0 4px;}
-  p,li{font-size:9.5pt;line-height:1.46;margin-bottom:5px;}
-  li{margin-bottom:4px;}
-  .lead{font-size:11pt;line-height:1.46;}
-  table{font-size:8.4pt;margin:6px 0 9px;}
-  th,td{padding:2.6px 5px;}
-  th{font-size:7.8pt;}
-  .box{padding:10px 14px;margin:11px 0;}
-  .box h4{font-size:10.2pt;margin-bottom:5px;}
-  .objection{padding:7px 13px;margin:9px 0;}
-  .objection h4{font-size:9.5pt;margin-bottom:4px;}
-  .qs{padding:8px 13px 2px;margin:9px 0;}
-  .qs li{font-size:9.8pt;line-height:1.48;margin-bottom:6px;}
-  .small{font-size:8.6pt;line-height:1.48;}
-  .ruled{height:0.225in;}
-  .glossary dt{font-size:9.4pt;margin-top:5px;}
-  .glossary dd{font-size:9.4pt;line-height:1.42;}
-  .srclist{font-size:8.2pt;line-height:1.5;}
-  .caseno{font-size:28pt;top:0;right:0;}
-  hr{margin:12px 0;}
-  hr.thin{margin:8px 0;}
-  .stamp{top:0;}
-  .pagenum{bottom:0;}
-}
+thead th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;border-bottom:2px solid var(--edge-strong);}
+tbody tr{transition:background .15s;}
+tbody tr:hover{background:var(--bg-2);}
+tr.jp td{background:var(--g6-soft);font-weight:700;color:var(--ink);}
+tr.jp td:first-child::before{content:"●";color:var(--g6);margin-right:7px;font-size:11px;}
+td.nd{color:var(--ink-3);font-style:italic;font-weight:400;}
+.src{font-size:13px;color:var(--ink-3);margin:4px 0 0;}
+
+/* objection — expandable */
+details.obj{border:1px solid color-mix(in srgb,var(--hot) 40%,transparent);
+  background:var(--hot-soft);border-radius:var(--r);margin:22px 0;overflow:hidden;}
+details.obj summary{cursor:pointer;list-style:none;padding:16px 20px;display:flex;
+  align-items:center;gap:12px;font-weight:650;font-size:16px;color:var(--ink);}
+details.obj summary::-webkit-details-marker{display:none;}
+details.obj summary .lbl{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--hot);background:color-mix(in srgb,var(--hot) 18%,transparent);
+  border-radius:99px;padding:4px 11px;}
+details.obj summary .chev{margin-left:auto;transition:transform .25s var(--ease);color:var(--hot);font-size:18px;}
+details.obj[open] summary .chev{transform:rotate(180deg);}
+details.obj .body{padding:0 20px 18px;}
+details.obj .body p{font-size:15.5px;line-height:1.65;margin:0 0 11px;color:var(--ink-2);}
+details.obj .body p:last-child{margin-bottom:0;}
+
+/* questions */
+.qs{background:var(--bg-2);border-radius:var(--r);padding:20px 22px;margin:24px 0 0;}
+.qs h3{margin-top:0;}
+.qs ol{margin:0;padding-left:20px;}
+.qs li{font-size:15.5px;line-height:1.65;color:var(--ink-2);margin-bottom:12px;}
+.qs li::marker{color:var(--g6);font-weight:700;}
+
+/* brief builder */
+.brief{background:var(--surface);border:2px solid var(--g6);border-radius:var(--r-xl);
+  padding:32px;margin-bottom:26px;scroll-margin-top:118px;}
+.bf{margin-bottom:20px;}
+.bf label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  font-size:13.5px;font-weight:650;color:var(--ink);margin-bottom:7px;}
+.bf .hint{font-weight:400;color:var(--ink-3);font-size:12.5px;}
+.bf textarea{width:100%;font:inherit;font-size:15.5px;line-height:1.55;padding:13px 15px;
+  border-radius:12px;border:2px solid var(--edge-strong);background:var(--bg);color:var(--ink);
+  resize:vertical;min-height:62px;transition:border-color .2s;}
+.bf textarea:focus{outline:none;border-color:var(--g6);}
+.bf.ok textarea{border-color:var(--g2);}
+.check{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:6px;color:var(--ink-3);}
+.check.ok{color:var(--g2);font-weight:600;}
+.check .dot{width:9px;height:9px;border-radius:50%;background:var(--edge-strong);flex:none;}
+.check.ok .dot{background:var(--g2);}
+.bstatus{background:var(--bg-2);border-radius:var(--r);padding:16px 19px;margin:20px 0;}
+.bstatus ul{margin:0;padding-left:18px;}
+.bstatus li{font-size:14px;color:var(--ink-2);margin-bottom:5px;}
+.bstatus li.done{color:var(--g2);}
+.bstatus li.done::marker{content:"✓ ";}
+.brow{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+
+/* glossary index */
+.glidx{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin:16px 0;}
+.glidx .gl{display:block;text-align:center;padding:10px 8px;border:1px solid var(--edge);
+  border-radius:10px;background:var(--surface);font-size:14px;font-weight:500;border-bottom-width:1px;}
+.glidx .gl:hover{border-color:var(--g6);}
+.srclist{display:grid;gap:7px;}
+.srclist a{display:block;font-size:14px;color:var(--ink-2);text-decoration:none;
+  padding:9px 13px;border:1px solid var(--edge);border-radius:10px;background:var(--surface);
+  transition:.15s;}
+.srclist a:hover{border-color:var(--g6);color:var(--g6);transform:translateX(3px);}
+.srclist a b{color:var(--ink);font-weight:600;}
 </style>
 </head>
-<body>
+<body class="g6">
 
 <nav class="site-bar">
   <a class="brand" href="/">Wonderschool</a>
   <span class="sep">/</span><a href="/grade-6/">6th grade</a>
   <span class="sep">/</span><a href="/grade-6/japan/">Japan</a>
   <span class="spacer"></span>
-  <a href="/grade-6/japan-data-desk.html">Data Desk →</a>
-  <button class="printbtn" onclick="window.print()">Print</button>
+  <a href="/grade-6/japan-data-desk.html">Data Desk &rarr;</a>
 </nav>
 
-<!-- ===== P1 : COVER ===== -->
-<section class="page">
-  <div class="stamp">ANALYST COPY</div>
-  <p class="kicker">Country Desk · Confidential Briefing 09-26</p>
-  <h1>JAPAN<br>The Paradox File</h1>
-  <hr>
-  <p class="lead">You have been assigned to the Japan desk. Your job is not to collect facts about Japan — anyone can do that. Your job is to work out <em>why the facts disagree with each other</em>.</p>
+<main>
+  <header class="hero">
+    <p class="kicker">Country Desk · briefing 09-26</p>
+    <h1>Japan<em>The Paradox File</em></h1>
+    <p class="lede">Your job is not to collect facts about Japan — anyone can do that. Your job is to work out
+    <strong>why the facts disagree with each other</strong>. Every number below is real, sourced, and correct.</p>
 
-  <p>Every number in this file is real and comes from a named source. None of them are wrong. And yet:</p>
+    <ul class="contra">
+      <li><span class="vs">4th vs 39th</span><span>Japan has the <b>4th-largest economy on Earth</b> and ranks
+        <b>39th</b> in money <span class="gl" data-t="per-capita">per person</span>.</span></li>
+      <li><span class="vs">96 vs 30th</span><span>It scores <b>96 out of 100</b> on
+        <span class="gl" data-t="political-freedom">political freedom</span> and <b>30th of 176</b> on
+        <span class="gl" data-t="economic-freedom">economic freedom</span>.</span></li>
+      <li><span class="vs">70 years</span><span>It is rated a <b>full democracy</b> where
+        <span class="gl" data-t="ldp">one party</span> has won almost every election since 1955.</span></li>
+      <li><span class="vs">149%</span><span>Official records say <b>70% are
+        <span class="gl" data-t="shinto">Shinto</span></b> and <b>70% are
+        <span class="gl" data-t="buddhism">Buddhist</span></b>. Surveys say <b>70% have no religion</b>.</span></li>
+      <li><span class="vs">no data</span><span>Everyone says Japan's <span class="gl" data-t="literacy">literacy
+        rate</span> is 99%. <b>No organisation on Earth publishes one.</b></span></li>
+    </ul>
 
-  <ul>
-    <li>Japan has the <strong>4th-largest economy on Earth</strong> and ranks <strong>39th</strong> in money per person.</li>
-    <li>Japan scores <strong>96 out of 100</strong> on political freedom and <strong>30th out of 176</strong> on economic freedom.</li>
-    <li>Japan is rated a <strong>"full democracy"</strong> where one party has won almost every election for seventy years.</li>
-    <li>Official records say <strong>70% of Japanese are Shinto and 70% are Buddhist</strong>. Surveys say <strong>70% have no religion</strong>.</li>
-    <li>Japan is the <strong>62nd-largest country</strong> by land with the <strong>11th-largest population</strong> — and two-thirds of it is empty forest.</li>
-    <li>Everyone says Japan's literacy rate is 99%. <strong>No organisation on Earth publishes a literacy figure for Japan at all.</strong></li>
-  </ul>
+    <div class="note"><p><strong>Your deliverable:</strong> a one-page brief answering <em>Is Japan a rich
+    country?</em> and <em>Is Japan a free country?</em> You need four numbers <strong>with their sources and
+    years</strong>, and you must name and answer the strongest objection to your own position. There is a
+    builder at the bottom of this page — nothing to print.</p></div>
+  </header>
 
-  <p>Five case files follow. Each contains a contradiction, the evidence behind it, and the strongest argument <em>against</em> the obvious answer. Work through them in order.</p>
+  <nav class="casenav" id="casenav" aria-label="Case files">
+    <a href="#raw">The raw file</a>
+    <a href="#c1">01 · Wealth</a>
+    <a href="#c2">02 · Freedom</a>
+    <a href="#c3">03 · Counting</a>
+    <a href="#c4">04 · Density</a>
+    <a href="#c5">05 · The hole</a>
+    <a href="#brief">Write the brief</a>
+  </nav>
 
-  <div class="box">
-    <h4>Your deliverable</h4>
-    <p style="margin-bottom:0;">A one-page intelligence brief answering two questions: <strong>Is Japan a rich country?</strong> and <strong>Is Japan a free country?</strong> The writing frame is on page 8. You must cite at least four numbers from this file <em>with their sources and years</em>, and you must name and answer the strongest objection to your own position. A brief that only argues one side is an incomplete brief.</p>
-  </div>
+  <!-- ============ RAW FILE ============ -->
+  <section class="case reveal" id="raw">
+    <div class="cn"><span>Section A</span></div>
+    <h2>The Raw File</h2>
+    <p>Read this once now. You will come back to it five times. <strong>Note the year on every row</strong> —
+    they are not all from the same moment, and that matters more than it looks.</p>
 
-  <p class="small">All figures verified 20 September 2026. Every source is listed with a live link on the final page.</p>
-  <div class="pagenum">01</div>
-</section>
+    <div class="tw"><table>
+      <thead><tr><th>Indicator</th><th>Value</th><th>Year</th><th>World rank</th></tr></thead>
+      <tbody>
+        <tr><td>Population</td><td>~122.7 million</td><td>2026</td><td>11th</td></tr>
+        <tr><td>Land area</td><td>377,975 km²</td><td>current</td><td>62nd</td></tr>
+        <tr><td>Population density</td><td>~325 per km²</td><td>2026</td><td>—</td></tr>
+        <tr><td>Forest cover</td><td>~68% of land</td><td>2022</td><td>—</td></tr>
+        <tr class="jp"><td>Economy, <span class="gl" data-t="nominal-gdp">nominal GDP</span></td><td>$4.38 trillion</td><td>2026</td><td>4th</td></tr>
+        <tr class="jp"><td><span class="gl" data-t="gdp">GDP</span> <span class="gl" data-t="per-capita">per person</span></td><td>$35,703</td><td>2026</td><td>39th</td></tr>
+        <tr><td>Economy, <span class="gl" data-t="ppp">PPP</span></td><td>$7.26 trillion</td><td>2026</td><td>5th</td></tr>
+        <tr><td><span class="gl" data-t="fertility-rate">Fertility rate</span></td><td>1.15 children per woman</td><td>2024</td><td>—</td></tr>
+        <tr><td><span class="gl" data-t="gini">Gini index</span></td><td>32.9 out of 100</td><td><strong>2013</strong></td><td>—</td></tr>
+        <tr><td><span class="gl" data-t="relative-poverty">Relative poverty</span></td><td>13.4% World Bank / 15.4% Japan's own ministry</td><td>2020 / 2021</td><td>—</td></tr>
+        <tr><td><span class="gl" data-t="economic-freedom">Economic freedom</span></td><td>70.3 — "Mostly Free"</td><td>2026</td><td>30th of 176</td></tr>
+        <tr><td><span class="gl" data-t="political-freedom">Political freedom</span></td><td>96 — "Free"</td><td>2026</td><td>—</td></tr>
+        <tr><td><span class="gl" data-t="democracy-index">Democracy Index</span></td><td>8.85 — "full democracy"</td><td>2024</td><td>13th of 167</td></tr>
+        <tr><td><span class="gl" data-t="hdi">HDI</span></td><td>0.925 — "very high"</td><td>2023</td><td>23rd</td></tr>
+        <tr><td><span class="gl" data-t="pisa">PISA</span> reading, age 15</td><td>516</td><td>2022</td><td>3rd</td></tr>
+        <tr><td>PISA mathematics</td><td>536</td><td>2022</td><td>5th</td></tr>
+        <tr><td>PISA science</td><td>547</td><td>2022</td><td>2nd</td></tr>
+        <tr><td>Adult <span class="gl" data-t="literacy">literacy</span></td><td class="nd">no figure published — Case File 05</td><td class="nd">—</td><td class="nd">—</td></tr>
+        <tr><td>Nobel laureates</td><td>32 (12 physics, 9 chemistry, 6 medicine, 3 literature, 2 peace)</td><td>to 2025</td><td>—</td></tr>
+      </tbody>
+    </table></div>
 
-<!-- ===== P2 : THE RAW FILE ===== -->
-<section class="page">
-  <p class="kicker">Section A</p>
-  <h2>The Raw File</h2>
-  <p>Read this once now. You will come back to it five times. <strong>Note the year on every row</strong> — they are not all from the same moment, and that matters.</p>
+    <h3 class="sec">Government and elections</h3>
+    <p><strong>System:</strong> <span class="gl" data-t="constitutional-monarchy">constitutional monarchy</span>
+    with parliamentary democracy. The 1947 constitution names the
+    <span class="gl" data-t="emperor">Emperor</span> "the symbol of the State and of the unity of the People" —
+    he holds <em>no</em> political power. Emperor Naruhito, since 2019.</p>
+    <p><strong>Legislature:</strong> <span class="gl" data-t="diet">the National Diet</span>. House of
+    Representatives, 465 seats (289 single-member districts, 176 by
+    <span class="gl" data-t="proportional-representation">proportional representation</span>). House of
+    Councillors, 248 seats, six-year terms, half replaced every three years.</p>
+    <p><strong>Executive:</strong> voters do not elect the Prime Minister. The Diet selects the PM from its own
+    members; the Emperor then formally appoints. Current PM: <strong>Sanae Takaichi</strong>
+    (<span class="gl" data-t="ldp">LDP</span>), in office since 21 October 2025 — Japan's first woman prime
+    minister. Voting age 18, lowered from 20 in 2016.</p>
 
-  <table>
-    <tr><th>Indicator</th><th>Value</th><th>Year</th><th>World rank</th></tr>
-    <tr><td>Population</td><td>~122.7 million</td><td>2026</td><td>11th</td></tr>
-    <tr><td>Land area</td><td>377,975 km²</td><td>current</td><td>62nd</td></tr>
-    <tr><td>Population density</td><td>~325 per km²</td><td>2026</td><td>—</td></tr>
-    <tr><td>Forest cover</td><td>~68% of land</td><td>2022</td><td>—</td></tr>
-    <tr class="hl"><td>Economy (nominal GDP)</td><td>$4.38 trillion</td><td>2026</td><td>4th</td></tr>
-    <tr class="hl"><td>GDP per person</td><td>$35,703</td><td>2026</td><td>39th</td></tr>
-    <tr><td>Economy (PPP)</td><td>$7.26 trillion</td><td>2026</td><td>5th</td></tr>
-    <tr><td>Fertility rate</td><td>1.15 children per woman</td><td>2024</td><td>—</td></tr>
-    <tr><td>Gini index (income inequality)</td><td>32.9 out of 100</td><td><strong>2013</strong></td><td>—</td></tr>
-    <tr><td>Relative poverty</td><td>13.4% (World Bank) / 15.4% (Japan's own ministry)</td><td>2020 / 2021</td><td>—</td></tr>
-    <tr><td>Economic freedom (Heritage)</td><td>70.3 — "Mostly Free"</td><td>2026</td><td>30th of 176</td></tr>
-    <tr><td>Political freedom (Freedom House)</td><td>96 — "Free"</td><td>2026</td><td>—</td></tr>
-    <tr><td>Democracy Index (EIU)</td><td>8.85 — "full democracy"</td><td>2024</td><td>13th of 167</td></tr>
-    <tr><td>Human Development Index</td><td>0.925 — "very high"</td><td>2023</td><td>23rd</td></tr>
-    <tr><td>PISA reading, age 15</td><td>516</td><td>2022</td><td>3rd</td></tr>
-    <tr><td>PISA mathematics</td><td>536</td><td>2022</td><td>5th</td></tr>
-    <tr><td>PISA science</td><td>547</td><td>2022</td><td>2nd</td></tr>
-    <tr><td class="nd">Adult literacy</td><td class="nd">no figure published — see Case File 05</td><td class="nd">—</td><td class="nd">—</td></tr>
-    <tr><td>Nobel laureates</td><td>32 (12 physics, 9 chemistry, 6 medicine, 3 literature, 2 peace)</td><td>to 2025</td><td>—</td></tr>
-  </table>
+    <h3 class="sec">Economy</h3>
+    <p>Services are 69.8% of GDP. Major industries: motor vehicles (Toyota is the world's largest carmaker by
+    volume), steel, semiconductor materials and manufacturing equipment, auto parts, industrial robotics — Japan
+    supplies roughly <strong>45% of the world's industrial robots</strong> — electronics, precision optics and
+    video games. It also quietly dominates components nobody notices: Shimano makes most of the world's bicycle
+    gears, YKK about half of its zippers.</p>
+  </section>
 
-  <h3>Government and elections</h3>
-  <p><strong>System:</strong> constitutional monarchy with parliamentary democracy. The 1947 constitution names the Emperor "the symbol of the State and of the unity of the People" — he holds <em>no</em> political power. <strong>Emperor:</strong> Naruhito, since 2019.</p>
-  <p><strong>Legislature:</strong> the National Diet. House of Representatives, 465 seats (289 single-member districts, 176 proportional). House of Councillors, 248 seats, six-year terms, half replaced every three years.</p>
-  <p><strong>Executive:</strong> voters do not elect the Prime Minister. The Diet selects the PM from its own members; the Emperor then formally appoints. <strong>Current PM:</strong> Sanae Takaichi (Liberal Democratic Party), in office since 21 October 2025 — Japan's first woman prime minister. <strong>Voting age:</strong> 18, lowered from 20 in 2016.</p>
+  <!-- ============ CASE 01 ============ -->
+  <section class="case reveal" id="c1">
+    <div class="cn"><b>01</b><span>Case File</span></div>
+    <h2>The Wealth Paradox</h2>
+    <p class="punch">Japan has the fourth-largest economy on Earth. Japan is the 39th-richest country per person.
+    Both statements are correct.</p>
 
-  <h3>Economy</h3>
-  <p>Services are 69.8% of GDP. Major industries: motor vehicles (Toyota is the world's largest carmaker by volume), steel, semiconductor materials and manufacturing equipment, auto parts, industrial robotics (Japan supplies roughly 45% of the world's industrial robots), electronics, precision optics, and video games. Japan also quietly dominates components almost nobody notices: Shimano makes most of the world's bicycle gears, YKK about half of its zippers.</p>
+    <h3 class="sec">The evidence</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Country</th><th>Total economy</th><th>Rank</th><th>Per person</th><th>Relative poverty</th></tr></thead>
+      <tbody>
+        <tr><td>United States</td><td>$32.38T</td><td>1</td><td>~$94,700</td><td>18.9%</td></tr>
+        <tr><td>China</td><td>$20.85T</td><td>2</td><td>~$14,800</td><td>12.0%</td></tr>
+        <tr><td>Germany</td><td>$5.45T</td><td>3</td><td>~$65,300</td><td>12.5%</td></tr>
+        <tr class="jp"><td>Japan</td><td>$4.38T</td><td>4</td><td>$35,703</td><td>13.4%</td></tr>
+        <tr><td>United Kingdom</td><td>$4.26T</td><td>5</td><td>~$61,300</td><td>11.7%</td></tr>
+        <tr><td>India</td><td>$4.15T</td><td>6</td><td>~$2,900</td><td class="nd">3.4% — measured differently</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Total economy: <span class="gl" data-t="imf">IMF</span> World Economic Outlook, April 2026.
+    Per-person figures other than Japan's are calculated and approximate. Relative poverty:
+    <span class="gl" data-t="world-bank">World Bank</span> SI.DST.50MD, years 2020–2024.</p>
 
-  <div class="pagenum">02</div>
-</section>
+    <p>Japan reaches fourth place by having a lot of people who each produce a moderate amount. Germany reaches
+    third with 39 million <em>fewer</em> people, each producing nearly twice as much. India sits two places
+    behind Japan with almost twelve times the population.</p>
 
-<!-- ===== P3 : CASE 01 ===== -->
-<section class="page">
-  <span class="caseno">01</span>
-  <p class="kicker">Case File 01</p>
-  <h2>The Wealth Paradox</h2>
-  <hr class="thin">
+    <p>Now look at the last column, and notice something uncomfortable: <strong>the richest country per person
+    on this table also has the most relative poverty.</strong> The United States produces $94,700 per head, and
+    18.9% of Americans live on less than half of what a typical American lives on. An average cannot see that,
+    because an average has no idea how the money is spread.</p>
 
-  <h3>The contradiction</h3>
-  <p class="lead">Japan has the fourth-largest economy on Earth. Japan is the 39th-richest country per person. Both statements are correct.</p>
+    <p>One more complication. The $4.38 trillion figure is <span class="gl" data-t="nominal-gdp">nominal GDP</span>
+    — priced in US dollars at today's exchange rate. Measured in <span class="gl" data-t="ppp">PPP</span>, which
+    adjusts for what things actually cost locally, Japan's economy is $7.26 trillion and it drops to 5th.
+    Two honest methods, two different answers.</p>
 
-  <h3>The evidence</h3>
-  <table>
-    <tr><th>Country</th><th>Total economy</th><th>Rank</th><th>Per person</th><th>Relative poverty</th></tr>
-    <tr><td>United States</td><td>$32.38T</td><td>1</td><td>~$94,700</td><td>18.9%</td></tr>
-    <tr><td>China</td><td>$20.85T</td><td>2</td><td>~$14,800</td><td>12.0%</td></tr>
-    <tr><td>Germany</td><td>$5.45T</td><td>3</td><td>~$65,300</td><td>12.5%</td></tr>
-    <tr class="hl"><td>Japan</td><td>$4.38T</td><td>4</td><td>$35,703</td><td>13.4%</td></tr>
-    <tr><td>United Kingdom</td><td>$4.26T</td><td>5</td><td>~$61,300</td><td>11.7%</td></tr>
-    <tr><td>India</td><td>$4.15T</td><td>6</td><td>~$2,900</td><td class="nd">3.4% — measured differently</td></tr>
-  </table>
-  <p class="small">Total economy: IMF <em>World Economic Outlook</em>, April 2026. Per-person figures other than Japan's are calculated and approximate. Relative poverty: World Bank SI.DST.50MD, years 2020–2024.</p>
+    <details class="obj">
+      <summary><span class="lbl">Strongest objection</span> Before you decide per-person is "the real number"…
+        <span class="chev">⌄</span></summary>
+      <div class="body">
+        <p>You will be tempted to conclude that per capita is the number that matters. Resist it for a moment.
+        Total size buys things per-person income cannot: Japan funds a large navy, a space agency, national
+        research laboratories and a bullet-train network precisely because the <em>pool</em> is enormous. A
+        country of 300,000 very rich people cannot build a bullet train.</p>
+        <p>Which number matters depends entirely on what you are trying to find out — and <strong>"which country
+        is richer" is not a well-formed question until you say who or what you mean.</strong></p>
+      </div>
+    </details>
 
-  <p>Japan reaches fourth place by having a lot of people who each produce a moderate amount. Germany reaches third with 39 million <em>fewer</em> people, each producing nearly twice as much. India sits two places behind Japan with almost twelve times the population.</p>
+    <div class="qs"><h3 class="sec">Questions</h3><ol>
+      <li>In 2025 many outlets reported that India had overtaken Japan as the world's fourth-largest economy. The
+      IMF's April 2026 figures put Japan back at 4th and India at 6th, mostly on currency movements. How much
+      weight should you put on a ranking where the gap is under 5%?</li>
+      <li>Japan's economy is $4.38 trillion and 122.7 million people live there. Do the division. How close do you
+      get to $35,703, and why isn't it exact?</li>
+      <li>The US has the highest output per person here <em>and</em> the highest relative poverty. Write one
+      sentence that makes both facts true at once without contradicting itself.</li>
+    </ol></div>
+  </section>
 
-  <p>Now look at the last column, and notice something uncomfortable: <strong>the richest country per person on this table also has the most relative poverty.</strong> The United States produces $94,700 per head and 18.9% of Americans live on less than half of what a typical American lives on. An average cannot see that, because an average has no idea how the money is spread.</p>
+  <!-- ============ CASE 02 ============ -->
+  <section class="case reveal" id="c2">
+    <div class="cn"><b>02</b><span>Case File</span></div>
+    <h2>The Freedom Paradox</h2>
+    <p class="punch"><span class="gl" data-t="freedom-house">Freedom House</span> gives Japan 96 out of 100 — a
+    perfect score on political rights. The <span class="gl" data-t="heritage">Heritage Foundation</span> ranks it
+    30th of 176 on economic freedom, scraping into "Mostly Free" by three-tenths of a point. And the same party
+    has governed since 1955.</p>
 
-  <p>One more complication. The $4.38 trillion figure is <strong>nominal</strong> GDP — priced in US dollars at today's exchange rate. Measured in <strong>PPP</strong>, which adjusts for what things actually cost locally, Japan's economy is $7.26 trillion and it drops to 5th. Two honest methods, two different answers.</p>
+    <h3 class="sec">The evidence</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Country</th><th>Political freedom</th><th>Economic freedom</th><th>Ec. rank</th></tr></thead>
+      <tbody>
+        <tr><td>Canada</td><td>97</td><td>75.6</td><td>14</td></tr>
+        <tr class="jp"><td>Japan</td><td>96</td><td>70.3</td><td>30</td></tr>
+        <tr><td>Germany</td><td>95</td><td>71.7</td><td>24</td></tr>
+        <tr><td>Australia</td><td>94</td><td>80.1</td><td>4</td></tr>
+        <tr><td>United Kingdom</td><td>92</td><td>70.4</td><td>29</td></tr>
+        <tr><td>South Korea</td><td>83</td><td>73.7</td><td>19</td></tr>
+        <tr><td>United States</td><td>81</td><td>72.8</td><td>22</td></tr>
+        <tr><td>Brazil</td><td>73</td><td>52.4</td><td>134</td></tr>
+        <tr><td>India</td><td>62</td><td>52.5</td><td>132</td></tr>
+        <tr><td>China</td><td>9</td><td>48.3</td><td>154</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">Freedom House, <em>Freedom in the World 2026</em>. Heritage Foundation,
+    <em>2026 Index of Economic Freedom</em>. Japan: political rights 40/40, civil liberties 56/60.</p>
 
-  <div class="objection">
-    <h4>The strongest objection</h4>
-    <p style="margin-bottom:0;">You will be tempted to conclude that "per person is the number that matters." Resist it for a moment. Total size buys things per-person income cannot: Japan funds a large navy, a space agency, national research laboratories and a bullet-train network precisely because the <em>pool</em> is enormous. A country of 300,000 very rich people cannot build a bullet train. Which number matters depends on what you are trying to find out — and "which country is richer" is not a well-formed question until you say who or what you mean.</p>
-  </div>
+    <p><strong>And then there is the election problem.</strong> The <span class="gl" data-t="ldp">Liberal
+    Democratic Party</span> has held power continuously since 1955, apart from two brief interruptions (1993–94,
+    2009–2012). In the general election of <strong>8 February 2026</strong> it won at least <strong>316 of 465
+    seats</strong> — a two-thirds <span class="gl" data-t="supermajority">supermajority</span> and the largest
+    single-party result in Japanese parliamentary history. Meanwhile the EIU rates Japan a
+    <span class="gl" data-t="democracy-index">full democracy</span>, 13th of 167. Only 26 countries earn that label.</p>
 
-  <div class="qs">
-    <ol>
-      <li>In 2025, many outlets reported that India had overtaken Japan as the world's fourth-largest economy. The IMF's April 2026 figures put Japan back at 4th and India at 6th, mostly on currency movements. How much weight should you put on a ranking where the gap is under 5%?</li>
-      <li>Japan's economy is $4.38 trillion and 122.7 million people live there. Do the division. How close do you get to $35,703, and why isn't it exact?</li>
-      <li>The US has the highest output per person here <em>and</em> the highest relative poverty. Write one sentence that makes both facts true at once without contradicting itself.</li>
-    </ol>
-  </div>
-  <div class="pagenum">03</div>
-</section>
+    <details class="obj">
+      <summary><span class="lbl">Strongest objection</span> "Same party always wins, so it isn't a democracy"
+        is weaker than it looks <span class="chev">⌄</span></summary>
+      <div class="body">
+        <p>The counter-case: elections are genuinely competitive, opposition parties campaign freely, the press
+        criticises the government constantly, and voters have thrown the LDP out twice and could do it again.
+        The LDP is not one fixed thing — it contains rival factions that fight each other bitterly, and Japan has
+        changed prime ministers repeatedly without any election at all. On this reading, Japanese voters simply
+        keep choosing the same party, and <em>choosing something repeatedly is not the same as being unable to
+        choose otherwise.</em></p>
+        <p>The counter-counter-argument: if a party has controlled the government, the bureaucracy and the flow of
+        public money for seventy years, does a challenger start on level ground, whatever the law says?
+        <strong>Political scientists genuinely disagree about Japan on exactly this point.</strong> You are not
+        expected to settle it — you are expected to state a position and show you understood the other one.</p>
+      </div>
+    </details>
 
-<!-- ===== P4 : CASE 02 ===== -->
-<section class="page">
-  <span class="caseno">02</span>
-  <p class="kicker">Case File 02</p>
-  <h2>The Freedom Paradox</h2>
-  <hr class="thin">
+    <div class="qs"><h3 class="sec">Questions</h3><ol>
+      <li>Both organisations claim to measure "freedom" and give Japan very different results. Neither is lying.
+      Write one sentence defining what each one actually measures.</li>
+      <li>Japan's economic freedom score is 70.3; the cutoff for "Mostly Free" is 70.0. If Japan dropped 0.4
+      points, headlines would read "Japan loses economic freedom status." How much would really have changed?</li>
+      <li>Both of these are <span class="gl" data-t="index">indexes</span>, not counts — people chose what to
+      include and how to weight it. Name one thing you would add to a freedom index that neither measures.</li>
+    </ol></div>
+  </section>
 
-  <h3>The contradiction</h3>
-  <p class="lead">Freedom House gives Japan 96 out of 100 — a perfect score on political rights. The Heritage Foundation ranks Japan 30th of 176 on economic freedom, scraping into "Mostly Free" by three-tenths of a point. And the same political party has governed Japan for almost the entire period since 1955.</p>
+  <!-- ============ CASE 03 ============ -->
+  <section class="case reveal" id="c3">
+    <div class="cn"><b>03</b><span>Case File</span></div>
+    <h2>The Counting Paradox</h2>
+    <p class="punch">Japan's own government reports that 70.4% of the population is Shinto and 69.8% is Buddhist.
+    That totals 149%. In national surveys, about 70% say they have no religion. All of these are accurate.</p>
 
-  <h3>The evidence</h3>
-  <p><strong>Freedom in the World 2026 (Freedom House):</strong> Japan 96/100 — political rights 40/40, civil liberties 56/60. Status <strong>Free</strong>. Elections are competitive and clean, the press is independent, courts function, people can protest and organise.</p>
-  <p><strong>Index of Economic Freedom 2026 (Heritage Foundation):</strong> Japan scores <strong>70.3</strong>, ranking <strong>30th of 176</strong>. The boundary for "Mostly Free" is exactly 70.0. This index weighs tax rates, regulation, ease of starting a business, government spending and trade openness.</p>
+    <h3 class="sec">The evidence</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Source</th><th style="text-align:left">What it found</th></tr></thead>
+      <tbody>
+        <tr><td>Agency for Cultural Affairs, 2015 (registry)</td><td style="text-align:left">Shinto 70.4% · Buddhism 69.8% · Christianity 1.5% · other 6.9% — <strong>total ≈ 149%</strong></td></tr>
+        <tr><td>Japanese National Character Survey, 2013</td><td style="text-align:left">72.0% report no personal faith</td></tr>
+        <tr><td>Japanese General Social Survey, 2015</td><td style="text-align:left">69.6% report no religion</td></tr>
+        <tr><td>Self-identification as Shinto</td><td style="text-align:left">about 3%</td></tr>
+      </tbody>
+    </table></div>
 
-  <table>
-    <tr><th>Country</th><th>Political freedom</th><th>Economic freedom</th><th>Ec. rank</th></tr>
-    <tr><td>Canada</td><td>97</td><td>75.6</td><td>14</td></tr>
-    <tr class="hl"><td>Japan</td><td>96</td><td>70.3</td><td>30</td></tr>
-    <tr><td>Germany</td><td>95</td><td>71.7</td><td>24</td></tr>
-    <tr><td>Australia</td><td>94</td><td>80.1</td><td>4</td></tr>
-    <tr><td>United Kingdom</td><td>92</td><td>70.4</td><td>29</td></tr>
-    <tr><td>South Korea</td><td>83</td><td>73.7</td><td>19</td></tr>
-    <tr><td>United States</td><td>81</td><td>72.8</td><td>22</td></tr>
-    <tr><td>Brazil</td><td>73</td><td>52.4</td><td>134</td></tr>
-    <tr><td>India</td><td>62</td><td>52.5</td><td>132</td></tr>
-    <tr><td>China</td><td>9</td><td>48.3</td><td>154</td></tr>
-  </table>
-  <p class="small">Political freedom: Freedom House, <em>Freedom in the World 2026</em>. Economic freedom: Heritage Foundation, <em>2026 Index of Economic Freedom</em>.</p>
+    <h3 class="sec">The resolution</h3>
+    <p>The official registry counts <strong>affiliation</strong>: how many people appear on the membership rolls
+    of shrines and temples. A typical Japanese family is on both — Shinto shrines handle blessings, New Year
+    visits and weddings; Buddhist temples handle funerals and ancestor rites. The same person is counted twice,
+    so the total exceeds 100%. This blending has a name:
+    <span class="gl" data-t="syncretism">syncretism</span>.</p>
+    <p>The surveys measure <strong>identity and belief</strong>: "do you personally have a religion?" Most
+    Japanese people answer no. And the 3% figure is a trap of language — in Japanese, calling yourself "Shinto"
+    implies belonging to an organised sect, so people who visit shrines every New Year still say no.</p>
+    <p><strong>Three different questions. Three different true answers. Nobody was counted wrongly.</strong></p>
 
-  <p><strong>And then there is the election problem.</strong> The Liberal Democratic Party has held power continuously since 1955, apart from two brief interruptions (1993–94, 2009–2012). In the general election of 8 February 2026 the LDP won at least <strong>316 of 465 seats</strong> — a two-thirds supermajority and the largest single-party result in Japanese parliamentary history. Meanwhile the Economist Intelligence Unit rates Japan a "full democracy", 13th of 167. Only 26 countries earn that label.</p>
+    <details class="obj">
+      <summary><span class="lbl">Strongest objection</span> The survey number is not automatically "the real one"
+        <span class="chev">⌄</span></summary>
+      <div class="body">
+        <p><span class="gl" data-t="self-report">Self-report</span> has its own failure: people are poor witnesses
+        to their own behaviour. A person who visits a shrine at New Year, buys a protective charm and has a
+        Buddhist funeral is doing an enormous amount of religion while sincerely reporting none. The registry may
+        describe what Japanese people <em>do</em> more accurately than the survey describes what they <em>are</em>.</p>
+        <p>"How religious is Japan?" cannot be answered with one number, and any source that gives you one without
+        saying how it counted should be treated with suspicion.</p>
+      </div>
+    </details>
 
-  <div class="objection">
-    <h4>The strongest objection</h4>
-    <p>The obvious conclusion — "if the same party always wins, it can't really be a democracy" — is weaker than it looks. The counter-case: elections are genuinely competitive, opposition parties campaign freely, the press criticises the government constantly, and voters have thrown the LDP out twice and could do it again. The LDP is not one fixed thing; it contains rival factions that fight each other bitterly, and Japan has changed prime ministers repeatedly without any election at all. On this reading, Japanese voters simply keep choosing the same party, and choosing something repeatedly is not the same as being unable to choose otherwise.</p>
-    <p style="margin-bottom:0;">The counter-counter-argument: if a party has controlled the government, the bureaucracy and the flow of public money for seventy years, does a challenger start on level ground, whatever the law says? <strong>Political scientists genuinely disagree about Japan on exactly this point.</strong> You are not expected to settle it — you are expected to state a position and show you understood the other one.</p>
-  </div>
+    <div class="qs"><h3 class="sec">Questions</h3><ol>
+      <li>Write the three different questions that produced these three different answers. Be precise — the
+      wording is the whole point.</li>
+      <li>Think of a statistic about your own country that would change dramatically depending on how the question
+      was phrased. Give both phrasings and both answers.</li>
+      <li>A news article says "Only 3% of Japanese people are Shinto." Is this false? Is it misleading?
+      Are those the same thing?</li>
+    </ol></div>
+  </section>
 
-  <div class="qs">
-    <ol>
-      <li>Freedom House and Heritage both claim to measure "freedom" and give Japan very different results. Neither is lying. Write one sentence defining what each one actually measures.</li>
-      <li>Japan's economic freedom score is 70.3; the cutoff for "Mostly Free" is 70.0. If Japan dropped 0.4 points, headlines would read "Japan loses economic freedom status." How much would really have changed?</li>
-      <li>Both of these are <em>indexes</em>, not counts — people chose what to include and how to weight it. Name one thing you would add to a freedom index that neither of these measures.</li>
-    </ol>
-  </div>
-  <div class="pagenum">04</div>
-</section>
+  <!-- ============ CASE 04 ============ -->
+  <section class="case reveal" id="c4">
+    <div class="cn"><b>04</b><span>Case File</span></div>
+    <h2>The Density Paradox</h2>
+    <p class="punch">Japan is the 62nd-largest country by land area and the 11th-largest by population — roughly
+    325 people per square kilometre. Yet about 68% of Japan is forest, and much of it is empty.</p>
 
-<!-- ===== P5 : CASE 03 ===== -->
-<section class="page">
-  <span class="caseno">03</span>
-  <p class="kicker">Case File 03</p>
-  <h2>The Counting Paradox</h2>
-  <hr class="thin">
+    <div class="stat-row">
+      <div class="stat"><div class="v">377,975</div><div class="l">km² — smaller than California, about the size of Montana</div></div>
+      <div class="stat"><div class="v">110×</div><div class="l">more people than Montana, in the same space</div></div>
+      <div class="stat"><div class="v">14,125</div><div class="l">islands, recounted in 2023 — up from 6,852</div></div>
+      <div class="stat"><div class="v">68%</div><div class="l">forest, mostly mountain too steep to build on</div></div>
+    </div>
 
-  <h3>The contradiction</h3>
-  <p class="lead">Japan's own government reports that 70.4% of the population is Shinto and 69.8% is Buddhist. That totals 149%. In national surveys, about 70% of Japanese people say they have no religion. All of these numbers are accurate.</p>
+    <p>The United States averages about 36 people per km². Japan averages about 325. But that average is close to
+    meaningless, because Japan is a volcanic island arc: it is mostly <strong>mountains</strong>, too steep to
+    farm or build on and therefore still covered in trees. The population is squeezed onto narrow coastal plains.
+    Its highest point, Mount Fuji, is an active <span class="gl" data-t="volcano">volcano</span> at 3,776 m that
+    last erupted in 1707.</p>
 
-  <h3>The evidence</h3>
-  <table>
-    <tr><th>Source</th><th>What it found</th></tr>
-    <tr><td>Agency for Cultural Affairs, 2015 (official registry)</td><td>Shinto 70.4% · Buddhism 69.8% · Christianity 1.5% · other 6.9% — <strong>total ≈ 149%</strong></td></tr>
-    <tr><td>Japanese National Character Survey, 2013</td><td>72.0% report no personal faith</td></tr>
-    <tr><td>Japanese General Social Survey, 2015</td><td>69.6% report no religion</td></tr>
-    <tr><td>Survey self-identification as Shinto</td><td>about 3%</td></tr>
-  </table>
+    <p>The consequences run through everything else in this file. Dense coastal cities are why Japan built the
+    world's first high-speed rail line in 1964 — the <span class="gl" data-t="shinkansen">Shinkansen</span> only
+    makes economic sense when enormous numbers of people need to travel between a handful of points. Scarce flat
+    land is why Japanese houses and cars are small, why farmland is expensive, and why Japan imports a large share
+    of its food.</p>
 
-  <h3>The resolution</h3>
-  <p>The official registry counts <strong>affiliation</strong>: how many people appear on the membership rolls of shrines and temples. A typical Japanese family is on both — Shinto shrines handle blessings, New Year visits and weddings; Buddhist temples handle funerals and ancestor rites. The same person is counted twice, so the total exceeds 100%.</p>
-  <p>The surveys measure <strong>identity and belief</strong>: "do you personally have a religion?" Most Japanese people answer no. And the 3% figure is a trap of language — in Japanese, calling yourself "Shinto" implies belonging to an organised sect, so people who visit shrines every New Year still say no.</p>
-  <p>Three different questions. Three different true answers. Nobody was counted wrongly.</p>
+    <details class="obj">
+      <summary><span class="lbl">Strongest objection</span> Population density looks like a fact. It is an average.
+        <span class="chev">⌄</span></summary>
+      <div class="body">
+        <p>Averages hide their own distribution. Two countries with identical density figures can be completely
+        different places: one evenly settled farmland, one an empty desert with a single vast city. Japan's
+        national density of 325/km² describes almost nobody's actual experience — the real numbers run from near
+        zero in the mountains to above 6,000/km² in central Tokyo.</p>
+        <p><strong>An average is a summary, and every summary throws information away.</strong> Before you use
+        one, ask what it deleted.</p>
+      </div>
+    </details>
 
-  <div class="objection">
-    <h4>The strongest objection</h4>
-    <p style="margin-bottom:0;">You might conclude the survey number is "the real one" because it asks people directly. But self-report has its own failure: people are poor witnesses to their own behaviour, and a person who visits a shrine at New Year, buys a protective charm and has a Buddhist funeral is doing an enormous amount of religion while sincerely reporting none. The registry may describe what Japanese people <em>do</em> more accurately than the survey describes what they <em>are</em>. "How religious is Japan?" cannot be answered with one number, and any source that gives you one without saying how it counted should be treated with suspicion.</p>
-  </div>
-
-  <div class="qs">
-    <ol>
-      <li>Write the three different questions that produced these three different answers. Be precise — the wording is the whole point.</li>
-      <li>Think of a statistic about your own country that would change dramatically depending on how the question was phrased. Give both phrasings and both answers.</li>
-      <li>A news article says: "Only 3% of Japanese people are Shinto." Is this false? Is it misleading? Are those the same thing?</li>
-    </ol>
-  </div>
-  <div class="pagenum">05</div>
-</section>
-
-<!-- ===== P6 : CASE 04 ===== -->
-<section class="page">
-  <span class="caseno">04</span>
-  <p class="kicker">Case File 04</p>
-  <h2>The Density Paradox</h2>
-  <hr class="thin">
-
-  <h3>The contradiction</h3>
-  <p class="lead">Japan is the 62nd-largest country by land area and the 11th-largest by population — roughly 325 people per square kilometre. Yet about 68% of Japan is forest, and much of it is empty.</p>
-
-  <h3>The evidence</h3>
-  <p>Japan's total area is 377,975 km², smaller than California and almost exactly the size of Montana. Montana holds about 1.1 million people. Japan holds about 122.7 million — roughly 110 times as many in the same space.</p>
-  <p>The United States averages about 36 people per km². Japan averages about 325. But that average is close to meaningless, because Japan is a volcanic island arc: it is mostly <strong>mountains</strong>, too steep to farm or build on and therefore still covered in trees. The population is squeezed onto narrow coastal plains. Japan has 14,125 islands (recounted in 2023 — the previous official figure, used for 35 years, was 6,852) and its highest point, Mount Fuji, is an active volcano at 3,776 m that last erupted in 1707.</p>
-  <p>The consequences run through everything else in this file. Dense coastal cities are why Japan built the world's first high-speed rail line in 1964 — the Shinkansen only makes economic sense when enormous numbers of people need to travel between a handful of points. Scarce flat land is why Japanese houses and cars are small, why farmland is expensive, and why Japan imports a large share of its food.</p>
-
-  <div class="objection">
-    <h4>The strongest objection</h4>
-    <p style="margin-bottom:0;">"Population density" looks like a hard physical fact, but it is an average, and averages hide their own distribution. Two countries with identical density figures can be completely different places: one evenly settled farmland, one an empty desert with a single vast city. Japan's national density of 325/km² describes almost nobody's actual experience — the real numbers run from near zero in the mountains to above 6,000/km² in central Tokyo. <strong>An average is a summary, and every summary throws information away.</strong> Before you use one, ask what it deleted.</p>
-  </div>
-
-  <div class="qs">
-    <ol>
-      <li>If two-thirds of Japan is uninhabitable forest, calculate roughly how many people per km² live on the habitable third. Then explain why even that number is still misleading.</li>
-      <li>Japan's island count more than doubled in 2023 without a single new island forming. What changed? What does that tell you about the difference between a measurement and the thing being measured?</li>
+    <div class="qs"><h3 class="sec">Questions</h3><ol>
+      <li>If two-thirds of Japan is uninhabitable forest, calculate roughly how many people per km² live on the
+      habitable third. Then explain why even that number is still misleading.</li>
+      <li>Japan's island count more than doubled in 2023 without a single new island forming. What changed? What
+      does that tell you about the difference between a measurement and the thing being measured?</li>
       <li>Give one way Japan's geography shows up in a <em>different</em> case file in this dossier.</li>
-    </ol>
-  </div>
-  <div class="pagenum">06</div>
-</section>
+    </ol></div>
+  </section>
 
-<!-- ===== P7 : CASE 05 — NEW ===== -->
-<section class="page">
-  <span class="caseno">05</span>
-  <p class="kicker">Case File 05</p>
-  <h2>The Hole in the Data</h2>
-  <hr class="thin">
+  <!-- ============ CASE 05 ============ -->
+  <section class="case reveal" id="c5">
+    <div class="cn"><b>05</b><span>Case File</span></div>
+    <h2>The Hole in the Data</h2>
+    <p class="punch">Every reference book, travel guide and school report says Japan's literacy rate is 99%.
+    <span class="gl" data-t="unesco">UNESCO</span> — the organisation whose job this is — publishes no literacy
+    figure for Japan at all. Nor for the United States, Germany, the UK, France, Canada or Australia.</p>
 
-  <h3>The contradiction</h3>
-  <p class="lead">Every reference book, travel guide and school report will tell you Japan's literacy rate is 99%. UNESCO — the organisation whose job this is — publishes no literacy figure for Japan at all. Nor for the United States, Germany, the United Kingdom, France, Canada or Australia.</p>
+    <h3 class="sec">The evidence</h3>
+    <div class="tw"><table>
+      <thead><tr><th>Country</th><th>UNESCO adult literacy rate</th><th>Year</th></tr></thead>
+      <tbody>
+        <tr class="jp"><td>Japan</td><td class="nd">no figure published</td><td class="nd">—</td></tr>
+        <tr><td>United States</td><td class="nd">no figure published</td><td class="nd">—</td></tr>
+        <tr><td>Germany · UK · France · Canada · Australia</td><td class="nd">no figure published</td><td class="nd">—</td></tr>
+        <tr><td>Italy</td><td>99.35%</td><td>2019</td></tr>
+        <tr><td>South Korea</td><td>97.97%</td><td><strong>2008</strong></td></tr>
+        <tr><td>China</td><td>96.7%</td><td>2020</td></tr>
+        <tr><td>Brazil</td><td>94.7%</td><td>2024</td></tr>
+        <tr><td>India</td><td>78.2%</td><td>2024</td></tr>
+      </tbody>
+    </table></div>
+    <p class="src">UNESCO Institute for Statistics via World Bank indicator SE.ADT.LITR.ZS.</p>
 
-  <h3>The evidence</h3>
-  <table>
-    <tr><th>Country</th><th>UNESCO adult literacy rate</th><th>Year</th></tr>
-    <tr class="hl"><td>Japan</td><td class="nd">no figure published</td><td class="nd">—</td></tr>
-    <tr><td>United States</td><td class="nd">no figure published</td><td class="nd">—</td></tr>
-    <tr><td>Germany · UK · France · Canada · Australia</td><td class="nd">no figure published</td><td class="nd">—</td></tr>
-    <tr><td>Italy</td><td>99.35%</td><td>2019</td></tr>
-    <tr><td>South Korea</td><td>97.97%</td><td><strong>2008</strong></td></tr>
-    <tr><td>China</td><td>96.7%</td><td>2020</td></tr>
-    <tr><td>Brazil</td><td>94.7%</td><td>2024</td></tr>
-    <tr><td>India</td><td>78.2%</td><td>2024</td></tr>
-  </table>
-  <p class="small">Source: UNESCO Institute for Statistics via World Bank indicator SE.ADT.LITR.ZS.</p>
+    <h3 class="sec">The resolution</h3>
+    <p>UNESCO stops estimating adult literacy once a country is assumed to have achieved universal basic
+    schooling. So for rich countries there is no number — not a low number, not an old number, <em>no number</em>.
+    The 99% everyone quotes is a gap that secondary sources filled in, copied from one another, and eventually
+    hardened into a fact.</p>
+    <p><strong>Japan's last real national literacy survey was in 1948</strong>, when occupation authorities tested
+    about 17,000 people. That is 78 years ago. Every "99%" you have ever read about Japan traces back to an
+    assumption, not a measurement.</p>
+    <p>Where rich countries <em>do</em> measure, they measure something harder and get uncomfortable answers. The
+    <span class="gl" data-t="oecd">OECD</span>'s adult skills survey asks whether people can actually use written
+    information — read a timetable, follow instructions, compare two arguments. Roughly 18% of adults in England
+    scored at the lowest levels; Germany's LEO study found 12.1% of adults low-literate; France's INSEE found 4%
+    classed as <em>illettrés</em>. None of those are literacy rates and none are comparable to each other —
+    different tests, different age ranges, different thresholds.</p>
+    <p>Japan does have strong evidence, just not of the kind people quote. On
+    <span class="gl" data-t="pisa">PISA</span> 2022, Japanese 15-year-olds scored <strong>516 in reading, third
+    in the world</strong>. That is a real measurement of real students in a real year. It is far better evidence
+    than the 99% — and almost nobody cites it.</p>
 
-  <h3>The resolution</h3>
-  <p>UNESCO stops estimating adult literacy once a country is assumed to have achieved universal basic schooling. So for rich countries there is no number — not a low number, not an old number, <em>no number</em>. The 99% everyone quotes is a gap that secondary sources filled in, copied from one another, and eventually hardened into a fact.</p>
-  <p><strong>Japan's last real national literacy survey was in 1948</strong>, when occupation authorities tested about 17,000 people. That is 78 years ago. Every "99%" you have ever read about Japan traces back to an assumption, not a measurement.</p>
-  <p>Where rich countries <em>do</em> measure, they measure something harder and get uncomfortable answers. The OECD's adult skills survey asks whether people can actually use written information — read a timetable, follow instructions, compare two arguments. On that test, roughly 18% of adults in England scored at the lowest levels; Germany's own LEO study found 12.1% of adults low-literate; France's INSEE found 4% classed as <em>illettrés</em>. None of those are "literacy rates" and none are comparable to each other — different tests, different age ranges, different thresholds.</p>
-  <p>Japan does have strong evidence, just not of the kind people quote. On PISA 2022, Japanese 15-year-olds scored <strong>516 in reading, third in the world</strong>. That is a real measurement of real students in a real year. It is far better evidence than the 99% — and almost nobody cites it.</p>
+    <details class="obj">
+      <summary><span class="lbl">Strongest objection</span> The 99% is probably roughly true
+        <span class="chev">⌄</span></summary>
+      <div class="body">
+        <p>Before you conclude the figure is a lie: Japan has had compulsory universal schooling for over a
+        century and scores at the top of every international test it enters. The inference is reasonable.</p>
+        <p>The problem is not that the number is wrong — it is that <strong>it is presented as a measurement when
+        it is an inference</strong>, and nobody quoting it knows the difference. A reasonable guess wearing the
+        costume of a fact is more dangerous than an obvious guess, because you cannot tell when it stops being
+        reasonable.</p>
+      </div>
+    </details>
 
-  <div class="objection">
-    <h4>The strongest objection</h4>
-    <p style="margin-bottom:0;">Before you conclude that the 99% is a lie: it is probably roughly true. Japan has had compulsory universal schooling for over a century and scores at the top of every international test it enters. The inference is reasonable. The problem is not that the number is wrong — it is that it is presented as a measurement when it is an inference, and nobody quoting it knows the difference. A reasonable guess wearing the costume of a fact is more dangerous than an obvious guess, because you cannot tell when it stops being reasonable.</p>
-  </div>
+    <div class="qs"><h3 class="sec">Questions</h3><ol>
+      <li>Find three sources online that state Japan's literacy rate. Does any of them say where the figure came
+      from? Follow the citations as far as they go and write down where the trail ends.</li>
+      <li>What is the difference between "no data" and "zero"? Give an example where confusing the two would lead
+      someone badly wrong.</li>
+      <li>If you were asked to measure literacy in Japan today, what exactly would you test, and on whom? Write a
+      definition precise enough that two different teams would get the same answer.</li>
+    </ol></div>
+  </section>
 
-  <div class="qs">
-    <ol>
-      <li>Find three sources online that state Japan's literacy rate. Does any of them say where the figure came from? Follow the citations as far as they go and write down where the trail ends.</li>
-      <li>What is the difference between "no data" and "zero"? Give an example where confusing the two would lead someone badly wrong.</li>
-      <li>If you were asked to measure literacy in Japan today, what exactly would you test, and on whom? Write a definition precise enough that two different teams would get the same answer.</li>
-    </ol>
-  </div>
-  <div class="pagenum">07</div>
-</section>
+  <!-- ============ BRIEF BUILDER ============ -->
+  <section class="brief reveal" id="brief">
+    <p class="kicker" style="color:var(--g6);">Section B · your deliverable</p>
+    <h2 style="margin-top:0;">Write the Brief</h2>
+    <p>Two questions: <strong>Is Japan a rich country?</strong> and <strong>Is Japan a free country?</strong>
+    Analysts use this structure because it makes hiding a weak argument impossible. Your work saves in this
+    browser as you type.</p>
 
-<!-- ===== P8 : THE BRIEF ===== -->
-<section class="page">
-  <p class="kicker">Section B · Your deliverable</p>
-  <h2>Write the Brief</h2>
-  <hr class="thin">
+    <div class="bf" data-min="12" data-id="claim">
+      <label><span>1 · Your claim</span><span class="hint">One sentence. No hedging — commit.</span></label>
+      <textarea rows="2" placeholder="Japan is…"></textarea>
+      <div class="check"><span class="dot"></span><span class="msg">Not started</span></div>
+    </div>
 
-  <p>One page. Two questions: <strong>Is Japan a rich country?</strong> and <strong>Is Japan a free country?</strong> Use the structure below. Analysts use it because it makes hiding a weak argument impossible.</p>
+    <div class="bf" data-min="25" data-id="e1" data-needsnum="1">
+      <label><span>2 · Evidence one</span><span class="hint">A number, its source, its year, and what it shows.</span></label>
+      <textarea rows="3" placeholder="Japan's GDP per person is $35,703 (IMF, 2026), which…"></textarea>
+      <div class="check"><span class="dot"></span><span class="msg">Not started</span></div>
+    </div>
 
-  <div class="box">
-    <h4>Required structure</h4>
-    <p><strong>1. Your claim.</strong> One sentence. No hedging, no "it depends" — you may qualify it later, but the first sentence has to commit.</p>
-    <p><strong>2. Three pieces of evidence.</strong> Each is a number from this dossier, <em>with its source and its year</em>. Explain what each supports and why.</p>
-    <p><strong>3. The strongest objection.</strong> State the best argument against your claim — the version someone clever who disagreed with you would actually make. Not a weak one you can knock over.</p>
-    <p style="margin-bottom:0;"><strong>4. Your response.</strong> Answer the objection, or concede the part that is right. Conceding correctly costs you nothing and gains you credibility.</p>
-  </div>
+    <div class="bf" data-min="25" data-id="e2" data-needsnum="1">
+      <label><span>3 · Evidence two</span><span class="hint">A different number, with source and year.</span></label>
+      <textarea rows="3" placeholder=""></textarea>
+      <div class="check"><span class="dot"></span><span class="msg">Not started</span></div>
+    </div>
 
-  <h3>Claim</h3>
-  <div class="ruled"></div><div class="ruled"></div>
+    <div class="bf" data-min="25" data-id="e3" data-needsnum="1">
+      <label><span>4 · Evidence three</span><span class="hint">A third number, with source and year.</span></label>
+      <textarea rows="3" placeholder=""></textarea>
+      <div class="check"><span class="dot"></span><span class="msg">Not started</span></div>
+    </div>
 
-  <h3>Evidence 1 — number, source, year, what it shows</h3>
-  <div class="ruled"></div><div class="ruled"></div><div class="ruled"></div>
+    <div class="bf" data-min="30" data-id="obj">
+      <label><span>5 · The strongest objection to my claim</span><span class="hint">The version a clever opponent would actually use.</span></label>
+      <textarea rows="4" placeholder="Someone who disagreed with me would say…"></textarea>
+      <div class="check"><span class="dot"></span><span class="msg">Not started</span></div>
+    </div>
 
-  <h3>Evidence 2</h3>
-  <div class="ruled"></div><div class="ruled"></div><div class="ruled"></div>
+    <div class="bf" data-min="30" data-id="resp">
+      <label><span>6 · My response</span><span class="hint">Answer it, or concede the part that is right.</span></label>
+      <textarea rows="4" placeholder=""></textarea>
+      <div class="check"><span class="dot"></span><span class="msg">Not started</span></div>
+    </div>
 
-  <h3>Evidence 3</h3>
-  <div class="ruled"></div><div class="ruled"></div><div class="ruled"></div>
+    <div class="bstatus">
+      <strong style="font-size:14px;">Before you hand this in</strong>
+      <ul id="bChecks">
+        <li data-c="all">All six boxes have something in them</li>
+        <li data-c="nums">At least three numbers appear in your evidence</li>
+        <li data-c="years">At least two years are named (2026, 2022, 1948…)</li>
+        <li data-c="src">At least two sources are named (IMF, Freedom House, UNESCO…)</li>
+        <li data-c="obj">Your objection is longer than one line — straw men are short</li>
+      </ul>
+    </div>
 
-  <h3>The strongest objection to my claim</h3>
-  <div class="ruled"></div><div class="ruled"></div><div class="ruled"></div><div class="ruled"></div>
+    <div class="brow">
+      <button class="btn" id="copyBtn">Copy my brief</button>
+      <button class="btn ghost" id="printBtn">Print it</button>
+      <button class="btn ghost" id="clearBtn">Clear</button>
+      <span id="copyMsg" style="align-self:center;font-size:14px;color:var(--g2);font-weight:600;"></span>
+    </div>
+  </section>
 
-  <h3>My response</h3>
-  <div class="ruled"></div><div class="ruled"></div><div class="ruled"></div><div class="ruled"></div>
+  <!-- ============ TERMS + SOURCES ============ -->
+  <section class="case reveal" id="terms">
+    <div class="cn"><span>Section C</span></div>
+    <h2>Terms &amp; sources</h2>
+    <p>Hover or tap any term to see what it means. These are the ones that do the most work in this dossier.</p>
+    <div class="glidx">
+      <span class="gl" data-t="nominal-gdp">Nominal GDP</span>
+      <span class="gl" data-t="ppp">PPP</span>
+      <span class="gl" data-t="per-capita">Per capita</span>
+      <span class="gl" data-t="median">Median</span>
+      <span class="gl" data-t="gini">Gini index</span>
+      <span class="gl" data-t="relative-poverty">Relative poverty</span>
+      <span class="gl" data-t="fertility-rate">Fertility rate</span>
+      <span class="gl" data-t="index">Index</span>
+      <span class="gl" data-t="self-report">Self-report</span>
+      <span class="gl" data-t="syncretism">Syncretism</span>
+      <span class="gl" data-t="proportional-representation">Proportional representation</span>
+      <span class="gl" data-t="supermajority">Supermajority</span>
+    </div>
 
-  <div class="pagenum">08</div>
-</section>
+    <h3 class="sec">Every source, live</h3>
+    <div class="srclist">
+      <a href="https://www.imf.org/en/Publications/WEO" target="_blank" rel="noopener"><b>IMF World Economic Outlook, April 2026</b> — GDP and rankings ↗</a>
+      <a href="https://www.heritage.org/index/" target="_blank" rel="noopener"><b>Heritage Foundation, 2026 Index of Economic Freedom</b> — 176 countries ↗</a>
+      <a href="https://freedomhouse.org/countries/freedom-world/scores" target="_blank" rel="noopener"><b>Freedom House, Freedom in the World 2026</b> — political freedom ↗</a>
+      <a href="https://data.worldbank.org/indicator/SP.DYN.TFRT.IN" target="_blank" rel="noopener"><b>World Bank SP.DYN.TFRT.IN</b> — fertility rate ↗</a>
+      <a href="https://data.worldbank.org/indicator/SI.POV.GINI" target="_blank" rel="noopener"><b>World Bank SI.POV.GINI</b> — Gini index ↗</a>
+      <a href="https://data.worldbank.org/indicator/SI.DST.50MD" target="_blank" rel="noopener"><b>World Bank SI.DST.50MD</b> — relative poverty ↗</a>
+      <a href="https://data.worldbank.org/indicator/SE.ADT.LITR.ZS" target="_blank" rel="noopener"><b>World Bank SE.ADT.LITR.ZS</b> — adult literacy, and its absences ↗</a>
+      <a href="https://population.un.org/wpp/" target="_blank" rel="noopener"><b>UN World Population Prospects</b> — population ↗</a>
+      <a href="https://www.oecd.org/en/about/programmes/pisa.html" target="_blank" rel="noopener"><b>OECD PISA 2022</b> — reading, maths and science ↗</a>
+      <a href="https://www.nippon.com/en/japan-data/h01615/" target="_blank" rel="noopener"><b>Japan's 2023 island recount</b> — 6,852 → 14,125 ↗</a>
+    </div>
 
-<!-- ===== P9 : TERMS + SOURCES ===== -->
-<section class="page">
-  <p class="kicker">Section C</p>
-  <h2>Terms &amp; Source Log</h2>
-  <hr class="thin">
+    <div class="note" style="margin-top:26px;"><p><strong>One last instruction.</strong> Every number in this
+    dossier has a date on it. That is not decoration. A 2013 Gini, a 2015 religion figure, a 2022 test score and a
+    2026 GDP estimate describe four different moments, and stacking them into one portrait of "Japan" is something
+    <em>you</em> are doing, not something the data did. Good analysts say so. In your brief, note at least one
+    place where the dates don't line up.</p></div>
+  </section>
 
-  <h3>Terms you need</h3>
-  <dl class="glossary">
-    <dt>Nominal GDP</dt><dd>The value of everything a country produces in a year, converted to US dollars at current exchange rates. Moves when currencies move, even if nothing real changes.</dd>
-    <dt>PPP (purchasing power parity)</dt><dd>GDP adjusted for what things actually cost locally. A haircut in Tokyo and a haircut in Mumbai are the same service at wildly different prices; PPP corrects for that.</dd>
-    <dt>Per capita</dt><dd>Latin for "by head" — a total divided by the population.</dd>
-    <dt>Gini index</dt><dd>How unevenly income is shared. 0 would mean everyone earns exactly the same; 100 would mean one person earns everything. Real countries land between about 25 and 55.</dd>
-    <dt>Relative poverty</dt><dd>Living on less than half of what a typical person in <em>your own country</em> lives on. A relatively poor person in Japan may be better off in absolute terms than an average person in a poorer country — which is precisely what the measure is not trying to tell you.</dd>
-    <dt>Fertility rate</dt><dd>The average number of children a woman would have in her lifetime at today's birth rates. About 2.1 keeps a population steady. Japan is at 1.15; South Korea, at 0.75, has the lowest ever recorded for a country.</dd>
-    <dt>Index</dt><dd>A score somebody built by choosing what to measure and how much to weight each part. An index is an argument with a number attached, not a fact of nature. Always ask who built it and what they chose to count.</dd>
-    <dt>Proportional representation</dt><dd>An election method where parties win seats in proportion to their vote share. Japan uses it for 176 of 465 lower-house seats and district voting for the other 289.</dd>
-    <dt>Supermajority</dt><dd>More than a simple majority, usually two-thirds. In Japan it allows a government to propose constitutional amendments.</dd>
-    <dt>Syncretism</dt><dd>Blending two or more religious traditions into everyday practice, so a person participates in both without seeing a contradiction. The standard explanation for Case File 03.</dd>
-    <dt>Self-report</dt><dd>Data collected by asking people about themselves. Cheap, fast, and systematically distorted by what people believe about themselves.</dd>
-  </dl>
+  <footer>
+    All figures verified 20 September 2026. Your draft brief is saved in this browser only — nothing is uploaded.
+  </footer>
+</main>
 
-  <h3>Source log — every link is live</h3>
-  <p class="small srclist">
-    <a href="https://www.imf.org/en/Publications/WEO">IMF World Economic Outlook, April 2026</a> — GDP and rankings &middot;
-    <a href="https://www.heritage.org/index/">Heritage Foundation, 2026 Index of Economic Freedom</a> — economic freedom, 176 countries &middot;
-    <a href="https://freedomhouse.org/countries/freedom-world/scores">Freedom House, Freedom in the World 2026</a> — political freedom &middot;
-    <a href="https://data.worldbank.org/indicator/SP.DYN.TFRT.IN">World Bank SP.DYN.TFRT.IN</a> — fertility rate &middot;
-    <a href="https://data.worldbank.org/indicator/SI.POV.GINI">World Bank SI.POV.GINI</a> — Gini index &middot;
-    <a href="https://data.worldbank.org/indicator/SI.DST.50MD">World Bank SI.DST.50MD</a> — relative poverty &middot;
-    <a href="https://data.worldbank.org/indicator/SE.ADT.LITR.ZS">World Bank SE.ADT.LITR.ZS</a> — adult literacy (and its absences) &middot;
-    <a href="https://population.un.org/wpp/">UN World Population Prospects</a> — population &middot;
-    <a href="https://www.oecd.org/en/about/programmes/pisa.html">OECD PISA 2022</a> — reading, maths and science scores &middot;
-    <a href="https://www.nippon.com/en/japan-data/h01615/">Japan's 2023 island recount</a> &middot;
-    <a href="https://en.wikipedia.org/wiki/Religion_in_Japan">Religion in Japan</a> — registry and survey figures with their original citations
-  </p>
+<script src="/assets/glossary.js"></script>
+<script>
+/* ---------- case nav highlighting ---------- */
+const navLinks = [...document.querySelectorAll(".casenav a")];
+const targets = navLinks.map(a => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+if ("IntersectionObserver" in window) {
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => {
+      if (!e.isIntersecting) return;
+      navLinks.forEach(a => a.classList.toggle("here", a.getAttribute("href") === "#" + e.target.id));
+    });
+  }, { rootMargin: "-25% 0px -65% 0px" });
+  targets.forEach(t => io.observe(t));
+}
 
-  <div class="box">
-    <h4>One last instruction</h4>
-    <p style="margin-bottom:0;">Every number in this dossier has a date on it. That is not decoration. A 2013 Gini, a 2015 religion figure, a 2022 test score and a 2026 GDP estimate describe four different moments, and stacking them into one portrait of "Japan" is something <em>you</em> are doing, not something the data did. Good analysts say so. In your brief, note at least one place where the dates don't line up.</p>
-  </div>
+/* ---------- brief builder ---------- */
+const BKEY = "ws-japan-g6-brief";
+let draft = {};
+try { draft = JSON.parse(localStorage.getItem(BKEY) || "{}"); } catch (e) {}
 
-  <div class="pagenum">09</div>
-</section>
+const fields = [...document.querySelectorAll(".bf")];
+fields.forEach(f => {
+  const ta = f.querySelector("textarea");
+  if (draft[f.dataset.id]) ta.value = draft[f.dataset.id];
+  ta.addEventListener("input", () => { draft[f.dataset.id] = ta.value; saveDraft(); grade(); });
+});
+function saveDraft(){ try { localStorage.setItem(BKEY, JSON.stringify(draft)); } catch (e) {} }
 
+function grade(){
+  let allFilled = true;
+  fields.forEach(f => {
+    const ta = f.querySelector("textarea");
+    const chk = f.querySelector(".check");
+    const msg = f.querySelector(".msg");
+    const txt = ta.value.trim();
+    const min = +f.dataset.min;
+    const words = txt ? txt.split(/\s+/).length : 0;
+    const hasNum = /\d/.test(txt);
+    let ok = txt.length >= min;
+    if (f.dataset.needsnum && !hasNum) ok = false;
+    f.classList.toggle("ok", ok);
+    chk.classList.toggle("ok", ok);
+    msg.textContent = !txt ? "Not started"
+      : ok ? "Looks good — " + words + " words"
+      : (f.dataset.needsnum && !hasNum) ? "Add the actual number"
+      : "Keep going — " + words + " words so far";
+    if (!ok) allFilled = false;
+  });
+
+  const all = Object.values(draft).join(" ");
+  const nums  = (all.match(/\d[\d,.]*/g) || []).length;
+  const years = new Set((all.match(/\b(19|20)\d{2}\b/g) || [])).size;
+  const SRC = ["imf","world bank","freedom house","heritage","unesco","oecd","pisa","un ","eiu","economist",
+               "agency for cultural affairs","nippon","ministry","statistics bureau"];
+  const srcs = SRC.filter(s => all.toLowerCase().includes(s)).length;
+  const objLong = (draft.obj || "").trim().split(/\s+/).filter(Boolean).length >= 25;
+
+  const set = (k, on) => {
+    const li = document.querySelector('#bChecks li[data-c="' + k + '"]');
+    if (li) li.classList.toggle("done", on);
+  };
+  set("all", allFilled);
+  set("nums", nums >= 3);
+  set("years", years >= 2);
+  set("src", srcs >= 2);
+  set("obj", objLong);
+}
+
+function briefText(){
+  const L = [
+    ["CLAIM", draft.claim], ["EVIDENCE 1", draft.e1], ["EVIDENCE 2", draft.e2],
+    ["EVIDENCE 3", draft.e3], ["STRONGEST OBJECTION", draft.obj], ["MY RESPONSE", draft.resp]
+  ];
+  return "JAPAN — INTELLIGENCE BRIEF\n\n" +
+    L.map(([h, v]) => h + "\n" + (v || "(not written yet)")).join("\n\n");
+}
+
+document.getElementById("copyBtn").addEventListener("click", async () => {
+  const msg = document.getElementById("copyMsg");
+  try {
+    await navigator.clipboard.writeText(briefText());
+    msg.textContent = "Copied to your clipboard.";
+  } catch (e) {
+    msg.textContent = "Select the text and copy it by hand.";
+  }
+  setTimeout(() => { msg.textContent = ""; }, 3200);
+});
+document.getElementById("printBtn").addEventListener("click", () => {
+  const w = window.open("", "_blank");
+  if (!w) return;
+  w.document.write("<pre style='font:14px/1.6 Georgia,serif;white-space:pre-wrap;padding:40px;max-width:40em'>" +
+    briefText().replace(/[<>&]/g, c => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" }[c])) + "</pre>");
+  w.document.close(); w.print();
+});
+document.getElementById("clearBtn").addEventListener("click", () => {
+  if (!confirm("Clear your whole brief? This cannot be undone.")) return;
+  draft = {}; saveDraft();
+  fields.forEach(f => f.querySelector("textarea").value = "");
+  grade();
+});
+
+grade();
+</script>
+<script>
+/* open every collapsible section before printing so nothing is lost on paper */
+window.addEventListener("beforeprint", () => {
+  document.querySelectorAll("details").forEach(d => { d.dataset.wasOpen = d.open ? "1" : ""; d.open = true; });
+});
+window.addEventListener("afterprint", () => {
+  document.querySelectorAll("details").forEach(d => { d.open = d.dataset.wasOpen === "1"; });
+});
+</script>
 </body>
 </html>

@@ -14,13 +14,13 @@ The git repository is already initialised and committed. You do the two steps th
 
 ```bash
 cd ~/"Library/CloudStorage/GoogleDrive-timholme@gmail.com/My Drive/2026-27 sabbatical/wonderschool"
-git remote add origin https://github.com/bayesfactor/wonderschool.git
+git remote add origin https://github.com/YOUR-USERNAME/wonderschool.git
 git push -u origin main
 ```
 
-(The tilde sits outside the quotes on purpose — inside them bash treats it as a literal `~` and the `cd` fails.)
+(The tilde is outside the quotes on purpose — inside them bash treats it as a literal `~` and the `cd` fails.)
 
-The branch is already `main` and the first commit is already made, so there is nothing to add or commit before you push.
+The branch is already `main` and the first commit is already made, so there is nothing to add or commit before pushing.
 
 **3. Import it at [vercel.com/new](https://vercel.com/new).** Pick the `wonderschool` repo. Vercel will detect a static site — leave every setting at its default (Framework Preset: Other, no build command, output directory blank). Click Deploy.
 
@@ -47,19 +47,24 @@ index.html              landing page — three grade sections
 grade-2/
   index.html            lesson list
   japan/index.html      lesson hub
-  japan-passport.html   printable 8-page discovery passport
+  japan-passport.html   six interactive stations
+  japan-explorer-sheet.html  the one page to print, black and white
 grade-4/
   index.html
   japan/index.html
   japan-quest.html      the game — 5 zones, 15 challenges
-  japan-cards.html      printable 12-country card deck
+  japan-cards.html      the rules, plus a league table that re-sorts by category
+  japan-cards-print.html  the 12 cards, black and white, to cut out
 grade-6/
   index.html
   japan/index.html
-  japan-dossier.html    printable 9-page paradox dossier
+  japan-dossier.html    five case files + an on-screen brief builder
   japan-data-desk.html  interactive — 10 measures, 12 countries
-together/index.html     mixed-age group activity, grades 2–6
-assets/site.css         the only stylesheet
+together/index.html     mixed-age group activity with a run-the-session timer
+  together/role-cards.html  four role cards, black and white, to cut out
+print/index.html        what to print and why
+assets/site.css         design system + the shared print stylesheet
+assets/glossary.js      hover glossary + scroll reveal
 vercel.json             headers only; there is nothing to build
 robots.txt              search engines are asked to stay out
 ```
@@ -77,9 +82,26 @@ robots.txt              search engines are asked to stay out
 
 Every page starts with the same `<nav class="site-bar">` block and links `/assets/site.css`. Copy that block from any existing page; the print stylesheets already hide it.
 
+## How it is built
+
+No framework, no build step. Two shared files do all the work:
+
+- **`assets/site.css`** — the design system. Colour tokens on `:root` with a dark-mode block, per-grade accents
+  (`body class="g2|g4|g6"`), cards, buttons, tooltips, motion. It also holds one shared `@media print` block
+  that flattens any screen page to clean black-and-white text.
+- **`assets/glossary.js`** — the hover glossary. Mark any term as
+  `<span class="gl" data-t="ppp">PPP</span>` and it gets a definition on hover, on tap, and on keyboard focus.
+  Add a term by adding one line to `TERMS` at the top of the file. It also runs the scroll-reveal animation.
+
+**Print sheets carry `<body class="doc">`** and opt out of the shared screen styling. They are deliberately
+black and white and their fonts are pinned so the layout never shifts if a webfont fails to load. There are
+exactly three: `grade-2/japan-explorer-sheet.html`, `grade-4/japan-cards-print.html`,
+`together/role-cards.html`.
+
 ## Conventions this site keeps
 
 - Every statistic shown to a student carries **a source link and a year**. A number without both is treated as a rumour, and several lessons make that point explicitly.
 - Pages must print. Each content page carries its own `@media print` rules and has been checked to produce the intended page count on US Letter.
-- Everything works offline once loaded — no CDNs, no external scripts, no fonts to fetch.
+- Everything works offline once loaded. The only external request is Google Fonts, and every page specifies a
+  full fallback stack, so the site is fully usable if it fails.
 - Colours are defined once in `:root` in `assets/site.css`, with a dark-mode block. Content documents that need their own palette redeclare it locally.

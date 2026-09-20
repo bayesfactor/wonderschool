@@ -4,52 +4,50 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Data Desk — Japan | Wonderschool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/site.css">
 <style>
+/* map this page's local names onto the shared design system */
 :root{
-  color-scheme:light;
-  --surface-0:#f4f4f1; --surface-1:#fcfcfb; --edge:#dedbd2;
-  --text-primary:#0b0b0b; --text-secondary:#52514e; --text-muted:#7c7a72;
-  --series-1:#2a78d6; --series-2:#eb6834; --grid:#e6e4dc; --nodata:#b9b7ad;
-  --flag:#8a1f1f;
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --surface-0:#121211; --surface-1:#1a1a19; --edge:#34342f;
-    --text-primary:#ffffff; --text-secondary:#c3c2b7; --text-muted:#8e8d84;
-    --series-1:#3987e5; --series-2:#d95926; --grid:#2a2a26; --nodata:#4e4d47;
-    --flag:#e08a8a;
-  }
+  --surface-0:var(--bg);
+  --surface-1:var(--surface);
+  --text-primary:var(--ink);
+  --text-secondary:var(--ink-2);
+  --text-muted:var(--ink-3);
+  --series-1:var(--g4);
+  --series-2:var(--hot);
+  --grid:var(--bg-2);
+  --nodata:var(--edge-strong);
+  --flag:var(--hot);
 }
 *{box-sizing:border-box;}
-html,body{margin:0;padding:0;background:var(--surface-0);color:var(--text-primary);
-  font-family:"Helvetica Neue",Helvetica,Arial,system-ui,sans-serif;}
-main{max-width:980px;margin:0 auto;padding:26px 16px 70px;}
+main{max-width:980px;}
 header.page-head{margin-bottom:22px;}
 .kicker{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text-muted);margin:0 0 6px;}
-h1{font-size:clamp(26px,5vw,38px);margin:0 0 8px;letter-spacing:-.5px;line-height:1.1;}
+h1{font-size:clamp(34px,6.5vw,56px);margin:0 0 12px;background:linear-gradient(100deg,var(--g6),var(--g4));-webkit-background-clip:text;background-clip:text;color:transparent;}
 h2{font-size:20px;margin:0 0 6px;}
 p{line-height:1.65;color:var(--text-secondary);margin:0 0 12px;}
 .lede{font-size:16.5px;max-width:64ch;}
-.panel{background:var(--surface-1);border:1px solid var(--edge);border-radius:14px;padding:20px;margin-bottom:20px;}
+.panel{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);padding:28px;margin-bottom:22px;box-shadow:var(--shadow-sm);}
 
 /* ---- metric chips ---- */
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:6px;}
 .chip{
-  font:inherit;font-size:14px;padding:9px 13px;border-radius:10px;cursor:pointer;
+  font:inherit;font-size:14.5px;font-weight:600;padding:10px 16px;border-radius:99px;cursor:pointer;
   border:1px solid var(--edge);background:transparent;color:var(--text-secondary);
   transition:.12s;display:inline-flex;align-items:center;gap:6px;
 }
-.chip:hover{border-color:var(--text-muted);color:var(--text-primary);}
-.chip[aria-pressed="true"]{background:var(--text-primary);color:var(--surface-1);
-  border-color:var(--text-primary);font-weight:600;}
+.chip:hover{border-color:var(--g6);color:var(--g6);transform:translateY(-2px);}
+.chip[aria-pressed="true"]{background:var(--g6);color:#fff;border-color:var(--g6);}
 .chip .q{font-size:10px;border:1px solid currentColor;border-radius:50%;
   width:14px;height:14px;display:inline-flex;align-items:center;justify-content:center;opacity:.6;}
 .hoverhint{font-size:12.5px;color:var(--text-muted);margin:8px 0 18px;}
 
 /* ---- chart ---- */
-.chart-title{font-size:17px;font-weight:600;margin:0 0 2px;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
+.chart-title{font-family:var(--font-display);font-size:21px;font-weight:600;margin:0 0 2px;display:flex;align-items:baseline;gap:9px;flex-wrap:wrap;}
 .chart-sub{font-size:13px;color:var(--text-muted);margin:0 0 16px;}
 .bar-row{display:grid;grid-template-columns:120px 1fr;align-items:center;gap:12px;
   margin-bottom:2px;padding:3px 0;border-radius:6px;position:relative;}
@@ -58,7 +56,7 @@ p{line-height:1.65;color:var(--text-secondary);margin:0 0 12px;}
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .bar-row.jp .bar-label{color:var(--text-primary);font-weight:700;}
 .bar-track{position:relative;display:flex;align-items:center;gap:8px;}
-.bar{height:19px;border-radius:0 4px 4px 0;background:var(--series-1);
+.bar{height:21px;border-radius:0 4px 4px 0;background:var(--series-1);
   transition:width .35s cubic-bezier(.4,0,.2,1);min-width:2px;}
 .bar-row.jp .bar{background:var(--series-2);}
 .bar.nodata,
@@ -117,7 +115,7 @@ footer a{color:var(--text-secondary);}
 @media(max-width:560px){ .bar-row{grid-template-columns:96px 1fr;gap:8px;} .bar-label{font-size:12px;} }
 </style>
 </head>
-<body>
+<body class="g6">
 
 <nav class="site-bar">
   <a class="brand" href="/">Wonderschool</a>
@@ -138,7 +136,7 @@ footer a{color:var(--text-secondary);}
 
 <section class="panel">
   <div class="filters" id="filters" role="group" aria-label="Choose a measure"></div>
-  <p class="hoverhint">Hover a measure (or tap it twice on a tablet) for its definition. The full definition,
+  <p class="hoverhint">Hover a measure (or tap it) for its definition, and hover any <span class="gl" data-t="index">underlined term</span> for a plain-language explanation. The full definition,
   the direction, and the source are always shown under the chart.</p>
 
   <p class="chart-title" id="cTitle"></p>
@@ -194,6 +192,7 @@ footer a{color:var(--text-secondary);}
 </main>
 
 <div id="tip" role="status" aria-live="polite"></div>
+<script src="/assets/glossary.js"></script>
 
 <script>
 /* ============================================================

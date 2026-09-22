@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Country Cards — the game | Wonderschool</title>
+<meta name="description" content="The country card game for 2–5 players, now with the 100 largest countries on Earth. Call a category, highest number wins. There is no best card.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:760px;}
+.hero h1{font-size:clamp(34px,7vw,58px);
+  background:linear-gradient(100deg,var(--g4),var(--g6));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+/* ---- generic screen frame ---- */
+.screen{display:none;}
+.screen.on{display:block;animation:fade .3s var(--ease);}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* ---- setup ---- */
+.setup{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-lg);
+  padding:24px;box-shadow:var(--shadow-sm);margin:22px 0;}
+.setup h2{margin-top:0;}
+.field{margin:18px 0;}
+.field > label{display:block;font-weight:600;font-size:14px;color:var(--ink);margin-bottom:9px;}
+.seg{display:inline-flex;gap:6px;flex-wrap:wrap;}
+.seg button{font:inherit;font-weight:700;font-size:16px;min-width:48px;padding:10px 16px;border-radius:12px;
+  cursor:pointer;border:2px solid var(--edge-strong);background:var(--surface);color:var(--ink-2);
+  transition:.15s var(--ease);}
+.seg button:hover{border-color:var(--g4);color:var(--g4);}
+.seg button[aria-pressed="true"]{background:var(--g4);border-color:var(--g4);color:var(--on-accent);}
+.names{display:grid;gap:10px;}
+.names input{font:inherit;font-size:15px;padding:11px 14px;border-radius:12px;border:1px solid var(--edge-strong);
+  background:var(--bg);color:var(--ink);width:100%;}
+.names input:focus-visible{outline:3px solid var(--g4);outline-offset:2px;}
+.names .nrow{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;}
+.names .dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;
+  font-weight:800;font-size:13px;color:#fff;font-family:var(--font-display);}
+
+/* ---- pass-the-device gate ---- */
+.gate{text-align:center;padding:44px 20px;}
+.gate .who{font-family:var(--font-display);font-size:clamp(26px,6vw,40px);font-weight:800;
+  letter-spacing:-.02em;margin:12px 0 6px;}
+.gate .sub{color:var(--ink-2);font-size:16px;margin-bottom:26px;}
+
+/* ---- the country card ---- */
+.card-stage{display:flex;justify-content:center;margin:6px 0 4px;}
+.ccard{width:100%;max-width:360px;background:var(--surface);border:1px solid var(--edge);
+  border-radius:var(--r-lg);box-shadow:var(--shadow-md);overflow:hidden;}
+.ccard .top{background:linear-gradient(120deg,var(--g4),var(--g6));color:#fff;padding:18px 20px;
+  display:flex;align-items:center;gap:14px;}
+.ccard .flag{width:46px;height:46px;border-radius:12px;flex:none;display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:800;font-size:17px;color:#fff;
+  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);letter-spacing:.5px;}
+.ccard .nm{font-family:var(--font-display);font-weight:800;font-size:22px;line-height:1.1;letter-spacing:-.02em;}
+.ccard .rk{font-size:12.5px;opacity:.92;margin-top:2px;}
+.ccard .stats{padding:10px 14px 14px;display:grid;gap:8px;}
+.stat-btn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;cursor:pointer;
+  background:var(--bg);border:2px solid var(--edge);border-radius:14px;padding:12px 15px;
+  transition:.14s var(--ease);color:var(--ink);}
+.stat-btn:hover:not(:disabled){border-color:var(--g4);transform:translateY(-2px);box-shadow:var(--shadow-sm);}
+.stat-btn:disabled{cursor:default;}
+.stat-btn .ico{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;font-size:18px;
+  background:var(--g4-soft);}
+.stat-btn .lab{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);}
+.stat-btn .val{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.02em;
+  font-variant-numeric:tabular-nums;color:var(--ink);}
+.stat-btn .grow{margin-left:auto;font-size:13px;color:var(--g4);font-weight:700;opacity:0;transition:.14s;}
+.stat-btn:hover:not(:disabled) .grow{opacity:1;}
+.stat-btn.picked{border-color:var(--g4);background:var(--g4-soft);}
+.stat-btn.picked .val{color:var(--g4);}
+.hint{text-align:center;color:var(--ink-3);font-size:14px;margin:14px 0 2px;}
+
+/* ---- reveal table ---- */
+.reveal-head{text-align:center;margin-bottom:16px;}
+.reveal-head .cat{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;
+  color:var(--g4);background:var(--g4-soft);border-radius:99px;padding:7px 15px;}
+.rtable{display:grid;gap:9px;margin:6px 0;}
+.rrow{display:grid;grid-template-columns:34px 1fr auto;gap:13px;align-items:center;
+  background:var(--surface);border:1px solid var(--edge);border-radius:14px;padding:12px 15px;
+  opacity:0;transform:translateX(-10px);animation:slidein .32s var(--ease) forwards;}
+@keyframes slidein{to{opacity:1;transform:none;}}
+.rrow .flag{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:12px;
+  color:#fff;font-family:var(--font-display);flex:none;}
+.rrow .pn{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);}
+.rrow .cn{font-weight:700;font-size:16px;color:var(--ink);line-height:1.15;}
+.rrow .vl{font-family:var(--font-display);font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;
+  color:var(--ink);white-space:nowrap;}
+.rrow.win{border-color:var(--gold);background:var(--gold-soft);box-shadow:var(--shadow-sm);}
+.rrow.win .vl{color:var(--gold-vivid);}
+.rrow.tie{border-color:var(--hot);background:var(--hot-soft);}
+.outcome{text-align:center;font-family:var(--font-display);font-weight:800;font-size:clamp(19px,4.4vw,26px);
+  letter-spacing:-.02em;margin:20px 0 4px;}
+.outcome.gold{color:var(--gold-vivid);}
+.outcome.tie{color:var(--hot);}
+.subout{text-align:center;color:var(--ink-2);font-size:14.5px;margin-bottom:8px;}
+
+/* ---- scoreboard strip ---- */
+.board{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:20px 0 4px;}
+.pchip{display:flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--edge);
+  border-radius:99px;padding:6px 13px 6px 7px;font-size:13.5px;}
+.pchip .dot{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  font-weight:800;font-size:11px;font-family:var(--font-display);}
+.pchip .cnt{font-weight:800;font-variant-numeric:tabular-nums;color:var(--ink);}
+.pchip.active{border-color:var(--g4);box-shadow:0 0 0 2px var(--g4-soft);}
+.pchip.out{opacity:.4;}
+.pot{display:inline-flex;align-items:center;gap:7px;background:var(--hot-soft);border:1px solid var(--hot);
+  border-radius:99px;padding:6px 13px;font-size:13px;font-weight:700;color:var(--hot);}
+
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:24px 0 0;}
+
+/* ---- game over ---- */
+.finale{text-align:center;padding:20px 0;}
+.finale .trophy{font-size:56px;line-height:1;}
+.finale h2{font-size:clamp(26px,6vw,40px);margin:10px 0 4px;
+  background:linear-gradient(100deg,var(--gold-vivid),var(--hot));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.podium{display:grid;gap:9px;max-width:440px;margin:22px auto 0;}
+.podium .prow{display:grid;grid-template-columns:34px 34px 1fr auto;gap:12px;align-items:center;
+  background:var(--surface);border:1px solid var(--edge);border-radius:14px;padding:12px 15px;}
+.podium .prow.first{border-color:var(--gold);background:var(--gold-soft);}
+.podium .medal{font-size:20px;text-align:center;}
+.podium .pnm{font-weight:700;font-size:16px;}
+.podium .pv{font-family:var(--font-display);font-weight:800;font-variant-numeric:tabular-nums;}
+
+.roundmeta{text-align:center;font-size:13px;color:var(--ink-3);margin-top:8px;}
+.tinybtn{font:inherit;font-size:13px;font-weight:600;padding:6px 13px;border-radius:99px;cursor:pointer;
+  border:1px solid var(--edge-strong);background:var(--surface);color:var(--ink-2);transition:.15s var(--ease);}
+.tinybtn:hover{border-color:var(--hot);color:var(--hot);}
+
+.rules{counter-reset:r;list-style:none;padding:0;margin:16px 0;}
+.rules li{counter-increment:r;position:relative;padding-left:44px;margin-bottom:13px;
+  font-size:15.5px;line-height:1.55;color:var(--ink-2);}
+.rules li::before{content:counter(r);position:absolute;left:0;top:-1px;width:30px;height:30px;
+  border-radius:50%;background:var(--g4);color:var(--on-accent);display:grid;place-items:center;
+  font-weight:700;font-size:14px;font-family:var(--font-display);}
+.rules li b{color:var(--ink);}
+</style>
+</head>
+<body class="g4">
+
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/games/">Games</a>
+  <span class="sep">/</span><a href="/games/country-cards.html">Country Cards</a>
+  <span class="spacer"></span>
+  <a href="/grade-4/japan-cards.html">The classroom version &rarr;</a>
+</nav>
+
+<main>
+  <header class="hero">
+    <p class="kicker">Games · for 2 to 5 players</p>
+    <h1>Country Cards</h1>
+    <p class="lede">The 100 largest countries on Earth, one shared device, four categories.
+    Call a category, highest number wins the pile. <strong>There is no best card</strong> — and beating
+    everyone means working out which category your country wins.</p>
+  </header>
+
+  <!-- ============ SETUP ============ -->
+  <section class="screen on" id="s-setup" aria-labelledby="setup-h">
+    <div class="setup">
+      <h2 id="setup-h">New game</h2>
+      <div class="field">
+        <label id="pc-label">How many players?</label>
+        <div class="seg" id="playerCount" role="group" aria-labelledby="pc-label">
+          <button data-n="2">2</button>
+          <button data-n="3" aria-pressed="true">3</button>
+          <button data-n="4">4</button>
+          <button data-n="5">5</button>
+        </div>
+      </div>
+      <div class="field">
+        <label>Player names <span style="color:var(--ink-3);font-weight:400;">(optional)</span></label>
+        <div class="names" id="nameRows"></div>
+      </div>
+      <div class="field">
+        <label id="len-label">Game length</label>
+        <div class="seg" id="gameLen" role="group" aria-labelledby="len-label">
+          <button data-r="15">Quick · 15 rounds</button>
+          <button data-r="30" aria-pressed="true">Standard · 30 rounds</button>
+          <button data-r="0">Knockout · no limit</button>
+        </div>
+      </div>
+      <div class="actions" style="justify-content:flex-start;margin-top:22px;">
+        <button class="btn" id="startBtn">Deal the cards →</button>
+      </div>
+    </div>
+
+    <h2>How it works</h2>
+    <ol class="rules">
+      <li>The 100 country cards are <b>shuffled and dealt evenly</b> to every player, face down.</li>
+      <li>On your turn you see <b>only your own top card</b>. Pick the category you think will win —
+      <b>People, Land, Economy</b> or <b>Wealth</b>.</li>
+      <li>Everyone's top card is revealed. <b>Highest number wins</b> all the cards played.</li>
+      <li>An <b>exact tie</b> sends the cards to the middle. Whoever wins the next round takes those too.</li>
+      <li>The winner calls the next category. When the round limit is up, or one player holds every card,
+      the <b>biggest pile wins</b>.</li>
+    </ol>
+    <div class="note"><p><strong>One device, passed around.</strong> Hand the phone or laptop to whoever's turn
+    it is. You only ever see your own top card until the reveal — so choosing well is the whole skill.</p></div>
+  </section>
+
+  <!-- ============ PASS GATE ============ -->
+  <section class="screen" id="s-gate">
+    <div class="gate">
+      <div class="pchip" style="display:inline-flex;margin:0 auto;"><span class="dot" id="gateDot"></span>
+        <span class="cnt" id="gateCnt"></span> <span style="color:var(--ink-3);">cards</span></div>
+      <div class="who" id="gateWho"></div>
+      <div class="sub">Pass the device over, then tap to see your top card.</div>
+      <button class="btn" id="gateBtn">Show my card</button>
+    </div>
+  </section>
+
+  <!-- ============ CHOOSE ============ -->
+  <section class="screen" id="s-choose">
+    <div class="board" id="chooseBoard"></div>
+    <div class="card-stage"><div class="ccard" id="chooseCard"></div></div>
+    <p class="hint">Tap a category to play it against everyone else.</p>
+  </section>
+
+  <!-- ============ REVEAL ============ -->
+  <section class="screen" id="s-reveal">
+    <div class="reveal-head"><span class="cat" id="revealCat"></span></div>
+    <div class="rtable" id="revealTable"></div>
+    <div class="outcome" id="revealOutcome"></div>
+    <div class="subout" id="revealSub"></div>
+    <div class="board" id="revealBoard"></div>
+    <div class="actions">
+      <button class="btn" id="nextBtn">Next round →</button>
+    </div>
+    <p class="roundmeta" id="revealRound"></p>
+  </section>
+
+  <!-- ============ GAME OVER ============ -->
+  <section class="screen" id="s-over">
+    <div class="finale">
+      <div class="trophy">🏆</div>
+      <h2 id="overWho"></h2>
+      <div class="subout" id="overSub"></div>
+      <div class="podium" id="overPodium"></div>
+      <div class="actions"><button class="btn" id="againBtn">Play again</button></div>
+    </div>
+  </section>
+
+  <footer>
+    100 most populous countries, rounded public estimates. Population: UN <em>World Population Prospects</em>,
+    2024 revision. Economy: nominal GDP, <span class="gl" data-t="imf">IMF</span> <em>World Economic Outlook</em>,
+    2025. Wealth is that economy divided by that population (GDP per person). Land area: total area, land plus
+    inland water. Figures are rounded for play and the exact edge of the "top 100" shifts a little between
+    sources — treat every number as an estimate, which is exactly how the sixth-grade
+    <a href="/grade-6/">data desk</a> teaches you to treat them.
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script src="/assets/countries.js"></script>
+<script>
+/* =========================================================================
+   Country Cards — pass-and-play, 2–5 players, 100 countries.
+   Top-Trumps rules: call a category, highest wins the pile; ties go to a pot.
+   ========================================================================= */
+(function(){
+  "use strict";
+  const DATA = window.COUNTRIES;               // [{c, iso, pop, area, gdp}]
+  DATA.forEach(d => { d.pc = d.gdp * 1000 / d.pop; });   // GDP per person, $ (gdp in $bn, pop in millions)
+
+  const CATS = [
+    {k:"pop",  n:"People", ico:"👥", lab:"People",
+     fmt:v => v>=1000 ? (v/1000).toFixed(2).replace(/\.?0+$/,"")+"B" : v.toLocaleString(undefined,{maximumFractionDigits:0})+"M"},
+    {k:"area", n:"Land", ico:"🗺️", lab:"Land area",
+     fmt:v => (v/1000).toLocaleString(undefined,{maximumFractionDigits:0})+"k km²"},
+    {k:"gdp",  n:"Economy", ico:"💰", lab:"Economy",
+     fmt:v => v>=1000 ? "$"+(v/1000).toFixed(2).replace(/\.?0+$/,"")+"T" : "$"+v.toLocaleString(undefined,{maximumFractionDigits:0})+"B"},
+    {k:"pc",   n:"Wealth", ico:"✨", lab:"Wealth / person",
+     fmt:v => "$"+(Math.round(v/100)*100).toLocaleString()}
+  ];
+  const catByKey = k => CATS.find(c => c.k === k);
+  const P_COLORS = ["#1f68c2","#bd3f0a","#12735a","#6c4bd4","#8a6209"];
+
+  // ---- element helpers ----
+  const $ = id => document.getElementById(id);
+  const screens = ["setup","gate","choose","reveal","over"];
+  function show(name){
+    screens.forEach(s => $("s-"+s).classList.toggle("on", s===name));
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function flag(iso){ return '<span class="flag" style="background:'+isoColor(iso)+'">'+iso+'</span>'; }
+  function isoColor(iso){ let h=0; for(const ch of iso) h=(h*31+ch.charCodeAt(0))%360; return "hsl("+h+" 55% 42%)"; }
+  function rankOf(d){ return DATA.indexOf(d)+1; } // DATA is population-ranked
+
+  // ---- state ----
+  let G = null;
+
+  function setupNames(n){
+    const box = $("nameRows"); box.innerHTML = "";
+    for(let i=0;i<n;i++){
+      const row = document.createElement("div"); row.className="nrow";
+      row.innerHTML = '<span class="dot" style="background:'+P_COLORS[i]+'">'+(i+1)+'</span>'+
+        '<input type="text" maxlength="14" placeholder="Player '+(i+1)+'" aria-label="Player '+(i+1)+' name" value="">';
+      box.appendChild(row);
+    }
+  }
+
+  // ---- setup controls ----
+  let nPlayers = 3, roundLimit = 30;
+  $("playerCount").addEventListener("click", e => {
+    const b = e.target.closest("button"); if(!b) return;
+    [...$("playerCount").children].forEach(x => x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true"); nPlayers = +b.dataset.n; setupNames(nPlayers);
+  });
+  $("gameLen").addEventListener("click", e => {
+    const b = e.target.closest("button"); if(!b) return;
+    [...$("gameLen").children].forEach(x => x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true"); roundLimit = +b.dataset.r;
+  });
+  setupNames(3);
+
+  $("startBtn").addEventListener("click", startGame);
+  $("againBtn").addEventListener("click", () => show("setup"));
+
+  function startGame(){
+    const inputs = [...$("nameRows").querySelectorAll("input")];
+    const players = inputs.map((inp,i) => ({
+      id:i, name:(inp.value.trim() || "Player "+(i+1)), color:P_COLORS[i], pile:[], out:false
+    }));
+    // shuffle & deal round-robin
+    const deck = shuffle(DATA.slice());
+    deck.forEach((card,i) => players[i % players.length].pile.push(card));
+    G = { players, pot:[], chooser:0, round:1, limit:roundLimit, pickedKey:null };
+    goGate();
+  }
+
+  // ---- pass gate ----
+  function activePlayers(){ return G.players.filter(p => p.pile.length>0); }
+
+  function goGate(){
+    // eliminate empties; if game should end, end it
+    G.players.forEach(p => { if(p.pile.length===0) p.out = true; });
+    const active = activePlayers();
+    if(active.length <= 1 || (G.limit>0 && G.round > G.limit)){ return gameOver(); }
+    // make sure chooser is active
+    if(G.players[G.chooser].pile.length === 0){
+      let idx = G.chooser;
+      for(let i=1;i<=G.players.length;i++){ const j=(G.chooser+i)%G.players.length; if(G.players[j].pile.length>0){ idx=j; break; } }
+      G.chooser = idx;
+    }
+    const p = G.players[G.chooser];
+    $("gateDot").style.background = p.color;
+    $("gateDot").textContent = p.name[0].toUpperCase();
+    $("gateCnt").textContent = p.pile.length;
+    $("gateWho").textContent = p.name + ", you're up";
+    show("gate");
+  }
+  $("gateBtn").addEventListener("click", goChoose);
+
+  // ---- scoreboard strip ----
+  function boardHTML(activeId){
+    let h = G.players.map(p =>
+      '<span class="pchip'+(p.id===activeId?" active":"")+(p.pile.length===0?" out":"")+'">'+
+      '<span class="dot" style="background:'+p.color+'">'+p.name[0].toUpperCase()+'</span>'+
+      escapeHtml(p.name)+' <span class="cnt">'+p.pile.length+'</span></span>').join("");
+    if(G.pot.length) h += '<span class="pot">🏵️ Middle pile: '+G.pot.length+'</span>';
+    return h;
+  }
+  function escapeHtml(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+  // ---- choose screen ----
+  function goChoose(){
+    const p = G.players[G.chooser];
+    const card = p.pile[0];
+    $("chooseBoard").innerHTML = boardHTML(p.id);
+    let stats = CATS.map(cat =>
+      '<button class="stat-btn" data-k="'+cat.k+'">'+
+        '<span class="ico">'+cat.ico+'</span>'+
+        '<span><span class="lab">'+cat.lab+'</span><br><span class="val">'+cat.fmt(card[cat.k])+'</span></span>'+
+        '<span class="grow">play →</span></button>').join("");
+    $("chooseCard").innerHTML =
+      '<div class="top">'+flag(card.iso)+'<div><div class="nm">'+escapeHtml(card.c)+'</div>'+
+      '<div class="rk">#'+rankOf(card)+' most people · '+p.name+"'s card</div></div></div>"+
+      '<div class="stats">'+stats+'</div>';
+    $("chooseCard").querySelectorAll(".stat-btn").forEach(btn =>
+      btn.addEventListener("click", () => doReveal(btn.dataset.k)));
+    show("choose");
+  }
+
+  // ---- reveal & resolve ----
+  function doReveal(key){
+    const cat = catByKey(key);
+    const active = activePlayers();
+    // each active player contributes their top card
+    const plays = active.map(p => ({ p, card:p.pile.shift() }));
+    const vals = plays.map(x => x.card[key]);
+    const max = Math.max(...vals);
+    const winners = plays.filter(x => x.card[key] === max);
+    const tie = winners.length > 1;
+
+    // sort display: highest first
+    const ordered = plays.slice().sort((a,b) => b.card[key] - a.card[key]);
+
+    $("revealCat").innerHTML = cat.ico + " " + cat.lab + " — highest wins";
+    const T = $("revealTable"); T.innerHTML = "";
+    ordered.forEach((x,i) => {
+      const isWin = x.card[key] === max;
+      const row = document.createElement("div");
+      row.className = "rrow" + (isWin ? (tie ? " tie" : " win") : "");
+      row.style.animationDelay = (i*70)+"ms";
+      row.innerHTML = flag(x.card.iso) +
+        '<div><div class="pn" style="color:'+x.p.color+'">'+escapeHtml(x.p.name)+'</div>'+
+        '<div class="cn">'+escapeHtml(x.card.c)+'</div></div>'+
+        '<div class="vl">'+cat.fmt(x.card[key])+'</div>';
+      T.appendChild(row);
+    });
+
+    const collected = plays.map(x => x.card);
+    if(tie){
+      // to the middle
+      G.pot.push(...collected);
+      $("revealOutcome").className = "outcome tie";
+      $("revealOutcome").textContent = "Tie — cards go to the middle";
+      $("revealSub").textContent = winners.map(w => w.card.c).join(" and ") +
+        " both scored " + cat.fmt(max) + ". Win the next round to sweep the middle pile ("+G.pot.length+").";
+      // chooser stays the same player (if still has cards); else pass on next gate
+    } else {
+      const w = winners[0];
+      const haul = shuffle(collected.concat(G.pot));
+      w.p.pile.push(...haul);
+      G.pot = [];
+      $("revealOutcome").className = "outcome gold";
+      $("revealOutcome").textContent = w.p.name + " wins the round";
+      $("revealSub").textContent = w.card.c + " took it on " + cat.lab.toLowerCase() +
+        " with " + cat.fmt(max) + " — +" + haul.length + " cards.";
+      G.chooser = w.p.id;
+    }
+
+    $("revealBoard").innerHTML = boardHTML(tie ? -1 : winners[0].p.id);
+    const active2 = activePlayers();
+    $("revealRound").textContent = G.limit>0
+      ? "Round "+G.round+" of "+G.limit
+      : "Round "+G.round+" · playing to knockout";
+    // end-of-game checks happen at next gate; advance round counter on a decisive round
+    if(!tie) G.round++;
+    // if a single player now holds everything, or limit reached, next screen is game over
+    show("reveal");
+  }
+
+  $("nextBtn").addEventListener("click", goGate);
+
+  // ---- game over ----
+  function gameOver(){
+    const ranked = G.players.slice().sort((a,b) => b.pile.length - a.pile.length);
+    const top = ranked[0];
+    const knockout = activePlayers().length <= 1 && ranked[0].pile.length === DATA.length;
+    $("overWho").textContent = top.name + " wins!";
+    $("overSub").textContent = knockout
+      ? top.name + " captured all 100 countries."
+      : "Biggest pile after " + (G.round-1) + " rounds.";
+    const medals = ["🥇","🥈","🥉","4️⃣","5️⃣"];
+    $("overPodium").innerHTML = ranked.map((p,i) =>
+      '<div class="prow'+(i===0?" first":"")+'">'+
+      '<span class="medal">'+(medals[i]||"")+'</span>'+
+      '<span class="dot" style="width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;font-size:12px;background:'+p.color+'">'+p.name[0].toUpperCase()+'</span>'+
+      '<span class="pnm">'+escapeHtml(p.name)+'</span>'+
+      '<span class="pv">'+p.pile.length+' cards</span></div>').join("");
+    show("over");
+  }
+})();
+</script>
+</body>
+</html>

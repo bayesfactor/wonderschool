@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rank It — the country ordering game | Wonderschool</title>
+<meta name="description" content="Four countries, one measure. Put them in order, highest to lowest. The closer you get, the more points you score.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:720px;}
+.hero h1{font-size:clamp(34px,7vw,58px);
+  background:linear-gradient(100deg,var(--g6),var(--g4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+.screen{display:none;}
+.screen.on{display:block;animation:fade .3s var(--ease);}
+@keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+
+/* ---- round header ---- */
+.rbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 14px;}
+.rbar .pill{font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--surface);
+  border:1px solid var(--edge);border-radius:99px;padding:6px 13px;}
+.rbar .pill b{color:var(--ink);}
+.rbar .spacer{flex:1;}
+.rbar .score{font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--g6);
+  font-variant-numeric:tabular-nums;}
+
+.ask{background:var(--g6-soft);border:1px solid color-mix(in srgb,var(--g6) 22%,transparent);
+  border-radius:var(--r-lg);padding:18px 20px;margin:6px 0 16px;text-align:center;}
+.ask .ico{font-size:30px;line-height:1;}
+.ask .cat{font-family:var(--font-display);font-weight:800;font-size:clamp(22px,5vw,30px);
+  letter-spacing:-.02em;margin:6px 0 2px;color:var(--ink);}
+.ask .dir{font-size:14px;color:var(--ink-2);}
+.ask .dir b{color:var(--g6);}
+
+/* ---- orderable list ---- */
+.rank-list{display:grid;gap:10px;margin:2px 0 6px;}
+.item{display:grid;grid-template-columns:30px 44px 1fr auto;gap:12px;align-items:center;
+  background:var(--surface);border:1px solid var(--edge);border-radius:16px;padding:11px 13px;
+  box-shadow:var(--shadow-sm);transition:border-color .15s,box-shadow .15s,transform .12s;
+  touch-action:none;}
+.item.dragging{opacity:.55;border-color:var(--g6);}
+.item.over{border-color:var(--g6);box-shadow:0 0 0 2px var(--g6-soft);}
+.item .slot{font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--ink-3);text-align:center;
+  cursor:grab;user-select:none;}
+.item .slot:active{cursor:grabbing;}
+.item .flag{width:44px;height:33px;border-radius:6px;object-fit:cover;background:#fff;
+  border:1px solid var(--edge-strong);}
+.item .nm{font-weight:700;font-size:17px;color:var(--ink);line-height:1.15;}
+.item .mv{display:flex;flex-direction:column;gap:3px;}
+.item .mv button{font:inherit;width:34px;height:26px;border-radius:8px;cursor:pointer;line-height:1;
+  border:1px solid var(--edge-strong);background:var(--bg);color:var(--ink-2);
+  display:grid;place-items:center;transition:.12s;}
+.item .mv button:hover:not(:disabled){border-color:var(--g6);color:var(--g6);}
+.item .mv button:disabled{opacity:.3;cursor:default;}
+
+/* reveal state */
+.item .reveal-val{display:none;font-family:var(--font-display);font-weight:800;font-size:16px;
+  font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;text-align:right;}
+.item .reveal-rank{display:none;font-size:11px;font-weight:700;color:var(--ink-3);}
+body.revealed .item .mv{display:none;}
+body.revealed .item .reveal-val{display:block;}
+body.revealed .item .reveal-rank{display:block;}
+body.revealed .item .slot{cursor:default;}
+.item.good{border-color:var(--g2);background:var(--g2-soft);}
+.item.good .slot{color:var(--g2);}
+.item.bad{border-color:var(--hot);background:var(--hot-soft);}
+.item.bad .slot{color:var(--hot);}
+
+.hintline{text-align:center;font-size:13px;color:var(--ink-3);margin:2px 0 14px;}
+
+.result{text-align:center;margin:16px 0 4px;display:none;}
+body.revealed .result{display:block;}
+.result .rp{font-family:var(--font-display);font-weight:800;font-size:clamp(20px,5vw,28px);letter-spacing:-.02em;}
+.result .rp.perfect{color:var(--g2);}
+.result .rp.mid{color:var(--g6);}
+.result .rp.low{color:var(--hot);}
+.result .detail{font-size:14px;color:var(--ink-2);margin-top:3px;}
+.result .truth{font-size:13.5px;color:var(--ink-3);margin-top:9px;}
+.result .truth b{color:var(--ink-2);}
+
+.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 0;}
+.btn.g6btn{background:var(--g6);}
+
+/* ---- final ---- */
+.finale{text-align:center;padding:16px 0;}
+.finale .medal{font-size:54px;line-height:1;}
+.finale h2{font-size:clamp(26px,6vw,40px);margin:8px 0 2px;
+  background:linear-gradient(100deg,var(--g6),var(--g4));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.finale .big{font-family:var(--font-display);font-weight:800;font-size:44px;color:var(--g6);
+  font-variant-numeric:tabular-nums;margin:8px 0 0;}
+.finale .sub{color:var(--ink-2);font-size:15px;}
+.bars{max-width:420px;margin:20px auto 0;display:grid;gap:7px;text-align:left;}
+.bars .b{display:grid;grid-template-columns:64px 1fr 42px;gap:10px;align-items:center;font-size:13px;}
+.bars .track{height:9px;border-radius:99px;background:var(--bg-2);overflow:hidden;}
+.bars .track i{display:block;height:100%;border-radius:99px;background:var(--g6);}
+
+.rules{counter-reset:r;list-style:none;padding:0;margin:16px 0;}
+.rules li{counter-increment:r;position:relative;padding-left:44px;margin-bottom:13px;
+  font-size:15.5px;line-height:1.55;color:var(--ink-2);}
+.rules li::before{content:counter(r);position:absolute;left:0;top:-1px;width:30px;height:30px;
+  border-radius:50%;background:var(--g6);color:var(--on-accent);display:grid;place-items:center;
+  font-weight:700;font-size:14px;font-family:var(--font-display);}
+.rules li b{color:var(--ink);}
+</style>
+</head>
+<body class="g6">
+
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/games/">Games</a>
+  <span class="sep">/</span><a href="/games/rank-it.html">Rank It</a>
+  <span class="spacer"></span>
+  <a href="/games/country-cards.html">Country Cards &rarr;</a>
+</nav>
+
+<main>
+  <header class="hero">
+    <p class="kicker">Games · one player</p>
+    <h1>Rank It</h1>
+    <p class="lede">Four countries, one measure. Drag them into order, highest to lowest.
+    <strong>The closer you get, the more you score</strong> — get every pair the right way round for a perfect
+    round.</p>
+  </header>
+
+  <!-- ============ INTRO ============ -->
+  <section class="screen on" id="s-intro">
+    <div class="actions" style="justify-content:flex-start;margin:8px 0 6px;">
+      <button class="btn g6btn" id="startBtn">Start · 8 rounds →</button>
+    </div>
+    <h2>How it works</h2>
+    <ol class="rules">
+      <li>Each round you get <b>four random countries</b> and <b>one measure</b> — people, land, economy,
+      wealth, inequality or a freedom score.</li>
+      <li><b>Put them in order</b>, most at the top down to least. Drag the cards, or use the ▲▼ buttons.</li>
+      <li>Score is by <b>pairs in the right order</b>: there are six pairs among four countries, and you earn
+      points for each one you get the right way round. All six right is a <b>perfect round</b>.</li>
+      <li>Eight rounds, then a final score and a rank. Every card shows its real number when the round is
+      graded, so you learn as you go.</li>
+    </ol>
+    <div class="note"><p><strong>No best answer to memorise.</strong> The measures pull in different
+    directions — the country with the most people is rarely the richest per person — so each round is its own
+    puzzle. Same idea as <a href="/games/country-cards.html">Country Cards</a>, turned into a solo challenge.</p></div>
+  </section>
+
+  <!-- ============ ROUND ============ -->
+  <section class="screen" id="s-round">
+    <div class="rbar">
+      <span class="pill">Round <b id="roundNo">1</b> / 8</span>
+      <span class="spacer"></span>
+      <span class="pill">Score <span class="score" id="scoreNow">0</span></span>
+    </div>
+
+    <div class="ask">
+      <div class="ico" id="askIco">📊</div>
+      <div class="cat" id="askCat">—</div>
+      <div class="dir" id="askDir"></div>
+    </div>
+
+    <div class="rank-list" id="rankList"></div>
+    <p class="hintline">Top = most · bottom = least. Drag a card or use ▲▼.</p>
+
+    <div class="result" id="roundResult">
+      <div class="rp" id="rpHead"></div>
+      <div class="detail" id="rpDetail"></div>
+      <div class="truth" id="rpTruth"></div>
+    </div>
+
+    <div class="actions">
+      <button class="btn g6btn" id="submitBtn">Lock in my order</button>
+      <button class="btn g6btn" id="nextBtn" style="display:none;">Next round →</button>
+    </div>
+  </section>
+
+  <!-- ============ FINAL ============ -->
+  <section class="screen" id="s-over">
+    <div class="finale">
+      <div class="medal" id="finMedal">🌍</div>
+      <h2 id="finRank">—</h2>
+      <div class="big" id="finScore">0</div>
+      <div class="sub" id="finSub"></div>
+      <div class="bars" id="finBars"></div>
+      <div class="actions"><button class="btn g6btn" id="againBtn">Play again</button></div>
+    </div>
+  </section>
+
+  <footer>
+    Same data as <a href="/games/country-cards.html">Country Cards</a>: 100 most populous countries, rounded
+    public estimates. Population: UN <em>World Population Prospects</em>, 2024. Economy: nominal GDP,
+    <span class="gl" data-t="imf">IMF</span>, 2025 — Wealth is GDP per person. Land: total area.
+    Inequality: World Bank <span class="gl" data-t="gini">Gini</span>, latest year.
+    Political freedom: <span class="gl" data-t="freedom-house">Freedom House</span> 2024.
+    Economic freedom: <span class="gl" data-t="heritage">Heritage</span> 2024. Every number is an estimate —
+    treat it that way. Flags: <a href="https://github.com/lipis/flag-icons" rel="noopener">flag-icons</a> (MIT).
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script src="/assets/countries.js"></script>
+<script>
+/* =========================================================================
+   Rank It — order four countries by a random measure. Solo, 8 rounds.
+   Score = pairs placed the right way round (Kendall-style), tie-safe.
+   ========================================================================= */
+(function(){
+  "use strict";
+  const DATA = window.COUNTRIES;
+  DATA.forEach(d => { d.pc = d.gdp * 1000 / d.pop; });
+
+  const CATS = [
+    {k:"pop",  ico:"👥", n:"People",           dir:"Most people at the top",
+     fmt:v => v>=1000 ? (v/1000).toFixed(2).replace(/\.?0+$/,"")+"B" : v.toLocaleString(undefined,{maximumFractionDigits:0})+"M"},
+    {k:"area", ico:"🗺️", n:"Land area",         dir:"Biggest country at the top",
+     fmt:v => (v/1000).toLocaleString(undefined,{maximumFractionDigits:0})+"k km²"},
+    {k:"gdp",  ico:"💰", n:"Economy",           dir:"Biggest economy at the top",
+     fmt:v => v>=1000 ? "$"+(v/1000).toFixed(2).replace(/\.?0+$/,"")+"T" : "$"+v.toLocaleString(undefined,{maximumFractionDigits:0})+"B"},
+    {k:"pc",   ico:"✨", n:"Wealth per person", dir:"Richest per person at the top",
+     fmt:v => "$"+(Math.round(v/100)*100).toLocaleString()},
+    {k:"gini", ico:"⚖️", n:"Inequality (Gini)", dir:"Most unequal at the top",
+     fmt:v => v.toFixed(1)},
+    {k:"pol",  ico:"🗳️", n:"Political freedom",  dir:"Most free at the top",
+     fmt:v => Math.round(v)+"/100"},
+    {k:"efree",ico:"🏦", n:"Economic freedom",   dir:"Most free-market at the top",
+     fmt:v => v.toFixed(1)+"/100"}
+  ];
+
+  const ROUNDS = 8, MAXR = 100;
+  const $ = id => document.getElementById(id);
+  const screens = ["intro","round","over"];
+  function show(name){ screens.forEach(s => $("s-"+s).classList.toggle("on", s===name));
+    window.scrollTo({top:0,behavior:"smooth"}); }
+  function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+  function esc(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function flag(iso){ return '<img class="flag" src="/assets/flags/'+iso.toLowerCase()+'.svg" alt="" loading="lazy" decoding="async">'; }
+
+  let G;   // {round, total, order:[cards], cat, graded, rows:[{pairs, exact}]}
+
+  function newGame(){ G = { round:0, total:0, rows:[] }; nextRound(); }
+
+  function pickRound(){
+    const quad = shuffle(DATA.slice()).slice(0,4);
+    // choose a measure where the four are not all tied
+    const cat = shuffle(CATS.slice()).find(c => new Set(quad.map(q => q[c.k])).size > 1) || CATS[0];
+    return { order: shuffle(quad.slice()), cat };
+  }
+
+  function nextRound(){
+    G.round++;
+    if(G.round > ROUNDS){ return endGame(); }
+    const r = pickRound();
+    G.order = r.order; G.cat = r.cat; G.graded = false;
+    document.body.classList.remove("revealed");
+    $("roundNo").textContent = G.round;
+    $("scoreNow").textContent = G.total;
+    $("askIco").textContent = r.cat.ico;
+    $("askCat").textContent = r.cat.n;
+    $("askDir").innerHTML = "Order them: <b>" + r.cat.dir + "</b>";
+    $("roundResult").style.display = "";     // controlled by body.revealed
+    $("submitBtn").style.display = "";
+    $("nextBtn").style.display = "none";
+    renderList();
+    show("round");
+  }
+
+  function renderList(){
+    const L = $("rankList"); L.innerHTML = "";
+    G.order.forEach((c, i) => {
+      const el = document.createElement("div");
+      el.className = "item"; el.dataset.i = i; el.draggable = !G.graded;
+      el.innerHTML =
+        '<div class="slot" title="drag to reorder">'+(i+1)+'</div>'+
+        flag(c.iso)+
+        '<div><div class="nm">'+esc(c.c)+'</div><div class="reveal-rank"></div></div>'+
+        '<div class="mv">'+
+          '<button class="up" aria-label="Move '+esc(c.c)+' up" '+(i===0?'disabled':'')+'>▲</button>'+
+          '<button class="down" aria-label="Move '+esc(c.c)+' down" '+(i===3?'disabled':'')+'>▼</button>'+
+        '</div>'+
+        '<div class="reveal-val"></div>';
+      L.appendChild(el);
+    });
+    if(!G.graded) wireInteractions();
+  }
+
+  function move(from, to){
+    if(to<0 || to>=G.order.length) return;
+    const [x] = G.order.splice(from,1); G.order.splice(to,0,x); renderList();
+  }
+
+  function wireInteractions(){
+    const L = $("rankList");
+    L.querySelectorAll(".up").forEach(b => b.onclick = e => move(+e.target.closest(".item").dataset.i, +e.target.closest(".item").dataset.i - 1));
+    L.querySelectorAll(".down").forEach(b => b.onclick = e => move(+e.target.closest(".item").dataset.i, +e.target.closest(".item").dataset.i + 1));
+    // HTML5 drag (mouse / desktop)
+    let dragI = null;
+    L.querySelectorAll(".item").forEach(it => {
+      it.addEventListener("dragstart", e => { dragI = +it.dataset.i; it.classList.add("dragging"); e.dataTransfer.effectAllowed="move"; });
+      it.addEventListener("dragend",   () => { it.classList.remove("dragging"); L.querySelectorAll(".item").forEach(x=>x.classList.remove("over")); });
+      it.addEventListener("dragover",  e => { e.preventDefault(); it.classList.add("over"); });
+      it.addEventListener("dragleave", () => it.classList.remove("over"));
+      it.addEventListener("drop",      e => { e.preventDefault(); const t=+it.dataset.i; if(dragI!==null && dragI!==t) move(dragI,t); dragI=null; });
+    });
+    // Pointer drag (touch): press a card's number, drag over others
+    L.querySelectorAll(".item .slot").forEach(slot => {
+      slot.addEventListener("pointerdown", e => {
+        if(e.pointerType==="mouse") return;            // desktop uses HTML5 DnD above
+        e.preventDefault();
+        const item = slot.closest(".item"); item.classList.add("dragging");
+        const onMove = ev => {
+          const el = document.elementFromPoint(ev.clientX, ev.clientY);
+          const over = el && el.closest && el.closest(".item");
+          L.querySelectorAll(".item").forEach(x=>x.classList.toggle("over", x===over && x!==item));
+        };
+        const onUp = ev => {
+          const el = document.elementFromPoint(ev.clientX, ev.clientY);
+          const over = el && el.closest && el.closest(".item");
+          if(over && over!==item) move(+item.dataset.i, +over.dataset.i);
+          document.removeEventListener("pointermove", onMove);
+          document.removeEventListener("pointerup", onUp);
+        };
+        document.addEventListener("pointermove", onMove);
+        document.addEventListener("pointerup", onUp);
+      });
+    });
+  }
+
+  // rank: 1 = highest value; ties share a rank
+  function trueRank(card){ return 1 + G.order.filter(c => c[G.cat.k] > card[G.cat.k]).length; }
+
+  function grade(){
+    const k = G.cat.k, o = G.order;
+    let correct = 0, total = 0;
+    for(let i=0;i<o.length;i++) for(let j=i+1;j<o.length;j++){
+      total++;
+      // player placed o[i] above o[j]; correct if o[i] >= o[j] (ties always count)
+      if(o[i][k] >= o[j][k]) correct++;
+    }
+    const pts = Math.round(correct/total * MAXR);
+    G.total += pts;
+    G.graded = true;
+    G.rows.push({ pairs:correct, total, pts, exact:(correct===total) });
+
+    document.body.classList.add("revealed");
+    renderList();
+    // annotate each row with value + rank + good/bad slot
+    const correctOrder = o.slice().sort((a,b)=> b[k]-a[k]);
+    $("rankList").querySelectorAll(".item").forEach((el,i) => {
+      const c = o[i];
+      el.querySelector(".reveal-val").textContent = G.cat.fmt(c[k]);
+      const rk = trueRank(c);
+      el.querySelector(".reveal-rank").textContent = "true rank #" + rk;
+      // "good" if this card is not out of order with its neighbours in the player's list
+      const upOk = i===0 || o[i-1][k] >= c[k];
+      const downOk = i===o.length-1 || c[k] >= o[i+1][k];
+      el.classList.add(upOk && downOk ? "good" : "bad");
+    });
+
+    const head = $("rpHead");
+    head.className = "rp " + (correct===total ? "perfect" : correct>=4 ? "mid" : "low");
+    head.textContent = correct===total ? "Perfect round! +"+pts : "+"+pts+" points";
+    $("rpDetail").textContent = correct + " of " + total + " pairs in the right order.";
+    $("rpTruth").innerHTML = "Correct order: <b>" +
+      correctOrder.map(c => c.c + " (" + G.cat.fmt(c[k]) + ")").join(" › ") + "</b>";
+    $("scoreNow").textContent = G.total;
+    $("submitBtn").style.display = "none";
+    $("nextBtn").style.display = "";
+    $("nextBtn").textContent = G.round >= ROUNDS ? "See my result →" : "Next round →";
+  }
+
+  function endGame(){
+    const max = ROUNDS * MAXR, pct = Math.round(G.total / max * 100);
+    const exacts = G.rows.filter(r => r.exact).length;
+    const tiers = [
+      [90,"🌍","Atlas Grand Master"],
+      [75,"🧭","Master Cartographer"],
+      [60,"🗺️","Seasoned Navigator"],
+      [40,"🔭","Apprentice Explorer"],
+      [0, "🌱","Rookie Ranker"]
+    ];
+    const t = tiers.find(t => pct >= t[0]);
+    $("finMedal").textContent = t[1];
+    $("finRank").textContent = t[2];
+    $("finScore").textContent = G.total + " / " + max;
+    $("finSub").textContent = pct + "% · " + exacts + " perfect round" + (exacts===1?"":"s") + " of " + ROUNDS;
+    $("finBars").innerHTML = G.rows.map((r,i) =>
+      '<div class="b"><span>Round '+(i+1)+'</span>'+
+      '<span class="track"><i style="width:'+Math.round(r.pts)+'%"></i></span>'+
+      '<span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink-2)">'+r.pts+'</span></div>').join("");
+    show("over");
+  }
+
+  $("startBtn").onclick = newGame;
+  $("againBtn").onclick = newGame;
+  $("submitBtn").onclick = () => { if(!G.graded) grade(); };
+  $("nextBtn").onclick = () => nextRound();
+})();
+</script>
+</body>
+</html>

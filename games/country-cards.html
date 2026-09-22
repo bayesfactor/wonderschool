@@ -53,21 +53,20 @@ main{max-width:760px;}
   border-radius:var(--r-lg);box-shadow:var(--shadow-md);overflow:hidden;}
 .ccard .top{background:linear-gradient(120deg,var(--g4),var(--g6));color:#fff;padding:18px 20px;
   display:flex;align-items:center;gap:14px;}
-.ccard .flag{width:46px;height:46px;border-radius:12px;flex:none;display:grid;place-items:center;
-  font-family:var(--font-display);font-weight:800;font-size:17px;color:#fff;
-  background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.5);letter-spacing:.5px;}
+.ccard .flag{width:52px;height:39px;border-radius:7px;flex:none;object-fit:cover;background:#fff;
+  border:2px solid rgba(255,255,255,.75);box-shadow:0 1px 4px rgba(0,0,0,.28);}
 .ccard .nm{font-family:var(--font-display);font-weight:800;font-size:22px;line-height:1.1;letter-spacing:-.02em;}
 .ccard .rk{font-size:12.5px;opacity:.92;margin-top:2px;}
-.ccard .stats{padding:10px 14px 14px;display:grid;gap:8px;}
-.stat-btn{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;cursor:pointer;
-  background:var(--bg);border:2px solid var(--edge);border-radius:14px;padding:12px 15px;
+.ccard .stats{padding:10px 12px 12px;display:grid;gap:7px;}
+.stat-btn{display:flex;align-items:center;gap:11px;width:100%;text-align:left;font:inherit;cursor:pointer;
+  background:var(--bg);border:2px solid var(--edge);border-radius:13px;padding:9px 13px;
   transition:.14s var(--ease);color:var(--ink);}
 .stat-btn:hover:not(:disabled){border-color:var(--g4);transform:translateY(-2px);box-shadow:var(--shadow-sm);}
 .stat-btn:disabled{cursor:default;}
-.stat-btn .ico{width:34px;height:34px;border-radius:10px;flex:none;display:grid;place-items:center;font-size:18px;
+.stat-btn .ico{width:32px;height:32px;border-radius:9px;flex:none;display:grid;place-items:center;font-size:17px;
   background:var(--g4-soft);}
-.stat-btn .lab{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);}
-.stat-btn .val{font-family:var(--font-display);font-weight:800;font-size:19px;letter-spacing:-.02em;
+.stat-btn .lab{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);}
+.stat-btn .val{font-family:var(--font-display);font-weight:800;font-size:18px;letter-spacing:-.02em;
   font-variant-numeric:tabular-nums;color:var(--ink);}
 .stat-btn .grow{margin-left:auto;font-size:13px;color:var(--g4);font-weight:700;opacity:0;transition:.14s;}
 .stat-btn:hover:not(:disabled) .grow{opacity:1;}
@@ -84,8 +83,8 @@ main{max-width:760px;}
   background:var(--surface);border:1px solid var(--edge);border-radius:14px;padding:12px 15px;
   opacity:0;transform:translateX(-10px);animation:slidein .32s var(--ease) forwards;}
 @keyframes slidein{to{opacity:1;transform:none;}}
-.rrow .flag{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:12px;
-  color:#fff;font-family:var(--font-display);flex:none;}
+.rrow .flag{width:36px;height:27px;border-radius:5px;object-fit:cover;flex:none;background:#fff;
+  border:1px solid var(--edge-strong);}
 .rrow .pn{font-size:11.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);}
 .rrow .cn{font-weight:700;font-size:16px;color:var(--ink);line-height:1.15;}
 .rrow .vl{font-family:var(--font-display);font-weight:800;font-size:18px;font-variant-numeric:tabular-nums;
@@ -98,6 +97,15 @@ main{max-width:760px;}
 .outcome.gold{color:var(--gold-vivid);}
 .outcome.tie{color:var(--hot);}
 .subout{text-align:center;color:var(--ink-2);font-size:14.5px;margin-bottom:8px;}
+
+/* ---- world map (decorative) ---- */
+.wmap{max-width:480px;margin:14px auto 4px;border:1px solid var(--edge);border-radius:14px;overflow:hidden;
+  background:#bfe0f2;box-shadow:var(--shadow-sm);}
+.wmap svg{display:block;width:100%;height:auto;}
+.wmap-cap{display:flex;gap:16px;justify-content:center;align-items:center;flex-wrap:wrap;
+  font-size:12.5px;color:var(--ink-3);margin:7px 0 0;}
+.wmap-cap .k{display:inline-flex;align-items:center;gap:6px;}
+.wmap-cap .sw{width:13px;height:10px;border-radius:2px;display:inline-block;border:1px solid rgba(0,0,0,.2);}
 
 /* ---- scoreboard strip ---- */
 .board{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:20px 0 4px;}
@@ -155,7 +163,7 @@ main{max-width:760px;}
   <header class="hero">
     <p class="kicker">Games · for 2 to 5 players</p>
     <h1>Country Cards</h1>
-    <p class="lede">The 100 largest countries on Earth, one shared device, four categories.
+    <p class="lede">The 100 largest countries on Earth, one shared device, seven categories.
     Call a category, highest number wins the pile. <strong>There is no best card</strong> — and beating
     everyone means working out which category your country wins.</p>
   </header>
@@ -194,8 +202,10 @@ main{max-width:760px;}
     <ol class="rules">
       <li>The 100 country cards are <b>shuffled and dealt evenly</b> to every player, face down.</li>
       <li>On your turn you see <b>only your own top card</b>. Pick the category you think will win —
-      <b>People, Land, Economy</b> or <b>Wealth</b>.</li>
-      <li>Everyone's top card is revealed. <b>Highest number wins</b> all the cards played.</li>
+      <b>People, Land, Economy, Wealth, Inequality, Political freedom</b> or <b>Economic freedom</b>.</li>
+      <li>Everyone's top card is revealed — with a world map of who played — and <b>the highest number wins</b>
+      all the cards. (Careful: on <b>Inequality</b> the <em>highest</em> Gini wins, and that's the country where
+      the gap between rich and poor is widest — winning a category isn't the same as being the best place to live.)</li>
       <li>An <b>exact tie</b> sends the cards to the middle. Whoever wins the next round takes those too.</li>
       <li>The winner calls the next category. When the round limit is up, or one player holds every card,
       the <b>biggest pile wins</b>.</li>
@@ -228,6 +238,8 @@ main{max-width:760px;}
     <div class="rtable" id="revealTable"></div>
     <div class="outcome" id="revealOutcome"></div>
     <div class="subout" id="revealSub"></div>
+    <div class="wmap" id="revealMap"></div>
+    <p class="wmap-cap" id="revealMapCap"></p>
     <div class="board" id="revealBoard"></div>
     <div class="actions">
       <button class="btn" id="nextBtn">Next round →</button>
@@ -247,17 +259,27 @@ main{max-width:760px;}
   </section>
 
   <footer>
-    100 most populous countries, rounded public estimates. Population: UN <em>World Population Prospects</em>,
-    2024 revision. Economy: nominal GDP, <span class="gl" data-t="imf">IMF</span> <em>World Economic Outlook</em>,
-    2025. Wealth is that economy divided by that population (GDP per person). Land area: total area, land plus
-    inland water. Figures are rounded for play and the exact edge of the "top 100" shifts a little between
-    sources — treat every number as an estimate, which is exactly how the sixth-grade
-    <a href="/grade-6/">data desk</a> teaches you to treat them.
+    100 most populous countries, rounded public estimates.
+    Population: UN <em>World Population Prospects</em>, 2024 revision.
+    Economy: nominal GDP, <span class="gl" data-t="imf">IMF</span> <em>World Economic Outlook</em>, 2025 —
+    Wealth is that economy divided by that population (GDP per person).
+    Land area: total area, land plus inland water.
+    Inequality: World Bank Gini index, latest available year.
+    Political freedom: <span class="gl" data-t="freedom-house">Freedom House</span>,
+    <em>Freedom in the World</em> 2024 total score (0–100).
+    Economic freedom: <span class="gl" data-t="heritage">Heritage Foundation</span> 2024 Index (0–100).
+    Figures are rounded for play, a few inequality and freedom values for countries that are not currently
+    measured (e.g. North Korea, Syria) are best-available estimates, and the exact edge of the "top 100" shifts
+    a little between sources — treat every number as an estimate, exactly how the sixth-grade
+    <a href="/grade-6/">data desk</a> teaches you to.
+    Flags: <a href="https://github.com/lipis/flag-icons" rel="noopener">flag-icons</a> (MIT).
+    Map: <a href="https://github.com/VictorCazanave/svg-maps" rel="noopener">svg-maps</a> (MIT).
   </footer>
 </main>
 
 <script src="/assets/glossary.js"></script>
 <script src="/assets/countries.js"></script>
+<script src="/assets/worldmap.js"></script>
 <script>
 /* =========================================================================
    Country Cards — pass-and-play, 2–5 players, 100 countries.
@@ -276,7 +298,13 @@ main{max-width:760px;}
     {k:"gdp",  n:"Economy", ico:"💰", lab:"Economy",
      fmt:v => v>=1000 ? "$"+(v/1000).toFixed(2).replace(/\.?0+$/,"")+"T" : "$"+v.toLocaleString(undefined,{maximumFractionDigits:0})+"B"},
     {k:"pc",   n:"Wealth", ico:"✨", lab:"Wealth / person",
-     fmt:v => "$"+(Math.round(v/100)*100).toLocaleString()}
+     fmt:v => "$"+(Math.round(v/100)*100).toLocaleString()},
+    {k:"gini", n:"Inequality", ico:"⚖️", lab:"Inequality · Gini",
+     fmt:v => v.toFixed(1)},
+    {k:"pol",  n:"Freedom", ico:"🗳️", lab:"Political freedom",
+     fmt:v => Math.round(v)+"/100"},
+    {k:"efree",n:"Free market", ico:"🏦", lab:"Economic freedom",
+     fmt:v => v.toFixed(1)+"/100"}
   ];
   const catByKey = k => CATS.find(c => c.k === k);
   const P_COLORS = ["#1f68c2","#bd3f0a","#12735a","#6c4bd4","#8a6209"];
@@ -289,9 +317,44 @@ main{max-width:760px;}
     window.scrollTo({top:0, behavior:"smooth"});
   }
   function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
-  function flag(iso){ return '<span class="flag" style="background:'+isoColor(iso)+'">'+iso+'</span>'; }
-  function isoColor(iso){ let h=0; for(const ch of iso) h=(h*31+ch.charCodeAt(0))%360; return "hsl("+h+" 55% 42%)"; }
+  function flag(iso){ return '<img class="flag" src="/assets/flags/'+iso.toLowerCase()+'.svg" alt="" loading="lazy" decoding="async">'; }
   function rankOf(d){ return DATA.indexOf(d)+1; } // DATA is population-ranked
+
+  // ---- decorative world map ----
+  const MAP_WIN = "#e0a021", MAP_OTHER = "#e2572c";
+  function renderMap(plays, key, max, tie){
+    const box = $("revealMap"), cap = $("revealMapCap"), m = window.WORLDMAP;
+    if(!m){ box.style.display = "none"; cap.style.display = "none"; return; }
+    box.style.display = ""; cap.style.display = "";
+    const hi = {};
+    plays.forEach(x => { hi[x.card.iso.toLowerCase()] = (x.card[key] === max) ? MAP_WIN : MAP_OTHER; });
+    const parts = m.viewBox.split(/\s+/), w = parts[2], h = parts[3];
+    let base = "", top = "";                       // draw highlights last so borders stay clean
+    for(const loc of m.locations){
+      const c = hi[loc.id];
+      if(c) top  += '<path class="hl" data-c="'+c+'" d="'+loc.d+'" fill="'+c+'" stroke="#4a3c0e" stroke-width="1.3"/>';
+      else  base += '<path d="'+loc.d+'" fill="#ffffff" stroke="#d6d6cc" stroke-width="0.4"/>';
+    }
+    box.innerHTML = '<svg viewBox="'+m.viewBox+'" preserveAspectRatio="xMidYMid meet" role="img" '+
+      'aria-label="World map with this round\'s countries highlighted">'+
+      '<rect x="0" y="0" width="'+w+'" height="'+h+'" fill="#bfe0f2"/>'+base+top+'</svg>';
+    // add a pin at each highlighted country's centre so even tiny nations are visible
+    const svg = box.querySelector("svg");
+    svg.querySelectorAll("path.hl").forEach(p => {
+      let b; try { b = p.getBBox(); } catch(e){ return; }
+      const cx = b.x + b.width/2, cy = b.y + b.height/2, col = p.getAttribute("data-c");
+      const ns = "http://www.w3.org/2000/svg";
+      const mk = (r, fill, stroke, sw) => { const c = document.createElementNS(ns,"circle");
+        c.setAttribute("cx",cx); c.setAttribute("cy",cy); c.setAttribute("r",r);
+        c.setAttribute("fill",fill); if(stroke){ c.setAttribute("stroke",stroke); c.setAttribute("stroke-width",sw); }
+        svg.appendChild(c); };
+      mk(8, "#ffffff", null, 0);          // white halo
+      mk(5.5, col, "#3a2f0b", 1.4);       // coloured pin
+    });
+    cap.innerHTML = '<span class="k"><span class="sw" style="background:'+MAP_WIN+'"></span>'+
+      (tie ? "tied" : "winner")+'</span>'+
+      (plays.length>1 ? '<span class="k"><span class="sw" style="background:'+MAP_OTHER+'"></span>the rest</span>' : "");
+  }
 
   // ---- state ----
   let G = null;
@@ -415,6 +478,8 @@ main{max-width:760px;}
         '<div class="vl">'+cat.fmt(x.card[key])+'</div>';
       T.appendChild(row);
     });
+
+    renderMap(plays, key, max, tie);
 
     const collected = plays.map(x => x.card);
     if(tie){

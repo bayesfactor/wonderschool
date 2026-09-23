@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Power Source Cards — 4th grade | Wonderschool</title>
+<meta name="description" content="Nine power sources, six statistics each. The winner changes depending on what you decided to care about.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:940px;}
+.rules{counter-reset:r;list-style:none;padding:0;margin:20px 0;}
+.rules li{counter-increment:r;position:relative;padding-left:46px;margin-bottom:14px;font-size:16.5px;
+  line-height:1.6;color:var(--ink-2);}
+.rules li::before{content:counter(r);position:absolute;left:0;top:0;width:30px;height:30px;
+  border-radius:50%;background:var(--g4);color:var(--on-accent);display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:800;font-size:15px;}
+
+.cats{display:flex;flex-wrap:wrap;gap:9px;margin:20px 0 6px;}
+.cats button{font:inherit;font-size:14px;font-weight:600;padding:9px 16px;border-radius:99px;
+  border:1px solid var(--edge-strong);background:var(--surface);color:var(--ink-2);cursor:pointer;
+  transition:.15s var(--ease);}
+.cats button:hover{border-color:var(--g4);color:var(--g4);transform:translateY(-1px);}
+.cats button.on{background:var(--g4);border-color:var(--g4);color:var(--on-accent);}
+
+.catdef{background:var(--accent-soft);border-radius:var(--r);padding:15px 18px;margin:10px 0 16px;
+  border:1px solid color-mix(in srgb,var(--g4) 22%,transparent);}
+.catdef p{margin:0;font-size:15.5px;color:var(--ink);}
+
+.league{border:1px solid var(--edge);border-radius:var(--r-lg);overflow:hidden;background:var(--surface);}
+.lrow{display:grid;grid-template-columns:38px 1fr auto;gap:12px;align-items:center;
+  padding:13px 16px;border-bottom:1px solid var(--edge);transition:background .2s;}
+.lrow:last-child{border-bottom:0;}
+.lrow:nth-child(1){background:var(--accent-soft);}
+.lrow .pos{font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--ink-3);
+  text-align:center;font-variant-numeric:tabular-nums;}
+.lrow:nth-child(1) .pos{color:var(--g4);}
+.lrow .who{display:flex;align-items:center;gap:10px;min-width:0;}
+.lrow .sw{width:14px;height:14px;border-radius:4px;flex:none;border:1px solid rgba(128,128,128,.35);}
+.lrow .nm{font-family:var(--font-display);font-weight:700;font-size:17px;color:var(--ink);}
+.lrow .sub{font-size:13px;color:var(--ink-3);}
+.lrow .val{font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--ink);
+  font-variant-numeric:tabular-nums;text-align:right;}
+.lrow .unit{display:block;font-family:var(--font-body);font-weight:400;font-size:11.5px;color:var(--ink-3);}
+
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:15px;margin:26px 0;}
+.fc{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);padding:18px 19px;}
+.fc .fh{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.fc .sw{width:14px;height:14px;border-radius:4px;flex:none;border:1px solid rgba(128,128,128,.35);}
+.fc .nm{font-family:var(--font-display);font-weight:700;font-size:17.5px;color:var(--ink);}
+.fc p{margin:0;font-size:14.5px;line-height:1.55;}
+.fc .stats{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.fc .st3{font-size:11.5px;font-weight:650;padding:3px 9px;border-radius:99px;
+  background:var(--bg-2);color:var(--ink-2);border:1px solid var(--edge);}
+</style>
+</head>
+<body class="g4">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-4/">4th grade</a>
+  <span class="sep">/</span><a href="/grade-4/energy/">Energy</a>
+  <span class="spacer"></span>
+  <a href="/grade-4/energy-cards-print.html">Get the cards</a>
+</nav>
+
+<main>
+  <p class="kicker">Fourth grade · lesson 2</p>
+  <h1>Power Source Cards</h1>
+  <p class="lede">Nine ways to make electricity, six statistics each. Here is the trick the game
+  teaches: <strong>there is no best card.</strong> Change which statistic you call for, and a
+  different card wins. That is not the game being unfair. That is energy policy.</p>
+
+  <h2>How to play</h2>
+  <ol class="rules">
+    <li>Deal all nine cards out. Two players get four and five; three players get three each.</li>
+    <li>The dealer calls a <strong>category</strong> — “Runs the most”, “Cleanest”, and so on.</li>
+    <li>Everyone puts down their top card. Best number in that category wins all the cards played.</li>
+    <li>The winner calls the next category. Play until one person holds all nine.</li>
+    <li><strong>The extra rule:</strong> before you call a category, say out loud <em>why</em> it
+    matters. “Cleanest, because the air” is a reason. “Cleanest, because I'll win” is not.</li>
+  </ol>
+
+  <h2>Sort them yourself</h2>
+  <p>Pick a category and watch the order change. Keep an eye on which card sinks when you switch.</p>
+
+  <div class="cats" id="cats"></div>
+  <div class="catdef" id="catdef"></div>
+  <div class="league" id="league"></div>
+
+  <p class="src">Carbon figures are lifetime medians from the
+    <a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf"
+       target="_blank" rel="noopener">IPCC Fifth Assessment Report, Annex III</a> — they count
+    building the machine and fuelling it, not just the smoke. The oil figure is an estimate; that
+    table does not give one. “Runs the most” is roughly the real
+    <span class="gl" data-t="capacity-factor">capacity factor</span> in Japan. “Cost” and “Land” are
+    simplified 1&ndash;5 scores for the game, not prices.</p>
+
+  <h2>What is actually on each card</h2>
+  <div class="facts" id="facts"></div>
+
+  <div class="note"><p><strong>The argument to have afterwards.</strong> Line the nine cards up.
+  Now cross out every one that <em>Japan cannot dig up or grow for itself</em>. How many are left,
+  and could those alone run a country of 123 million people? That question has been the whole of
+  Japanese energy policy for a hundred years.</p></div>
+
+  <footer>
+    <a href="/grade-4/energy/">Back to the energy lesson</a> ·
+    <a href="/grade-4/energy-cards-print.html">The one page to print</a> ·
+    <a href="/grade-4/energy-grid.html">The Control Room</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var CARDS = [
+    {nm:"Coal", col:"var(--e-coal)", sub:"burning black rock",
+     runs:75, co2:820, cost:2, land:2, home:0, night:3,
+     fact:"Japan still makes more than a quarter of its electricity from coal. The plan is to mix " +
+          "ammonia into the flame to cut the carbon — other countries argue that is really a " +
+          "way of keeping coal plants alive.",
+     tags:["Always ready","Dirtiest card","Nothing from Japan"]},
+    {nm:"Gas (LNG)", col:"var(--e-lng)", sub:"chilled to −162 °C",
+     runs:55, co2:490, cost:3, land:1, home:0, night:3,
+     fact:"Japan started this trade: the first tanker of liquefied gas reached Tokyo Bay in 1969. " +
+          "For fifty years Japan bought more of it than any country on Earth, until China went past " +
+          "it in 2021.",
+     tags:["Half the carbon of coal","Starts and stops fast"]},
+    {nm:"Oil", col:"var(--e-oil)", sub:"the emergency card",
+     runs:35, co2:650, cost:5, land:1, home:0, night:3,
+     fact:"Barely 2% of Japan's electricity — but nearly all of its cars, lorries, ships and " +
+          "planes. About 93% of it arrives through the Strait of Hormuz, a gap 21 miles wide.",
+     tags:["Expensive","One narrow strait"]},
+    {nm:"Nuclear", col:"var(--e-nuclear)", sub:"splitting atoms",
+     runs:80, co2:12, cost:2, land:2, home:3, night:3,
+     fact:"Japan had 54 reactors before March 2011. After Fukushima every single one was switched " +
+          "off. Fifteen have restarted. Kashiwazaki-Kariwa 6 came back in February 2026 — the " +
+          "first reactor its owner had run in over fourteen years.",
+     tags:["Almost no carbon","Runs day and night","One bad day changed everything"]},
+    {nm:"Solar", col:"var(--e-solar)", sub:"panels on roofs",
+     runs:15, co2:48, cost:2, land:5, home:3, night:0,
+     fact:"Japan has about 103 gigawatts of panels, sixth most in the world. It all began on " +
+          "1 July 2012, when a new law promised ¥40 for every unit — several times the " +
+          "going rate. Everybody built panels. Everybody's bill went up.",
+     tags:["Free fuel","Nothing after sunset","Needs a lot of land"]},
+    {nm:"Wind", col:"var(--e-wind)", sub:"blades in the sky",
+     runs:25, co2:11, cost:3, land:4, home:3, night:1,
+     fact:"The cleanest card in the pack — and Japan has very little of it. The sea floor drops " +
+          "away fast around Japan, so turbines have to float. In August 2025 Mitsubishi walked away " +
+          "from three big sea projects when the cost more than doubled.",
+     tags:["Cleanest card","Works at night — if it blows"]},
+    {nm:"Hydro", col:"var(--e-hydro)", sub:"falling water",
+     runs:45, co2:24, cost:1, land:4, home:3, night:3,
+     fact:"The oldest electricity in Japan and still the cheapest. Japan is steep and rainy, which " +
+          "is perfect — but nearly every good river already has a dam on it. Some dams pump " +
+          "water back uphill at night to use again: a battery made of geography.",
+     tags:["Cheapest card","Already mostly used up"]},
+    {nm:"Geothermal", col:"var(--e-geo)", sub:"steam from hot rocks",
+     runs:70, co2:38, cost:4, land:2, home:3, night:3,
+     fact:"Japan sits on one of the great volcanic zones of the world and takes less than half a " +
+          "percent of its electricity from it. The best spots are usually hot-spring towns or " +
+          "national parks, and nobody wants a power station next to their bath.",
+     tags:["Works all night","Japan barely uses it"]},
+    {nm:"Wood & waste", col:"var(--e-bio)", sub:"chips and rubbish",
+     runs:65, co2:230, cost:5, land:3, home:1, night:3,
+     fact:"Japan burns a great deal of town rubbish for electricity, which is better than burying " +
+          "it. The wood, though, is mostly shipped in as pellets from Canada and Vietnam — so " +
+          "the ships are back.",
+     tags:["Steady","The ships are back"]}
+  ];
+
+  var CATS = [
+    {k:"runs", nm:"Runs the most", hi:1, unit:"% of the time",
+     def:"How much of the year the machine really produces, out of everything it could make if it " +
+         "never stopped. A solar farm scores 15 because the sun sets. This is the statistic most " +
+         "people forget, and it is the one that decides whether the lights stay on."},
+    {k:"co2", nm:"Cleanest", hi:0, unit:"g CO₂ per kWh",
+     def:"Grams of carbon dioxide for every unit of electricity, counting the whole life of the " +
+         "machine — mining it, building it, running it, taking it apart. Lower wins."},
+    {k:"cost", nm:"Cheapest", hi:0, unit:"score 1–5",
+     def:"A simple score: 1 is cheap, 5 is dear. Real prices move every year and differ by country, " +
+         "so this is a rough ranking rather than a price tag."},
+    {k:"home", nm:"Most Japanese", hi:1, unit:"score 0–3",
+     def:"How much of it Japan can supply for itself. 3 means Japan has it at home; 0 means every " +
+         "gram arrives on a ship. This is the statistic Japan cares about more than any other, " +
+         "and it is why the list looks so short."},
+    {k:"night", nm:"Best at night", hi:1, unit:"score 0–3",
+     def:"Can you call on it at two in the morning in January? 3 is yes, whenever you like. " +
+         "0 is solar, which is honest about it."},
+    {k:"land", nm:"Least land", hi:0, unit:"score 1–5",
+     def:"How much ground it takes to make a useful amount. Japan is mountainous and crowded: " +
+         "about three quarters of it is too steep to build on, so flat land is precious."}
+  ];
+
+  var cur = CATS[0];
+
+  function draw(){
+    var sorted = CARDS.slice().sort(function(a,b){
+      return cur.hi ? b[cur.k] - a[cur.k] : a[cur.k] - b[cur.k];
+    });
+    document.getElementById("league").innerHTML = sorted.map(function(c, i){
+      return '<div class="lrow"><div class="pos">' + (i + 1) + '</div>' +
+        '<div class="who"><span class="sw" style="background:' + c.col + '"></span>' +
+        '<span><span class="nm">' + c.nm + '</span><br><span class="sub">' + c.sub + '</span></span></div>' +
+        '<div class="val">' + c[cur.k] + '<span class="unit">' + cur.unit + '</span></div></div>';
+    }).join("");
+    document.getElementById("catdef").innerHTML = "<p><strong>" + cur.nm + ".</strong> " + cur.def + "</p>";
+    document.querySelectorAll("#cats button").forEach(function(b){
+      b.classList.toggle("on", b.dataset.k === cur.k);
+    });
+  }
+
+  var cats = document.getElementById("cats");
+  CATS.forEach(function(c){
+    var b = document.createElement("button");
+    b.type = "button"; b.dataset.k = c.k; b.textContent = c.nm;
+    b.addEventListener("click", function(){ cur = c; draw(); });
+    cats.appendChild(b);
+  });
+
+  document.getElementById("facts").innerHTML = CARDS.map(function(c){
+    return '<div class="fc"><div class="fh"><span class="sw" style="background:' + c.col + '"></span>' +
+      '<span class="nm">' + c.nm + '</span></div><p>' + c.fact + '</p>' +
+      '<div class="stats">' + c.tags.map(function(t){ return '<span class="st3">' + t + '</span>'; }).join("") +
+      '</div></div>';
+  }).join("");
+
+  draw();
+})();
+</script>
+</body>
+</html>

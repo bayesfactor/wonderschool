@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Control Room — 4th grade | Wonderschool</title>
+<meta name="description" content="Place twenty power stations, watch three dials, and survive seven real events.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+/* ---- control-room palette, scoped to body so it beats the shared tokens ---- */
+body{
+  color-scheme:dark;
+  --bg:#0c1220; --bg-2:#111a2e; --surface:#16203a; --surface-2:#1c2845;
+  --edge:#2a3757; --edge-strong:#41527d;
+  --ink:#eef3fb; --ink-2:#b4c2da; --ink-3:#8b9ab8;
+  --accent:#f0bc52; --accent-soft:#2a2313;
+  --on-accent:#1a1405;
+  --ok:#5fe0a0; --bad:#ff9277; --warn:#ffc46b;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.5);
+  --shadow-md:0 6px 20px rgba(0,0,0,.55);
+  --shadow-lg:0 14px 44px rgba(0,0,0,.6);
+  background:
+    radial-gradient(1100px 520px at 18% -12%, #1a2949 0%, transparent 62%),
+    radial-gradient(900px 460px at 88% 4%, #23203f 0%, transparent 58%),
+    #0c1220;
+}
+main{max-width:940px;}
+.hero{text-align:center;padding:14px 0 4px;}
+.hero h1{font-size:clamp(38px,8.4vw,66px);margin:0 0 8px;color:var(--ink);}
+.hero .sub{font-size:clamp(16px,2.2vw,20px);color:var(--ink-2);max-width:40ch;margin:0 auto 10px;}
+
+.panelx{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-lg);
+  padding:24px 22px;margin:22px 0;box-shadow:var(--shadow-sm);}
+.panelx h2{margin:0 0 6px;font-size:clamp(21px,3.2vw,27px);color:var(--ink);}
+.panelx p{color:var(--ink-2);}
+
+/* ---- the three dials ---- */
+.gauges{display:grid;grid-template-columns:repeat(auto-fit,minmax(168px,1fr));gap:14px;margin:4px 0 6px;}
+.gz{background:var(--bg-2);border:1px solid var(--edge);border-radius:var(--r);padding:15px 16px;}
+.gz .gl2{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);}
+.gz .gv{font-family:var(--font-display);font-size:clamp(25px,4.6vw,34px);font-weight:800;
+  letter-spacing:-.03em;line-height:1.1;margin:4px 0 2px;color:var(--ink);font-variant-numeric:tabular-nums;}
+.gz .gu{font-size:12.5px;color:var(--ink-3);line-height:1.35;}
+.gz .gt{height:8px;border-radius:99px;background:#0a1020;border:1px solid var(--edge);
+  overflow:hidden;margin-top:9px;}
+.gz .gf{display:block;height:100%;border-radius:99px;transition:width .5s var(--ease),background .4s;}
+
+/* the headline power readout */
+.readout{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between;
+  background:#0a1020;border:1px solid var(--edge-strong);border-radius:var(--r);
+  padding:16px 20px;margin:16px 0 4px;}
+.readout .big{font-family:var(--font-display);font-size:clamp(26px,5vw,38px);font-weight:800;
+  letter-spacing:-.03em;line-height:1;color:var(--ok);font-variant-numeric:tabular-nums;}
+.readout .big.short{color:var(--bad);}
+.readout .lab{font-size:13px;color:var(--ink-3);margin-top:5px;}
+.lights{display:flex;align-items:center;gap:10px;font-weight:650;font-size:17px;color:var(--ok);}
+.lights.out{color:var(--bad);}
+.lights .bulb{width:15px;height:15px;border-radius:50%;background:var(--ok);
+  box-shadow:0 0 14px currentColor;}
+.lights.out .bulb{background:var(--bad);}
+
+/* ---- the plant picker ---- */
+.plants{display:grid;grid-template-columns:repeat(auto-fit,minmax(215px,1fr));gap:11px;margin:16px 0 4px;}
+.pl{background:var(--bg-2);border:1px solid var(--edge);border-radius:var(--r);padding:13px 14px;
+  transition:border-color .2s,background .2s;}
+.pl.has{border-color:var(--accent);background:var(--surface-2);}
+.pl .ph{display:flex;align-items:center;gap:9px;margin-bottom:3px;}
+.pl .sw{width:13px;height:13px;border-radius:4px;flex:none;border:1px solid rgba(255,255,255,.28);}
+.pl .nm{font-family:var(--font-display);font-weight:700;font-size:16.5px;color:var(--ink);}
+.pl .fx{font-size:12.5px;color:var(--ink-3);line-height:1.4;min-height:2.6em;margin-bottom:8px;}
+.pl .ctr{display:flex;align-items:center;gap:9px;}
+.pl .ctr button{width:34px;height:34px;border-radius:9px;border:1px solid var(--edge-strong);
+  background:var(--surface);color:var(--ink);font:inherit;font-size:18px;font-weight:700;
+  cursor:pointer;line-height:1;transition:.15s var(--ease);}
+.pl .ctr button:hover:not(:disabled){border-color:var(--accent);color:var(--accent);}
+.pl .ctr button:disabled{opacity:.32;cursor:not-allowed;}
+.pl .cnt{font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--ink);
+  min-width:1.5em;text-align:center;font-variant-numeric:tabular-nums;}
+.pl .bar{flex:1;height:9px;border-radius:99px;background:#0a1020;border:1px solid var(--edge);overflow:hidden;}
+.pl .bf{display:block;height:100%;border-radius:99px;width:0;transition:width .3s var(--ease);}
+
+.left{font-size:16px;color:var(--ink-2);margin:12px 0 0;}
+.left b{font-family:var(--font-display);font-size:22px;color:var(--accent);}
+.left.zero b{color:var(--ok);}
+
+/* ---- events ---- */
+.eventbtn{display:flex;gap:12px;flex-wrap:wrap;margin-top:6px;}
+.evcard{background:linear-gradient(150deg,#241c2f,#16203a 62%);
+  border:1px solid var(--edge-strong);border-left:5px solid var(--warn);
+  border-radius:var(--r);padding:19px 21px;margin:16px 0 0;animation:slide .4s var(--ease);}
+@keyframes slide{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.evcard .dt{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--warn);margin-bottom:5px;}
+.evcard h3{margin:0 0 7px;font-size:21px;color:var(--ink);}
+.evcard p{margin:0 0 9px;font-size:15.5px;color:var(--ink-2);line-height:1.55;}
+.evcard .real{font-size:13.5px;color:var(--ink-3);border-top:1px solid var(--edge);
+  padding-top:9px;margin:0;line-height:1.5;}
+.evcard.survived{border-left-color:var(--ok);}
+.evcard.failed{border-left-color:var(--bad);}
+.evres{font-weight:700;font-size:16.5px;margin:2px 0 9px;}
+.evres.ok{color:var(--ok);} .evres.no{color:var(--bad);}
+
+.eventlog{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px;}
+.chip{font-size:12px;font-weight:650;padding:5px 11px;border-radius:99px;
+  border:1px solid var(--edge-strong);color:var(--ink-3);background:var(--bg-2);}
+.chip.ok{border-color:var(--ok);color:var(--ok);}
+.chip.no{border-color:var(--bad);color:var(--bad);}
+
+.finalbox{background:linear-gradient(140deg,#1b2c4d,#2a2340 75%);border:2px solid var(--accent);
+  border-radius:var(--r-lg);padding:26px 24px;margin-top:20px;display:none;}
+.finalbox.on{display:block;animation:slide .45s var(--ease);}
+.finalbox h2{margin-top:0;color:var(--ink);}
+.finalbox p{color:var(--ink-2);}
+
+.presets{display:flex;flex-wrap:wrap;gap:9px;margin-top:12px;}
+.presets button{font:inherit;font-size:13.5px;font-weight:600;padding:8px 15px;border-radius:99px;
+  border:1px solid var(--edge-strong);background:var(--bg-2);color:var(--ink-2);cursor:pointer;
+  transition:.15s var(--ease);}
+.presets button:hover{border-color:var(--accent);color:var(--accent);}
+
+table.mini{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;}
+table.mini th,table.mini td{padding:7px 8px;border-bottom:1px solid var(--edge);text-align:right;color:var(--ink-2);}
+table.mini th{color:var(--ink-3);font-weight:650;font-size:12px;letter-spacing:.06em;text-transform:uppercase;}
+table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--ink);}
+</style>
+</head>
+<body>
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-4/">4th grade</a>
+  <span class="sep">/</span><a href="/grade-4/energy/">Energy</a>
+  <span class="spacer"></span>
+  <button class="barbtn" id="resetBtn" type="button">New game</button>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="kicker">Fourth grade · lesson 2</p>
+    <h1>The Control Room</h1>
+    <p class="sub">Twenty power stations. One country. Three dials that fight each other.</p>
+  </div>
+
+  <div class="panelx">
+    <h2>Step 1 — Build the country</h2>
+    <p>Place all twenty stations. Each one is a different kind of machine, and they are
+    <strong>not</strong> equally useful — a solar farm only works while the sun is up, so twenty
+    solar farms would leave Japan in the dark every single night.</p>
+
+    <div class="plants" id="plants"></div>
+    <p class="left" id="leftSay">Stations left to place: <b>20</b></p>
+
+    <div class="presets">
+      <button type="button" data-preset="japan">Copy real Japan</button>
+      <button type="button" data-preset="france">Copy France</button>
+      <button type="button" data-preset="clear">Clear the board</button>
+    </div>
+  </div>
+
+  <div class="panelx">
+    <h2>Step 2 — Read the dials</h2>
+
+    <div class="readout">
+      <div>
+        <div class="big" id="pwr">0.0</div>
+        <div class="lab">power made, against 10.0 needed</div>
+      </div>
+      <div class="lights out" id="lights"><span class="bulb"></span><span id="lightTx">Lights out</span></div>
+    </div>
+
+    <div class="gauges">
+      <div class="gz">
+        <div class="gl2">Cheap</div>
+        <div class="gv" id="gCost">—</div>
+        <div class="gu">lower is cheaper<br>(game score, 1 to 5)</div>
+        <div class="gt"><span class="gf" id="fCost"></span></div>
+      </div>
+      <div class="gz">
+        <div class="gl2">Safe</div>
+        <div class="gv" id="gSec">—</div>
+        <div class="gu">share made in Japan<br>real Japan is about 16%</div>
+        <div class="gt"><span class="gf" id="fSec"></span></div>
+      </div>
+      <div class="gz">
+        <div class="gl2">Clean</div>
+        <div class="gv" id="gCO2">—</div>
+        <div class="gu">grams of CO₂ per kWh<br>real Japan is 477</div>
+        <div class="gt"><span class="gf" id="fCO2"></span></div>
+      </div>
+    </div>
+
+    <p class="src" style="color:var(--ink-3);">Carbon figures are lifetime medians from the
+      <a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf"
+         target="_blank" rel="noopener" style="color:var(--ink-2);">IPCC, Annex III</a>.
+      Japan's grid was 477 g/kWh in 2025 —
+      <a href="https://ember-energy.org/countries-and-regions/japan/" target="_blank" rel="noopener"
+         style="color:var(--ink-2);">Ember</a>. “Cheap” and the availability factors are simplified
+      game scores, close to real ones but not exact prices.</p>
+  </div>
+
+  <div class="panelx">
+    <h2>Step 3 — History happens</h2>
+    <p>Seven cards. Every one of them really happened, or really could. Draw them one at a time.
+    You may rebuild between cards — that is allowed, and it is exactly what real ministers do.</p>
+
+    <div class="eventbtn">
+      <button class="btn" id="drawBtn" type="button">Draw an event card</button>
+    </div>
+    <div class="eventlog" id="log"></div>
+    <div id="evHere"></div>
+
+    <div class="finalbox" id="final">
+      <h2 id="finalH">Seven cards survived</h2>
+      <p id="finalP"></p>
+      <table class="mini" id="finalT"></table>
+    </div>
+  </div>
+
+  <div class="panelx">
+    <h2>The challenge</h2>
+    <p><strong>Get through all seven cards with the lights on every time — and finish under
+    <span style="color:var(--accent)">300 grams</span> of CO₂ with at least
+    <span style="color:var(--accent)">40%</span> made in Japan.</strong></p>
+    <p>It can be done. It is harder than it looks, and every answer that works makes
+    somebody unhappy about something.</p>
+    <p><strong>Three things worth noticing while you fail:</strong></p>
+    <ul>
+      <li>Twenty solar farms survive <em>none</em> of the seven cards. Not one.</li>
+      <li>Twenty coal stations survive <em>all</em> seven — at 820 grams and nothing made at home.
+      Winning the wrong game is easy.</li>
+      <li>Load “Copy France”, then draw the tsunami card. That single card is the whole argument
+      Japan has been having with itself since 2011.</li>
+    </ul>
+    <p>If you manage all seven cards, under 300 grams, <strong>and over 50% made in Japan</strong> —
+    go and tell your teacher, because that one is genuinely hard.</p>
+  </div>
+
+  <footer>
+    <a href="/grade-4/energy/">Back to the energy lesson</a> ·
+    <a href="/grade-4/energy-cards.html">Power Source Cards</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var TOTAL = 20, DEMAND = 10.0;
+
+  /* availability = the share of the time a station really produces.
+     These are close to real Japanese capacity factors. */
+  var SRC = [
+    {k:"coal",    nm:"Coal",        col:"var(--e-coal)",    cf:0.75, cost:2, co2:820, dom:0.00,
+      fx:"Cheap and always ready. Every lump arrives by ship, and it is the dirtiest thing on the board."},
+    {k:"lng",     nm:"Gas (LNG)",   col:"var(--e-lng)",     cf:0.55, cost:3, co2:490, dom:0.00,
+      fx:"Half the carbon of coal, and it can speed up and slow down quickly. Japan buys more of it than almost anyone."},
+    {k:"oil",     nm:"Oil",         col:"var(--e-oil)",     cf:0.35, cost:5, co2:650, dom:0.00,
+      fx:"Expensive and dirty, but it starts fast in an emergency. 93% of it comes through one narrow strait."},
+    {k:"nuclear", nm:"Nuclear",     col:"var(--e-nuclear)", cf:0.80, cost:2, co2:12,  dom:1.00,
+      fx:"Almost no carbon, runs day and night. One accident in 2011 switched off every reactor in the country."},
+    {k:"solar",   nm:"Solar",       col:"var(--e-solar)",   cf:0.15, cost:2, co2:48,  dom:1.00,
+      fx:"Free fuel, no smoke, no ship — and nothing at all after sunset. Needs a great deal of land."},
+    {k:"wind",    nm:"Wind",        col:"var(--e-wind)",    cf:0.25, cost:3, co2:11,  dom:1.00,
+      fx:"The cleanest thing here. Japan's sea floor drops away fast, which makes turbines hard to stand up."},
+    {k:"hydro",   nm:"Hydro",       col:"var(--e-hydro)",   cf:0.45, cost:1, co2:24,  dom:1.00,
+      fx:"Steep rivers and heavy rain. The cheapest power Japan has — and almost every good river is already used."},
+    {k:"biomass", nm:"Wood & waste",col:"var(--e-bio)",     cf:0.65, cost:5, co2:230, dom:0.30,
+      fx:"Burns wood chips and town rubbish. Steady and useful; most of the wood is shipped in too."}
+  ];
+
+  var PRESETS = {
+    japan:  {coal:5, lng:6, oil:0, nuclear:3, solar:4, wind:0, hydro:2, biomass:0},
+    france: {coal:0, lng:2, oil:0, nuclear:12, solar:2, wind:2, hydro:2, biomass:0},
+    clear:  {}
+  };
+
+  var EVENTS = [
+    { id:"tsunami", dt:"11 March 2011", h:"The wave",
+      tx:"A magnitude 9 earthquake sends a tsunami over the sea wall at Fukushima Daiichi. Within " +
+         "fourteen months every one of Japan's 54 reactors is switched off for checks.",
+      real:"Really happened. Japan ran on zero nuclear power for two whole years. Fifteen reactors " +
+           "have restarted since; the first was Sendai 1, in August 2015.",
+      mod:{nuclear:0} },
+    { id:"ukraine", dt:"24 February 2022", h:"War in Europe",
+      tx:"Russia invades Ukraine. Japan joins the sanctions — but about 9% of its gas was coming " +
+         "from Sakhalin, a Russian island just to the north. Gas prices jump everywhere.",
+      real:"Really happened. Japan kept its share of the Sakhalin-2 gas project anyway: Mitsui owns " +
+           "12.5% and Mitsubishi 10%. Being close to the gas turned out to matter more than being cross.",
+      mod:{lng:0.90}, costmod:{lng:2} },
+    { id:"hormuz", dt:"June 2025", h:"Trouble at the strait",
+      tx:"Fighting spreads near the Strait of Hormuz, a channel 21 miles wide. Tankers stop sailing. " +
+         "Ninety-three per cent of Japan's crude oil comes through that gap.",
+      real:"Japan holds about 254 days of oil in tanks for exactly this. No pipeline goes round " +
+           "Hormuz to Japan — there is no other route.",
+      mod:{oil:0} },
+    { id:"dunkel", dt:"A week in December", h:"Still and grey",
+      tx:"Seven days of thick cloud and no wind at all. Short days, long nights, and heaters on " +
+         "in every house in the country.",
+      real:"German engineers named this a <em>Dunkelflaute</em> — a dark lull. It is the single " +
+           "hardest week of the year for any grid that leans on sun and wind.",
+      mod:{solar:0.15, wind:0.10}, demand:1.06 },
+    { id:"heat", dt:"August", h:"Heatwave",
+      tx:"Tokyo hits 39 °C. Every air conditioner in the country switches on at the same moment " +
+         "and demand jumps by more than a tenth.",
+      real:"Japan's peak demand really does come on hot summer afternoons. Helpfully, that is also " +
+           "when solar panels are at their best — one of the few times the timing works out.",
+      mod:{solar:1.35}, demand:1.15 },
+    { id:"typhoon", dt:"Typhoon season", h:"The storm",
+      tx:"A typhoon crosses Kyushu. A big coastal coal station floods and shuts down, transmission " +
+         "towers come down, and wind turbines feather their blades to save themselves.",
+      real:"Turbines really do stop in a storm — above about 55 mph they shut down on purpose, " +
+           "because spinning that fast would tear them apart.",
+      mod:{coal:0.85, wind:0.25} },
+    { id:"curtail", dt:"October 2018, Kyushu", h:"Too much sunshine",
+      tx:"A mild sunny Sunday lunchtime. Factories are shut, nobody needs much power, and the solar " +
+         "farms are making more than the grid can swallow. You have to switch good panels off.",
+      real:"Really happened — the first time a big Japanese grid had to throw away free electricity. " +
+           "It now happens in almost every region of Japan. The cure is storage and better wires.",
+      mod:{solar:0.55}, demand:0.80 }
+  ];
+
+  /* ---------- state ---------- */
+  var mix = {}, drawn = [], results = [], evIdx = 0;
+  SRC.forEach(function(s){ mix[s.k] = 0; });
+
+  var elPlants = document.getElementById("plants");
+  var elLeft   = document.getElementById("leftSay");
+  var elLog    = document.getElementById("log");
+  var elEv     = document.getElementById("evHere");
+  var elFinal  = document.getElementById("final");
+
+  function placed(){ var n=0; SRC.forEach(function(s){ n += mix[s.k]; }); return n; }
+
+  /* ---------- build the picker ---------- */
+  SRC.forEach(function(s){
+    var d = document.createElement("div");
+    d.className = "pl"; d.dataset.k = s.k;
+    d.innerHTML =
+      '<div class="ph"><span class="sw" style="background:' + s.col + '"></span>' +
+        '<span class="nm">' + s.nm + '</span></div>' +
+      '<div class="fx">' + s.fx + '</div>' +
+      '<div class="ctr">' +
+        '<button type="button" data-d="-1" aria-label="Remove one ' + s.nm + ' station">&minus;</button>' +
+        '<span class="cnt">0</span>' +
+        '<button type="button" data-d="1" aria-label="Add one ' + s.nm + ' station">+</button>' +
+        '<span class="bar"><span class="bf" style="background:' + s.col + '"></span></span>' +
+      '</div>';
+    d.addEventListener("click", function(e){
+      var b = e.target.closest("button[data-d]"); if (!b) return;
+      var dd = +b.dataset.d;
+      if (dd > 0 && placed() >= TOTAL) return;
+      mix[s.k] = Math.max(0, mix[s.k] + dd);
+      render();
+    });
+    elPlants.appendChild(d);
+  });
+
+  /* ---------- the model ---------- */
+  function evaluate(ev){
+    var mod = (ev && ev.mod) || {}, cmod = (ev && ev.costmod) || {};
+    var out = 0, co2 = 0, dom = 0, costW = 0, n = placed();
+    SRC.forEach(function(s){
+      var f = mod[s.k] === undefined ? 1 : mod[s.k];
+      var o = mix[s.k] * s.cf * f;
+      out  += o;
+      co2  += o * s.co2;
+      dom  += o * s.dom;
+      costW += mix[s.k] * s.cost * (cmod[s.k] === undefined ? 1 : cmod[s.k]);
+    });
+    var need = DEMAND * ((ev && ev.demand) || 1);
+    return {
+      out: out, need: need, on: out >= need,
+      co2: out > 0 ? co2 / out : 0,
+      sec: out > 0 ? dom / out * 100 : 0,
+      cost: n > 0 ? costW / n : 0
+    };
+  }
+
+  function tint(el, v, lo, hi, invert){
+    /* lo = good end, hi = bad end (or reversed when invert) */
+    var t = Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
+    if (invert) t = 1 - t;
+    el.style.background = t < .34 ? "var(--ok)" : t < .67 ? "var(--warn)" : "var(--bad)";
+    el.style.width = Math.round(Math.max(3, Math.min(100, (invert ? 1 - t : t) * 100)) ) + "%";
+  }
+
+  function render(ev){
+    SRC.forEach(function(s){
+      var d = elPlants.querySelector('[data-k="' + s.k + '"]');
+      d.querySelector(".cnt").textContent = mix[s.k];
+      d.querySelector(".bf").style.width = (mix[s.k] / 8 * 100) + "%";
+      d.classList.toggle("has", mix[s.k] > 0);
+      d.querySelector('[data-d="1"]').disabled = placed() >= TOTAL;
+      d.querySelector('[data-d="-1"]').disabled = mix[s.k] === 0;
+    });
+    var left = TOTAL - placed();
+    elLeft.innerHTML = left === 0
+      ? 'All twenty placed. <b>Ready.</b>'
+      : 'Stations left to place: <b>' + left + '</b>';
+    elLeft.classList.toggle("zero", left === 0);
+
+    var r = evaluate(ev);
+    var pwr = document.getElementById("pwr");
+    pwr.textContent = r.out.toFixed(1);
+    pwr.classList.toggle("short", !r.on);
+    document.querySelector(".readout .lab").textContent =
+      "power made, against " + r.need.toFixed(1) + " needed";
+    var lg = document.getElementById("lights");
+    lg.classList.toggle("out", !r.on);
+    document.getElementById("lightTx").textContent = r.on ? "Lights on" : "Lights out";
+
+    document.getElementById("gCost").textContent = placed() ? r.cost.toFixed(1) : "—";
+    document.getElementById("gSec").textContent  = placed() ? Math.round(r.sec) + "%" : "—";
+    document.getElementById("gCO2").textContent  = placed() ? Math.round(r.co2) : "—";
+    tint(document.getElementById("fCost"), r.cost, 1, 5, false);
+    tint(document.getElementById("fSec"),  r.sec, 0, 100, true);
+    tint(document.getElementById("fCO2"),  r.co2, 0, 820, false);
+  }
+
+  /* ---------- events ---------- */
+  document.getElementById("drawBtn").addEventListener("click", function(){
+    if (placed() < TOTAL) {
+      elEv.innerHTML = '<div class="evcard"><div class="dt">Not yet</div>' +
+        '<h3>Place all twenty stations first</h3>' +
+        '<p>A country cannot half-exist. You have ' + (TOTAL - placed()) + ' still to place.</p></div>';
+      return;
+    }
+    if (evIdx >= EVENTS.length) return;
+    var ev = EVENTS[evIdx++];
+    var r = evaluate(ev);
+    drawn.push(ev.id); results.push({ev:ev, ok:r.on, out:r.out, need:r.need, co2:r.co2, sec:r.sec});
+
+    elEv.innerHTML =
+      '<div class="evcard ' + (r.on ? "survived" : "failed") + '">' +
+        '<div class="dt">' + ev.dt + '</div><h3>' + ev.h + '</h3>' +
+        '<p>' + ev.tx + '</p>' +
+        '<p class="evres ' + (r.on ? "ok" : "no") + '">' +
+          (r.on
+            ? "✓ The lights stayed on. You made " + r.out.toFixed(1) + " against " + r.need.toFixed(1) + " needed."
+            : "✗ Blackout. You made " + r.out.toFixed(1) + " against " + r.need.toFixed(1) +
+              " needed — short by " + (r.need - r.out).toFixed(1) + ".") +
+        '</p>' +
+        '<p class="real"><strong>What really happened:</strong> ' + ev.real + '</p>' +
+      '</div>';
+
+    render(ev);
+    paintLog();
+
+    if (evIdx >= EVENTS.length) finish();
+    else document.getElementById("drawBtn").textContent =
+      "Draw the next card (" + (EVENTS.length - evIdx) + " left)";
+  });
+
+  function paintLog(){
+    elLog.innerHTML = "";
+    results.forEach(function(x){
+      var c = document.createElement("span");
+      c.className = "chip " + (x.ok ? "ok" : "no");
+      c.textContent = (x.ok ? "✓ " : "✗ ") + x.ev.h;
+      elLog.appendChild(c);
+    });
+  }
+
+  function finish(){
+    var won = results.filter(function(x){ return x.ok; }).length;
+    var base = evaluate(null);
+    document.getElementById("drawBtn").disabled = true;
+    document.getElementById("drawBtn").textContent = "All seven cards drawn";
+    document.getElementById("finalH").textContent =
+      won === 7 ? "Seven out of seven. Nothing went dark." : won + " out of 7 survived";
+    document.getElementById("finalP").innerHTML = won === 7
+      ? "You built a country that held together through a tsunami, two wars, a dark week and a heatwave. " +
+        "Now the hard question: <strong>what did it cost, and who paid?</strong> Look at your Cheap dial."
+      : "Every blackout is a real house with no heating in it. Look at which cards beat you — " +
+        "they will all have one thing in common. Rebuild and try again.";
+    var t = document.getElementById("finalT");
+    t.innerHTML = "<tr><th>Card</th><th>Made</th><th>Needed</th><th>Result</th></tr>" +
+      results.map(function(x){
+        return "<tr><td>" + x.ev.h + "</td><td>" + x.out.toFixed(1) + "</td><td>" +
+               x.need.toFixed(1) + "</td><td style='color:" +
+               (x.ok ? "var(--ok)" : "var(--bad)") + "'>" + (x.ok ? "lights on" : "blackout") +
+               "</td></tr>";
+      }).join("") +
+      "<tr><td><strong>Normal day</strong></td><td>" + base.out.toFixed(1) + "</td><td>" +
+      base.need.toFixed(1) + "</td><td>" + Math.round(base.co2) + " g CO₂</td></tr>";
+    elFinal.classList.add("on");
+  }
+
+  /* ---------- presets and reset ---------- */
+  document.querySelectorAll("[data-preset]").forEach(function(b){
+    b.addEventListener("click", function(){
+      var p = PRESETS[b.dataset.preset] || {};
+      SRC.forEach(function(s){ mix[s.k] = p[s.k] || 0; });
+      render();
+    });
+  });
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    SRC.forEach(function(s){ mix[s.k] = 0; });
+    drawn = []; results = []; evIdx = 0;
+    elEv.innerHTML = ""; elLog.innerHTML = "";
+    elFinal.classList.remove("on");
+    var db = document.getElementById("drawBtn");
+    db.disabled = false; db.textContent = "Draw an event card";
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>

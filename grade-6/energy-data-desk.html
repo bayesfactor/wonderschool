@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Energy Data Desk — 6th grade | Wonderschool</title>
+<meta name="description" content="Twelve measures of Japan's energy system. Every one with a definition, a year, and a link to whoever published it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:920px;}
+.m{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-lg);
+  padding:26px 26px 22px;margin-bottom:20px;box-shadow:var(--shadow-sm);scroll-margin-top:112px;}
+.m > h2{margin:0 0 4px;font-size:clamp(20px,3vw,26px);}
+.m .q{font-size:15px;color:var(--ink-3);margin:0 0 16px;line-height:1.5;}
+.m .big{font-family:var(--font-display);font-weight:800;font-size:clamp(34px,6.5vw,52px);
+  letter-spacing:-.035em;line-height:1;color:var(--g6);margin:2px 0 4px;}
+.m .bigu{font-size:14.5px;color:var(--ink-3);margin:0 0 14px;}
+
+.glidx{position:sticky;top:52px;z-index:200;display:flex;gap:8px;overflow-x:auto;
+  padding:12px 4px;margin:0 -4px 14px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+  scrollbar-width:none;}
+.glidx::-webkit-scrollbar{display:none;}
+.glidx a{flex:none;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;
+  padding:7px 14px;border-radius:99px;border:1px solid var(--edge-strong);
+  color:var(--ink-2);background:var(--surface);transition:.18s var(--ease);}
+.glidx a:hover{border-color:var(--g6);color:var(--g6);}
+
+.tw{overflow-x:auto;margin:12px 0 4px;}
+table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;}
+th,td{padding:9px 11px;text-align:right;border-bottom:1px solid var(--edge);}
+th{white-space:nowrap;}
+td:first-child{white-space:normal;min-width:10em;}
+th:first-child,td:first-child{text-align:left;}
+thead th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;border-bottom:2px solid var(--edge-strong);}
+tbody tr:hover{background:var(--bg-2);}
+tr.jp td{background:var(--g6-soft);font-weight:700;color:var(--ink);}
+td.warn{color:var(--hot);font-weight:650;}
+
+.twocol{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;}
+.mini h3{font-size:13px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px;}
+</style>
+</head>
+<body class="g6">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-6/">6th grade</a>
+  <span class="sep">/</span><a href="/grade-6/energy/">Japan's Energy</a>
+  <span class="spacer"></span>
+  <a href="/grade-6/energy-dossier.html">The case files</a>
+</nav>
+
+<main>
+  <p class="kicker">Sixth grade · lesson 2 · data desk</p>
+  <h1>The Energy Data Desk</h1>
+  <p class="lede">Twelve measures. Every one carries its definition — hover any
+  <span class="gl" data-t="index">dotted term</span> — the year it refers to, and a link straight
+  to whoever published it. Two of them contradict each other. That is deliberate, and it is
+  Case File 05.</p>
+
+  <div class="note"><p><strong>Do not compare across measures.</strong> “Japan is 6th for solar and
+  33rd for something else, so the spread is 27” is a sentence with no meaning in it. Each measure
+  answers its own question. Read them one at a time.</p></div>
+
+  <nav class="glidx" aria-label="Measures">
+    <a href="#m1">Self-sufficiency</a><a href="#m2">Electricity mix</a><a href="#m3">Primary energy</a>
+    <a href="#m4">Demand by sector</a><a href="#m5">Nuclear</a><a href="#m6">Solar</a>
+    <a href="#m7">Wind</a><a href="#m8">Where it comes from</a><a href="#m9">Stockpile</a>
+    <a href="#m10">Carbon</a><a href="#m11">Price</a><a href="#m12">Per person</a>
+  </nav>
+
+  <!-- 1 -->
+  <section class="m reveal" id="m1">
+    <h2>1 · Energy self-sufficiency</h2>
+    <p class="q">Of all the energy Japan uses, how much does it produce itself?
+      <span class="gl" data-t="self-sufficiency">Definition</span></p>
+    <div class="big">16.4%</div>
+    <p class="bigu">Japanese fiscal year 2024 (April 2024 – March 2025)</p>
+    <div class="bars" data-bars='[
+      ["FY2010","20.2",20.2,"var(--e-nuclear)"],
+      ["FY2011","11.5",11.5,"var(--e-nuclear)"],
+      ["FY2012","6.7",6.7,"var(--e-coal)"],
+      ["FY2014","6.3",6.3,"var(--e-coal)"],
+      ["FY2024","16.4",16.4,"var(--e-nuclear)"]]' data-max="25" data-suffix="%"></div>
+    <p class="src">Nuclear counts as domestic production under the Japanese method, which is why
+      switching the reactors off moves this number so far. The government target is 30–40% by 2040.
+      <a href="https://opengov.jp/en/economy/energy/self-sufficiency/" target="_blank" rel="noopener">OpenGov
+      Japan, from Agency for Natural Resources and Energy statistics</a>.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="m reveal" id="m2">
+    <h2>2 · The electricity mix — and the disagreement</h2>
+    <p class="q">What is Japan's <span class="gl" data-t="electricity">electricity</span> actually
+      made from? Two institutions, same year, different answers.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Source</th>
+          <th><span class="gl" data-t="isep">ISEP</span> 2025</th>
+          <th><span class="gl" data-t="ember">Ember</span> 2025</th></tr></thead>
+        <tbody>
+          <tr><td>Gas · <span class="gl" data-t="lng">LNG</span></td><td>28.9%</td><td class="warn">33%</td></tr>
+          <tr><td>Coal</td><td>28.4%</td><td class="warn">32%</td></tr>
+          <tr><td>Nuclear</td><td>9.4%</td><td>9.1%</td></tr>
+          <tr><td>Solar</td><td>9.9%</td><td>9.8%</td></tr>
+          <tr><td>Hydro</td><td>7.5%</td><td>—</td></tr>
+          <tr><td>Biomass</td><td>6.9%</td><td>—</td></tr>
+          <tr><td>Wind</td><td>1.4%</td><td>1.3%</td></tr>
+          <tr><td>Geothermal</td><td>0.3%</td><td>—</td></tr>
+          <tr class="jp"><td>All renewables</td><td>26.1%</td><td>—</td></tr>
+          <tr class="jp"><td>All fossil</td><td>64.5%</td><td class="warn">67%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The gap is the <span class="gl" data-t="denominator">denominator</span>: ISEP
+      counts electricity that factories generate for their own use, Ember counts the public grid.
+      Factories self-generate mostly with coal and gas.
+      <a href="https://www.isep.or.jp/en/1592/" target="_blank" rel="noopener">ISEP, 2025 preliminary</a> ·
+      <a href="https://ember-energy.org/countries-and-regions/japan/" target="_blank" rel="noopener">Ember,
+      Global Electricity Review 2026</a>. Both figures are for calendar year 2025.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="m reveal" id="m3">
+    <h2>3 · Primary energy supply</h2>
+    <p class="q">All the energy entering the country, not just the electricity.
+      <span class="gl" data-t="primary-energy">Definition</span> — and note how different this
+      looks from measure 2.</p>
+    <div class="bars" data-bars='[
+      ["Oil","35.4",35.4,"var(--e-oil)"],
+      ["Coal","26.1",26.1,"var(--e-coal)"],
+      ["Natural gas","21.6",21.6,"var(--e-lng)"],
+      ["Renewables (non-hydro)","8.4",8.4,"var(--e-solar)"],
+      ["Nuclear","4.7",4.7,"var(--e-nuclear)"],
+      ["Hydro","3.8",3.8,"var(--e-hydro)"]]' data-max="40" data-suffix="%"></div>
+    <p class="src">Total 405.4 Mtoe, Japanese fiscal year 2024. Oil dominates here and almost
+      vanishes from the electricity mix, because most of it never becomes electricity — it becomes
+      petrol, diesel, jet fuel, plastics and chemicals. Shares calculated from
+      <a href="https://eneken.ieej.or.jp/data/12968_summary.pdf" target="_blank" rel="noopener">IEEJ,
+      <em>Economic and Energy Outlook of Japan</em>, January 2026</a>
+      (<span class="gl" data-t="ieej">who?</span>).</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="m reveal" id="m4">
+    <h2>4 · Who actually uses it</h2>
+    <p class="q">Final energy consumption by sector. Electrifying a country means different work
+      in each of these rows.</p>
+    <div class="bars" data-bars='[
+      ["Industry (energy)","29",29,"var(--e-coal)"],
+      ["Transport","24",24,"var(--e-oil)"],
+      ["Commercial &amp; public","17",17,"var(--e-lng)"],
+      ["Residential","16",16,"var(--e-hydro)"],
+      ["Industry (feedstock)","10",10,"var(--e-geo)"],
+      ["Other","3",3,"var(--e-other)"]]' data-max="35" data-suffix="%"></div>
+    <p class="src">Calendar year 2022, IEA definitions. “Feedstock” is oil and gas used as raw
+      material — turned into plastic, not burned — which is why that row cannot be electrified at
+      all, only replaced. Transport is nearly all oil, and industry's heat is the hardest part of
+      the whole problem.
+      <a href="https://www.ieabioenergy.com/wp-content/uploads/2024/12/CountryReport2024_Japan_final.pdf"
+      target="_blank" rel="noopener">IEA Bioenergy country report, 2024, from IEA data</a>.
+      A more recent sectoral split is published only by METI, whose site this lesson could not reach.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="m reveal" id="m5">
+    <h2>5 · Nuclear, before and after</h2>
+    <p class="q">The single biggest change in Japan's energy system in fifty years.
+      <span class="gl" data-t="reactor">Definition</span></p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Measure</th><th>Value</th><th>When</th></tr></thead>
+        <tbody>
+          <tr><td>Reactors operable</td><td>54</td><td>before 11 March 2011</td></tr>
+          <tr class="jp"><td>Reactors generating</td><td>0</td><td>5 May 2012 – 11 Aug 2015</td></tr>
+          <tr><td>Reactors restarted since</td><td>15</td><td>as of September 2026</td></tr>
+          <tr><td>Reactors operable now</td><td>33</td><td>September 2026</td></tr>
+          <tr><td>Nuclear share of electricity</td><td>~25%</td><td>2010</td></tr>
+          <tr><td>Nuclear share of electricity</td><td>9.4%</td><td>2025</td></tr>
+          <tr><td><span class="gl" data-t="kashiwazaki-kariwa">Kashiwazaki-Kariwa 6</span>
+            back in commercial operation</td><td>after 14 years</td><td>16 April 2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Counts differ by definition — “approved but not restarted” is 2 units by one
+      regulator's count and 7 by another's, because they mean different stages of the same process.
+      <a href="https://world-nuclear.org/information-library/country-profiles/countries-g-n/japan-nuclear-power"
+      target="_blank" rel="noopener">World Nuclear Association</a> ·
+      <a href="https://www.nucnet.org/news/japan-s-kashiwazaki-kariwa-6-resumes-commercial-operation-after-more-than-14-years-offline-4-5-2026"
+      target="_blank" rel="noopener">NucNet, April 2026</a>. Every restart must clear the
+      <span class="gl" data-t="nra">NRA</span>'s 2013 rules.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="m reveal" id="m6">
+    <h2>6 · Solar</h2>
+    <p class="q">The one renewable Japan built at enormous speed — and the trouble that followed.</p>
+    <div class="big">102.7 GW</div>
+    <p class="bigu">installed capacity at the end of 2025 · 6th in the world</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Measure</th><th>Value</th><th>Year</th></tr></thead>
+        <tbody>
+          <tr><td>Added in the year</td><td>5.7 <span class="gl" data-t="gigawatt">GW</span></td><td>2025</td></tr>
+          <tr><td>World rank, capacity</td><td>6th</td><td>2025</td></tr>
+          <tr><td>World rank, generation</td><td>4th</td><td>2025</td></tr>
+          <tr><td><span class="gl" data-t="fit">Feed-in tariff</span> begins</td>
+            <td>¥40/kWh, 20 years</td><td>1 July 2012</td></tr>
+          <tr class="jp"><td><span class="gl" data-t="curtailment">Curtailment</span> begins</td>
+            <td>Kyushu</td><td>October 2018</td></tr>
+          <tr><td>Realistic <span class="gl" data-t="capacity-factor">capacity factor</span></td>
+            <td>~15%</td><td>—</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Capacity and ranks:
+      <a href="https://iea-pvps.org/wp-content/uploads/2026/04/Snapshot-of-Global-PV-Markets-2026.pdf"
+      target="_blank" rel="noopener">IEA-PVPS, <em>Snapshot of Global PV Markets 2026</em></a>.
+      Generation rank: <a href="https://ember-energy.org/countries-and-regions/japan/"
+      target="_blank" rel="noopener">Ember</a>. The commonly repeated claim that Japan is “third in
+      the world for solar” is out of date for capacity and confuses it with the generation rank.</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="m reveal" id="m7">
+    <h2>7 · Offshore wind</h2>
+    <p class="q">The plan that has not happened yet.</p>
+    <div class="big">~421 MW</div>
+    <p class="bigu">operating offshore, across six projects, February 2026</p>
+    <p>For scale: one large nuclear reactor is about 1,000 MW, and Japan's 2040 target is
+    30,000–45,000 MW. Japan's sea floor drops away steeply, so most of its wind resource needs
+    <em>floating</em> turbines — a technology that exists but is not yet cheap.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Target or event</th><th>Value</th><th>Year</th></tr></thead>
+        <tbody>
+          <tr><td>Government project-formation target</td><td>10 GW</td><td>by 2030</td></tr>
+          <tr><td>Operational target — a different number</td><td>5.7 GW</td><td>by 2030</td></tr>
+          <tr><td>Independent forecast of what will really spin</td><td>~3.5 GW</td><td>by 2030</td></tr>
+          <tr class="jp"><td>Mitsubishi abandons three won projects</td><td>~1.7 GW</td><td>27 August 2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Mitsubishi withdrew after construction costs “more than doubled” against its 2021
+      winning bids of ¥11.99–16.49/kWh.
+      <a href="https://www.westwoodenergy.com/news/westwood-insight/westwood-insight-what-does-mitsubishis-exit-mean-for-japans-offshore-wind-targets"
+      target="_blank" rel="noopener">Westwood Global Energy, 2025</a>. Operating capacity:
+      <a href="https://www.gem.wiki/Japan_Offshore_Wind_Development" target="_blank" rel="noopener">Global
+      Energy Monitor</a>. Note that “10 GW by 2030” and “5.7 GW by 2030” are both real government
+      numbers measuring different things — the first is capacity auctioned, the second capacity running.</p>
+  </section>
+
+  <!-- 8 -->
+  <section class="m reveal" id="m8">
+    <h2>8 · Where it comes from</h2>
+    <p class="q">The <span class="gl" data-t="energy-security">security</span> measures. These are
+      the numbers that keep Japanese ministers awake.</p>
+    <div class="twocol">
+      <div class="mini">
+        <h3>Crude oil</h3>
+        <div class="bars" data-bars='[
+          ["Through the Strait of Hormuz","93",93,"var(--e-oil)"],
+          ["From the Middle East","94",94,"var(--e-oil)"],
+          ["United Arab Emirates","43",43,"var(--e-geo)"],
+          ["Saudi Arabia","39",39,"var(--e-geo)"],
+          ["Iran","0",0.4,"var(--e-other)"]]' data-max="100" data-suffix="%"></div>
+      </div>
+      <div class="mini">
+        <h3>LNG</h3>
+        <div class="bars" data-bars='[
+          ["Australia","41",41,"var(--e-lng)"],
+          ["Malaysia","16",16,"var(--e-lng)"],
+          ["Russia (Sakhalin)","9",9,"var(--e-coal)"],
+          ["United States","9",9,"var(--e-lng)"],
+          ["Middle East — was 29% in 2013","11",11,"var(--e-geo)"]]' data-max="50" data-suffix="%"></div>
+      </div>
+    </div>
+    <p class="src">Oil, 2026: <a href="https://www.csis.org/analysis/what-are-implications-iran-conflict-japan"
+      target="_blank" rel="noopener">CSIS, March 2026</a> — Japan has not directly imported Iranian
+      crude since 2019. LNG supplier shares, FY2023:
+      <a href="https://www.nippon.com/en/japan-data/h02310/" target="_blank" rel="noopener">Nippon.com,
+      from trade statistics</a>; Russia's 9% share of 2024 imports:
+      <a href="https://gasoutlook.com/analysis/japans-takaichi-pushes-back-against-russian-supply-pressure/"
+      target="_blank" rel="noopener">Gas Outlook, citing the IGU World LNG Report 2025</a>.
+      Mitsui holds 12.5% of <span class="gl" data-t="sakhalin">Sakhalin-2</span> and Mitsubishi 10%.</p>
+  </section>
+
+  <!-- 9 -->
+  <section class="m reveal" id="m9">
+    <h2>9 · The stockpile</h2>
+    <p class="q">How long Japan could run if the ships stopped tomorrow.
+      <span class="gl" data-t="stockpile">Definition</span></p>
+    <div class="big">254 days</div>
+    <p class="bigu">about 470 million barrels · 31 December 2025</p>
+    <p>Made of three parts: 146 days held by the government, 101 days that oil companies are
+    required by law to keep, and 7 days held jointly with producer countries. The
+    <span class="gl" data-t="iea">IEA</span> asks its members for 90 days. Japan holds nearly
+    three times the requirement.</p>
+    <p class="src"><a href="https://www.csis.org/analysis/what-are-implications-iran-conflict-japan"
+      target="_blank" rel="noopener">CSIS, March 2026</a> ·
+      <a href="https://www.nippon.com/en/japan-data/h02718/" target="_blank" rel="noopener">Nippon.com</a>.
+      Worth asking: what is the plan for day 255?</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="m reveal" id="m10">
+    <h2>10 · Carbon</h2>
+    <p class="q">How dirty is the electricity, and where are total emissions going?
+      <span class="gl" data-t="carbon-intensity">Definition</span></p>
+    <div class="twocol">
+      <div class="mini">
+        <h3>Grid carbon intensity, 2025</h3>
+        <div class="bars" data-bars='[
+          ["Japan","477",477,"var(--e-coal)"],
+          ["World average","~445",445,"var(--e-other)"],
+          ["France","&lt;60",60,"var(--e-nuclear)"]]' data-max="600" data-suffix=" g"></div>
+        <p class="src" style="margin-top:6px;">grams of CO₂ per kWh. Japan's figure is a 15-year low.</p>
+      </div>
+      <div class="mini">
+        <h3>Total greenhouse gases</h3>
+        <div class="bars" data-bars='[
+          ["FY2013","1,394",1394,"var(--e-coal)"],
+          ["FY2023","1,013",1013,"var(--e-lng)"],
+          ["FY2024","994",994,"var(--e-wind)"]]' data-max="1500" data-suffix=" Mt"></div>
+        <p class="src" style="margin-top:6px;">million tonnes CO₂-equivalent. FY2024 was the first
+        year below one billion tonnes, and the lowest on record: <strong>−28.7%</strong> against FY2013.</p>
+      </div>
+    </div>
+    <p class="src"><a href="https://www.env.go.jp/en/press/press_01760.html" target="_blank"
+      rel="noopener">Japan Ministry of the Environment, 14 April 2026</a> ·
+      <a href="https://ember-energy.org/countries-and-regions/japan/" target="_blank" rel="noopener">Ember</a>.
+      Note that the FY2013 baseline is the year Japan's emissions peaked, with every reactor off —
+      which makes the fall since then look larger than a different baseline would.</p>
+  </section>
+
+  <!-- 11 -->
+  <section class="m reveal" id="m11">
+    <h2>11 · What households pay</h2>
+    <p class="q">Electricity price for a home, in US dollars per
+      <span class="gl" data-t="kwh">kilowatt-hour</span>.</p>
+    <div class="bars" data-bars='[
+      ["Italy","0.417",0.417,"var(--e-other)"],
+      ["Germany","0.404",0.404,"var(--e-other)"],
+      ["United Kingdom","0.401",0.401,"var(--e-other)"],
+      ["France","0.277",0.277,"var(--e-nuclear)"],
+      ["Australia","0.256",0.256,"var(--e-other)"],
+      ["Japan","0.229",0.229,"var(--e-geo)"],
+      ["United States","0.184",0.184,"var(--e-other)"],
+      ["South Korea","0.126",0.126,"var(--e-other)"],
+      ["Canada","0.123",0.123,"var(--e-hydro)"]]' data-max="0.45" data-prefix="$"></div>
+    <p class="src">Average of 2023–2025 quarterly figures.
+      <a href="https://www.globalpetrolprices.com/electricity_prices/" target="_blank" rel="noopener">GlobalPetrolPrices.com</a>.
+      Treat these as approximate: household tariffs vary by region, by season and by how much a
+      household uses, and this source aggregates rather than measuring. Japan sits in the middle of
+      the rich countries — higher than North America, well below western Europe.</p>
+  </section>
+
+  <!-- 12 -->
+  <section class="m reveal" id="m12">
+    <h2>12 · Per person</h2>
+    <p class="q">Divide by the population and two different pictures appear.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Measure</th><th>Japan</th><th>World</th><th>Year</th></tr></thead>
+        <tbody>
+          <tr class="jp"><td>Electricity used per person</td><td>8.4 MWh</td><td>3.9 MWh</td><td>2025</td></tr>
+          <tr><td>Power-sector CO₂ per person</td><td>4.0 t</td><td>1.8 t</td><td>2025</td></tr>
+          <tr><td>Total electricity demand</td><td>1,061 <span class="gl" data-t="twh">TWh</span></td><td>—</td><td>2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><a href="https://ember-energy.org/countries-and-regions/japan/" target="_blank"
+      rel="noopener">Ember, 2026</a>. Japan uses roughly twice the world average of electricity per
+      person and emits roughly twice the world average from making it — those two facts are the
+      same fact, which is worth a minute's thought.</p>
+  </section>
+
+  <div class="note"><p><strong>The exercise.</strong> Pick any three measures on this page. For each
+  one, open the source link and find the actual number in the actual document. Time yourself.
+  Any figure you cannot find in two minutes goes in a list called <em>“claims I am repeating”</em> —
+  and that list is the most useful thing you will make all week.</p></div>
+
+  <footer>
+    <a href="/grade-6/energy/">Back to the energy lesson</a> ·
+    <a href="/grade-6/energy-dossier.html">The case files</a> ·
+    <a href="/grade-6/japan/">Lesson 1: Japan</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll(".bars[data-bars]").forEach(function(box){
+    var rows, max = parseFloat(box.dataset.max) || 100;
+    var suf = box.dataset.suffix || "", pre = box.dataset.prefix || "";
+    try { rows = JSON.parse(box.dataset.bars); } catch (e) { return; }
+    box.innerHTML = rows.map(function(r){
+      var label = r[0], shown = r[1], val = r[2], col = r[3] || "var(--accent)";
+      var w = Math.max(0.6, Math.min(100, val / max * 100));
+      return '<div class="row">' +
+        '<span class="lbl"><span class="sw" style="background:' + col + '"></span>' + label + '</span>' +
+        '<span class="track"><span class="fill" data-w="' + w + '" style="background:' + col + '"></span></span>' +
+        '<span class="num">' + pre + shown + suf + '</span></div>';
+    }).join("");
+  });
+  function grow(scope){
+    (scope || document).querySelectorAll(".bars .fill[data-w]").forEach(function(f){
+      f.style.width = f.dataset.w + "%";
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { grow(e.target); io.unobserve(e.target); } });
+    }, { threshold: .15 });
+    document.querySelectorAll(".bars").forEach(function(b){ io.observe(b); });
+    setTimeout(function(){ grow(); }, 2200);
+  } else { grow(); }
+})();
+</script>
+</body>
+</html>

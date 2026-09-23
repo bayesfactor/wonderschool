@@ -47,6 +47,12 @@
   --font-mono:"SF Mono",Menlo,Consolas,monospace;
 
   --ease:cubic-bezier(.34,.11,.2,1);
+
+  /* Energy-source fills. GRAPHICS ONLY — never used as a text colour,
+     so they are free to be vivid. Legends use a swatch plus normal ink. */
+  --e-coal:#57544e; --e-lng:#b96d24; --e-oil:#6b4a2f; --e-nuclear:#7c5ce0;
+  --e-solar:#dfa01f; --e-hydro:#2a78d6; --e-wind:#1f9c78;
+  --e-bio:#6c9339;  --e-geo:#bb5033;  --e-other:#9a958a;
 }
 
 @media (prefers-color-scheme:dark){
@@ -67,6 +73,9 @@
     --shadow-sm:0 1px 2px rgba(0,0,0,.4);
     --shadow-md:0 4px 14px rgba(0,0,0,.45);
     --shadow-lg:0 10px 34px rgba(0,0,0,.55);
+    --e-coal:#918d84; --e-lng:#e0975a; --e-oil:#ab8460; --e-nuclear:#a78bfa;
+    --e-solar:#f0bc52; --e-hydro:#5aa2ef; --e-wind:#3fc89c;
+    --e-bio:#9dc468;  --e-geo:#e08a70;  --e-other:#7e7a71;
   }
 }
 
@@ -215,6 +224,25 @@ a.tile:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:va
 
 .divider{height:1px;background:var(--edge);border:0;margin:44px 0;}
 
+/* ---------- data bars (shared by the energy lessons) ---------- */
+.bars{margin:20px 0;}
+.bars .row{display:grid;grid-template-columns:minmax(96px,30%) 1fr auto;gap:11px;
+  align-items:center;padding:5px 0;}
+.bars .lbl{font-size:14.5px;color:var(--ink-2);display:flex;align-items:center;gap:8px;line-height:1.3;}
+.bars .sw{width:12px;height:12px;border-radius:3px;flex:none;background:var(--accent);
+  border:1px solid rgba(128,128,128,.35);}
+.bars .track{background:var(--bg-2);border:1px solid var(--edge);border-radius:99px;
+  height:16px;overflow:hidden;}
+.bars .fill{display:block;height:100%;border-radius:99px;background:var(--accent);
+  width:0;transition:width .85s var(--ease);}
+.bars .num{font-family:var(--font-display);font-weight:700;font-size:15px;
+  color:var(--ink);min-width:3.6em;text-align:right;font-variant-numeric:tabular-nums;}
+
+/* a source credit under a chart or a table */
+.src{font-size:12.5px;color:var(--ink-3);margin:10px 0 0;line-height:1.55;}
+.src a{color:var(--ink-2);}
+.src a:hover{color:var(--accent);}
+
 footer{border-top:1px solid var(--edge);margin-top:60px;padding-top:22px;
   font-size:13.5px;color:var(--ink-3);line-height:1.7;max-width:70ch;}
 footer a{color:var(--ink-2);}
@@ -270,7 +298,13 @@ body.doc .site-bar{background:#ffffff;border-bottom-color:#d8d4c8;}
   body:not(.doc) details .body{display:block !important;}
   body:not(.doc) :is(.rail,.casenav,.cats,.league,.timer,.stampbtn,.brow,
     .guess input[type=range],.guess button,.kgrid,.fuji,#fujiSay,.beats,.hdone,
-    .glidx,#resetBtn,.badge button){display:none !important;}
+    .glidx,#resetBtn,.badge button,
+    .sliders,.gauges,.drawbtn,.eventlog,.hundred,.sunsim,.daysim,.mixtoggle,
+    .kpow,.chain,.slicebox,.scorebar){display:none !important;}
+  /* bars still make sense on paper, in black and white */
+  body:not(.doc) .bars .track{border:1px solid #000;background:#fff !important;}
+  body:not(.doc) .bars .fill{background:#000 !important;}
+  body:not(.doc) .bars .sw{background:#fff !important;border:1px solid #000;}
   body:not(.doc) .reveal{opacity:1 !important;transform:none !important;}
   body:not(.doc) img,body:not(.doc) svg{max-width:60mm;}
   /* neutralise screen-only colour so nothing prints as a solid block */

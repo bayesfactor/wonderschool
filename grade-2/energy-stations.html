@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Six Energy Stations — 2nd grade | Wonderschool</title>
+<meta name="description" content="Follow the wire, crack the picture-words, taste the energy pie, and find out what happens at night.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:860px;}
+.hero{text-align:center;padding:18px 0 6px;}
+.hero h1{font-size:clamp(40px,9vw,72px);margin:0 0 6px;
+  background:linear-gradient(115deg,var(--g2),var(--g4) 60%,var(--g6));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{font-size:clamp(17px,2.4vw,21px);color:var(--ink-2);max-width:34ch;margin:0 auto 22px;}
+
+.rail{position:sticky;top:52px;z-index:200;display:flex;gap:7px;justify-content:center;
+  flex-wrap:wrap;padding:11px 10px;margin:0 -10px 26px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-radius:99px;}
+.rail a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  font-weight:700;font-size:14px;text-decoration:none;
+  border:2px solid var(--edge-strong);color:var(--ink-3);background:var(--surface);transition:.2s var(--ease);}
+.rail a:hover{transform:translateY(-2px);border-color:var(--g2);color:var(--g2);}
+.rail a.done{background:var(--g2);border-color:var(--g2);color:var(--on-accent);}
+
+.station{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
+  padding:32px 30px;margin-bottom:26px;box-shadow:var(--shadow-sm);scroll-margin-top:110px;}
+.station .num{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:9px;}
+.station .num b{width:24px;height:24px;border-radius:50%;background:var(--g2);color:var(--on-accent);
+  display:grid;place-items:center;font-size:12px;}
+.station h2{margin:0 0 12px;font-size:clamp(26px,4.5vw,36px);}
+.station p{font-size:17px;line-height:1.65;}
+.big-say{font-size:clamp(19px,2.6vw,22px);line-height:1.5;color:var(--ink);font-weight:500;}
+
+.paper{display:flex;gap:13px;align-items:flex-start;background:var(--gold-soft);
+  border:1px solid color-mix(in srgb,var(--gold-vivid) 45%,transparent);
+  border-radius:var(--r);padding:15px 18px;margin:20px 0 4px;}
+.paper .ic{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gold-vivid);color:#3a2a06;
+  display:grid;place-items:center;font-weight:800;font-size:15px;}
+.paper p{margin:0;font-size:15.5px;color:var(--ink);}
+
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px);}to{opacity:1;transform:none;}}
+.verdict{margin-top:16px;font-size:16.5px;line-height:1.6;display:none;}
+.verdict.on{display:block;animation:pop .4s var(--ease);}
+
+/* ---- station 1: the chain ---- */
+.chain{display:grid;grid-template-columns:repeat(auto-fit,minmax(125px,1fr));gap:10px;
+  align-items:stretch;margin:22px 0 6px;}
+.link{border:2px solid var(--edge-strong);border-radius:var(--r);
+  padding:14px 12px;text-align:center;background:var(--surface);opacity:.32;
+  transition:.45s var(--ease);}
+.link.on{opacity:1;border-color:var(--g2);background:var(--g2-soft);transform:translateY(-3px);}
+.link .em{font-size:34px;line-height:1.1;}
+.link .nm{font-family:var(--font-display);font-weight:700;font-size:15px;margin-top:5px;color:var(--ink);}
+.link .ds{font-size:13px;color:var(--ink-2);line-height:1.4;margin-top:3px;}
+.chainsay{min-height:3.2em;font-size:17px;line-height:1.55;color:var(--ink);margin:14px 0 0;font-weight:500;}
+
+/* ---- station 2: power picture-words ---- */
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:13px;margin:20px 0;}
+.kcard{perspective:900px;background:none;border:0;padding:0;cursor:pointer;height:172px;font:inherit;}
+.kinner{position:relative;width:100%;height:100%;transition:transform .55s var(--ease);transform-style:preserve-3d;}
+.kcard.flip .kinner{transform:rotateY(180deg);}
+.kface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:6px;padding:10px;border:2px solid var(--edge-strong);background:var(--surface);}
+.kface .ch{font-size:46px;line-height:1.05;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:var(--ink);}
+.kface .rd{font-size:13px;color:var(--ink-3);font-style:italic;}
+.kface .tap{font-size:11px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;}
+.kback{transform:rotateY(180deg);background:var(--g2);border-color:var(--g2);color:var(--on-accent);text-align:center;}
+.kback .ch{color:var(--on-accent);font-size:30px;}
+.kback .en{font-family:var(--font-display);font-size:19px;font-weight:800;line-height:1.15;}
+.kback .why{font-size:13px;line-height:1.4;opacity:.94;}
+
+/* ---- station 3: the pie ---- */
+.pie{display:flex;flex-wrap:wrap;gap:26px;align-items:center;justify-content:center;margin:20px 0 6px;}
+.pie svg{flex:none;}
+.pie .seg{cursor:pointer;transition:opacity .2s,stroke-width .2s;}
+.pie .seg:hover,.pie .seg.sel{stroke-width:38;}
+.pie .seg.dim{opacity:.3;}
+.legend{display:grid;gap:7px;min-width:210px;}
+.legend button{display:flex;align-items:center;gap:9px;background:none;border:0;padding:5px 7px;
+  border-radius:9px;cursor:pointer;font:inherit;font-size:15px;color:var(--ink-2);text-align:left;width:100%;
+  transition:background .15s;}
+.legend button:hover,.legend button.sel{background:var(--bg-2);color:var(--ink);}
+.legend .sw{width:14px;height:14px;border-radius:4px;flex:none;border:1px solid rgba(128,128,128,.35);}
+.legend .pc{margin-left:auto;font-family:var(--font-display);font-weight:700;color:var(--ink);
+  font-variant-numeric:tabular-nums;}
+.slicebox{background:var(--bg-2);border-radius:var(--r);padding:18px 20px;margin-top:8px;min-height:5.2em;}
+.slicebox .st{font-family:var(--font-display);font-weight:800;font-size:20px;color:var(--ink);margin-bottom:5px;}
+.slicebox p{margin:0;font-size:16px;}
+
+/* ---- station 4: 100 squares ---- */
+.hundred{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:330px;margin:20px auto 10px;}
+.sq{aspect-ratio:1;border-radius:4px;background:var(--edge);border:1px solid var(--edge-strong);
+  transition:background .3s var(--ease),transform .3s var(--ease);}
+.sq.home{background:var(--g2-vivid);border-color:var(--g2);}
+.sq.ship{background:var(--g4-vivid);border-color:var(--g4);}
+.keyrow{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;font-size:14.5px;color:var(--ink-2);margin-bottom:6px;}
+.keyrow span{display:inline-flex;align-items:center;gap:7px;}
+.keyrow i{width:13px;height:13px;border-radius:4px;display:inline-block;}
+
+/* ---- station 5: the sun ---- */
+.sunsim{background:var(--bg-2);border-radius:var(--r-lg);padding:20px;margin:20px 0 6px;}
+.sky{position:relative;height:150px;border-radius:var(--r);overflow:hidden;
+  background:linear-gradient(180deg,#0d1b3a,#26406e 55%,#3d5a86);}
+.sky.day{background:linear-gradient(180deg,#5fa8e8,#a9d4f2 60%,#d9ecf8);}
+.sun{position:absolute;width:40px;height:40px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,#fff3c4,#f2b21c);
+  box-shadow:0 0 26px rgba(242,178,28,.75);transition:left .18s linear,top .18s linear,opacity .3s;}
+.ground{position:absolute;left:0;right:0;bottom:0;height:34px;background:#2f4a2c;}
+.panel2{position:absolute;bottom:26px;left:50%;transform:translateX(-50%) skewX(-16deg);
+  width:74px;height:24px;background:#22304a;border:2px solid #7d8ea8;border-radius:3px;}
+.panel2.lit{background:#4b7fd0;border-color:#bcd6f5;}
+.hourrow{display:flex;justify-content:space-between;font-size:13px;color:var(--ink-3);margin-top:12px;}
+.sunsim input[type=range]{width:100%;accent-color:var(--g2);height:30px;}
+.outbar{display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;margin-top:12px;
+  font-size:15px;color:var(--ink-2);}
+.outbar .tk{height:18px;background:var(--surface);border:1px solid var(--edge-strong);border-radius:99px;overflow:hidden;}
+.outbar .fl{display:block;height:100%;background:var(--gold-vivid);width:0;transition:width .18s linear;}
+.outbar .vv{font-family:var(--font-display);font-weight:800;color:var(--ink);min-width:3.4em;text-align:right;
+  font-variant-numeric:tabular-nums;}
+.choices{display:grid;gap:10px;margin-top:18px;}
+.choices button{font:inherit;font-size:16px;text-align:left;padding:14px 17px;border-radius:var(--r);
+  border:2px solid var(--edge-strong);background:var(--surface);color:var(--ink);cursor:pointer;transition:.18s var(--ease);}
+.choices button:hover{border-color:var(--g2);transform:translateX(3px);}
+.choices button.yes{border-color:var(--g2);background:var(--g2-soft);}
+.choices button.no{border-color:var(--hot);background:var(--hot-soft);}
+
+/* ---- stamps ---- */
+.stampbtn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font:inherit;
+  font-weight:650;font-size:15.5px;padding:12px 22px;border-radius:99px;cursor:pointer;
+  border:2px dashed var(--g2);background:transparent;color:var(--g2);transition:.2s var(--ease);}
+.stampbtn:hover{background:var(--g2-soft);transform:translateY(-2px);}
+.stampbtn.got{border-style:solid;background:var(--g2);color:var(--on-accent);}
+.badge{text-align:center;background:linear-gradient(140deg,var(--g2-soft),var(--g4-soft) 70%,var(--g6-soft));
+  border:2px solid var(--g2);border-radius:var(--r-xl);padding:34px 28px;margin-bottom:26px;}
+.badge h2{margin-top:0;}
+.stamps{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:14px;margin:22px 0 6px;}
+.st2{aspect-ratio:1;border-radius:50%;border:3px dashed var(--edge-strong);display:grid;place-items:center;
+  text-align:center;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--ink-3);
+  padding:8px;background:var(--surface);transition:.35s var(--ease);}
+.st2.got{border-style:solid;border-color:var(--g2);background:var(--g2);color:var(--on-accent);
+  transform:rotate(-4deg) scale(1.04);}
+</style>
+</head>
+<body class="g2">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-2/">2nd grade</a>
+  <span class="sep">/</span><a href="/grade-2/energy/">Energy</a>
+  <span class="spacer"></span>
+  <button class="barbtn" id="resetBtn" type="button">Start over</button>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="kicker">Second grade · lesson 2</p>
+    <h1>Six Energy Stations</h1>
+    <p class="sub">Follow the wire all the way to the end. Collect a stamp at every station.</p>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Stations">
+    <a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a>
+    <a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a>
+  </nav>
+
+  <!-- ============ 1 ============ -->
+  <section class="station reveal" id="s1">
+    <div class="num"><b>1</b> The long wire</div>
+    <h2>Where does the light come from?</h2>
+    <p class="big-say">Press the button. Follow the wire backwards, one step at a time,
+    and see where it finally stops.</p>
+
+    <div class="chain" id="chain"></div>
+    <p class="chainsay" id="chainsay">Ready?</p>
+    <button class="btn" id="chainBtn" type="button">Follow the wire &rarr;</button>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>On plain paper:</strong> draw the whole chain for the light in <em>your</em> room.
+      Start with the lamp. Do not stop until you have drawn the very first thing.</p></div>
+
+    <button class="stampbtn" data-stamp="wire" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section class="station reveal" id="s2">
+    <div class="num"><b>2</b> Picture-words</div>
+    <h2>Fire power, water power, wind power</h2>
+    <p>You already know some kanji: 火 fire, 水 water, 日 sun. Japanese builds bigger words by
+    <strong>gluing small ones together</strong>. The word for power is 力 — it looks like an arm
+    pushing. Glue it on and watch what happens.</p>
+    <p><strong>Guess first, then tap to flip.</strong></p>
+
+    <div class="kgrid" id="kgrid"></div>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>On plain paper:</strong> invent your own power picture-word. What would
+      <em>cat power</em> look like? Draw it, then explain your drawing to somebody.</p></div>
+
+    <button class="stampbtn" data-stamp="words" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section class="station reveal" id="s3">
+    <div class="num"><b>3</b> The energy pie</div>
+    <h2>What is Japan's electricity made of?</h2>
+    <p>Imagine all the electricity Japan used last year as one big pie, cut into 100 slices.
+    Tap a slice to find out what it is.</p>
+
+    <div class="pie">
+      <svg width="220" height="220" viewBox="0 0 220 220" role="img" aria-label="Japan's electricity, by source">
+        <g id="donut" transform="translate(110,110) rotate(-90)"></g>
+        <text x="110" y="104" text-anchor="middle" font-size="15" fill="currentColor"
+              font-family="Inter, sans-serif" opacity=".7">100</text>
+        <text x="110" y="126" text-anchor="middle" font-size="15" fill="currentColor"
+              font-family="Inter, sans-serif" opacity=".7">slices</text>
+      </svg>
+      <div class="legend" id="legend"></div>
+    </div>
+
+    <div class="slicebox" id="slicebox">
+      <div class="st">Tap any slice</div>
+      <p>Or tap a name in the list. Each one tells you what it really is.</p>
+    </div>
+
+    <p class="src">Japan's electricity in 2025, all sources.
+      <a href="https://www.isep.or.jp/en/1592/" target="_blank" rel="noopener">Institute for Sustainable
+      Energy Policies, Tokyo</a>. Numbers are rounded to whole slices.</p>
+
+    <button class="stampbtn" data-stamp="pie" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section class="station reveal" id="s4">
+    <div class="num"><b>4</b> Sixteen out of a hundred</div>
+    <h2>Japan has almost no fuel of its own</h2>
+    <p>Japan has forests, rivers, hot springs and volcanoes. What it does <strong>not</strong> have
+    is oil, or coal worth digging, or gas. Out of every 100 pieces of energy Japan uses,
+    only a few are made at home.</p>
+    <p class="big-say">How many out of 100? Press the button and count.</p>
+
+    <div class="keyrow">
+      <span><i style="background:var(--g2-vivid)"></i> made in Japan</span>
+      <span><i style="background:var(--g4-vivid)"></i> arrives on a ship</span>
+    </div>
+    <div class="hundred" id="hundred" aria-hidden="true"></div>
+    <button class="btn" id="hundredBtn" type="button">Show me the hundred</button>
+    <p class="verdict" id="hundredSay"></p>
+
+    <p class="src">Japan's energy self-sufficiency was <strong>16.4%</strong> in the year to March 2025.
+      In 2010 it was 20.2%; in 2014, after every nuclear reactor was switched off, it fell to 6.3%.
+      <a href="https://opengov.jp/en/economy/energy/self-sufficiency/" target="_blank" rel="noopener">OpenGov Japan,
+      from government statistics</a>.</p>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>On the printed Energy Sheet:</strong> colour in your own hundred squares.
+      Sixteen in one colour, eighty-four in another. Then look at it from across the room.</p></div>
+
+    <button class="stampbtn" data-stamp="hundred" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section class="station reveal" id="s5">
+    <div class="num"><b>5</b> When the sun goes down</div>
+    <h2>The problem nobody can solve by being clever</h2>
+    <p>Solar panels are wonderful. They are silent, they need no fuel, and Japan has enough of them
+    to cover a city. Drag the slider and watch what they do across one day.</p>
+
+    <div class="sunsim">
+      <div class="sky" id="sky">
+        <div class="sun" id="sunDot"></div>
+        <div class="ground"></div>
+        <div class="panel2" id="panel2"></div>
+      </div>
+      <input type="range" id="hour" min="0" max="23" step="1" value="12"
+             aria-label="Hour of the day">
+      <div class="hourrow"><span>midnight</span><span>noon</span><span>midnight</span></div>
+      <div class="outbar">
+        <span id="hourLab">12 noon</span>
+        <span class="tk"><span class="fl" id="outFill"></span></span>
+        <span class="vv" id="outVal">100%</span>
+      </div>
+    </div>
+
+    <p class="big-say" style="margin-top:20px;">It is eight o'clock at night. You want your reading
+    lamp on. Where does that electricity come from?</p>
+
+    <div class="choices" id="choices">
+      <button type="button" data-ok="0">The solar panels keep working in the dark.</button>
+      <button type="button" data-ok="1">Something else has to make it — a fire, a river, or a stored-up supply.</button>
+      <button type="button" data-ok="0">The electricity waits in the wire until you need it.</button>
+    </div>
+    <p class="verdict" id="nightSay"></p>
+
+    <button class="stampbtn" data-stamp="night" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section class="station reveal" id="s6">
+    <div class="num"><b>6</b> Your turn</div>
+    <h2>Build a power island</h2>
+    <p>You have your own island. Nobody is sending you any ships. Design the island so the lights
+    stay on — all day, all night, all year.</p>
+
+    <p><strong>Your island must have all four of these:</strong></p>
+    <ul>
+      <li>Something that works in the <strong>daytime</strong>.</li>
+      <li>Something that works at <strong>night</strong>.</li>
+      <li>Something that works on a <strong>still, cloudy day</strong> when there is no sun and no wind.</li>
+      <li>A place to <strong>keep some energy for later</strong>. Draw it. Where does it go?</li>
+    </ul>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>On a big sheet of plain paper:</strong> draw your island from the side, like a
+      cut-through picture. Label everything. Then draw one small house on it and show the wire
+      going from your power to that house.</p></div>
+
+    <p>When you are done, find the hardest question anyone can ask you about your island —
+    and answer it honestly. Real engineers do exactly this.</p>
+
+    <button class="stampbtn" data-stamp="island" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ badge ============ -->
+  <section class="badge reveal" id="badge">
+    <p class="kicker">Junior Energy Engineer</p>
+    <h2>Six stamps</h2>
+    <div class="stamps">
+      <div class="st2" data-s="wire">THE<br>WIRE</div>
+      <div class="st2" data-s="words">PICTURE<br>WORDS</div>
+      <div class="st2" data-s="pie">THE<br>PIE</div>
+      <div class="st2" data-s="hundred">16 OF<br>100</div>
+      <div class="st2" data-s="night">AT<br>NIGHT</div>
+      <div class="st2" data-s="island">POWER<br>ISLAND</div>
+    </div>
+    <p id="badgeSay" style="margin-top:16px;">Collect all six.</p>
+  </section>
+
+  <footer>
+    <a href="/grade-2/energy/">Back to the energy lesson</a> ·
+    <a href="/grade-2/energy-sheet.html">The one page to print</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- station 1: the chain ---------- */
+  var CHAIN = [
+    {em:"💡", nm:"Your lamp",    ds:"It turns on.",              say:"The light is on. Now go backwards."},
+    {em:"🔌", nm:"The plug",     ds:"In the wall.",              say:"Behind the wall is a wire. Keep going."},
+    {em:"🏙️", nm:"Wires",  ds:"Under the street.",         say:"The wires run for miles, all joined together. Keep going."},
+    {em:"🏭", nm:"Power station",ds:"Something is burning.",     say:"Here is the surprise: to make your electricity, something had to be burned, split, or caught."},
+    {em:"⛽",       nm:"Fuel",         ds:"Gas, or coal.",             say:"The fuel came off a ship this morning. Keep going — one more."},
+    {em:"🚢", nm:"A ship",       ds:"From far away.",            say:"And that is where it ends. Almost every chain in Japan ends on a boat from another country."}
+  ];
+  var ci = -1;
+  var chainEl = document.getElementById("chain");
+  var chainSay = document.getElementById("chainsay");
+  var chainBtn = document.getElementById("chainBtn");
+  if (chainEl) {
+    CHAIN.forEach(function(c){
+      var d = document.createElement("div");
+      d.className = "link";
+      d.innerHTML = '<div class="em">' + c.em + '</div><div class="nm">' + c.nm +
+                    '</div><div class="ds">' + c.ds + '</div>';
+      chainEl.appendChild(d);
+    });
+    chainBtn.addEventListener("click", function(){
+      ci++;
+      if (ci >= CHAIN.length) { ci = -1;
+        chainEl.querySelectorAll(".link").forEach(function(l){ l.classList.remove("on"); });
+        chainSay.textContent = "Ready?";
+        chainBtn.textContent = "Follow the wire →";
+        return;
+      }
+      chainEl.children[ci].classList.add("on");
+      chainSay.textContent = CHAIN[ci].say;
+      chainBtn.textContent = ci === CHAIN.length - 1 ? "Start again" : "Keep going →";
+    });
+  }
+
+  /* ---------- station 2: power picture-words ---------- */
+  var WORDS = [
+    {ch:"火力", rd:"ka-ryoku",   en:"FIRE POWER",  small:"火 fire + 力 power",
+      why:"Coal and gas stations. Two thirds of Japan's electricity."},
+    {ch:"水力", rd:"sui-ryoku",  en:"WATER POWER", small:"水 water + 力 power",
+      why:"Falling water spins a wheel. Japan is steep and rainy, so it has a lot."},
+    {ch:"風力", rd:"fu-ryoku",   en:"WIND POWER",  small:"風 wind + 力 power",
+      why:"Still very small in Japan — about 1 slice in 100."},
+    {ch:"太陽光", rd:"taiyo-ko", en:"BIG SUN LIGHT", small:"太 big + 陽 sun + 光 light",
+      why:"Solar panels. Japan has about 10 slices in 100."},
+    {ch:"原子力", rd:"genshi-ryoku", en:"ATOM POWER", small:"原子 atom + 力 power",
+      why:"Splitting tiny pieces of metal. No smoke at all."},
+    {ch:"地熱", rd:"chi-netsu",  en:"GROUND HEAT", small:"地 ground + 熱 heat",
+      why:"Steam from hot rocks. Japan has volcanoes — but uses hardly any of it."}
+  ];
+  var kg = document.getElementById("kgrid");
+  if (kg) WORDS.forEach(function(w){
+    var b = document.createElement("button");
+    b.className = "kcard"; b.type = "button";
+    b.setAttribute("aria-label", "Picture word " + w.rd + ". Tap to reveal.");
+    b.innerHTML =
+      '<div class="kinner">' +
+        '<div class="kface"><div class="ch">' + w.ch + '</div>' +
+          '<div class="rd">' + w.rd + '</div><div class="tap">tap</div></div>' +
+        '<div class="kface kback"><div class="ch">' + w.ch + '</div>' +
+          '<div class="en">' + w.en + '</div><div class="why">' + w.small + '</div>' +
+          '<div class="why">' + w.why + '</div></div>' +
+      '</div>';
+    b.addEventListener("click", function(){ b.classList.toggle("flip"); });
+    kg.appendChild(b);
+  });
+
+  /* ---------- station 3: the pie ---------- */
+  var MIX = [
+    {k:"fire",    nm:"Fire power",       pc:64.5, col:"var(--e-lng)",
+      st:"Burning things", tx:"Gas, coal and a little oil, all burned to boil water and spin a wheel. Every bit of it arrives on a ship. This is about two slices in every three."},
+    {k:"sun",     nm:"Sun",              pc:9.9,  col:"var(--e-solar)",
+      st:"Sunshine", tx:"Panels on roofs and on old fields. Japan has enough to cover a whole city — but they only work while the sun is up."},
+    {k:"atom",    nm:"Atom power",       pc:9.4,  col:"var(--e-nuclear)",
+      st:"Splitting atoms", tx:"No smoke, no ship. Japan had 54 of these machines. In 2011 a giant wave flooded one, and every single one was switched off. Fifteen have started again."},
+    {k:"water",   nm:"Water power",      pc:7.5,  col:"var(--e-hydro)",
+      st:"Falling water", tx:"Japan is steep and rainy, so rivers run fast downhill. This is the oldest electricity in Japan, and it still works perfectly."},
+    {k:"wood",    nm:"Wood and rubbish", pc:6.9,  col:"var(--e-bio)",
+      st:"Burning wood and waste", tx:"Wood chips, sawdust, and the rubbish from towns. Burning rubbish for electricity means it does not go in a hole in the ground."},
+    {k:"wind",    nm:"Wind",             pc:1.4,  col:"var(--e-wind)",
+      st:"Wind", tx:"Only about one slice in a hundred. Japan is windy at sea, but the sea gets deep very fast — which makes windmills hard and expensive to stand up."},
+    {k:"rocks",   nm:"Hot rocks",        pc:0.4,  col:"var(--e-geo)",
+      st:"Heat from underground", tx:"Steam from volcanoes. Japan has more volcanoes than almost anywhere — and uses less than half a slice. Many of the best spots are hot-spring resorts or national parks."}
+  ];
+  var R = 70, C = 2 * Math.PI * R;
+  var donut = document.getElementById("donut");
+  var legend = document.getElementById("legend");
+  var sliceBox = document.getElementById("slicebox");
+
+  function selectSlice(k){
+    document.querySelectorAll(".pie .seg").forEach(function(s){
+      s.classList.toggle("sel", s.dataset.k === k);
+      s.classList.toggle("dim", k !== null && s.dataset.k !== k);
+    });
+    legend.querySelectorAll("button").forEach(function(b){
+      b.classList.toggle("sel", b.dataset.k === k);
+    });
+    var m = MIX.filter(function(x){ return x.k === k; })[0];
+    if (m) sliceBox.innerHTML = '<div class="st">' + m.st + ' — about ' +
+        Math.round(m.pc) + ' slices</div><p>' + m.tx + '</p>';
+  }
+
+  if (donut) {
+    var acc = 0;
+    MIX.forEach(function(m){
+      var len = C * m.pc / 100;
+      var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      c.setAttribute("r", R); c.setAttribute("cx", 0); c.setAttribute("cy", 0);
+      c.setAttribute("fill", "none");
+      c.setAttribute("stroke", m.col);
+      c.setAttribute("stroke-width", 30);
+      c.setAttribute("stroke-dasharray", (len - 1.2) + " " + (C - len + 1.2));
+      c.setAttribute("stroke-dashoffset", -acc);
+      c.setAttribute("class", "seg");
+      c.dataset.k = m.k;
+      c.addEventListener("click", function(){ selectSlice(m.k); });
+      donut.appendChild(c);
+      acc += len;
+
+      var b = document.createElement("button");
+      b.type = "button"; b.dataset.k = m.k;
+      b.innerHTML = '<span class="sw" style="background:' + m.col + '"></span>' +
+                    '<span>' + m.nm + '</span><span class="pc">' + Math.round(m.pc) + '</span>';
+      b.addEventListener("click", function(){ selectSlice(m.k); });
+      legend.appendChild(b);
+    });
+  }
+
+  /* ---------- station 4: 100 squares ---------- */
+  var hundred = document.getElementById("hundred");
+  var hBtn = document.getElementById("hundredBtn");
+  var hSay = document.getElementById("hundredSay");
+  if (hundred) {
+    for (var i = 0; i < 100; i++) {
+      var s = document.createElement("div"); s.className = "sq"; hundred.appendChild(s);
+    }
+    var running = false;
+    hBtn.addEventListener("click", function(){
+      if (running) return;
+      running = true;
+      var sq = hundred.children, n = 0;
+      for (var j = 0; j < 100; j++) sq[j].className = "sq";
+      hSay.classList.remove("on");
+      var t = setInterval(function(){
+        sq[n].classList.add(n < 16 ? "home" : "ship");
+        n++;
+        if (n >= 100) {
+          clearInterval(t); running = false;
+          hSay.innerHTML = "<strong>Sixteen green. Eighty-four blue.</strong> Everything blue " +
+            "had to be bought from somebody else and carried across an ocean. " +
+            "If the ships stop, Japan has about eight months of oil saved up — and then nothing.";
+          hSay.classList.add("on");
+        }
+      }, 26);
+    });
+  }
+
+  /* ---------- station 5: the sun ---------- */
+  var hour = document.getElementById("hour");
+  function solarAt(h){
+    if (h <= 6 || h >= 18) return 0;
+    return Math.round(Math.sin(Math.PI * (h - 6) / 12) * 100);
+  }
+  function hourName(h){
+    if (h === 0) return "midnight";
+    if (h === 12) return "12 noon";
+    return (h % 12 === 0 ? 12 : h % 12) + (h < 12 ? " in the morning" : " at night");
+  }
+  function drawSun(){
+    var h = +hour.value, out = solarAt(h);
+    var sky = document.getElementById("sky");
+    var dot = document.getElementById("sunDot");
+    var pan = document.getElementById("panel2");
+    sky.classList.toggle("day", out > 0);
+    dot.style.opacity = out > 0 ? 1 : 0;
+    dot.style.left = (((h - 6) / 12) * 86 + 4) + "%";
+    dot.style.top = (76 - Math.sin(Math.PI * (h - 6) / 12) * 62) + "px";
+    pan.classList.toggle("lit", out > 30);
+    document.getElementById("outFill").style.width = out + "%";
+    document.getElementById("outVal").textContent = out + "%";
+    document.getElementById("hourLab").textContent = hourName(h);
+  }
+  if (hour) { hour.addEventListener("input", drawSun); drawSun(); }
+
+  var nightSay = document.getElementById("nightSay");
+  var choices = document.getElementById("choices");
+  if (choices) choices.addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    var ok = b.dataset.ok === "1";
+    b.classList.add(ok ? "yes" : "no");
+    nightSay.innerHTML = ok
+      ? "<strong>Yes.</strong> Electricity cannot wait around in a wire. It has to be made at the " +
+        "exact second you use it. So at eight at night, somewhere in Japan, a gas flame is burning " +
+        "or a river is turning a wheel — for your lamp."
+      : "<strong>Not quite — try again.</strong> Panels make nothing in the dark, and electricity " +
+        "cannot sit and wait in a wire. Something has to be making it right now.";
+    nightSay.classList.add("on");
+  });
+
+  /* ---------- stamps ---------- */
+  var KEY = "ws-energy-g2";
+  var got = {};
+  try { got = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { got = {}; }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(got)); } catch (e) {} }
+  function paint(){
+    var n = 0;
+    document.querySelectorAll("[data-stamp]").forEach(function(b){
+      var on = !!got[b.dataset.stamp];
+      b.classList.toggle("got", on);
+      b.textContent = on ? "✓  Stamped" : "Stamp this station";
+    });
+    document.querySelectorAll(".st2").forEach(function(s){
+      var on = !!got[s.dataset.s]; s.classList.toggle("got", on); if (on) n++;
+    });
+    var order = ["wire","words","pie","hundred","night","island"];
+    document.querySelectorAll("#rail a").forEach(function(a, i){
+      a.classList.toggle("done", !!got[order[i]]);
+    });
+    document.getElementById("badgeSay").innerHTML = n === 6
+      ? "<strong>All six. You are a Junior Energy Engineer.</strong> Now go and explain the ships to somebody who does not know."
+      : n + " of 6. Collect all six.";
+  }
+  document.querySelectorAll("[data-stamp]").forEach(function(b){
+    b.addEventListener("click", function(){
+      got[b.dataset.stamp] = !got[b.dataset.stamp]; save(); paint();
+    });
+  });
+  var rb = document.getElementById("resetBtn");
+  if (rb) rb.addEventListener("click", function(){ got = {}; save(); paint(); });
+  paint();
+})();
+</script>
+</body>
+</html>

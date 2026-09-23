@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Energy File — 6th grade | Wonderschool</title>
+<meta name="description" content="Five case files on Japan's energy: 1941, Fukushima, hydrogen, two wars, and a chart that disagrees with itself.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:900px;}
+.hero{padding:10px 0 4px;}
+.hero h1{font-size:clamp(38px,8vw,68px);line-height:1;margin-bottom:16px;}
+.hero h1 em{font-style:normal;display:block;
+  background:linear-gradient(100deg,var(--g6),var(--hot) 75%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+.contra{list-style:none;padding:0;margin:26px 0;display:grid;gap:11px;}
+.contra li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);padding:15px 18px;
+  font-size:16px;color:var(--ink-2);line-height:1.5;}
+.contra li b{color:var(--ink);}
+.contra .vs{font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.1em;
+  color:var(--hot);background:var(--hot-soft);border-radius:8px;padding:4px 9px;white-space:nowrap;}
+
+.casenav{position:sticky;top:52px;z-index:200;display:flex;gap:8px;overflow-x:auto;
+  padding:12px 4px;margin:0 -4px 8px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+  scrollbar-width:none;}
+.casenav::-webkit-scrollbar{display:none;}
+.casenav a{flex:none;font-size:13.5px;font-weight:600;text-decoration:none;white-space:nowrap;
+  padding:8px 15px;border-radius:99px;border:1px solid var(--edge-strong);
+  color:var(--ink-2);background:var(--surface);transition:.18s var(--ease);}
+.casenav a:hover{border-color:var(--g6);color:var(--g6);}
+
+.case{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
+  padding:34px 32px;margin-bottom:26px;box-shadow:var(--shadow-sm);scroll-margin-top:118px;
+  position:relative;overflow:hidden;}
+.case::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;
+  background:linear-gradient(90deg,var(--g6),var(--g4));}
+.case .cn{display:flex;align-items:center;gap:11px;margin-bottom:10px;}
+.case .cn span{font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);}
+.case .cn b{font-family:var(--font-display);font-size:34px;font-weight:800;line-height:1;
+  color:color-mix(in srgb,var(--g6) 30%,transparent);letter-spacing:-.04em;}
+.case h2{margin:0 0 14px;font-size:clamp(25px,4.2vw,36px);}
+.case p{font-size:16.5px;line-height:1.7;}
+.punch{font-size:clamp(18px,2.5vw,21px);line-height:1.5;color:var(--ink);font-weight:500;
+  border-left:4px solid var(--g6);padding-left:18px;margin:18px 0 22px;}
+h3.sec{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);margin:28px 0 10px;}
+
+.tw{overflow-x:auto;margin:14px 0 8px;}
+table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--edge);}
+th{white-space:nowrap;}
+td:first-child{white-space:normal;min-width:11em;}
+th:first-child,td:first-child{text-align:left;}
+thead th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;border-bottom:2px solid var(--edge-strong);}
+tbody tr{transition:background .15s;}
+tbody tr:hover{background:var(--bg-2);}
+tr.jp td{background:var(--g6-soft);font-weight:700;color:var(--ink);}
+
+details.obj{border:1px solid color-mix(in srgb,var(--hot) 40%,transparent);
+  background:var(--hot-soft);border-radius:var(--r);margin:22px 0;overflow:hidden;}
+details.obj summary{cursor:pointer;list-style:none;padding:16px 20px;display:flex;
+  align-items:center;gap:12px;font-weight:650;font-size:16px;color:var(--ink);}
+details.obj summary::-webkit-details-marker{display:none;}
+details.obj summary .lbl{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--hot);background:color-mix(in srgb,var(--hot) 18%,transparent);
+  border-radius:99px;padding:4px 11px;}
+details.obj summary .chev{margin-left:auto;transition:transform .25s var(--ease);color:var(--hot);font-size:18px;}
+details.obj[open] summary .chev{transform:rotate(180deg);}
+details.obj .body{padding:0 20px 18px;}
+details.obj .body p{font-size:15.5px;line-height:1.65;margin:0 0 11px;color:var(--ink-2);}
+details.obj .body p:last-child{margin-bottom:0;}
+
+.qs{background:var(--bg-2);border-radius:var(--r);padding:20px 22px;margin:24px 0 0;}
+.qs h3{margin-top:0;}
+.qs ol{margin:0;padding-left:20px;}
+.qs li{font-size:15.5px;line-height:1.65;color:var(--ink-2);margin-bottom:12px;}
+.qs li::marker{color:var(--g6);font-weight:700;}
+
+/* timeline */
+.tl{position:relative;margin:20px 0 6px;padding-left:26px;list-style:none;}
+.tl::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,var(--g6),var(--g4),var(--hot));}
+.tl li{position:relative;margin-bottom:15px;}
+.tl li::before{content:"";position:absolute;left:-22px;top:8px;width:11px;height:11px;border-radius:50%;
+  background:var(--surface);border:3px solid var(--g6);}
+.tl .yr{font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--g6);}
+.tl .wh{font-size:16px;color:var(--ink);}
+.tl .no{display:block;font-size:14.5px;color:var(--ink-3);line-height:1.5;}
+
+/* self-sufficiency sparkbars */
+.ssb{display:grid;grid-template-columns:repeat(auto-fit,minmax(86px,1fr));gap:12px;margin:18px 0 6px;
+  align-items:end;}
+.ssb .b{text-align:center;}
+.ssb .col{border-radius:8px 8px 0 0;background:linear-gradient(180deg,var(--g6-vivid),var(--g4-vivid));
+  margin:0 auto 7px;width:100%;min-height:5px;}
+.ssb .v{font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--ink);}
+.ssb .y{font-size:12.5px;color:var(--ink-3);line-height:1.3;}
+
+/* brief builder */
+.brief{background:var(--surface);border:2px solid var(--g6);border-radius:var(--r-xl);
+  padding:32px;margin-bottom:26px;scroll-margin-top:118px;}
+.bf{margin-bottom:20px;}
+.bf label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  font-size:13.5px;font-weight:650;color:var(--ink);margin-bottom:7px;}
+.bf .hint{font-weight:400;color:var(--ink-3);font-size:12.5px;}
+.bf textarea{width:100%;font:inherit;font-size:15.5px;line-height:1.55;padding:13px 15px;
+  border-radius:12px;border:2px solid var(--edge-strong);background:var(--bg);color:var(--ink);
+  resize:vertical;min-height:62px;transition:border-color .2s;}
+.bf textarea:focus{outline:none;border-color:var(--g6);}
+.bf.ok textarea{border-color:var(--g2);}
+.check{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:6px;color:var(--ink-3);}
+.check.ok{color:var(--g2);font-weight:600;}
+</style>
+</head>
+<body class="g6">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-6/">6th grade</a>
+  <span class="sep">/</span><a href="/grade-6/energy/">Japan's Energy</a>
+  <span class="spacer"></span>
+  <a href="/grade-6/energy-data-desk.html">Data Desk</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="kicker">Sixth grade · lesson 2 · case files</p>
+    <h1>The Energy File<em>Five problems with no clean answer</em></h1>
+    <p class="lede">Japan has almost no coal worth digging, no oil, and no gas. It has 123 million
+    people, the world's fourth-largest economy, and a hundred and fifty years of having to solve
+    the same problem over and over. Here is what it has tried.</p>
+
+    <ul class="contra">
+      <li><span class="vs">1941</span><span>Japan imported about <b>85%</b> of its oil from the
+        United States — and then attacked it.</span></li>
+      <li><span class="vs">2011</span><span>Japan switched off <b>every one</b> of its 54 nuclear
+        reactors after an accident that killed, by radiation, <b>one person</b>.</span></li>
+      <li><span class="vs">2023</span><span>Japan committed over <b>¥15 trillion</b> to hydrogen —
+        while the number of hydrogen filling stations in Japan was <b>falling</b>.</span></li>
+      <li><span class="vs">2022</span><span>Japan sanctioned Russia and <b>kept</b> its stake in a
+        Russian gas field.</span></li>
+      <li><span class="vs">now</span><span>Two careful institutions report Japan's coal share as
+        <b>28%</b> and <b>32%</b> in the same year. Both are right.</span></li>
+    </ul>
+  </div>
+
+  <nav class="casenav" aria-label="Case files">
+    <a href="#c1">01 · 1941</a>
+    <a href="#c2">02 · The switch-off</a>
+    <a href="#c3">03 · The hydrogen bet</a>
+    <a href="#c4">04 · Two wars</a>
+    <a href="#c5">05 · The chart that disagrees</a>
+    <a href="#brief">Write the brief</a>
+  </nav>
+
+  <!-- ================= CASE 01 ================= -->
+  <section class="case reveal" id="c1">
+    <div class="cn"><b>01</b><span>Case file · the first energy war</span></div>
+    <h2>A country that went to war for oil</h2>
+
+    <p>By 1941 Japan had been fighting in China for four years and had almost no oil of its own.
+    Roughly <strong>85% of the oil it used came from the United States</strong> — the country it
+    was increasingly at odds with. This is the single strangest fact in twentieth-century strategy:
+    Japan's war machine ran on American fuel.</p>
+
+    <p>In July 1941 Japanese forces moved into southern French Indochina. On
+    <strong>26 July 1941</strong> President Roosevelt froze all Japanese assets in the United States
+    and placed oil exports under licence — a licence that was never granted. The tap closed.</p>
+
+    <p class="punch">Japan's navy calculated it had roughly eighteen months of fuel. Its army,
+    about twelve. After that, the fleet would stop moving — not be defeated, simply stop.</p>
+
+    <p>There were two options. Withdraw from China and get the oil back. Or seize the oilfields of
+    the Dutch East Indies — today's Indonesia — which meant taking the Philippines on the way, which
+    meant war with the United States. On 7 December 1941 Japan chose the second.</p>
+
+    <h3 class="sec">What the oil actually did</h3>
+    <ul class="tl">
+      <li><span class="yr">Jan–Feb 1942</span> <span class="wh">Japan captures the oilfields.</span>
+        <span class="no">Tarakan and Balikpapan in Borneo, then Palembang in Sumatra, taken by
+        paratroopers. The plan worked.</span></li>
+      <li><span class="yr">1943</span> <span class="wh">The oil is in the wrong place.</span>
+        <span class="no">Crude in Sumatra is no use in Osaka. It has to travel four thousand miles
+        by tanker, through water the United States Navy is learning to control.</span></li>
+      <li><span class="yr">1944</span> <span class="wh">American submarines sink the tankers.</span>
+        <span class="no">Not the warships — the tankers. Japan had captured the oil and lost the
+        ability to carry it.</span></li>
+      <li><span class="yr">1945</span> <span class="wh">Japan tries to make fuel from pine roots.</span>
+        <span class="no">Schoolchildren were sent to dig up pine stumps to be distilled into
+        aviation fuel. It never worked at anything like the scale needed.</span></li>
+    </ul>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Was it really about oil? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p>A historian could reasonably say: no. Japan had been expanding into Asia since 1895,
+        long before oil mattered. The ideology of empire, the army's political power, and the
+        humiliation of the 1920s naval treaties were all pushing the same direction. Oil was the
+        <em>occasion</em>, not the cause — the embargo forced a timetable onto a decision that had
+        already been made.</p>
+        <p>There is a second objection, and it is sharper. If oil was the reason, the decision was
+        catastrophically bad at its own game: Japan attacked the world's largest oil producer in
+        order to secure oil. A country genuinely optimising for fuel supply would have withdrawn
+        from China. So either oil was not the real goal, or the decision-makers were not
+        reasoning about oil very well.</p>
+        <p>Hold both. The embargo is why it happened <em>in December 1941</em>. It is not, by itself,
+        why it happened at all.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>Japan captured the oilfields and still ran out of fuel. What does that tell you about
+        the difference between <em>having</em> a resource and <em>having access to</em> one?</li>
+        <li>The United States cut off oil to stop a war and started a bigger one. When is an
+        embargo a good idea? Give a condition, not an opinion.</li>
+        <li>Japan today holds about <span class="gl" data-t="stockpile">254 days</span> of oil in
+        storage. In 1941 it held roughly 18 months for the navy. Which country was better prepared,
+        and what does your answer depend on?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= CASE 02 ================= -->
+  <section class="case reveal" id="c2">
+    <div class="cn"><b>02</b><span>Case file · the switch-off</span></div>
+    <h2>The day 54 reactors stopped</h2>
+
+    <p>On 11 March 2011 a magnitude 9.0 earthquake struck off north-east Japan. The
+    <span class="gl" data-t="reactor">reactors</span> at
+    <span class="gl" data-t="fukushima">Fukushima Daiichi</span> shut down automatically, as designed.
+    Then the tsunami arrived, flooded the backup generators, and the cooling stopped. Three cores
+    melted.</p>
+
+    <p>What followed was not an engineering decision but a political one. Reactor by reactor, as
+    each came up for routine maintenance, local governors refused permission to restart. On
+    <strong>5 May 2012</strong> the last one — Tomari 3 — shut down, and for the first time since
+    1970 Japan made no nuclear power at all.</p>
+
+    <p class="punch">A country that got roughly a quarter of its electricity from nuclear power
+    replaced all of it, in about a year, mostly by burning imported gas and coal.</p>
+
+    <h3 class="sec">What it cost</h3>
+    <div class="ssb" id="ssb"></div>
+    <p class="src">Energy <span class="gl" data-t="self-sufficiency">self-sufficiency</span>, by
+      Japanese fiscal year. Nuclear counts as domestic under the Japanese method, which is why
+      switching the reactors off moves this number so violently.
+      <a href="https://opengov.jp/en/economy/energy/self-sufficiency/" target="_blank" rel="noopener">OpenGov
+      Japan, from government statistics</a>.</p>
+
+    <p>Japan's electricity bills rose. Its <span class="gl" data-t="trade-deficit">trade balance</span>
+    flipped from surplus to deficit as it bought gas and coal on world markets. Its carbon emissions
+    rose for three years, then began falling again as efficiency measures and solar took hold.</p>
+
+    <h3 class="sec">The casualty figures, carefully</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Cause</th><th>Deaths</th><th>Source</th></tr></thead>
+        <tbody>
+          <tr><td>Earthquake and tsunami, nationwide</td><td>~19,700</td><td>Japanese police</td></tr>
+          <tr class="jp"><td>Radiation from the accident</td><td>1</td><td>Japanese government, 2018</td></tr>
+          <tr><td>“Disaster-related” deaths in Fukushima Prefecture<br>
+            <span style="font-weight:400;font-size:13px;color:var(--ink-3)">mostly elderly people who
+            died during or after the evacuation itself</span></td><td>~2,100</td><td>Fukushima Prefecture, 2017</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">In 2018 Japan's health ministry acknowledged one worker's lung-cancer death as
+      radiation-related. <a href="https://www.npr.org/2018/09/05/644933882/japanese-government-acknowledges-first-fukushima-radiation-death"
+      target="_blank" rel="noopener">NPR, 5 September 2018</a>. UNSCEAR, the UN scientific committee,
+      reported in 2013 that no radiation-related deaths or acute illnesses had been observed among
+      workers or the public.
+      <a href="https://en.wikipedia.org/wiki/Fukushima_nuclear_accident_casualties" target="_blank"
+      rel="noopener">Summary and sources</a>.</p>
+
+    <p class="punch">Read those three rows again. The evacuation ordered to protect people from
+    radiation appears to have killed roughly two thousand times as many people as the radiation did.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        So the shutdown was irrational? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p>Careful. Three separate arguments are hiding in that sentence and they do not all survive.</p>
+        <p><strong>The strong version of the case against the shutdown:</strong> the reactors that
+        were switched off were not the ones that failed. Burning coal and gas instead has costs
+        too — air pollution from fossil generation kills people every year, quietly, and nobody
+        evacuates a city for it. If you count deaths per unit of electricity, nuclear is among the
+        safest things humans have ever built.</p>
+        <p><strong>The strong version of the case for it:</strong> Japan's regulator had been
+        captured by the industry it supervised. Fukushima Daiichi's sea wall was known to be too
+        low. Turning everything off and rebuilding the regulator from scratch — which is what the
+        <span class="gl" data-t="nra">NRA</span> was, in 2012 — was a reasonable response to
+        discovering that the safety system on paper was not the safety system in reality.
+        And the evacuation deaths are an argument against <em>how</em> the evacuation was done,
+        not against caution itself.</p>
+        <p><strong>And a harder one:</strong> a democracy is allowed to decide it does not want
+        something, even if the expected-value calculation says otherwise. The people who had to
+        leave their homes were not asked to run the numbers. Whether that is wisdom or weakness
+        is a real question, and neither answer is obviously stupid.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>Fifteen reactors have restarted, and Kashiwazaki-Kariwa 6 came back in
+        <strong>February 2026</strong> — the first reactor its owner had run since the accident.
+        What changed between 2012 and 2026: the technology, the evidence, or the politics?</li>
+        <li>Suppose you could prove that the extra coal burned between 2011 and 2015 shortened more
+        lives than the accident did. Should that settle the argument? Say what your answer assumes.</li>
+        <li>Japan's self-sufficiency fell from 20.2% to 6.3%. Name one thing that becomes possible
+        for a rival country when a country's number falls that far.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= CASE 03 ================= -->
+  <section class="case reveal" id="c3">
+    <div class="cn"><b>03</b><span>Case file · the hydrogen bet</span></div>
+    <h2>Why Japan is so keen on fuel cells</h2>
+
+    <p>No other country has gone as far into hydrogen as Japan. It published the world's first
+    national hydrogen strategy in <strong>December 2017</strong>, revised it in June 2023 with
+    over <strong>¥15 trillion</strong> of planned public and private investment, and has installed
+    more home <span class="gl" data-t="fuel-cell">fuel cells</span> than the rest of the world
+    combined. The question worth asking is <em>why</em>, because the usual answer — climate — is
+    not the main one.</p>
+
+    <h3 class="sec">Four reasons, in order of how much they actually explain</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Reason</th><th style="text-align:left">What it means</th></tr></thead>
+        <tbody>
+          <tr class="jp"><td>Security</td><td style="text-align:left;font-weight:400">
+            Hydrogen can be made from almost anything, almost anywhere — gas, coal, sunlight,
+            spare nuclear power. A country that must import its energy would much rather import
+            something with <em>many</em> possible sellers than oil, which has few.</td></tr>
+          <tr><td>Industry</td><td style="text-align:left">
+            Toyota, Honda, Panasonic, Toshiba and Kawasaki hold a great many hydrogen patents.
+            A hydrogen world is a world Japanese firms would sell into. This is industrial policy
+            as much as energy policy, and Japan does not much hide it.</td></tr>
+          <tr><td>Efficiency</td><td style="text-align:left">
+            A fuel cell makes electricity without burning or spinning anything. The best Japanese
+            home unit reaches <strong>55% electrical efficiency</strong>, and
+            <strong>87%</strong> once the waste heat is used for the bath — better than a large
+            power station, in a box beside the house.</td></tr>
+          <tr><td>The awkward jobs</td><td style="text-align:left">
+            Steel, shipping, long-haul lorries and chemicals are all hard to run on batteries.
+            Something dense and storable has to do those, and hydrogen or
+            <span class="gl" data-t="ammonia">ammonia</span> is the leading candidate.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Efficiency figures: ENE-FARM Type S, 2020 model.
+      <a href="https://www.daigasgroup.com/en/rd/topic/1768549_56103.html" target="_blank" rel="noopener">Daigas
+      Group</a>. Strategy figures:
+      <a href="https://www.whitecase.com/insight-alert/japan-hydrogen-basic-strategy" target="_blank" rel="noopener">June
+      2023 revision, summarised by White &amp; Case</a> — targets of 3 million tonnes a year by 2030,
+      12 million by 2040 and 20 million by 2050.</p>
+
+    <p class="punch">Add a fifth reason that nobody writes down. After 2011, millions of Japanese
+    households discovered that the grid can fail. A machine in your own basement that makes
+    electricity and hot water from the gas pipe is, among other things, a promise that the
+    next disaster will be less cold.</p>
+
+    <h3 class="sec">Now the uncomfortable part</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>What was promised</th><th>Where it actually is</th></tr></thead>
+        <tbody>
+          <tr><td>320 hydrogen filling stations by 2025</td><td>161 at the end of 2024 — and
+            <strong>falling</strong>, to roughly 149 in 2025</td></tr>
+          <tr><td>800,000 fuel cell vehicles by 2030</td><td>Fewer than 25,000 Toyota Mirai have
+            ever been sold, worldwide, since 2014</td></tr>
+          <tr><td>Clean hydrogen</td><td>Almost all hydrogen used in Japan today is made from
+            natural gas, which releases CO₂ — it is
+            <span class="gl" data-t="green-hydrogen">grey, not green</span></td></tr>
+          <tr class="jp"><td>Over 500,000 home fuel cells installed</td><td>This one is true.
+            503,276 by the end of 2023 — the one part of the plan that worked</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Station counts:
+      <a href="https://www.h2stations.org/press-release-2025-milestone-reached-over-1000-hydrogen-refuelling-stations-in-op-eration-worldwide-in-2024/"
+      target="_blank" rel="noopener">LBST H2stations.org, February 2025</a>. ENE-FARM total:
+      <a href="https://www.osakagas.co.jp/en/whatsnew/__icsFiles/afieldfile/2024/05/10/240410.pdf"
+      target="_blank" rel="noopener">Osaka Gas, citing the Advanced Cogeneration and Energy
+      Utilization Center Japan</a>.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Is the hydrogen strategy a mistake? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p><strong>The case that it is:</strong> every time you convert energy you lose some.
+        Electricity → hydrogen → back to electricity loses roughly two-thirds of what you started
+        with. A battery loses about a tenth. If the goal is to move energy around cleanly, hydrogen
+        is the expensive way to do it, and the FCV numbers suggest the market has already decided.
+        Critics argue the strategy survives because it lets Japan keep burning things — ammonia
+        in coal plants, gas reformed into hydrogen — while sounding like a transition.</p>
+        <p><strong>The case that it is not:</strong> round-trip efficiency is the wrong test for
+        the jobs hydrogen is actually for. Nobody proposes turning hydrogen back into grid
+        electricity as the main use. They propose making steel with it, fuelling ships with it,
+        and storing energy for months rather than hours — none of which a battery does. On those
+        jobs, hydrogen's competition is not batteries; it is coal.</p>
+        <p><strong>And the honest middle:</strong> Japan may be right about the destination and
+        wrong about the vehicle. Home fuel cells worked. Hydrogen cars did not. A strategy that
+        counts both as “hydrogen” hides the difference — and the difference is the whole lesson.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>Home fuel cells sold half a million units; hydrogen cars sold almost none. Both are the
+        same technology. What is different about the two situations?</li>
+        <li>Japan's hydrogen is mostly made from imported natural gas. In what sense does that
+        improve Japan's energy security, and in what sense does it not?</li>
+        <li>If you were told to spend ¥15 trillion to make Japan more energy-secure, and you could
+        not spend it on hydrogen, what would you spend it on? Defend the choice against the
+        objection that it will not work either.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= CASE 04 ================= -->
+  <section class="case reveal" id="c4">
+    <div class="cn"><b>04</b><span>Case file · wars now</span></div>
+    <h2>Two wars, one island</h2>
+
+    <p>Japan's energy problem is not history. It is happening this decade, in two places at once,
+    and the two force opposite decisions.</p>
+
+    <h3 class="sec">Russia: the gas you sanction and keep buying</h3>
+    <p>When Russia invaded Ukraine in February 2022, Japan joined the G7 sanctions. It also kept
+    its stake in <span class="gl" data-t="sakhalin">Sakhalin-2</span>, a gas project on a Russian
+    island a few hundred miles north of Hokkaido. Mitsui holds 12.5%; Mitsubishi holds 10%.
+    Russia supplied about <strong>9% of Japan's LNG</strong> in 2024.</p>
+
+    <p>Why keep it? Because Sakhalin gas reaches Japan in two or three days. Australian gas takes
+    about ten; Qatari gas takes three weeks and passes through the
+    <span class="gl" data-t="hormuz">Strait of Hormuz</span>. Giving up Sakhalin would not have
+    reduced Japan's emissions or Russia's income by much — it would have handed the cargoes to
+    China and made Japan's supply longer and more fragile.</p>
+
+    <h3 class="sec">The Middle East: one strait, 93 per cent</h3>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Measure</th><th>Value</th><th>Year</th></tr></thead>
+        <tbody>
+          <tr class="jp"><td>Japan's crude oil arriving through the Strait of Hormuz</td>
+            <td>93%</td><td>2026</td></tr>
+          <tr><td>Crude oil from the Middle East overall</td><td>94%</td><td>2026</td></tr>
+          <tr><td>From the UAE</td><td>43%</td><td>2026</td></tr>
+          <tr><td>From Saudi Arabia</td><td>39%</td><td>2026</td></tr>
+          <tr><td>Oil held in stockpile</td><td>254 days · ~470 million barrels</td><td>2025</td></tr>
+          <tr><td>LNG from the Middle East — <em>fell</em> from 29% in 2013</td><td>11%</td><td>2025</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><a href="https://www.csis.org/analysis/what-are-implications-iran-conflict-japan"
+      target="_blank" rel="noopener">Center for Strategic and International Studies, 20 March 2026</a>.
+      Japan has not directly imported Iranian crude since 2019, when American sanctions waivers ended.</p>
+
+    <p class="punch">Japan spent a decade successfully reducing its Middle Eastern
+    <em>gas</em> dependence from 29% to 11%. Over the same decade its Middle Eastern
+    <em>oil</em> dependence did not fall at all. Ask why the two went differently.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Is 254 days of oil enough? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p><strong>Yes:</strong> the IEA asks its members to hold 90 days. Japan holds nearly three
+        times that. No closure of Hormuz in history has lasted anything close to eight months,
+        because the countries that would be strangled by it include the ones doing the strangling.
+        Stockpiles are insurance against a shock, and eight months is a lot of insurance.</p>
+        <p><strong>No:</strong> a stockpile buys time; it does not buy a solution. If the strait
+        closed on day one, what exactly is Japan doing on day 253? The stock only helps if the
+        interruption is temporary <em>and</em> Japan uses the time to build something. And oil is
+        not the only thing on those ships — fertiliser, plastics and chemicals come the same way.</p>
+        <p><strong>The sharper objection:</strong> holding 254 days may actually reduce the
+        pressure to fix the underlying dependence. Insurance that is too good makes you careless.
+        That argument is uncomfortable, and it is not obviously wrong.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>Japan sanctioned Russia and kept the gas field. Is that hypocrisy, or is it what any
+        country would do? Give a rule that distinguishes the two.</li>
+        <li>Japan cut Middle Eastern gas from 29% to 11% but could not cut Middle Eastern oil at
+        all. What is different about oil that makes it harder to move away from?</li>
+        <li>Which single change would do most for Japan's energy security: more stockpile, more
+        reactors, more renewables, or more suppliers? Pick one and say what you are giving up.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= CASE 05 ================= -->
+  <section class="case reveal" id="c5">
+    <div class="cn"><b>05</b><span>Case file · the measurement problem</span></div>
+    <h2>The chart that disagrees with itself</h2>
+
+    <p>In lesson 1 you found that nobody has measured Japan's literacy rate since 1948, and that
+    the famous 99% is a gap somebody filled in. Here is the same disease in a different organ.</p>
+
+    <p>Two respected institutions published Japan's 2025 electricity mix. Neither is careless.
+    Neither is lying. They do not agree.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Source in the mix</th>
+          <th><span class="gl" data-t="isep">ISEP</span> (Tokyo)</th>
+          <th><span class="gl" data-t="ember">Ember</span> (London)</th>
+          <th>Gap</th></tr></thead>
+        <tbody>
+          <tr><td>Gas / LNG</td><td>28.9%</td><td>33%</td><td>4.1</td></tr>
+          <tr class="jp"><td>Coal</td><td>28.4%</td><td>32%</td><td>3.6</td></tr>
+          <tr><td>Nuclear</td><td>9.4%</td><td>9.1%</td><td>0.3</td></tr>
+          <tr><td>Solar</td><td>9.9%</td><td>9.8%</td><td>0.1</td></tr>
+          <tr><td>Wind</td><td>1.4%</td><td>1.3%</td><td>0.1</td></tr>
+          <tr><td>All fossil</td><td>64.5%</td><td>67%</td><td>2.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">ISEP: <a href="https://www.isep.or.jp/en/1592/" target="_blank" rel="noopener">Institute
+      for Sustainable Energy Policies, 2025 preliminary, published September 2026</a>.
+      Ember: <a href="https://ember-energy.org/countries-and-regions/japan/" target="_blank"
+      rel="noopener">Global Electricity Review 2026</a>.</p>
+
+    <p class="punch">Notice which rows disagree. Nuclear, solar and wind match almost exactly.
+    Coal and gas are out by three to four points. That pattern is the clue.</p>
+
+    <h3 class="sec">The answer</h3>
+    <p>The two organisations are dividing by different
+    <span class="gl" data-t="denominator">denominators</span>. ISEP counts <em>all</em> electricity
+    generated in Japan, including power that factories and steel mills make for themselves and never
+    sell. Ember counts the public grid. Factories mostly self-generate with gas and coal — so adding
+    them to the bottom of the fraction dilutes coal and gas, and leaves nuclear, solar and wind
+    almost untouched.</p>
+
+    <p>Both numbers are correct answers to slightly different questions. The mistake is not choosing
+    one. The mistake is quoting ISEP's solar share next to Ember's coal share, which produces a
+    chart of a country that does not exist.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Then which one should a school use? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p>It depends what you are asking. “How clean is the electricity in my plug?” is a
+        grid question — use Ember. “How much carbon does Japanese electricity generation emit
+        in total?” is a whole-country question — use ISEP. If you are comparing Japan with
+        Germany, use whichever source measured <em>both</em> the same way, which in practice
+        means Ember, because it applies one method everywhere.</p>
+        <p>The genuinely wrong answer is “whichever number supports what I already wanted to say.”
+        You can spot people doing this: they will quote the 32% coal figure when criticising Japan
+        and the 26.7% renewables figure when praising it, and those two come from different
+        publications.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>Without looking it up: if a country's steel industry collapsed, which way would ISEP's
+        coal share move, and why?</li>
+        <li>ISEP's own report says Japan's solar share for 2024 could be anywhere from 9.6% to
+        11.4% depending on method. They published 11.4%. Is that dishonest? What would you have
+        published?</li>
+        <li>Find one number in the Data Desk that you could not check from the linked source in
+        under two minutes. What does that tell you about the number?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ================= BRIEF ================= -->
+  <section class="brief reveal" id="brief">
+    <p class="kicker">The deliverable</p>
+    <h2 style="margin-top:0;">Write the brief</h2>
+    <p>You advise the Prime Minister. She has four minutes and will not read more than this.
+    Four boxes. The last one is the one that matters.</p>
+
+    <div class="bf" data-min="90" data-need="number">
+      <label><span>1 · The situation, in three sentences</span>
+        <span class="hint">must contain at least one number</span></label>
+      <textarea rows="3" placeholder="Japan produces about ___% of its own energy…"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <div class="bf" data-min="70">
+      <label><span>2 · Your recommendation. One sentence. Commit.</span>
+        <span class="hint">no “it depends”, no “we should consider”</span></label>
+      <textarea rows="2" placeholder="Japan should…"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <div class="bf" data-min="90" data-need="number">
+      <label><span>3 · The evidence, with a year attached</span>
+        <span class="hint">at least one number and one year</span></label>
+      <textarea rows="3" placeholder="In 20__, …"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <div class="bf" data-min="120" data-need="against">
+      <label><span>4 · The strongest argument that you are wrong</span>
+        <span class="hint">the real one — not a weak version you can knock down</span></label>
+      <textarea rows="4" placeholder="The best case against me is…"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <p id="briefSay" style="font-size:16.5px;color:var(--ink-3);">Fill all four. Box 4 is worth the
+    other three put together.</p>
+  </section>
+
+  <footer>
+    <a href="/grade-6/energy/">Back to the energy lesson</a> ·
+    <a href="/grade-6/energy-data-desk.html">The Data Desk</a> ·
+    <a href="/together/energy.html">The Energy Meeting</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* self-sufficiency bars */
+  var SS = [
+    {y:"FY2010", v:20.2, n:"before Fukushima"},
+    {y:"FY2011", v:11.5, n:"the year of the accident"},
+    {y:"FY2014", v:6.3,  n:"zero nuclear"},
+    {y:"FY2024", v:16.4, n:"15 reactors back"}
+  ];
+  var box = document.getElementById("ssb");
+  if (box) SS.forEach(function(s){
+    var d = document.createElement("div");
+    d.className = "b";
+    d.innerHTML = '<div class="col" style="height:' + Math.round(s.v * 5.2) + 'px"></div>' +
+                  '<div class="v">' + s.v.toFixed(1) + '%</div>' +
+                  '<div class="y">' + s.y + '<br>' + s.n + '</div>';
+    box.appendChild(d);
+  });
+
+  /* brief builder checks */
+  function check(bf){
+    var t  = bf.querySelector("textarea").value.trim();
+    var c  = bf.querySelector(".check");
+    var min = +bf.dataset.min;
+    var need = bf.dataset.need;
+    var msgs = [], ok = true;
+
+    if (t.length < min) { ok = false; msgs.push("keep going — " + t.length + " of " + min + " characters"); }
+    if (need === "number" && !/\d/.test(t)) { ok = false; msgs.push("no number in here yet"); }
+    if (need === "number" && bf.dataset.min === "90" && /\d/.test(t) &&
+        bf.querySelector("label span").textContent.indexOf("evidence") > -1 &&
+        !/(19|20)\d\d|FY\s?\d\d/i.test(t)) { ok = false; msgs.push("add the year"); }
+    if (need === "against") {
+      if (/\bbut\b/i.test(t) && t.length < 160) { msgs.push("careful — a “but” usually means you are answering the objection instead of stating it"); }
+      if (!/\d/.test(t) && t.length >= min) { msgs.push("the strongest objections usually have a number in them too"); }
+    }
+    if (/it depends|we should consider|maybe|perhaps/i.test(t) && bf.dataset.min === "70") {
+      ok = false; msgs.push("that is a hedge — commit");
+    }
+
+    bf.classList.toggle("ok", ok && t.length >= min);
+    c.classList.toggle("ok", ok && t.length >= min);
+    c.querySelector("span").textContent = t.length === 0 ? "—"
+      : (ok && t.length >= min ? "✓ good" : msgs.join(" · "));
+    return ok && t.length >= min;
+  }
+
+  var fields = [].slice.call(document.querySelectorAll(".bf"));
+  fields.forEach(function(bf){
+    bf.querySelector("textarea").addEventListener("input", function(){
+      check(bf);
+      var done = fields.filter(check).length;
+      document.getElementById("briefSay").innerHTML = done === 4
+        ? "<strong style='color:var(--g2)'>Four of four.</strong> Now read box 4 out loud to " +
+          "somebody who disagrees with box 2, and see whether they think you have been fair to them."
+        : done + " of 4 boxes ready. Box 4 is worth the other three put together.";
+    });
+  });
+})();
+</script>
+</body>
+</html>

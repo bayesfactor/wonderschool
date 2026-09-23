@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Energy Sheet — Japan | Wonderschool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  /* print sheet: pin fonts so layout never depends on a webfont loading */
+  h1,h2,h3{font-family:inherit !important;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#e9e9e9;color:#111;
+    font-family:"Century Gothic","Verdana","Trebuchet MS",sans-serif;}
+  .sheet{width:8.5in;min-height:11in;background:#fff;margin:18px auto;padding:0.5in 0.55in;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);}
+  .top{display:flex;justify-content:space-between;align-items:flex-end;
+    border-bottom:3px solid #111;padding-bottom:8px;margin-bottom:13px;}
+  h1{font-size:25pt;margin:0;letter-spacing:-.5px;line-height:1;}
+  .eyebrow{font-size:9pt;letter-spacing:3px;text-transform:uppercase;color:#6b6b6b;margin:0 0 3px;}
+  .nameline{font-size:11pt;color:#666;white-space:nowrap;}
+  .nameline span{display:inline-block;border-bottom:2px solid #444;width:2.1in;}
+  h2{font-size:14.5pt;margin:0 0 3px;}
+  .hint{font-size:10.5pt;color:#555;line-height:1.42;margin:0 0 8px;}
+  section{margin-bottom:15px;}
+
+  /* the hundred */
+  .gridwrap{display:flex;gap:0.22in;align-items:flex-start;}
+  .grid100{display:grid;grid-template-columns:repeat(10,0.34in);grid-auto-rows:0.34in;gap:2.5px;}
+  .cell{border:1.5px solid #333;border-radius:3px;}
+  .keybox{flex:1;font-size:10pt;line-height:1.45;color:#333;}
+  .keybox .k{display:flex;align-items:center;gap:8px;margin-bottom:7px;}
+  .keybox .sw{width:0.3in;height:0.3in;border:2px solid #111;border-radius:4px;flex:none;}
+  .keybox .sw.hatch{background:repeating-linear-gradient(45deg,#111,#111 2px,#fff 2px,#fff 5px);}
+  .keybox b{display:block;font-size:10.5pt;}
+
+  /* power words */
+  .wordgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;}
+  .wbox{border:2.5px solid #444;border-radius:9px;padding:6px 5px 7px;text-align:center;}
+  .wchar{font-size:25pt;line-height:1.05;color:#111;
+    font-family:"Hiragino Mincho ProN","Yu Mincho","MS Mincho",serif;}
+  .wen{font-size:9.5pt;font-weight:bold;margin-top:2px;line-height:1.1;}
+  .wsub{font-size:7.5pt;color:#6b6b6b;line-height:1.15;margin-top:1px;}
+  .tracerow{display:flex;justify-content:space-around;margin-top:3px;}
+  .tracerow span{font-size:19pt;line-height:1.02;color:#bdbdbd;
+    font-family:"Hiragino Mincho ProN","Yu Mincho","MS Mincho",serif;}
+
+  /* island checklist */
+  .checks{display:grid;grid-template-columns:repeat(2,1fr);gap:7px 18px;margin-top:4px;}
+  .checks div{display:flex;align-items:flex-start;gap:8px;font-size:10.5pt;line-height:1.35;color:#222;}
+  .checks i{width:0.26in;height:0.26in;border:2px solid #333;border-radius:4px;flex:none;margin-top:1px;}
+
+  .foot{font-size:9pt;color:#6b6b6b;border-top:1px solid #ccc;padding-top:6px;margin-top:4px;line-height:1.45;}
+
+  @media print{
+    html,body{background:#fff;}
+    @page{size:letter portrait;margin:0.45in 0.5in;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .site-bar{display:none !important;}
+  }
+</style>
+</head>
+<body class="doc">
+
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-2/">2nd grade</a>
+  <span class="sep">/</span><a href="/grade-2/energy/">Energy</a>
+  <span class="spacer"></span>
+  <button class="printbtn" onclick="window.print()">Print this sheet</button>
+</nav>
+
+<div class="sheet">
+
+  <div class="top">
+    <div>
+      <p class="eyebrow">Japan &middot; Junior Energy Engineer</p>
+      <h1>Energy Sheet</h1>
+    </div>
+    <div class="nameline">Name <span></span></div>
+  </div>
+
+  <section>
+    <h2>1 &middot; Colour the Hundred</h2>
+    <p class="hint">These hundred squares are all the energy Japan uses in a year.
+    Colour <strong>16</strong> squares one colour &mdash; that is everything Japan makes for itself.
+    Colour the other <strong>84</strong> a different colour. All of those came on a ship.</p>
+    <div class="gridwrap">
+      <div class="grid100" id="g100"></div>
+      <div class="keybox">
+        <div class="k"><span class="sw"></span><b>16 squares<br><span style="font-weight:normal">Made in Japan</span></b></div>
+        <div class="k"><span class="sw hatch"></span><b>84 squares<br><span style="font-weight:normal">Arrived by ship</span></b></div>
+        <p style="margin:10px 0 0;font-size:9.5pt;line-height:1.4;">When you have finished,
+        stand back and look at it from across the room.<br><br>
+        <strong>Then write one sentence here</strong> about what you see:</p>
+        <div style="border-bottom:1.5px solid #444;height:0.28in;margin-top:6px;"></div>
+        <div style="border-bottom:1.5px solid #444;height:0.28in;"></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>2 &middot; Power Words</h2>
+    <p class="hint">Japanese builds big words out of small pictures. 力 means <em>power</em> &mdash;
+    it looks like an arm pushing. Glue it onto another picture and you get a kind of power.
+    Trace the two grey copies in each box.</p>
+    <div class="wordgrid">
+      <div class="wbox"><div class="wchar">火力</div><div class="wen">FIRE POWER</div>
+        <div class="wsub">coal and gas</div><div class="tracerow"><span>火力</span><span>火力</span></div></div>
+      <div class="wbox"><div class="wchar">水力</div><div class="wen">WATER POWER</div>
+        <div class="wsub">rivers</div><div class="tracerow"><span>水力</span><span>水力</span></div></div>
+      <div class="wbox"><div class="wchar">風力</div><div class="wen">WIND POWER</div>
+        <div class="wsub">windmills</div><div class="tracerow"><span>風力</span><span>風力</span></div></div>
+      <div class="wbox"><div class="wchar">電気</div><div class="wen">ELECTRICITY</div>
+        <div class="wsub">lightning + air</div><div class="tracerow"><span>電気</span><span>電気</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>3 &middot; My Power Island &mdash; the checklist</h2>
+    <p class="hint">Draw your island on a big sheet of plain paper. Tick a box when your drawing
+    really has that thing on it. All four, or the lights go out.</p>
+    <div class="checks">
+      <div><i></i><span>Something that works in the <strong>daytime</strong>.</span></div>
+      <div><i></i><span>Something that works at <strong>night</strong>.</span></div>
+      <div><i></i><span>Something for a <strong>still, cloudy day</strong>.</span></div>
+      <div><i></i><span>A place to <strong>keep energy for later</strong>.</span></div>
+    </div>
+  </section>
+
+  <p class="foot"><strong>Everything else in this lesson happens on a screen and on plain paper.</strong>
+  The six stations are at <strong>wonderschool.vercel.app</strong> &rarr; 2nd grade &rarr; Energy.
+  Do your drawings &mdash; the chain from your lamp, your own power picture-word, and your island &mdash;
+  as big as you like on blank paper.</p>
+
+</div>
+<script>
+(function(){
+  var g = document.getElementById("g100");
+  if (!g) return;
+  for (var i = 0; i < 100; i++) {
+    var d = document.createElement("div"); d.className = "cell"; g.appendChild(d);
+  }
+})();
+</script>
+</body>
+</html>

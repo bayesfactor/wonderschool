@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Energy Meeting — grades 2–6 | Wonderschool</title>
+<meta name="description" content="Four roles, one decision, forty minutes. Japan can build ten new things. Which ten?">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:940px;}
+.hero h1{font-size:clamp(36px,7.5vw,62px);
+  background:linear-gradient(100deg,var(--g2),var(--g4) 45%,var(--g6));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+.roles{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;margin:26px 0;}
+.role{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-lg);
+  padding:24px 22px;box-shadow:var(--shadow-sm);position:relative;overflow:hidden;
+  transition:transform .2s var(--ease),box-shadow .2s var(--ease);}
+.role:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.role::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--rc);}
+.role.r1{--rc:var(--g2);} .role.r2{--rc:var(--g4);}
+.role.r3{--rc:var(--hot);} .role.r4{--rc:var(--g6);}
+.role .band{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--rc);margin-bottom:6px;}
+.role .rname{font-family:var(--font-display);font-size:22px;font-weight:800;letter-spacing:-.02em;
+  margin-bottom:9px;line-height:1.1;}
+.role p{font-size:15px;margin:0 0 11px;}
+.role ul{margin:0 0 4px;padding-left:19px;}
+.role li{font-size:14.5px;line-height:1.5;color:var(--ink-2);margin-bottom:6px;}
+.role .power{margin-top:14px;padding-top:12px;border-top:1px solid var(--edge);font-size:14.5px;color:var(--ink);}
+.role .power b{display:block;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--rc);margin-bottom:3px;}
+
+.steps{counter-reset:s;list-style:none;padding:0;margin:20px 0;}
+.steps li{counter-increment:s;position:relative;padding-left:48px;margin-bottom:18px;
+  font-size:16px;line-height:1.6;color:var(--ink-2);}
+.steps li::before{content:counter(s);position:absolute;left:0;top:-2px;width:32px;height:32px;
+  border-radius:50%;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;
+  font-weight:700;font-size:15px;font-family:var(--font-display);}
+.steps li b{color:var(--ink);}
+
+.timer{background:linear-gradient(145deg,var(--g4-soft),var(--g6-soft));
+  border:2px solid var(--g4);border-radius:var(--r-xl);padding:28px;margin:26px 0;text-align:center;}
+.clock{font-family:var(--font-display);font-size:clamp(50px,13vw,84px);font-weight:800;
+  letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums;color:var(--ink);}
+.phase{font-size:clamp(17px,2.4vw,21px);font-weight:650;color:var(--g4);margin:8px 0 2px;min-height:1.4em;}
+.phasenext{font-size:14px;color:var(--ink-3);min-height:1.3em;}
+.tbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:18px;}
+.pbar{height:9px;border-radius:99px;background:color-mix(in srgb,var(--ink) 12%,transparent);
+  overflow:hidden;margin:18px 0 4px;}
+.pbar i{display:block;height:100%;width:0;border-radius:99px;
+  background:linear-gradient(90deg,var(--g2),var(--g4),var(--g6));transition:width .5s linear;}
+.sched{display:grid;gap:6px;margin-top:16px;text-align:left;}
+.sched div{display:flex;gap:12px;font-size:14px;color:var(--ink-2);padding:7px 12px;border-radius:9px;
+  transition:.2s;}
+.sched div.now{background:var(--surface);color:var(--ink);font-weight:600;box-shadow:var(--shadow-sm);}
+.sched div.done{opacity:.45;}
+.sched .tm{font-variant-numeric:tabular-nums;color:var(--ink-3);white-space:nowrap;min-width:64px;}
+
+/* the shared budget board */
+.board{background:var(--surface);border:2px solid var(--g4);border-radius:var(--r-xl);
+  padding:26px 24px;margin:26px 0;}
+.shelf{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:11px;margin:18px 0 8px;}
+.item{background:var(--bg-2);border:1px solid var(--edge);border-radius:var(--r);padding:13px 14px;}
+.item .ih{display:flex;align-items:center;gap:8px;margin-bottom:3px;}
+.item .sw{width:12px;height:12px;border-radius:4px;flex:none;border:1px solid rgba(128,128,128,.35);}
+.item .nm{font-family:var(--font-display);font-weight:700;font-size:15.5px;color:var(--ink);}
+.item .tg{font-size:12.5px;color:var(--ink-3);line-height:1.35;min-height:2.7em;}
+.item .ctr{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.item .ctr button{width:30px;height:30px;border-radius:8px;border:1px solid var(--edge-strong);
+  background:var(--surface);color:var(--ink);font:inherit;font-size:16px;font-weight:700;
+  cursor:pointer;line-height:1;transition:.15s var(--ease);}
+.item .ctr button:hover:not(:disabled){border-color:var(--g4);color:var(--g4);}
+.item .ctr button:disabled{opacity:.3;cursor:not-allowed;}
+.item .cnt{font-family:var(--font-display);font-weight:800;font-size:18px;color:var(--ink);
+  min-width:1.3em;text-align:center;font-variant-numeric:tabular-nums;}
+
+.scorebar{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:16px;}
+.sc{background:var(--bg-2);border:1px solid var(--edge);border-radius:var(--r);padding:14px 15px;}
+.sc .l{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);}
+.sc .v{font-family:var(--font-display);font-size:26px;font-weight:800;line-height:1.1;margin-top:3px;
+  color:var(--ink);font-variant-numeric:tabular-nums;}
+.sc .n{font-size:12.5px;color:var(--ink-3);line-height:1.35;margin-top:2px;}
+.sc.good .v{color:var(--g2);} .sc.bad .v{color:var(--hot);}
+
+.verdictbox{margin-top:16px;padding:16px 18px;border-radius:var(--r);background:var(--accent-soft);
+  border:1px solid color-mix(in srgb,var(--g4) 25%,transparent);font-size:15.5px;color:var(--ink);
+  line-height:1.6;}
+
+table.simple{width:100%;border-collapse:collapse;font-size:15px;margin:16px 0;}
+table.simple td,table.simple th{padding:11px 10px;border-bottom:1px solid var(--edge);text-align:left;
+  color:var(--ink-2);vertical-align:top;}
+table.simple th{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);}
+table.simple td:first-child{white-space:nowrap;color:var(--ink);font-weight:600;width:1%;padding-right:20px;}
+</style>
+</head>
+<body class="g4">
+
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/together/">Work together</a>
+  <span class="sep">/</span><a href="/together/energy.html">The Energy Meeting</a>
+  <span class="spacer"></span>
+  <a href="/print/">What to print</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="kicker">Everyone together · grades 2–6 · about 40 minutes</p>
+    <h1>The Energy Meeting</h1>
+    <p class="lede">Japan can build <strong>ten</strong> new things. That is the whole budget.
+    Four people at the table, each holding one thing nobody else can do. Nothing gets decided
+    unless all four agree — and the youngest person at the table has the first veto.</p>
+  </div>
+
+  <div class="note"><p><strong>Nothing to print.</strong> Read your role off the screen, or have
+  the teacher read them out. You will need one sheet of plain paper for the wall chart and a
+  device for the Control Room.</p></div>
+
+  <h2>The four roles</h2>
+  <div class="roles">
+
+    <div class="role r1">
+      <div class="band">Grades 2–3</div>
+      <div class="rname">The Islander</div>
+      <p>You are the only person who knows what Japan actually <em>has</em>. Everyone else keeps
+      forgetting, and it is your job to keep saying it.</p>
+      <ul>
+        <li>Draw Japan in the middle of the paper: four islands, mountains down the spine.</li>
+        <li>Write on it, big: <strong>16 out of 100</strong>.</li>
+        <li>Draw the sun, a river, a volcano, and the wind. Those are the things Japan has.</li>
+        <li>Draw a ship arriving. That is everything else.</li>
+      </ul>
+      <p class="power"><b>Your power</b>Whenever anyone proposes something, you get to ask:
+      <em>“does Japan have that?”</em> If the answer is no, they must say where it comes from
+      before the table may vote.</p>
+    </div>
+
+    <div class="role r2">
+      <div class="band">Grades 3–4</div>
+      <div class="rname">The Engineer</div>
+      <p>You run <a href="/grade-4/energy-grid.html">the Control Room</a> on a device. You are the
+      only one who can tell the table whether their plan actually keeps the lights on.</p>
+      <ul>
+        <li>Put the table's ten choices into the Control Room and read out the three dials.</li>
+        <li>Draw the tsunami card. Then the dark-week card. Report what happens.</li>
+        <li>Say the numbers out loud. Do not soften them.</li>
+      </ul>
+      <p class="power"><b>Your power</b>No plan is agreed until you have tested it and said the
+      words <em>“the lights stayed on”</em>. If they did not, the table must change something.</p>
+    </div>
+
+    <div class="role r3">
+      <div class="band">Grades 4–5</div>
+      <div class="rname">The Quartermaster</div>
+      <p>You hold <a href="/grade-4/energy-cards.html">the Power Source Cards</a> and you own the
+      cost column. Nothing reaches the wall chart without a price on it.</p>
+      <ul>
+        <li>Write the cost score and the carbon number next to every item the table picks.</li>
+        <li>Find one choice that is cheap now and expensive later. Say so.</li>
+        <li>Keep a running total. Announce it every time it changes.</li>
+      </ul>
+      <p class="power"><b>Your power</b>You may veto <strong>one</strong> item on cost alone,
+      once, at any point. You must explain the veto in one sentence — and you may not use it in
+      the last five minutes.</p>
+    </div>
+
+    <div class="role r4">
+      <div class="band">Grades 5–6</div>
+      <div class="rname">The Minister</div>
+      <p>You write the decision at the bottom of the chart and read it out. Three sentences,
+      and the third one has to hurt.</p>
+      <ul>
+        <li><strong>Sentence 1:</strong> what Japan is building, and the ten items.</li>
+        <li><strong>Sentence 2:</strong> the one number that justifies it.</li>
+        <li><strong>Sentence 3:</strong> the strongest argument that you have got this wrong.</li>
+        <li>You may only use numbers the Quartermaster wrote down.</li>
+      </ul>
+      <p class="power"><b>Your power</b>None at all. You cannot build anything, price anything,
+      or test anything. You can only persuade the other three — and then take the blame.
+      That is the job.</p>
+    </div>
+  </div>
+
+  <h2>The shared budget board</h2>
+  <p>Ten things, and the table has to agree on all ten. Add and remove until everybody can live
+  with it — then send it to the Engineer.</p>
+
+  <div class="board">
+    <div class="shelf" id="shelf"></div>
+    <p class="left" id="leftSay" style="font-size:16px;color:var(--ink-2);">
+      Left to spend: <strong id="leftN">10</strong> of 10</p>
+
+    <div class="scorebar">
+      <div class="sc" id="scHome"><div class="l">Made in Japan</div><div class="v">—</div>
+        <div class="n">out of ten items</div></div>
+      <div class="sc" id="scNight"><div class="l">Works at night</div><div class="v">—</div>
+        <div class="n">out of ten items</div></div>
+      <div class="sc" id="scCost"><div class="l">Cost</div><div class="v">—</div>
+        <div class="n">average score, 1 to 5</div></div>
+      <div class="sc" id="scCarb"><div class="l">Carbon</div><div class="v">—</div>
+        <div class="n">average, g CO₂ per kWh</div></div>
+    </div>
+
+    <div class="verdictbox" id="verdict">Pick ten. The board will tell you what you have chosen —
+    but not whether it is right. That part is yours.</div>
+  </div>
+
+  <h2>How the forty minutes go</h2>
+  <ol class="steps">
+    <li><b>The Islander draws first, alone, for five minutes.</b> Nobody else touches the paper.
+    The map and the words <em>16 out of 100</em> have to be there before anything else.</li>
+    <li><b>Everyone proposes.</b> Go round the table youngest first. Each person names one thing
+    Japan should build and says why in one sentence. The Islander may challenge any of them.</li>
+    <li><b>Fill the board to ten.</b> Argue. The Quartermaster prices everything; the Islander
+    asks where it comes from.</li>
+    <li><b>The Engineer tests it.</b> Ten choices go into the Control Room. Read the dials out loud.
+    Draw the tsunami card and the dark-week card.</li>
+    <li><b>Rebuild once.</b> You are allowed exactly one rebuild after the test. Choose what to change.</li>
+    <li><b>The Minister writes the three sentences</b> and reads them to the table.</li>
+    <li><b>The challenge round, last five minutes.</b> See below.</li>
+  </ol>
+
+  <div class="timer">
+    <p class="kicker" style="margin-bottom:4px;">Run the meeting</p>
+    <div class="clock" id="clock">40:00</div>
+    <div class="phase" id="phase">Ready</div>
+    <div class="phasenext" id="phasenext">Press start when everyone is sitting down</div>
+    <div class="pbar"><i id="pbar"></i></div>
+    <div class="tbtns">
+      <button class="btn" id="startBtn" type="button">Start the meeting</button>
+      <button class="btn ghost" id="resetT" type="button">Reset</button>
+    </div>
+    <div class="sched" id="sched"></div>
+  </div>
+
+  <h2>The challenge round</h2>
+  <p>The teacher asks; anybody may answer. A correct answer from the <strong>youngest</strong>
+  student is worth three points, from the oldest, one. Read these out in any order.</p>
+
+  <table class="simple">
+    <tr><td>3 points</td><td>How many out of a hundred does Japan make for itself?
+      <em>(About 16.)</em></td></tr>
+    <tr><td>3 points</td><td>What does 火力 mean, literally? <em>(Fire power.)</em></td></tr>
+    <tr><td>2 points</td><td>Name one thing that works at night and one thing that does not.</td></tr>
+    <tr><td>2 points</td><td>Why can't we just save electricity in the wire until we need it?</td></tr>
+    <tr><td>2 points</td><td>In 2011 Japan switched off all 54 of something. All 54 of what?</td></tr>
+    <tr><td>1 point</td><td>What fraction of Japan's oil comes through the Strait of Hormuz?
+      <em>(About 93%.)</em></td></tr>
+    <tr><td>1 point</td><td>Two organisations say Japan's coal share is 28% and 32%. Which is lying?
+      <em>(Neither. Different denominators.)</em></td></tr>
+    <tr><td>3 points</td><td><strong>The one worth most:</strong> name something the table decided
+      that you personally think is wrong, and say why. Anyone may answer. The Minister may not.</td></tr>
+  </table>
+
+  <footer>
+    <a href="/together/">The other group activity</a> ·
+    <a href="/grade-2/energy/">2nd grade</a> ·
+    <a href="/grade-4/energy/">4th grade</a> ·
+    <a href="/grade-6/energy/">6th grade</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- the budget board ---------- */
+  var ITEMS = [
+    {k:"nuclear", nm:"Restart a reactor", col:"var(--e-nuclear)", home:1, night:1, cost:2, co2:12,
+      tg:"Big, steady, almost no carbon. Somebody nearby will object."},
+    {k:"solar",   nm:"Solar farm", col:"var(--e-solar)", home:1, night:0, cost:2, co2:48,
+      tg:"Cheap and Japanese. Nothing at all after sunset."},
+    {k:"wind",    nm:"Offshore wind", col:"var(--e-wind)", home:1, night:1, cost:4, co2:11,
+      tg:"Cleanest of the lot. The sea is deep, so it has to float."},
+    {k:"hydro",   nm:"Pumped hydro", col:"var(--e-hydro)", home:1, night:1, cost:2, co2:24,
+      tg:"A battery made of two lakes. Needs the right mountain."},
+    {k:"geo",     nm:"Geothermal", col:"var(--e-geo)", home:1, night:1, cost:4, co2:38,
+      tg:"Volcano steam, day and night. Usually under a hot-spring town."},
+    {k:"lng",     nm:"Gas station", col:"var(--e-lng)", home:0, night:1, cost:3, co2:490,
+      tg:"Reliable, flexible, imported. Half the carbon of coal."},
+    {k:"battery", nm:"Grid battery", col:"var(--e-other)", home:1, night:1, cost:4, co2:20,
+      tg:"Makes nothing. Moves sunshine from lunchtime to bedtime."},
+    {k:"fuelcell",nm:"Home fuel cells", col:"var(--e-bio)", home:1, night:1, cost:4, co2:250,
+      tg:"Electricity and hot water in the basement. Runs on imported gas."},
+    {k:"wires",   nm:"Better wires", col:"var(--e-coal)", home:1, night:1, cost:3, co2:0,
+      tg:"Joins the 50 Hz half of Japan to the 60 Hz half. Boring. Possibly the best buy here."},
+    {k:"save",    nm:"Use less", col:"var(--e-hydro)", home:1, night:1, cost:1, co2:0,
+      tg:"Insulation, efficient machines, switching things off. The cheapest unit of energy is the one nobody needs."}
+  ];
+  var BUDGET = 10, pick = {};
+  ITEMS.forEach(function(i){ pick[i.k] = 0; });
+
+  var shelf = document.getElementById("shelf");
+  ITEMS.forEach(function(it){
+    var d = document.createElement("div");
+    d.className = "item"; d.dataset.k = it.k;
+    d.innerHTML =
+      '<div class="ih"><span class="sw" style="background:' + it.col + '"></span>' +
+      '<span class="nm">' + it.nm + '</span></div>' +
+      '<div class="tg">' + it.tg + '</div>' +
+      '<div class="ctr">' +
+        '<button type="button" data-d="-1" aria-label="Remove one ' + it.nm + '">&minus;</button>' +
+        '<span class="cnt">0</span>' +
+        '<button type="button" data-d="1" aria-label="Add one ' + it.nm + '">+</button>' +
+      '</div>';
+    d.addEventListener("click", function(e){
+      var b = e.target.closest("button[data-d]"); if (!b) return;
+      var dd = +b.dataset.d, used = total();
+      if (dd > 0 && used >= BUDGET) return;
+      pick[it.k] = Math.max(0, pick[it.k] + dd);
+      paint();
+    });
+    shelf.appendChild(d);
+  });
+
+  function total(){ var n = 0; ITEMS.forEach(function(i){ n += pick[i.k]; }); return n; }
+
+  function paint(){
+    var n = total();
+    ITEMS.forEach(function(it){
+      var d = shelf.querySelector('[data-k="' + it.k + '"]');
+      d.querySelector(".cnt").textContent = pick[it.k];
+      d.querySelector('[data-d="1"]').disabled = n >= BUDGET;
+      d.querySelector('[data-d="-1"]').disabled = pick[it.k] === 0;
+    });
+    document.getElementById("leftN").textContent = BUDGET - n;
+
+    var home = 0, night = 0, cost = 0, co2 = 0;
+    ITEMS.forEach(function(it){
+      home += pick[it.k] * it.home; night += pick[it.k] * it.night;
+      cost += pick[it.k] * it.cost; co2 += pick[it.k] * it.co2;
+    });
+    set("scHome", n ? home : "—", home >= 7, home <= 4 && n === BUDGET);
+    set("scNight", n ? night : "—", night >= 7, night <= 4 && n === BUDGET);
+    set("scCost", n ? (cost / n).toFixed(1) : "—", n && cost / n <= 2.5, n && cost / n >= 3.6);
+    set("scCarb", n ? Math.round(co2 / n) : "—", n && co2 / n <= 100, n && co2 / n >= 250);
+
+    var v = document.getElementById("verdict");
+    if (n < BUDGET) {
+      v.textContent = "Pick ten. The board will tell you what you have chosen — but not whether " +
+        "it is right. That part is yours.";
+    } else {
+      var lines = [];
+      if (night <= 4) lines.push("<strong>Over half your plan stops after sunset.</strong> Ask the Engineer what happens at eight in the evening in January.");
+      if (home <= 4) lines.push("<strong>Most of this still arrives by ship.</strong> The Islander should be objecting loudly by now.");
+      if (co2 / n >= 250) lines.push("<strong>The carbon is high.</strong> Somebody should say out loud whether that is a price worth paying, and why.");
+      if (cost / n >= 3.6) lines.push("<strong>This is an expensive plan.</strong> The Quartermaster needs to say who pays.");
+      if (pick.save === 0) lines.push("Nobody picked <em>Use less</em>. It is the cheapest thing on the board and it is boring. Worth asking why it lost.");
+      if (pick.wires === 0) lines.push("Nobody picked <em>Better wires</em>. Japan's grid is split into a 50 Hz half and a 60 Hz half that can barely share. Worth a minute.");
+      if (!lines.length) lines.push("<strong>A balanced plan.</strong> Now the Minister has to find the strongest argument against it — and there always is one.");
+      v.innerHTML = lines.join("<br><br>");
+    }
+  }
+  function set(id, val, good, bad){
+    var el = document.getElementById(id);
+    el.querySelector(".v").textContent = val;
+    el.classList.toggle("good", !!good); el.classList.toggle("bad", !!bad);
+  }
+  paint();
+
+  /* ---------- the timer ---------- */
+  var PHASES = [
+    [5,  "The Islander draws", "Nobody else touches the paper"],
+    [7,  "Everyone proposes",  "Youngest first, one sentence each"],
+    [9,  "Fill the board to ten", "Quartermaster prices everything"],
+    [6,  "The Engineer tests it", "Read the dials out loud"],
+    [4,  "One rebuild",        "You only get one"],
+    [4,  "The Minister writes", "Three sentences. The third one hurts."],
+    [5,  "Challenge round",    "Youngest answers are worth three points"]
+  ];
+  var totalMin = PHASES.reduce(function(a, p){ return a + p[0]; }, 0);
+  var left = totalMin * 60, tick = null, running = false;
+
+  var sched = document.getElementById("sched");
+  var acc = 0;
+  PHASES.forEach(function(p, i){
+    var d = document.createElement("div");
+    d.dataset.i = i;
+    d.innerHTML = '<span class="tm">' + acc + "–" + (acc + p[0]) + " min</span><span>" + p[1] + "</span>";
+    sched.appendChild(d); acc += p[0];
+  });
+
+  function phaseAt(sec){
+    var gone = totalMin * 60 - sec, a = 0;
+    for (var i = 0; i < PHASES.length; i++) {
+      a += PHASES[i][0] * 60;
+      if (gone < a) return i;
+    }
+    return PHASES.length - 1;
+  }
+  function draw(){
+    var m = Math.floor(left / 60), s = left % 60;
+    document.getElementById("clock").textContent = m + ":" + (s < 10 ? "0" : "") + s;
+    var i = phaseAt(left);
+    document.getElementById("phase").textContent = running || left < totalMin * 60 ? PHASES[i][1] : "Ready";
+    document.getElementById("phasenext").textContent =
+      running || left < totalMin * 60 ? PHASES[i][2] : "Press start when everyone is sitting down";
+    document.getElementById("pbar").style.width =
+      ((totalMin * 60 - left) / (totalMin * 60) * 100) + "%";
+    sched.querySelectorAll("div").forEach(function(d, j){
+      d.classList.toggle("now", running && j === i);
+      d.classList.toggle("done", j < i);
+    });
+  }
+  document.getElementById("startBtn").addEventListener("click", function(){
+    if (running) {
+      clearInterval(tick); running = false; this.textContent = "Resume";
+    } else {
+      running = true; this.textContent = "Pause";
+      tick = setInterval(function(){
+        left--; if (left <= 0) { left = 0; clearInterval(tick); running = false;
+          document.getElementById("startBtn").textContent = "Start the meeting"; }
+        draw();
+      }, 1000);
+    }
+    draw();
+  });
+  document.getElementById("resetT").addEventListener("click", function(){
+    clearInterval(tick); running = false; left = totalMin * 60;
+    document.getElementById("startBtn").textContent = "Start the meeting";
+    draw();
+  });
+  draw();
+})();
+</script>
+</body>
+</html>

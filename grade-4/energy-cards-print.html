@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Power Source Cards — print | Wonderschool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+  h1,h2,h3{font-family:inherit !important;}
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#e9e9e9;color:#111;
+    font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}
+  .sheet{width:8.5in;min-height:11in;background:#fff;margin:18px auto;padding:0.4in 0.45in;
+    box-shadow:0 2px 10px rgba(0,0,0,.25);}
+  .top{border-bottom:3px solid #111;padding-bottom:6px;margin-bottom:9px;
+    display:flex;justify-content:space-between;align-items:flex-end;}
+  h1{font-size:19pt;margin:0;letter-spacing:-.4px;}
+  .eyebrow{font-size:8pt;letter-spacing:3px;text-transform:uppercase;color:#6b6b6b;margin:0 0 2px;}
+  .cutnote{font-size:9pt;color:#6b6b6b;text-align:right;line-height:1.35;}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.11in;}
+  .card2{border:2.5px solid #111;border-radius:10px;padding:8px 10px 7px;height:2.86in;
+    display:flex;flex-direction:column;}
+  .band{font-size:7pt;letter-spacing:1.8px;text-transform:uppercase;color:#6b6b6b;}
+  .cname{font-size:14pt;font-weight:bold;line-height:1.05;margin:1px 0 4px;
+    border-bottom:2px solid #111;padding-bottom:4px;}
+  table{width:100%;border-collapse:collapse;font-size:8.4pt;}
+  td{padding:1.6px 0;color:#222;border-bottom:1px dotted #bbb;}
+  td.v{text-align:right;font-weight:bold;white-space:nowrap;}
+  .fact{margin-top:auto;padding-top:5px;border-top:1.5px solid #999;font-size:7.6pt;
+    line-height:1.32;color:#333;}
+  .foot{font-size:8.6pt;color:#666;border-top:1px solid #ccc;padding-top:6px;margin-top:9px;line-height:1.5;}
+
+  @media print{
+    html,body{background:#fff;}
+    @page{size:letter portrait;margin:0.35in 0.4in;}
+    .sheet{margin:0;box-shadow:none;width:auto;min-height:auto;padding:0;}
+    .site-bar{display:none !important;}
+  }
+</style>
+</head>
+<body class="doc">
+
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-4/">4th grade</a>
+  <span class="sep">/</span><a href="/grade-4/energy/">Energy</a>
+  <span class="spacer"></span>
+  <button class="printbtn" onclick="window.print()">Print the cards</button>
+</nav>
+
+<div class="sheet">
+  <div class="top">
+    <div>
+      <p class="eyebrow">Japan &middot; energy &middot; grades 2&ndash;6</p>
+      <h1>Power Source Cards</h1>
+    </div>
+    <div class="cutnote">&#9986; Cut along the borders &middot; nine cards<br>
+      Rules and a sortable table: wonderschool.vercel.app</div>
+  </div>
+
+  <div class="grid">
+
+    <div class="card2">
+      <div class="band">Burning black rock</div>
+      <div class="cname">COAL</div>
+      <table>
+        <tr><td>Runs</td><td class="v">75%</td></tr>
+        <tr><td>Carbon</td><td class="v">820 g</td></tr>
+        <tr><td>Cost</td><td class="v">2 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">0 / 3</td></tr>
+        <tr><td>At night</td><td class="v">3 / 3</td></tr>
+        <tr><td>Land</td><td class="v">2 / 5</td></tr>
+      </table>
+      <p class="fact">Over a quarter of Japan's electricity. The dirtiest card in the pack,
+      and not one gram of it comes from Japan.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">Chilled to &minus;162 &deg;C</div>
+      <div class="cname">GAS &middot; LNG</div>
+      <table>
+        <tr><td>Runs</td><td class="v">55%</td></tr>
+        <tr><td>Carbon</td><td class="v">490 g</td></tr>
+        <tr><td>Cost</td><td class="v">3 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">0 / 3</td></tr>
+        <tr><td>At night</td><td class="v">3 / 3</td></tr>
+        <tr><td>Land</td><td class="v">1 / 5</td></tr>
+      </table>
+      <p class="fact">Japan started this trade. First tanker into Tokyo Bay, 1969. Half the
+      carbon of coal, and it can speed up fast.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">The emergency card</div>
+      <div class="cname">OIL</div>
+      <table>
+        <tr><td>Runs</td><td class="v">35%</td></tr>
+        <tr><td>Carbon</td><td class="v">650 g</td></tr>
+        <tr><td>Cost</td><td class="v">5 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">0 / 3</td></tr>
+        <tr><td>At night</td><td class="v">3 / 3</td></tr>
+        <tr><td>Land</td><td class="v">1 / 5</td></tr>
+      </table>
+      <p class="fact">Only 2% of the electricity &mdash; but nearly every car and plane.
+      93% of it comes through a gap 21 miles wide.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">Splitting atoms</div>
+      <div class="cname">NUCLEAR</div>
+      <table>
+        <tr><td>Runs</td><td class="v">80%</td></tr>
+        <tr><td>Carbon</td><td class="v">12 g</td></tr>
+        <tr><td>Cost</td><td class="v">2 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">3 / 3</td></tr>
+        <tr><td>At night</td><td class="v">3 / 3</td></tr>
+        <tr><td>Land</td><td class="v">2 / 5</td></tr>
+      </table>
+      <p class="fact">54 reactors before March 2011. Every one switched off afterwards.
+      Fifteen have come back.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">Panels on roofs</div>
+      <div class="cname">SOLAR</div>
+      <table>
+        <tr><td>Runs</td><td class="v">15%</td></tr>
+        <tr><td>Carbon</td><td class="v">48 g</td></tr>
+        <tr><td>Cost</td><td class="v">2 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">3 / 3</td></tr>
+        <tr><td>At night</td><td class="v">0 / 3</td></tr>
+        <tr><td>Land</td><td class="v">5 / 5</td></tr>
+      </table>
+      <p class="fact">About 103 gigawatts, sixth in the world. Free fuel, no ship &mdash;
+      and absolutely nothing after sunset.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">Blades in the sky</div>
+      <div class="cname">WIND</div>
+      <table>
+        <tr><td>Runs</td><td class="v">25%</td></tr>
+        <tr><td>Carbon</td><td class="v">11 g</td></tr>
+        <tr><td>Cost</td><td class="v">3 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">3 / 3</td></tr>
+        <tr><td>At night</td><td class="v">1 / 3</td></tr>
+        <tr><td>Land</td><td class="v">4 / 5</td></tr>
+      </table>
+      <p class="fact">The cleanest card here. Japan's sea floor drops away fast, so the
+      turbines have to float &mdash; which is dear.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">Falling water</div>
+      <div class="cname">HYDRO</div>
+      <table>
+        <tr><td>Runs</td><td class="v">45%</td></tr>
+        <tr><td>Carbon</td><td class="v">24 g</td></tr>
+        <tr><td>Cost</td><td class="v">1 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">3 / 3</td></tr>
+        <tr><td>At night</td><td class="v">3 / 3</td></tr>
+        <tr><td>Land</td><td class="v">4 / 5</td></tr>
+      </table>
+      <p class="fact">Japan's oldest electricity and still its cheapest. Nearly every good
+      river already has a dam on it.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">Steam from hot rocks</div>
+      <div class="cname">GEOTHERMAL</div>
+      <table>
+        <tr><td>Runs</td><td class="v">70%</td></tr>
+        <tr><td>Carbon</td><td class="v">38 g</td></tr>
+        <tr><td>Cost</td><td class="v">4 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">3 / 3</td></tr>
+        <tr><td>At night</td><td class="v">3 / 3</td></tr>
+        <tr><td>Land</td><td class="v">2 / 5</td></tr>
+      </table>
+      <p class="fact">Japan sits on volcanoes and takes under half a percent from them.
+      The best spots are hot-spring towns.</p>
+    </div>
+
+    <div class="card2">
+      <div class="band">Chips and rubbish</div>
+      <div class="cname">WOOD &amp; WASTE</div>
+      <table>
+        <tr><td>Runs</td><td class="v">65%</td></tr>
+        <tr><td>Carbon</td><td class="v">230 g</td></tr>
+        <tr><td>Cost</td><td class="v">5 / 5</td></tr>
+        <tr><td>Japanese</td><td class="v">1 / 3</td></tr>
+        <tr><td>At night</td><td class="v">3 / 3</td></tr>
+        <tr><td>Land</td><td class="v">3 / 5</td></tr>
+      </table>
+      <p class="fact">Burning the town's rubbish beats burying it. The wood pellets,
+      though, are shipped in from Canada and Vietnam.</p>
+    </div>
+
+  </div>
+
+  <p class="foot"><strong>Runs</strong> = how much of the year it really produces &middot;
+  <strong>Carbon</strong> = grams of CO&#8322; per kWh over the machine's whole life
+  (<a href="https://www.ipcc.ch/site/assets/uploads/2018/02/ipcc_wg3_ar5_annex-iii.pdf">IPCC AR5,
+  Annex III</a>; the oil figure is an estimate) &middot; <strong>Japanese</strong> = how much Japan
+  can supply itself &middot; <strong>Cost</strong> and <strong>Land</strong> are simplified game
+  scores. &nbsp;&middot;&nbsp; Before you call a category, say out loud why it matters.</p>
+</div>
+</body>
+</html>

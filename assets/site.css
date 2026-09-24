@@ -305,6 +305,10 @@ body.doc .site-bar{background:#ffffff;border-bottom-color:#d8d4c8;}
   body:not(.doc) .bars .track{border:1px solid #000;background:#fff !important;}
   body:not(.doc) .bars .fill{background:#000 !important;}
   body:not(.doc) .bars .sw{background:#fff !important;border:1px solid #000;}
+  body:not(.doc) .srow .tk{border:1px solid #000;background:#fff !important;}
+  body:not(.doc) .srow .fl{background:#000 !important;}
+  body:not(.doc) .srow.on{background:#f0f0f0 !important;}
+  body:not(.doc) .fc.best{box-shadow:none !important;border-color:#000 !important;}
   body:not(.doc) .reveal{opacity:1 !important;transform:none !important;}
   body:not(.doc) img,body:not(.doc) svg{max-width:60mm;}
   /* neutralise screen-only colour so nothing prints as a solid block */

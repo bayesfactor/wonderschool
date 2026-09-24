@@ -57,6 +57,17 @@ main{max-width:940px;}
   letter-spacing:-.03em;line-height:1;color:var(--ok);font-variant-numeric:tabular-nums;}
 .readout .big.short{color:var(--bad);}
 .readout .lab{font-size:13px;color:var(--ink-3);margin-top:5px;}
+.scen{font-size:12px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin-bottom:6px;}
+.scen.ev{color:var(--warn);}
+.normbtn{font:inherit;font-size:13.5px;font-weight:600;padding:7px 15px;border-radius:99px;
+  border:1px solid var(--edge-strong);background:var(--bg-2);color:var(--ink-2);cursor:pointer;
+  margin-top:10px;transition:.15s var(--ease);}
+.normbtn:hover{border-color:var(--accent);color:var(--accent);}
+.notyet{font-size:15px;color:var(--warn);margin:10px 0 0;}
+.stalewarn{font-size:15px;line-height:1.55;color:var(--warn);
+  background:rgba(255,196,107,.09);border:1px solid rgba(255,196,107,.35);
+  border-radius:var(--r);padding:13px 16px;margin:0 0 14px;}
 .lights{display:flex;align-items:center;gap:10px;font-weight:650;font-size:17px;color:var(--ok);}
 .lights.out{color:var(--bad);}
 .lights .bulb{width:15px;height:15px;border-radius:50%;background:var(--ok);
@@ -126,6 +137,9 @@ table.mini{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px;}
 table.mini th,table.mini td{padding:7px 8px;border-bottom:1px solid var(--edge);text-align:right;color:var(--ink-2);}
 table.mini th{color:var(--ink-3);font-weight:650;font-size:12px;letter-spacing:.06em;text-transform:uppercase;}
 table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--ink);}
+table.mini tr.stale td{opacity:.62;}
+table.mini tr.stale td:first-child::after{content:" ●";color:var(--warn);font-size:11px;}
+table.mini tr.base td{border-top:2px solid var(--edge-strong);}
 </style>
 </head>
 <body>
@@ -165,29 +179,31 @@ table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--
 
     <div class="readout">
       <div>
+        <div class="scen" id="scen">Showing: a normal day</div>
         <div class="big" id="pwr">0.0</div>
-        <div class="lab">power made, against 10.0 needed</div>
+        <div class="lab" id="pwrLab">power made, against 10.0 needed</div>
       </div>
       <div class="lights out" id="lights"><span class="bulb"></span><span id="lightTx">Lights out</span></div>
     </div>
+    <button class="normbtn" id="normBtn" type="button" hidden>&larr; Back to a normal day</button>
 
     <div class="gauges">
       <div class="gz">
         <div class="gl2">Cheap</div>
         <div class="gv" id="gCost">—</div>
-        <div class="gu">lower is cheaper<br>(game score, 1 to 5)</div>
+        <div class="gu">game score 1 to 5, lower is cheaper<br>a fuller bar is better</div>
         <div class="gt"><span class="gf" id="fCost"></span></div>
       </div>
       <div class="gz">
         <div class="gl2">Safe</div>
         <div class="gv" id="gSec">—</div>
-        <div class="gu">share made in Japan<br>real Japan is about 16%</div>
+        <div class="gu">share made in Japan · real Japan ≈ 16%<br>a fuller bar is better</div>
         <div class="gt"><span class="gf" id="fSec"></span></div>
       </div>
       <div class="gz">
         <div class="gl2">Clean</div>
         <div class="gv" id="gCO2">—</div>
-        <div class="gu">grams of CO₂ per kWh<br>real Japan is 477</div>
+        <div class="gu">grams of CO₂ per kWh · real Japan is 477<br>a fuller bar is better</div>
         <div class="gt"><span class="gf" id="fCO2"></span></div>
       </div>
     </div>
@@ -209,12 +225,15 @@ table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--
     <div class="eventbtn">
       <button class="btn" id="drawBtn" type="button">Draw an event card</button>
     </div>
+    <p class="notyet" id="notYet" hidden></p>
     <div class="eventlog" id="log"></div>
     <div id="evHere"></div>
 
     <div class="finalbox" id="final">
       <h2 id="finalH">Seven cards survived</h2>
       <p id="finalP"></p>
+      <p class="stalewarn" id="staleWarn" hidden></p>
+      <button class="btn ghost" id="retestAll" type="button" hidden>Test all seven against the country you have now</button>
       <table class="mini" id="finalT"></table>
     </div>
   </div>
@@ -324,7 +343,7 @@ table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--
   ];
 
   /* ---------- state ---------- */
-  var mix = {}, drawn = [], results = [], evIdx = 0;
+  var mix = {}, results = [], evIdx = 0, current = null;
   SRC.forEach(function(s){ mix[s.k] = 0; });
 
   var elPlants = document.getElementById("plants");
@@ -380,13 +399,17 @@ table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--
     };
   }
 
-  function tint(el, v, lo, hi, invert){
-    /* lo = good end, hi = bad end (or reversed when invert) */
-    var t = Math.max(0, Math.min(1, (v - lo) / (hi - lo)));
-    if (invert) t = 1 - t;
-    el.style.background = t < .34 ? "var(--ok)" : t < .67 ? "var(--warn)" : "var(--bad)";
-    el.style.width = Math.round(Math.max(3, Math.min(100, (invert ? 1 - t : t) * 100)) ) + "%";
+  /* One convention for all three bars: the fill is how GOOD the dial is,
+     0 = worst possible, 1 = best possible. A fuller bar is always better. */
+  function tint(el, good){
+    var g = Math.max(0, Math.min(1, good));
+    el.style.background = g > .66 ? "var(--ok)" : g > .33 ? "var(--warn)" : "var(--bad)";
+    el.style.width = Math.round(g * 100) + "%";
   }
+
+  /* a fingerprint of the current build, so we can tell when a recorded
+     result was scored against a country that no longer exists */
+  function mixKey(){ return SRC.map(function(s){ return mix[s.k]; }).join(","); }
 
   function render(ev){
     SRC.forEach(function(s){
@@ -403,56 +426,102 @@ table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--
       : 'Stations left to place: <b>' + left + '</b>';
     elLeft.classList.toggle("zero", left === 0);
 
-    var r = evaluate(ev);
+    /* the dials always report the scenario currently in play, so that
+       rebuilding during a disaster shows how the NEW country handles it */
+    var scenario = ev === undefined ? current : ev;
+    var r = evaluate(scenario);
+    var any = placed() > 0;
+
+    var sc = document.getElementById("scen");
+    sc.textContent = scenario
+      ? "Showing: " + scenario.h + " · " + scenario.dt
+      : "Showing: a normal day";
+    sc.classList.toggle("ev", !!scenario);
+    document.getElementById("normBtn").hidden = !scenario;
+
     var pwr = document.getElementById("pwr");
     pwr.textContent = r.out.toFixed(1);
     pwr.classList.toggle("short", !r.on);
-    document.querySelector(".readout .lab").textContent =
+    document.getElementById("pwrLab").textContent =
       "power made, against " + r.need.toFixed(1) + " needed";
     var lg = document.getElementById("lights");
     lg.classList.toggle("out", !r.on);
     document.getElementById("lightTx").textContent = r.on ? "Lights on" : "Lights out";
 
-    document.getElementById("gCost").textContent = placed() ? r.cost.toFixed(1) : "—";
-    document.getElementById("gSec").textContent  = placed() ? Math.round(r.sec) + "%" : "—";
-    document.getElementById("gCO2").textContent  = placed() ? Math.round(r.co2) : "—";
-    tint(document.getElementById("fCost"), r.cost, 1, 5, false);
-    tint(document.getElementById("fSec"),  r.sec, 0, 100, true);
-    tint(document.getElementById("fCO2"),  r.co2, 0, 820, false);
+    document.getElementById("gCost").textContent = any ? r.cost.toFixed(1) : "—";
+    document.getElementById("gSec").textContent  = any ? Math.round(r.sec) + "%" : "—";
+    document.getElementById("gCO2").textContent  = any ? Math.round(r.co2) : "—";
+    tint(document.getElementById("fCost"), any ? (5 - r.cost) / 4 : 0);
+    tint(document.getElementById("fSec"),  any ? r.sec / 100 : 0);
+    tint(document.getElementById("fCO2"),  any ? 1 - r.co2 / 820 : 0);
+
+    /* keep the card on screen honest: its verdict, and the score recorded
+       for it, both track the country as it stands right now */
+    if (scenario && current === scenario) {
+      paintCard(scenario, r);
+      var slot = results[results.length - 1];
+      if (slot && slot.ev === scenario) {
+        slot.ok = r.on; slot.out = r.out; slot.need = r.need;
+        slot.co2 = r.co2; slot.sec = r.sec; slot.cost = r.cost; slot.key = mixKey();
+        paintLog();
+        if (elFinal.classList.contains("on")) finish();
+      }
+    }
   }
 
   /* ---------- events ---------- */
-  document.getElementById("drawBtn").addEventListener("click", function(){
-    if (placed() < TOTAL) {
-      elEv.innerHTML = '<div class="evcard"><div class="dt">Not yet</div>' +
-        '<h3>Place all twenty stations first</h3>' +
-        '<p>A country cannot half-exist. You have ' + (TOTAL - placed()) + ' still to place.</p></div>';
-      return;
+  function paintCard(ev, r){
+    var extra = "";
+    if (ev.costmod) {
+      extra = '<p class="real">Your <strong>Cheap</strong> dial has moved: the gas you are burning ' +
+              'now costs double. Watch it, then watch it fall back when the next card comes.</p>';
     }
-    if (evIdx >= EVENTS.length) return;
-    var ev = EVENTS[evIdx++];
-    var r = evaluate(ev);
-    drawn.push(ev.id); results.push({ev:ev, ok:r.on, out:r.out, need:r.need, co2:r.co2, sec:r.sec});
-
     elEv.innerHTML =
       '<div class="evcard ' + (r.on ? "survived" : "failed") + '">' +
         '<div class="dt">' + ev.dt + '</div><h3>' + ev.h + '</h3>' +
         '<p>' + ev.tx + '</p>' +
         '<p class="evres ' + (r.on ? "ok" : "no") + '">' +
           (r.on
-            ? "✓ The lights stayed on. You made " + r.out.toFixed(1) + " against " + r.need.toFixed(1) + " needed."
+            ? "✓ The lights stayed on. You made " + r.out.toFixed(1) +
+              " against " + r.need.toFixed(1) + " needed."
             : "✗ Blackout. You made " + r.out.toFixed(1) + " against " + r.need.toFixed(1) +
               " needed — short by " + (r.need - r.out).toFixed(1) + ".") +
-        '</p>' +
+        '</p>' + extra +
+        '<p class="real"><strong>Rebuild if you like.</strong> The dials above and this verdict are ' +
+        'still inside ' + ev.h.toLowerCase() + ', so you can see straight away whether your ' +
+        'change fixes it.</p>' +
         '<p class="real"><strong>What really happened:</strong> ' + ev.real + '</p>' +
       '</div>';
+  }
 
+  document.getElementById("drawBtn").addEventListener("click", function(){
+    var ny = document.getElementById("notYet");
+    if (placed() < TOTAL) {
+      ny.hidden = false;
+      ny.textContent = "Place all twenty stations first — a country cannot half-exist. " +
+        (TOTAL - placed()) + " still to place.";
+      return;
+    }
+    ny.hidden = true;
+    if (evIdx >= EVENTS.length) return;
+    var ev = EVENTS[evIdx++];
+    current = ev;
+    var r = evaluate(ev);
+    results.push({ev:ev, ok:r.on, out:r.out, need:r.need,
+                  co2:r.co2, sec:r.sec, cost:r.cost, key:mixKey()});
+
+    paintCard(ev, r);
     render(ev);
     paintLog();
 
     if (evIdx >= EVENTS.length) finish();
     else document.getElementById("drawBtn").textContent =
       "Draw the next card (" + (EVENTS.length - evIdx) + " left)";
+  });
+
+  document.getElementById("normBtn").addEventListener("click", function(){
+    current = null;
+    render();
   });
 
   function paintLog(){
@@ -468,27 +537,72 @@ table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--
   function finish(){
     var won = results.filter(function(x){ return x.ok; }).length;
     var base = evaluate(null);
+    var nowKey = mixKey();
+    var stale = results.filter(function(x){ return x.key !== nowKey; }).length;
+
     document.getElementById("drawBtn").disabled = true;
     document.getElementById("drawBtn").textContent = "All seven cards drawn";
     document.getElementById("finalH").textContent =
       won === 7 ? "Seven out of seven. Nothing went dark." : won + " out of 7 survived";
     document.getElementById("finalP").innerHTML = won === 7
       ? "You built a country that held together through a tsunami, two wars, a dark week and a heatwave. " +
-        "Now the hard question: <strong>what did it cost, and who paid?</strong> Look at your Cheap dial."
+        "Now the hard question: <strong>what did it cost, and who paid?</strong> Look at the Cheap column."
       : "Every blackout is a real house with no heating in it. Look at which cards beat you — " +
-        "they will all have one thing in common. Rebuild and try again.";
+        "they will all have one thing in common. Rebuild and test again.";
+
+    /* A score is only meaningful if every card was judged against the same
+       country. If the player rebuilt mid-game, say so rather than adding up
+       seven results from seven different countries. */
+    var warn = document.getElementById("staleWarn");
+    var btn  = document.getElementById("retestAll");
+    if (stale) {
+      warn.hidden = false;
+      warn.innerHTML = "<strong>" + stale + " of these " + results.length + " cards were scored " +
+        "against a different country.</strong> You rebuilt partway through, so this is not really " +
+        "one score — it is a mixture. The faded rows marked ● are the old ones.";
+      btn.hidden = false;
+    } else {
+      warn.hidden = true;
+      btn.hidden = true;
+    }
+
     var t = document.getElementById("finalT");
-    t.innerHTML = "<tr><th>Card</th><th>Made</th><th>Needed</th><th>Result</th></tr>" +
+    t.innerHTML =
+      "<tr><th>Card</th><th>Made</th><th>Needed</th><th>Cheap</th><th>CO₂</th><th>Result</th></tr>" +
       results.map(function(x){
-        return "<tr><td>" + x.ev.h + "</td><td>" + x.out.toFixed(1) + "</td><td>" +
-               x.need.toFixed(1) + "</td><td style='color:" +
-               (x.ok ? "var(--ok)" : "var(--bad)") + "'>" + (x.ok ? "lights on" : "blackout") +
-               "</td></tr>";
+        return "<tr" + (x.key !== nowKey ? " class='stale'" : "") + ">" +
+               "<td>" + x.ev.h + "</td>" +
+               "<td>" + x.out.toFixed(1) + "</td>" +
+               "<td>" + x.need.toFixed(1) + "</td>" +
+               "<td>" + (x.cost === undefined ? "—" : x.cost.toFixed(1)) + "</td>" +
+               "<td>" + Math.round(x.co2) + " g</td>" +
+               "<td style='color:" + (x.ok ? "var(--ok)" : "var(--bad)") + "'>" +
+               (x.ok ? "lights on" : "blackout") + "</td></tr>";
       }).join("") +
-      "<tr><td><strong>Normal day</strong></td><td>" + base.out.toFixed(1) + "</td><td>" +
-      base.need.toFixed(1) + "</td><td>" + Math.round(base.co2) + " g CO₂</td></tr>";
+      "<tr class='base'><td><strong>A normal day</strong></td>" +
+      "<td>" + base.out.toFixed(1) + "</td><td>" + base.need.toFixed(1) + "</td>" +
+      "<td>" + base.cost.toFixed(1) + "</td><td>" + Math.round(base.co2) + " g</td>" +
+      "<td>" + Math.round(base.sec) + "% Japanese</td></tr>";
     elFinal.classList.add("on");
   }
+
+  /* re-score every card against the country as it stands now, so the
+     seven results describe one design instead of several */
+  document.getElementById("retestAll").addEventListener("click", function(){
+    var k = mixKey();
+    results = EVENTS.map(function(ev){
+      var r = evaluate(ev);
+      return {ev:ev, ok:r.on, out:r.out, need:r.need,
+              co2:r.co2, sec:r.sec, cost:r.cost, key:k};
+    });
+    evIdx = EVENTS.length;
+    current = null;
+    elEv.innerHTML = "";
+    paintLog();
+    render();
+    finish();
+    document.getElementById("final").scrollIntoView({behavior:"smooth", block:"nearest"});
+  });
 
   /* ---------- presets and reset ---------- */
   document.querySelectorAll("[data-preset]").forEach(function(b){
@@ -500,9 +614,12 @@ table.mini td:first-child,table.mini th:first-child{text-align:left;color:var(--
   });
   document.getElementById("resetBtn").addEventListener("click", function(){
     SRC.forEach(function(s){ mix[s.k] = 0; });
-    drawn = []; results = []; evIdx = 0;
+    results = []; evIdx = 0; current = null;
     elEv.innerHTML = ""; elLog.innerHTML = "";
     elFinal.classList.remove("on");
+    document.getElementById("notYet").hidden = true;
+    document.getElementById("staleWarn").hidden = true;
+    document.getElementById("retestAll").hidden = true;
     var db = document.getElementById("drawBtn");
     db.disabled = false; db.textContent = "Draw an event card";
     render();

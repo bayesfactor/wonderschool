@@ -46,13 +46,34 @@ main{max-width:940px;}
   font-variant-numeric:tabular-nums;text-align:right;}
 .lrow .unit{display:block;font-family:var(--font-body);font-weight:400;font-size:11.5px;color:var(--ink-3);}
 
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:15px;margin:26px 0;}
-.fc{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);padding:18px 19px;}
-.fc .fh{display:flex;align-items:center;gap:9px;margin-bottom:7px;}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:15px;margin:26px 0;}
+.fc{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);padding:18px 19px;
+  transition:border-color .2s,box-shadow .2s;}
+.fc.best{border-color:var(--g4);box-shadow:0 0 0 2px color-mix(in srgb,var(--g4) 22%,transparent);}
+.fc .fh{display:flex;align-items:center;gap:9px;margin-bottom:2px;}
 .fc .sw{width:14px;height:14px;border-radius:4px;flex:none;border:1px solid rgba(128,128,128,.35);}
 .fc .nm{font-family:var(--font-display);font-weight:700;font-size:17.5px;color:var(--ink);}
+.fc .bestchip{margin-left:auto;font-size:10.5px;font-weight:700;letter-spacing:.09em;
+  text-transform:uppercase;color:var(--g4);background:var(--g4-soft);border-radius:99px;
+  padding:3px 9px;display:none;}
+.fc.best .bestchip{display:inline-block;}
+.fc .sub2{font-size:13px;color:var(--ink-3);margin:0 0 11px;}
 .fc p{margin:0;font-size:14.5px;line-height:1.55;}
-.fc .stats{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+
+/* the full stat block — the same six numbers that are on the paper card */
+.statblock{display:grid;gap:4px;margin:0 0 12px;}
+.srow{display:grid;grid-template-columns:5.6em 1fr 4.1em;gap:9px;align-items:center;
+  padding:4px 7px;border-radius:8px;transition:background .18s;}
+.srow .k{font-size:13px;color:var(--ink-3);line-height:1.2;}
+.srow .tk{height:8px;border-radius:99px;background:var(--bg-2);
+  border:1px solid var(--edge);overflow:hidden;}
+.srow .fl{display:block;height:100%;border-radius:99px;width:0;
+  transition:width .55s var(--ease);}
+.srow .v{font-family:var(--font-display);font-weight:700;font-size:14px;color:var(--ink);
+  text-align:right;font-variant-numeric:tabular-nums;}
+.srow.on{background:var(--accent-soft);}
+.srow.on .k{color:var(--ink);font-weight:650;}
+.fc .stats{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;}
 .fc .st3{font-size:11.5px;font-weight:650;padding:3px 9px;border-radius:99px;
   background:var(--bg-2);color:var(--ink-2);border:1px solid var(--edge);}
 </style>
@@ -98,7 +119,14 @@ main{max-width:940px;}
     <span class="gl" data-t="capacity-factor">capacity factor</span> in Japan. “Cost” and “Land” are
     simplified 1&ndash;5 scores for the game, not prices.</p>
 
-  <h2>What is actually on each card</h2>
+  <h2>All nine cards, in full</h2>
+  <p>Every number that is printed on the paper deck, on screen. Pick a category above and the
+  matching row lights up on all nine cards at once, so you can see the whole board instead of
+  one column of it.</p>
+  <p><strong>The bars are not scores.</strong> A longer bar just means that card is stronger at
+  that one thing. Look at the <em>shape</em> of each card rather than adding it up — coal is
+  nearly full at the top and nearly empty in the middle, and that is the entire argument about
+  coal in one picture.</p>
   <div class="facts" id="facts"></div>
 
   <div class="note"><p><strong>The argument to have afterwards.</strong> Line the nine cards up.
@@ -199,6 +227,27 @@ main{max-width:940px;}
 
   var cur = CATS[0];
 
+  /* How good a card is at one statistic, 0 = worst possible, 1 = best possible.
+     Used only for bar length — never summed, because adding these together
+     would invent a "best card", and the whole point is that there isn't one. */
+  var SCALE = {
+    runs:  function(v){ return v / 100; },
+    co2:   function(v){ return 1 - v / 820; },
+    cost:  function(v){ return (5 - v) / 4; },
+    home:  function(v){ return v / 3; },
+    night: function(v){ return v / 3; },
+    land:  function(v){ return (5 - v) / 4; }
+  };
+  var SHORT = {
+    runs:"Runs", co2:"Carbon", cost:"Cost", home:"Japanese", night:"At night", land:"Land"
+  };
+  var SUFFIX = { runs:"%", co2:" g", cost:" / 5", home:" / 3", night:" / 3", land:" / 5" };
+
+  function bestIn(cat){
+    var vals = CARDS.map(function(c){ return c[cat.k]; });
+    return cat.hi ? Math.max.apply(null, vals) : Math.min.apply(null, vals);
+  }
+
   function draw(){
     var sorted = CARDS.slice().sort(function(a,b){
       return cur.hi ? b[cur.k] - a[cur.k] : a[cur.k] - b[cur.k];
@@ -213,6 +262,16 @@ main{max-width:940px;}
     document.querySelectorAll("#cats button").forEach(function(b){
       b.classList.toggle("on", b.dataset.k === cur.k);
     });
+
+    /* light up the matching row on all nine cards at once */
+    var win = bestIn(cur);
+    document.querySelectorAll(".fc").forEach(function(fc){
+      var card = CARDS[+fc.dataset.i];
+      fc.classList.toggle("best", card[cur.k] === win);
+      fc.querySelectorAll(".srow").forEach(function(r){
+        r.classList.toggle("on", r.dataset.k === cur.k);
+      });
+    });
   }
 
   var cats = document.getElementById("cats");
@@ -223,12 +282,42 @@ main{max-width:940px;}
     cats.appendChild(b);
   });
 
-  document.getElementById("facts").innerHTML = CARDS.map(function(c){
-    return '<div class="fc"><div class="fh"><span class="sw" style="background:' + c.col + '"></span>' +
-      '<span class="nm">' + c.nm + '</span></div><p>' + c.fact + '</p>' +
+  document.getElementById("facts").innerHTML = CARDS.map(function(c, i){
+    var rows = CATS.map(function(cat){
+      var v = c[cat.k];
+      var good = Math.max(0, Math.min(1, SCALE[cat.k](v)));
+      return '<div class="srow" data-k="' + cat.k + '">' +
+               '<span class="k">' + SHORT[cat.k] + '</span>' +
+               '<span class="tk"><span class="fl" data-w="' + (good * 100).toFixed(0) +
+                 '" style="background:' + c.col + '"></span></span>' +
+               '<span class="v">' + v + SUFFIX[cat.k] + '</span>' +
+             '</div>';
+    }).join("");
+    return '<div class="fc" data-i="' + i + '">' +
+      '<div class="fh"><span class="sw" style="background:' + c.col + '"></span>' +
+      '<span class="nm">' + c.nm + '</span><span class="bestchip">best</span></div>' +
+      '<p class="sub2">' + c.sub + '</p>' +
+      '<div class="statblock">' + rows + '</div>' +
+      '<p>' + c.fact + '</p>' +
       '<div class="stats">' + c.tags.map(function(t){ return '<span class="st3">' + t + '</span>'; }).join("") +
       '</div></div>';
   }).join("");
+
+  /* grow the bars once the deck scrolls into view */
+  (function(){
+    var grow = function(scope){
+      (scope || document).querySelectorAll(".srow .fl[data-w]").forEach(function(f){
+        f.style.width = f.dataset.w + "%";
+      });
+    };
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function(es){
+        es.forEach(function(e){ if (e.isIntersecting) { grow(e.target); io.unobserve(e.target); } });
+      }, { threshold: .12 });
+      document.querySelectorAll(".fc").forEach(function(f){ io.observe(f); });
+      setTimeout(function(){ grow(); }, 2200);
+    } else { grow(); }
+  })();
 
   draw();
 })();

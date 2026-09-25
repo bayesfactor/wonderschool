@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rank It — the country ordering game | Wonderschool</title>
-<meta name="description" content="Four countries, one measure. Put them in order, highest to lowest. The closer you get, the more points you score.">
+<meta name="description" content="Four countries, one measure. Put them in order, highest to lowest. Play solo or pass the device between 2–5 players. The closer you get, the more you score.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -20,14 +20,44 @@ main{max-width:720px;}
 .screen.on{display:block;animation:fade .3s var(--ease);}
 @keyframes fade{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
 
+/* ---- setup ---- */
+.setup{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-lg);
+  padding:22px;box-shadow:var(--shadow-sm);margin:14px 0 6px;}
+.field{margin:0 0 16px;}
+.field:last-child{margin-bottom:0;}
+.field > label{display:block;font-weight:600;font-size:14px;color:var(--ink);margin-bottom:9px;}
+.seg{display:inline-flex;gap:6px;flex-wrap:wrap;}
+.seg button{font:inherit;font-weight:700;font-size:16px;min-width:46px;padding:9px 15px;border-radius:12px;
+  cursor:pointer;border:2px solid var(--edge-strong);background:var(--surface);color:var(--ink-2);
+  transition:.15s var(--ease);}
+.seg button:hover{border-color:var(--g6);color:var(--g6);}
+.seg button[aria-pressed="true"]{background:var(--g6);border-color:var(--g6);color:var(--on-accent);}
+.names{display:grid;gap:9px;}
+.names .nrow{display:grid;grid-template-columns:30px 1fr;gap:11px;align-items:center;}
+.names .ndot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  font-weight:800;font-size:12px;font-family:var(--font-display);}
+.names input{font:inherit;font-size:15px;padding:10px 13px;border-radius:11px;border:1px solid var(--edge-strong);
+  background:var(--bg);color:var(--ink);width:100%;}
+.names input:focus-visible{outline:3px solid var(--g6);outline-offset:2px;}
+
+/* ---- pass-the-device gate ---- */
+.gate{text-align:center;padding:40px 16px;}
+.gate .pdot{width:42px;height:42px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;
+  font-weight:800;font-size:17px;font-family:var(--font-display);margin-bottom:4px;}
+.gate .who{font-family:var(--font-display);font-weight:800;font-size:clamp(24px,6vw,38px);
+  letter-spacing:-.02em;margin:8px 0 6px;}
+.gate .sub{color:var(--ink-2);font-size:15px;max-width:36ch;margin:0 auto 22px;}
+
 /* ---- round header ---- */
-.rbar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:8px 0 14px;}
+.rbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0 14px;}
 .rbar .pill{font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--surface);
-  border:1px solid var(--edge);border-radius:99px;padding:6px 13px;}
+  border:1px solid var(--edge);border-radius:99px;padding:6px 13px;display:inline-flex;align-items:center;gap:7px;}
 .rbar .pill b{color:var(--ink);}
 .rbar .spacer{flex:1;}
 .rbar .score{font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--g6);
   font-variant-numeric:tabular-nums;}
+.rbar .pdotmini{width:20px;height:20px;border-radius:50%;display:inline-grid;place-items:center;color:#fff;
+  font-weight:800;font-size:10.5px;font-family:var(--font-display);}
 
 .ask{background:var(--g6-soft);border:1px solid color-mix(in srgb,var(--g6) 22%,transparent);
   border-radius:var(--r-lg);padding:18px 20px;margin:6px 0 16px;text-align:center;}
@@ -36,6 +66,9 @@ main{max-width:720px;}
   letter-spacing:-.02em;margin:6px 0 2px;color:var(--ink);}
 .ask .dir{font-size:14px;color:var(--ink-2);}
 .ask .dir b{color:var(--g6);}
+.ask.compact{padding:12px 16px;margin:6px 0 14px;}
+.ask.compact .ico{font-size:22px;}
+.ask.compact .cat{font-size:20px;margin:2px 0 0;}
 
 /* ---- orderable list ---- */
 .rank-list{display:grid;gap:10px;margin:2px 0 6px;}
@@ -58,7 +91,7 @@ main{max-width:720px;}
 .item .mv button:hover:not(:disabled){border-color:var(--g6);color:var(--g6);}
 .item .mv button:disabled{opacity:.3;cursor:default;}
 
-/* reveal state */
+/* reveal state (solo) */
 .item .reveal-val{display:none;font-family:var(--font-display);font-weight:800;font-size:16px;
   font-variant-numeric:tabular-nums;color:var(--ink);white-space:nowrap;text-align:right;}
 .item .reveal-rank{display:none;font-size:11px;font-weight:700;color:var(--ink-3);}
@@ -85,6 +118,28 @@ body.revealed .result{display:block;}
 
 .actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:20px 0 0;}
 .btn.g6btn{background:var(--g6);}
+
+/* ---- multiplayer reveal ---- */
+.sect-h{text-align:center;font-size:15px;font-weight:700;color:var(--ink-3);letter-spacing:.04em;
+  text-transform:uppercase;margin:20px 0 10px;}
+.truthrow{display:grid;grid-template-columns:32px 44px 1fr auto;gap:12px;align-items:center;
+  background:var(--surface);border:1px solid var(--edge);border-radius:14px;padding:10px 13px;margin-bottom:8px;}
+.truthrow .rk{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--g6);text-align:center;}
+.truthrow .flag{width:44px;height:33px;border-radius:6px;object-fit:cover;background:#fff;border:1px solid var(--edge-strong);}
+.truthrow .nm{font-weight:700;font-size:16px;color:var(--ink);}
+.truthrow .vl{font-family:var(--font-display);font-weight:800;font-variant-numeric:tabular-nums;
+  color:var(--ink);white-space:nowrap;}
+.standings{display:grid;gap:8px;max-width:480px;margin:6px auto 0;}
+.strow{display:grid;grid-template-columns:24px 26px 1fr auto auto;gap:11px;align-items:center;
+  background:var(--surface);border:1px solid var(--edge);border-radius:12px;padding:10px 13px;}
+.strow.lead{border-color:var(--g6);background:var(--g6-soft);}
+.strow .pos{font-family:var(--font-display);font-weight:800;font-size:15px;color:var(--ink-3);text-align:center;}
+.strow .dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;color:#fff;
+  font-weight:800;font-size:11px;font-family:var(--font-display);}
+.strow .snm{font-weight:700;color:var(--ink);}
+.strow .rd{font-size:12.5px;color:var(--g6);font-weight:700;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;}
+.strow .tot{font-family:var(--font-display);font-weight:800;font-variant-numeric:tabular-nums;
+  text-align:right;min-width:34px;color:var(--ink);}
 
 /* ---- final ---- */
 .finale{text-align:center;padding:16px 0;}
@@ -121,40 +176,65 @@ body.revealed .result{display:block;}
 
 <main>
   <header class="hero">
-    <p class="kicker">Games · one player</p>
+    <p class="kicker">Games · 1 to 5 players</p>
     <h1>Rank It</h1>
     <p class="lede">Four countries, one measure. Drag them into order, highest to lowest.
     <strong>The closer you get, the more you score</strong> — get every pair the right way round for a perfect
-    round.</p>
+    round. Play solo, or pass the device around a table of up to five.</p>
   </header>
 
-  <!-- ============ INTRO ============ -->
+  <!-- ============ INTRO / SETUP ============ -->
   <section class="screen on" id="s-intro">
-    <div class="actions" style="justify-content:flex-start;margin:8px 0 6px;">
-      <button class="btn g6btn" id="startBtn">Start · 8 rounds →</button>
+    <div class="setup">
+      <div class="field">
+        <label id="pc-label">How many players?</label>
+        <div class="seg" id="playerCount" role="group" aria-labelledby="pc-label">
+          <button data-n="1" aria-pressed="true">Solo</button>
+          <button data-n="2">2</button>
+          <button data-n="3">3</button>
+          <button data-n="4">4</button>
+          <button data-n="5">5</button>
+        </div>
+      </div>
+      <div class="field" id="nameField" style="display:none;">
+        <label>Player names <span style="color:var(--ink-3);font-weight:400;">(optional)</span></label>
+        <div class="names" id="nameRows"></div>
+      </div>
+      <div class="actions" style="justify-content:flex-start;margin-top:18px;">
+        <button class="btn g6btn" id="startBtn">Start · 8 rounds →</button>
+      </div>
     </div>
+
     <h2>How it works</h2>
     <ol class="rules">
-      <li>Each round you get <b>four random countries</b> and <b>one measure</b> — people, land, economy,
-      wealth, inequality or a freedom score.</li>
+      <li>Each round shows <b>four random countries</b> and <b>one measure</b> — people, land, economy, wealth,
+      inequality or a freedom score.</li>
       <li><b>Put them in order</b>, most at the top down to least. Drag the cards, or use the ▲▼ buttons.</li>
       <li>Score is by <b>pairs in the right order</b>: there are six pairs among four countries, and you earn
       points for each one you get the right way round. All six right is a <b>perfect round</b>.</li>
-      <li>Eight rounds, then a final score and a rank. Every card shows its real number when the round is
-      graded, so you learn as you go.</li>
+      <li><b>With 2–5 players</b> everyone gets the <b>same</b> four countries and measure and takes a turn.
+      The cards are re-shuffled before each turn, so you can't see how anyone else answered. Highest total after
+      eight rounds wins.</li>
     </ol>
     <div class="note"><p><strong>No best answer to memorise.</strong> The measures pull in different
     directions — the country with the most people is rarely the richest per person — so each round is its own
-    puzzle. Same idea as <a href="/games/country-cards.html">Country Cards</a>, turned into a solo challenge.</p></div>
+    puzzle. Same data as <a href="/games/country-cards.html">Country Cards</a>.</p></div>
   </section>
 
-  <!-- ============ ROUND ============ -->
-  <section class="screen" id="s-round">
-    <div class="rbar">
-      <span class="pill">Round <b id="roundNo">1</b> / 8</span>
-      <span class="spacer"></span>
-      <span class="pill">Score <span class="score" id="scoreNow">0</span></span>
+  <!-- ============ PASS GATE (multiplayer) ============ -->
+  <section class="screen" id="s-gate">
+    <div class="gate">
+      <div class="pdot" id="gateDot"></div>
+      <div class="who" id="gateWho"></div>
+      <div class="sub">Pass the device over, then tap to see your four countries — freshly shuffled, so no
+      peeking at anyone else's order.</div>
+      <button class="btn g6btn" id="gateBtn">Show my countries</button>
     </div>
+  </section>
+
+  <!-- ============ ROUND (input) ============ -->
+  <section class="screen" id="s-round">
+    <div class="rbar" id="rbar"></div>
 
     <div class="ask">
       <div class="ico" id="askIco">📊</div>
@@ -175,6 +255,21 @@ body.revealed .result{display:block;}
       <button class="btn g6btn" id="submitBtn">Lock in my order</button>
       <button class="btn g6btn" id="nextBtn" style="display:none;">Next round →</button>
     </div>
+  </section>
+
+  <!-- ============ MULTIPLAYER ROUND REVEAL ============ -->
+  <section class="screen" id="s-mpreveal">
+    <div class="rbar"><span class="pill">Round <b id="mpRoundNo"></b> / 8 · result</span></div>
+    <div class="ask compact">
+      <div class="ico" id="mpAskIco"></div>
+      <div class="cat" id="mpAskCat"></div>
+      <div class="dir" id="mpAskDir"></div>
+    </div>
+    <div class="sect-h">Correct order</div>
+    <div id="truthList"></div>
+    <div class="sect-h">Standings</div>
+    <div class="standings" id="standings"></div>
+    <div class="actions"><button class="btn g6btn" id="mpNextBtn">Next round →</button></div>
   </section>
 
   <!-- ============ FINAL ============ -->
@@ -204,7 +299,8 @@ body.revealed .result{display:block;}
 <script src="/assets/countries.js"></script>
 <script>
 /* =========================================================================
-   Rank It — order four countries by a random measure. Solo, 8 rounds.
+   Rank It — order four countries by a random measure.
+   Solo, or pass-and-play for 2–5 players (same question, secret turns).
    Score = pairs placed the right way round (Kendall-style), tie-safe.
    ========================================================================= */
 (function(){
@@ -228,43 +324,92 @@ body.revealed .result{display:block;}
     {k:"efree",ico:"🏦", n:"Economic freedom",   dir:"Most free-market at the top",
      fmt:v => v.toFixed(1)+"/100"}
   ];
+  const P_COLORS = ["#6c4bd4","#1f68c2","#bd3f0a","#12735a","#8a6209"];
 
   const ROUNDS = 8, MAXR = 100;
   const $ = id => document.getElementById(id);
-  const screens = ["intro","round","over"];
+  const screens = ["intro","gate","round","mpreveal","over"];
   function show(name){ screens.forEach(s => $("s-"+s).classList.toggle("on", s===name));
     window.scrollTo({top:0,behavior:"smooth"}); }
   function shuffle(a){ for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
   function esc(s){ return s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
   function flag(iso){ return '<img class="flag" src="/assets/flags/'+iso.toLowerCase()+'.svg" alt="" loading="lazy" decoding="async">'; }
+  const initial = s => s.trim() ? s.trim()[0].toUpperCase() : "?";
 
-  let G;   // {round, total, order:[cards], cat, graded, rows:[{pairs, exact}]}
+  // G = { n, players:[{name,color,total,rounds:[]}], round, quad, cat, order, turn, graded }
+  let G;
 
-  function newGame(){ G = { round:0, total:0, rows:[] }; nextRound(); }
+  /* ---------- setup ---------- */
+  let selN = 1;
+  function setupNames(n){
+    $("nameField").style.display = n > 1 ? "" : "none";
+    if(n <= 1){ $("nameRows").innerHTML = ""; return; }
+    let h = "";
+    for(let i=0;i<n;i++)
+      h += '<div class="nrow"><span class="ndot" style="background:'+P_COLORS[i]+'">'+(i+1)+'</span>'+
+           '<input type="text" maxlength="14" placeholder="Player '+(i+1)+'" aria-label="Player '+(i+1)+' name"></div>';
+    $("nameRows").innerHTML = h;
+  }
+  $("playerCount").addEventListener("click", e => {
+    const b = e.target.closest("button"); if(!b) return;
+    [...$("playerCount").children].forEach(x => x.setAttribute("aria-pressed","false"));
+    b.setAttribute("aria-pressed","true"); selN = +b.dataset.n; setupNames(selN);
+  });
 
-  function pickRound(){
-    const quad = shuffle(DATA.slice()).slice(0,4);
-    // choose a measure where the four are not all tied
-    const cat = shuffle(CATS.slice()).find(c => new Set(quad.map(q => q[c.k])).size > 1) || CATS[0];
-    return { order: shuffle(quad.slice()), cat };
+  function newGame(){
+    const n = selN, players = [];
+    if(n === 1){ players.push({ name:"You", color:P_COLORS[0], total:0, rounds:[] }); }
+    else {
+      const inputs = [...$("nameRows").querySelectorAll("input")];
+      for(let i=0;i<n;i++)
+        players.push({ name:(inputs[i] && inputs[i].value.trim()) || ("Player "+(i+1)),
+                       color:P_COLORS[i], total:0, rounds:[] });
+    }
+    G = { n, players, round:0 };
+    startRound();
   }
 
-  function nextRound(){
+  /* ---------- round lifecycle ---------- */
+  function startRound(){
     G.round++;
     if(G.round > ROUNDS){ return endGame(); }
-    const r = pickRound();
-    G.order = r.order; G.cat = r.cat; G.graded = false;
+    const quad = shuffle(DATA.slice()).slice(0,4);
+    // pick a measure where the four are not all tied
+    const cat = shuffle(CATS.slice()).find(c => new Set(quad.map(q => q[c.k])).size > 1) || CATS[0];
+    G.quad = quad; G.cat = cat; G.turn = 0;
+    $("askIco").textContent = cat.ico;
+    $("askCat").textContent = cat.n;
+    $("askDir").innerHTML = "Order them: <b>" + cat.dir + "</b>";
+    beginTurn();
+  }
+
+  function beginTurn(){
+    if(G.n === 1){ showBoard(); return; }
+    const p = G.players[G.turn];
+    $("gateDot").style.background = p.color;
+    $("gateDot").textContent = initial(p.name);
+    $("gateWho").textContent = p.name + " — round " + G.round;
+    show("gate");
+  }
+
+  function showBoard(){
+    G.order = shuffle(G.quad.slice());   // fresh shuffle per player: no seeing prior answers
+    G.graded = false;
     document.body.classList.remove("revealed");
-    $("roundNo").textContent = G.round;
-    $("scoreNow").textContent = G.total;
-    $("askIco").textContent = r.cat.ico;
-    $("askCat").textContent = r.cat.n;
-    $("askDir").innerHTML = "Order them: <b>" + r.cat.dir + "</b>";
-    $("roundResult").style.display = "";     // controlled by body.revealed
+    renderRbar();
+    renderList();
     $("submitBtn").style.display = "";
     $("nextBtn").style.display = "none";
-    renderList();
     show("round");
+  }
+
+  function renderRbar(){
+    const p = G.players[G.turn];
+    let h = '<span class="pill">Round <b>'+G.round+'</b> / '+ROUNDS+'</span><span class="spacer"></span>';
+    if(G.n > 1)
+      h += '<span class="pill"><span class="pdotmini" style="background:'+p.color+'">'+esc(initial(p.name))+'</span>'+esc(p.name)+'</span>';
+    h += '<span class="pill">Score <span class="score">'+p.total+'</span></span>';
+    $("rbar").innerHTML = h;
   }
 
   function renderList(){
@@ -295,7 +440,6 @@ body.revealed .result{display:block;}
     const L = $("rankList");
     L.querySelectorAll(".up").forEach(b => b.onclick = e => move(+e.target.closest(".item").dataset.i, +e.target.closest(".item").dataset.i - 1));
     L.querySelectorAll(".down").forEach(b => b.onclick = e => move(+e.target.closest(".item").dataset.i, +e.target.closest(".item").dataset.i + 1));
-    // HTML5 drag (mouse / desktop)
     let dragI = null;
     L.querySelectorAll(".item").forEach(it => {
       it.addEventListener("dragstart", e => { dragI = +it.dataset.i; it.classList.add("dragging"); e.dataTransfer.effectAllowed="move"; });
@@ -304,7 +448,6 @@ body.revealed .result{display:block;}
       it.addEventListener("dragleave", () => it.classList.remove("over"));
       it.addEventListener("drop",      e => { e.preventDefault(); const t=+it.dataset.i; if(dragI!==null && dragI!==t) move(dragI,t); dragI=null; });
     });
-    // Pointer drag (touch): press a card's number, drag over others
     L.querySelectorAll(".item .slot").forEach(slot => {
       slot.addEventListener("pointerdown", e => {
         if(e.pointerType==="mouse") return;            // desktop uses HTML5 DnD above
@@ -328,75 +471,134 @@ body.revealed .result{display:block;}
     });
   }
 
-  // rank: 1 = highest value; ties share a rank
-  function trueRank(card){ return 1 + G.order.filter(c => c[G.cat.k] > card[G.cat.k]).length; }
-
-  function grade(){
-    const k = G.cat.k, o = G.order;
+  /* ---------- scoring ---------- */
+  function scoreOrder(order, k){
     let correct = 0, total = 0;
-    for(let i=0;i<o.length;i++) for(let j=i+1;j<o.length;j++){
+    for(let i=0;i<order.length;i++) for(let j=i+1;j<order.length;j++){
       total++;
-      // player placed o[i] above o[j]; correct if o[i] >= o[j] (ties always count)
-      if(o[i][k] >= o[j][k]) correct++;
+      if(order[i][k] >= order[j][k]) correct++;   // ties always count
     }
-    const pts = Math.round(correct/total * MAXR);
-    G.total += pts;
-    G.graded = true;
-    G.rows.push({ pairs:correct, total, pts, exact:(correct===total) });
+    return { correct, total, pts:Math.round(correct/total*MAXR), exact:(correct===total) };
+  }
+  function trueRank(card, k){ return 1 + G.quad.filter(c => c[k] > card[k]).length; }
 
+  function onLock(){
+    if(G.graded && G.n === 1) return;              // solo guard: already revealed
+    const k = G.cat.k, p = G.players[G.turn];
+    const r = scoreOrder(G.order, k);
+    p.rounds[G.round-1] = r; p.total += r.pts;
+
+    if(G.n === 1){ revealSolo(r); return; }
+
+    // multiplayer: hand off or reveal
+    G.turn++;
+    if(G.turn < G.n) beginTurn();
+    else showMpReveal();
+  }
+
+  function revealSolo(r){
+    const k = G.cat.k, o = G.order;
+    G.graded = true;
     document.body.classList.add("revealed");
     renderList();
-    // annotate each row with value + rank + good/bad slot
-    const correctOrder = o.slice().sort((a,b)=> b[k]-a[k]);
-    $("rankList").querySelectorAll(".item").forEach((el,i) => {
-      const c = o[i];
+    o.forEach((c,idx) => {
+      const el = $("rankList").children[idx];
       el.querySelector(".reveal-val").textContent = G.cat.fmt(c[k]);
-      const rk = trueRank(c);
-      el.querySelector(".reveal-rank").textContent = "true rank #" + rk;
-      // "good" if this card is not out of order with its neighbours in the player's list
-      const upOk = i===0 || o[i-1][k] >= c[k];
-      const downOk = i===o.length-1 || c[k] >= o[i+1][k];
+      el.querySelector(".reveal-rank").textContent = "true rank #" + trueRank(c, k);
+      const upOk = idx===0 || o[idx-1][k] >= c[k];
+      const downOk = idx===o.length-1 || c[k] >= o[idx+1][k];
       el.classList.add(upOk && downOk ? "good" : "bad");
     });
-
     const head = $("rpHead");
-    head.className = "rp " + (correct===total ? "perfect" : correct>=4 ? "mid" : "low");
-    head.textContent = correct===total ? "Perfect round! +"+pts : "+"+pts+" points";
-    $("rpDetail").textContent = correct + " of " + total + " pairs in the right order.";
+    head.className = "rp " + (r.exact ? "perfect" : r.correct>=4 ? "mid" : "low");
+    head.textContent = r.exact ? "Perfect round! +"+r.pts : "+"+r.pts+" points";
+    $("rpDetail").textContent = r.correct + " of " + r.total + " pairs in the right order.";
+    const co = G.quad.slice().sort((a,b)=> b[k]-a[k]);
     $("rpTruth").innerHTML = "Correct order: <b>" +
-      correctOrder.map(c => c.c + " (" + G.cat.fmt(c[k]) + ")").join(" › ") + "</b>";
-    $("scoreNow").textContent = G.total;
+      co.map(c => c.c + " (" + G.cat.fmt(c[k]) + ")").join(" › ") + "</b>";
+    renderRbar();
     $("submitBtn").style.display = "none";
     $("nextBtn").style.display = "";
     $("nextBtn").textContent = G.round >= ROUNDS ? "See my result →" : "Next round →";
   }
 
-  function endGame(){
-    const max = ROUNDS * MAXR, pct = Math.round(G.total / max * 100);
-    const exacts = G.rows.filter(r => r.exact).length;
+  function showMpReveal(){
+    const k = G.cat.k;
+    $("mpRoundNo").textContent = G.round;
+    $("mpAskIco").textContent = G.cat.ico;
+    $("mpAskCat").textContent = G.cat.n;
+    $("mpAskDir").innerHTML = "<b>" + G.cat.dir + "</b>";
+    const co = G.quad.slice().sort((a,b)=> b[k]-a[k]);
+    $("truthList").innerHTML = co.map((c,i) =>
+      '<div class="truthrow"><div class="rk">'+(i+1)+'</div>'+flag(c.iso)+
+      '<div class="nm">'+esc(c.c)+'</div><div class="vl">'+G.cat.fmt(c[k])+'</div></div>').join("");
+
+    const ranked = G.players.slice().sort((a,b)=> b.total - a.total);
+    const lead = ranked[0].total, medals = ["🥇","🥈","🥉","4th","5th"];
+    $("standings").innerHTML = ranked.map((p,i) => {
+      const rd = p.rounds[G.round-1];
+      return '<div class="strow'+(p.total===lead?' lead':'')+'">'+
+        '<div class="pos">'+(medals[i]||'')+'</div>'+
+        '<div class="dot" style="background:'+p.color+'">'+esc(initial(p.name))+'</div>'+
+        '<div class="snm">'+esc(p.name)+'</div>'+
+        '<div class="rd">+'+rd.pts+(rd.exact?' ✓':'')+'</div>'+
+        '<div class="tot">'+p.total+'</div></div>';
+    }).join("");
+    $("mpNextBtn").textContent = G.round >= ROUNDS ? "See final standings →" : "Next round →";
+    show("mpreveal");
+  }
+
+  /* ---------- final ---------- */
+  function endGame(){ G.n === 1 ? endSolo() : endMulti(); }
+
+  function endSolo(){
+    const p = G.players[0], max = ROUNDS*MAXR, pct = Math.round(p.total/max*100);
+    const exacts = p.rounds.filter(r => r.exact).length;
     const tiers = [
-      [90,"🌍","Atlas Grand Master"],
-      [75,"🧭","Master Cartographer"],
-      [60,"🗺️","Seasoned Navigator"],
-      [40,"🔭","Apprentice Explorer"],
-      [0, "🌱","Rookie Ranker"]
+      [90,"🌍","Atlas Grand Master"],[75,"🧭","Master Cartographer"],
+      [60,"🗺️","Seasoned Navigator"],[40,"🔭","Apprentice Explorer"],[0,"🌱","Rookie Ranker"]
     ];
     const t = tiers.find(t => pct >= t[0]);
     $("finMedal").textContent = t[1];
     $("finRank").textContent = t[2];
-    $("finScore").textContent = G.total + " / " + max;
+    $("finScore").textContent = p.total + " / " + max;
     $("finSub").textContent = pct + "% · " + exacts + " perfect round" + (exacts===1?"":"s") + " of " + ROUNDS;
-    $("finBars").innerHTML = G.rows.map((r,i) =>
+    $("finBars").innerHTML = p.rounds.map((r,i) =>
       '<div class="b"><span>Round '+(i+1)+'</span>'+
       '<span class="track"><i style="width:'+Math.round(r.pts)+'%"></i></span>'+
       '<span style="text-align:right;font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink-2)">'+r.pts+'</span></div>').join("");
     show("over");
   }
 
+  function endMulti(){
+    const max = ROUNDS*MAXR;
+    const ranked = G.players.slice().sort((a,b)=> b.total - a.total);
+    const top = ranked[0].total, winners = ranked.filter(p => p.total === top);
+    const medals = ["🥇","🥈","🥉","4th","5th"];
+    $("finMedal").textContent = winners.length > 1 ? "🤝" : "🏆";
+    $("finRank").textContent = winners.length > 1 ? "It's a tie!" : winners[0].name + " wins!";
+    $("finScore").textContent = top + " / " + max;
+    $("finSub").textContent = G.n + " players · " + ROUNDS + " rounds";
+    $("finBars").innerHTML = '<div class="standings">' + ranked.map((p,i) => {
+      const ex = p.rounds.filter(r => r.exact).length;
+      return '<div class="strow'+(p.total===top?' lead':'')+'">'+
+        '<div class="pos">'+(medals[i]||'')+'</div>'+
+        '<div class="dot" style="background:'+p.color+'">'+esc(initial(p.name))+'</div>'+
+        '<div class="snm">'+esc(p.name)+'</div>'+
+        '<div class="rd">'+ex+' perfect</div>'+
+        '<div class="tot">'+p.total+'</div></div>';
+    }).join("") + '</div>';
+    show("over");
+  }
+
+  /* ---------- wiring ---------- */
   $("startBtn").onclick = newGame;
-  $("againBtn").onclick = newGame;
-  $("submitBtn").onclick = () => { if(!G.graded) grade(); };
-  $("nextBtn").onclick = () => nextRound();
+  $("againBtn").onclick = () => show("intro");
+  $("gateBtn").onclick = showBoard;
+  $("submitBtn").onclick = onLock;
+  $("nextBtn").onclick = startRound;      // solo advance
+  $("mpNextBtn").onclick = startRound;    // multiplayer advance
+  setupNames(1);
 })();
 </script>
 </body>

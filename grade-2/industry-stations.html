@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Six Making Stations — 2nd grade | Wonderschool</title>
+<meta name="description" content="A treasure hunt round your house, a hundred people and their jobs, and a factory of your own to design.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:860px;}
+.hero{text-align:center;padding:18px 0 6px;}
+.hero h1{font-size:clamp(38px,8.6vw,70px);margin:0 0 6px;
+  background:linear-gradient(115deg,var(--g2),var(--g4) 60%,var(--g6));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{font-size:clamp(17px,2.4vw,21px);color:var(--ink-2);max-width:34ch;margin:0 auto 22px;}
+
+.rail{position:sticky;top:52px;z-index:200;display:flex;gap:7px;justify-content:center;
+  flex-wrap:wrap;padding:11px 10px;margin:0 -10px 26px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-radius:99px;}
+.rail a{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;
+  font-weight:700;font-size:14px;text-decoration:none;
+  border:2px solid var(--edge-strong);color:var(--ink-3);background:var(--surface);transition:.2s var(--ease);}
+.rail a:hover{transform:translateY(-2px);border-color:var(--g2);color:var(--g2);}
+.rail a.done{background:var(--g2);border-color:var(--g2);color:var(--on-accent);}
+
+.station{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
+  padding:32px 30px;margin-bottom:26px;box-shadow:var(--shadow-sm);scroll-margin-top:110px;}
+.station .num{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:9px;}
+.station .num b{width:24px;height:24px;border-radius:50%;background:var(--g2);color:var(--on-accent);
+  display:grid;place-items:center;font-size:12px;}
+.station h2{margin:0 0 12px;font-size:clamp(26px,4.5vw,36px);}
+.station p{font-size:17px;line-height:1.65;}
+.big-say{font-size:clamp(19px,2.6vw,22px);line-height:1.5;color:var(--ink);font-weight:500;}
+
+.paper{display:flex;gap:13px;align-items:flex-start;background:var(--gold-soft);
+  border:1px solid color-mix(in srgb,var(--gold-vivid) 45%,transparent);
+  border-radius:var(--r);padding:15px 18px;margin:20px 0 4px;}
+.paper .ic{flex:none;width:30px;height:30px;border-radius:9px;background:var(--gold-vivid);color:#3a2a06;
+  display:grid;place-items:center;font-weight:800;font-size:15px;}
+.paper p{margin:0;font-size:15.5px;color:var(--ink);}
+
+@keyframes pop{from{opacity:0;transform:scale(.96) translateY(6px);}to{opacity:1;transform:none;}}
+.verdict{margin-top:16px;font-size:16.5px;line-height:1.6;display:none;}
+.verdict.on{display:block;animation:pop .4s var(--ease);}
+
+/* ---- 1: treasure hunt ---- */
+.hunt{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:12px;margin:20px 0 6px;}
+.hb{background:var(--bg-2);border:2px solid var(--edge-strong);border-radius:var(--r);
+  padding:15px 13px;text-align:center;cursor:pointer;font:inherit;transition:.22s var(--ease);}
+.hb:hover{transform:translateY(-3px);border-color:var(--g2);}
+.hb.found{border-color:var(--g2);background:var(--g2-soft);}
+.hb .em{font-size:36px;line-height:1.1;}
+.hb .th{font-family:var(--font-display);font-weight:700;font-size:16px;color:var(--ink);margin-top:5px;}
+.hb .ans{font-size:13.5px;color:var(--ink-2);line-height:1.4;margin-top:5px;
+  max-height:0;overflow:hidden;transition:max-height .35s var(--ease);}
+.hb.found .ans{max-height:9em;}
+.huntcount{font-size:17px;color:var(--ink-2);margin-top:14px;}
+.huntcount b{font-family:var(--font-display);font-size:23px;color:var(--g2);}
+
+/* ---- 2: the hundred people ---- */
+.people{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;max-width:340px;margin:18px auto 12px;}
+.pp{aspect-ratio:1;border-radius:4px;background:var(--edge);transition:background .4s var(--ease);}
+.jobkey{display:grid;gap:7px;margin:14px 0 4px;}
+.jobkey button{display:flex;align-items:center;gap:10px;background:none;border:0;padding:7px 9px;
+  border-radius:9px;cursor:pointer;font:inherit;font-size:15.5px;color:var(--ink-2);text-align:left;
+  width:100%;transition:background .15s;}
+.jobkey button:hover,.jobkey button.sel{background:var(--bg-2);color:var(--ink);}
+.jobkey .sw{width:14px;height:14px;border-radius:4px;flex:none;border:1px solid rgba(128,128,128,.35);}
+.jobkey .n{margin-left:auto;font-family:var(--font-display);font-weight:800;color:var(--ink);}
+.jobsay{background:var(--bg-2);border-radius:var(--r);padding:16px 19px;margin-top:10px;min-height:4.6em;}
+.jobsay .jt{font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--ink);margin-bottom:4px;}
+.jobsay p{margin:0;font-size:16px;}
+
+/* ---- 3: name cards ---- */
+.kgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(152px,1fr));gap:13px;margin:20px 0;}
+.kcard{perspective:900px;background:none;border:0;padding:0;cursor:pointer;height:176px;font:inherit;}
+.kinner{position:relative;width:100%;height:100%;transition:transform .55s var(--ease);transform-style:preserve-3d;}
+.kcard.flip .kinner{transform:rotateY(180deg);}
+.kface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  border-radius:var(--r);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:5px;padding:11px;border:2px solid var(--edge-strong);background:var(--surface);text-align:center;}
+.kface .ch{font-size:34px;line-height:1.1;font-family:"Hiragino Mincho ProN","Yu Mincho",serif;color:var(--ink);}
+.kface .nm2{font-family:var(--font-display);font-weight:800;font-size:17px;color:var(--ink);}
+.kface .tap{font-size:11px;color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase;}
+.kback{transform:rotateY(180deg);background:var(--g2);border-color:var(--g2);color:var(--on-accent);}
+.kback .mean{font-family:var(--font-display);font-size:18px;font-weight:800;line-height:1.15;}
+.kback .why{font-size:13px;line-height:1.42;opacity:.95;}
+
+/* ---- 4: big vs famous ---- */
+.vs{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;margin:20px 0 6px;}
+.vsbox{background:var(--bg-2);border:2px solid var(--edge-strong);border-radius:var(--r);
+  padding:18px 16px;text-align:center;}
+.vsbox .who2{font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--ink);}
+.vsbox .num2{font-family:var(--font-display);font-weight:800;font-size:clamp(24px,5vw,34px);
+  color:var(--g4);line-height:1.1;margin:6px 0 2px;font-variant-numeric:tabular-nums;}
+.vsbox .lab2{font-size:13px;color:var(--ink-3);line-height:1.35;}
+.vsmid{font-family:var(--font-display);font-weight:800;font-size:19px;color:var(--ink-3);}
+
+/* ---- stamps ---- */
+.stampbtn{display:inline-flex;align-items:center;gap:10px;margin-top:22px;font:inherit;
+  font-weight:650;font-size:15.5px;padding:12px 22px;border-radius:99px;cursor:pointer;
+  border:2px dashed var(--g2);background:transparent;color:var(--g2);transition:.2s var(--ease);}
+.stampbtn:hover{background:var(--g2-soft);transform:translateY(-2px);}
+.stampbtn.got{border-style:solid;background:var(--g2);color:var(--on-accent);}
+.badge{text-align:center;background:linear-gradient(140deg,var(--g2-soft),var(--g4-soft) 70%,var(--g6-soft));
+  border:2px solid var(--g2);border-radius:var(--r-xl);padding:34px 28px;margin-bottom:26px;}
+.badge h2{margin-top:0;}
+.stamps{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:14px;margin:22px 0 6px;}
+.st2{aspect-ratio:1;border-radius:50%;border:3px dashed var(--edge-strong);display:grid;place-items:center;
+  text-align:center;font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--ink-3);
+  padding:8px;background:var(--surface);transition:.35s var(--ease);}
+.st2.got{border-style:solid;border-color:var(--g2);background:var(--g2);color:var(--on-accent);
+  transform:rotate(-4deg) scale(1.04);}
+</style>
+</head>
+<body class="g2">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-2/">2nd grade</a>
+  <span class="sep">/</span><a href="/grade-2/industry/">Making Things</a>
+  <span class="spacer"></span>
+  <button class="barbtn" id="resetBtn" type="button">Start over</button>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="kicker">Second grade · lesson 3</p>
+    <h1>Six Making Stations</h1>
+    <p class="sub">Who makes the things in your house? Collect a stamp at every station.</p>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Stations">
+    <a href="#s1">1</a><a href="#s2">2</a><a href="#s3">3</a>
+    <a href="#s4">4</a><a href="#s5">5</a><a href="#s6">6</a>
+  </nav>
+
+  <!-- ============ 1 ============ -->
+  <section class="station reveal" id="s1">
+    <div class="num"><b>1</b> Treasure hunt</div>
+    <h2>Go and find these in your house</h2>
+    <p class="big-say">Actually get up and look. Tap each one when you have found it —
+    the answer to <em>who made it</em> is hiding underneath.</p>
+
+    <div class="hunt" id="hunt"></div>
+    <p class="huntcount" id="huntCount">Found: <b>0</b> of 6</p>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>On plain paper:</strong> draw the room you are in, and put a small star on
+      everything you found. Then count your stars.</p></div>
+
+    <button class="stampbtn" data-stamp="hunt" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 2 ============ -->
+  <section class="station reveal" id="s2">
+    <div class="num"><b>2</b> A hundred people</div>
+    <h2>What do grown-ups in Japan do all day?</h2>
+    <p>Here are a hundred people who work in Japan. Tap a job to see how many of the hundred
+    do it. Most people guess wrong — badly wrong.</p>
+
+    <div class="people" id="people" aria-hidden="true"></div>
+    <div class="jobkey" id="jobkey"></div>
+    <div class="jobsay" id="jobsay">
+      <div class="jt">Tap a job</div>
+      <p>Guess first. Out of a hundred people in Japan, how many work in a factory?</p>
+    </div>
+
+    <p class="src">Japan's workforce in 2025: 68.28 million people.
+      <a href="https://www.jef.or.jp/journal/pdf/267th_Economic_Indicators.pdf" target="_blank"
+      rel="noopener">Japan Economic Foundation, from the Labour Force Survey</a>. Rounded to whole people.</p>
+
+    <button class="stampbtn" data-stamp="people" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 3 ============ -->
+  <section class="station reveal" id="s3">
+    <div class="num"><b>3</b> Name secrets</div>
+    <h2>Company names are picture-words too</h2>
+    <p>You already know that Japanese builds big words out of small pictures — 火力 is fire-power,
+    水力 is water-power. Company names do exactly the same thing. Some of the most famous
+    companies on Earth are named after <strong>rice fields</strong>.</p>
+    <p><strong>Guess first, then tap to flip.</strong></p>
+
+    <div class="kgrid" id="kgrid"></div>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>On plain paper:</strong> write your own name, then draw the picture it would be
+      if it were a Japanese company name. A meadow? A bright star? A small bear? Make it beautiful —
+      this one is going on your company in Station 6.</p></div>
+
+    <button class="stampbtn" data-stamp="names" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 4 ============ -->
+  <section class="station reveal" id="s4">
+    <div class="num"><b>4</b> Big and famous</div>
+    <h2>The biggest is not the one you have heard of</h2>
+    <p>Everyone knows Toyota. It makes more cars than any company in the world. So it must be
+    Japan's biggest company for <em>jobs</em> too?</p>
+
+    <div class="vs">
+      <div class="vsbox">
+        <div class="who2">Toyota</div>
+        <div class="num2">390,927</div>
+        <div class="lab2">people who work there</div>
+      </div>
+      <div class="vsmid">vs</div>
+      <div class="vsbox">
+        <div class="who2">AEON</div>
+        <div class="num2">427,230</div>
+        <div class="lab2">people who work there</div>
+      </div>
+    </div>
+
+    <p class="big-say" style="margin-top:18px;">AEON is a shop. Have you ever heard of it?</p>
+    <p>More people in Japan work for a chain of supermarkets than for the world's largest car
+    company. Being <strong>famous</strong> and being <strong>big</strong> are two totally different
+    things, and grown-ups mix them up all the time.</p>
+
+    <div class="note"><p>Here is a stranger one. A company called <strong>Sumitomo Electric</strong>
+    employs <strong>302,972</strong> people — the fourth most in Japan. It comes
+    <strong>490th in the world</strong> for money earned. Almost nobody outside Japan has
+    heard of it, and it makes the wires inside your car.</p></div>
+
+    <p class="src">Employee counts for the financial year ending 2026.
+      <a href="https://fortune.com/ranking/global500/2026/" target="_blank" rel="noopener">Fortune
+      Global 500</a>.</p>
+
+    <button class="stampbtn" data-stamp="big" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 5 ============ -->
+  <section class="station reveal" id="s5">
+    <div class="num"><b>5</b> Draw the factory</div>
+    <h2>How does a thing get made?</h2>
+    <p>Pick <strong>one</strong> thing you found in Station 1. Now draw the factory that made it —
+    but draw it as a <em>journey across the page</em>, left to right.</p>
+
+    <ul>
+      <li><strong>On the left:</strong> what goes in. Metal? Plastic? Glass? Sand? Draw it arriving
+      on a truck or a ship.</li>
+      <li><strong>In the middle:</strong> at least <strong>three</strong> things that happen to it.
+      Cut? Melted? Bent? Painted? Screwed together? Draw each one as its own little scene.</li>
+      <li><strong>On the right:</strong> the finished thing, in a box, going out of the door.</li>
+      <li><strong>Somewhere:</strong> one person doing a job, and one robot doing a job.
+      Decide which jobs go to which, and be ready to say why.</li>
+    </ul>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>Use a big sheet, sideways.</strong> Real engineers draw exactly this and call it
+      a <em>process flow</em>. You are doing a real grown-up drawing.</p></div>
+
+    <button class="stampbtn" data-stamp="factory" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ 6 ============ -->
+  <section class="station reveal" id="s6">
+    <div class="num"><b>6</b> Your turn</div>
+    <h2>Invent a company</h2>
+    <p>You are starting a company. Here is everything you have to decide.</p>
+
+    <ul>
+      <li><strong>Its name.</strong> Use the picture-word you drew in Station 3, or invent a new one.
+      It should mean something.</li>
+      <li><strong>One thing it makes.</strong> Only one. The best companies in the world usually
+      started by making one thing extremely well.</li>
+      <li><strong>Its mark.</strong> Design a simple sign for it — your own, not a copy of anybody
+      else's. Test it: can you draw it from memory? Does it still work tiny? Does it work in
+      just one colour?</li>
+      <li><strong>The hard question.</strong> What does your company do <em>better than anyone
+      else in the world</em>? Write one sentence. This is the question every real company has to
+      answer, and most of them cannot.</li>
+    </ul>
+
+    <div class="paper"><div class="ic">✎</div>
+      <p><strong>On plain paper:</strong> a whole page for your company. Name at the top, mark in
+      the corner, a picture of the thing it makes in the middle, and your one sentence at the bottom.</p></div>
+
+    <button class="stampbtn" data-stamp="company" type="button">Stamp this station</button>
+  </section>
+
+  <!-- ============ badge ============ -->
+  <section class="badge reveal" id="badge">
+    <p class="kicker">Junior Maker</p>
+    <h2>Six stamps</h2>
+    <div class="stamps">
+      <div class="st2" data-s="hunt">TREASURE<br>HUNT</div>
+      <div class="st2" data-s="people">100<br>PEOPLE</div>
+      <div class="st2" data-s="names">NAME<br>SECRETS</div>
+      <div class="st2" data-s="big">BIG &amp;<br>FAMOUS</div>
+      <div class="st2" data-s="factory">THE<br>FACTORY</div>
+      <div class="st2" data-s="company">MY<br>COMPANY</div>
+    </div>
+    <p id="badgeSay" style="margin-top:16px;">Collect all six.</p>
+  </section>
+
+  <footer>
+    <a href="/grade-2/industry/">Back to the lesson</a> ·
+    <a href="/together/industry.html">The Cabinet Meeting</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- 1: treasure hunt ---------- */
+  var HUNT = [
+    {em:"🧥", th:"A zipper",
+     ans:"Turn the pull-tab over. <strong>YKK</strong> means a Japanese company made it — they make about 4 in every 10 zippers on Earth."},
+    {em:"📱", th:"A phone camera",
+     ans:"The tiny chip that turns light into a picture is probably Japanese. Japanese firms make about <strong>48%</strong> of them."},
+    {em:"🚗", th:"A car",
+     ans:"One in every eleven cars built in the world last year was built in Japan — <strong>8.4 million</strong> of them."},
+    {em:"🎮", th:"A game",
+     ans:"Nintendo started in <strong>1889</strong> making playing cards out of mulberry bark. It is older than the aeroplane."},
+    {em:"🎹", th:"Something musical",
+     ans:"Yamaha makes about <strong>39%</strong> of the world's pianos and almost half its digital ones. It also makes motorbikes."},
+    {em:"🔋", th:"Something with a battery",
+     ans:"Japanese factories make a great many of the world's batteries — and almost all the special machines that make the chips inside."}
+  ];
+  var hunt = document.getElementById("hunt");
+  var huntGot = 0;
+  HUNT.forEach(function(h){
+    var b = document.createElement("button");
+    b.className = "hb"; b.type = "button";
+    b.innerHTML = '<div class="em">' + h.em + '</div><div class="th">' + h.th +
+                  '</div><div class="ans">' + h.ans + '</div>';
+    b.addEventListener("click", function(){
+      if (b.classList.contains("found")) return;
+      b.classList.add("found"); huntGot++;
+      document.getElementById("huntCount").innerHTML =
+        huntGot === 6
+          ? "Found: <b>6</b> of 6 — every single one of those came from one island country."
+          : "Found: <b>" + huntGot + "</b> of 6";
+    });
+    hunt.appendChild(b);
+  });
+
+  /* ---------- 2: a hundred people ---------- */
+  var JOBS = [
+    {k:"factory", nm:"Making things in a factory", n:15, col:"var(--e-coal)",
+     tx:"Fifteen out of a hundred. Japan is famous for factories — and only fifteen people in a hundred work in one. Most people guess forty or fifty."},
+    {k:"shop", nm:"Shops and selling things", n:15, col:"var(--e-lng)",
+     tx:"Also fifteen. Exactly as many Japanese people sell things as make things. That is the fact that surprises grown-ups most."},
+    {k:"care", nm:"Hospitals and looking after people", n:14, col:"var(--e-hydro)",
+     tx:"Fourteen, and climbing fast — about 1.6 million more people than ten years ago. Japan has more old people than almost anywhere, so it needs more nurses and carers."},
+    {k:"service", nm:"Helping and fixing", n:7, col:"var(--e-wind)",
+     tx:"Seven. Cleaning, repairing, hairdressing, looking after buildings — all the work that keeps everything else running."},
+    {k:"tech", nm:"Computers and phones", n:4, col:"var(--e-nuclear)",
+     tx:"Only four in a hundred. A small group of people, making the things everybody uses all day."},
+    {k:"other", nm:"Everything else", n:45, col:"var(--e-other)",
+     tx:"Forty-five: teachers, drivers, builders, cooks, farmers, police, office workers. Farming is under three in a hundred — a hundred years ago it was more than half."}
+  ];
+  var ppl = document.getElementById("people");
+  for (var i = 0; i < 100; i++) {
+    var d = document.createElement("div"); d.className = "pp"; ppl.appendChild(d);
+  }
+  var jobkey = document.getElementById("jobkey");
+  JOBS.forEach(function(j){
+    var b = document.createElement("button");
+    b.type = "button"; b.dataset.k = j.k;
+    b.innerHTML = '<span class="sw" style="background:' + j.col + '"></span><span>' + j.nm +
+                  '</span><span class="n">' + j.n + '</span>';
+    b.addEventListener("click", function(){ showJob(j); });
+    jobkey.appendChild(b);
+  });
+  function showJob(j){
+    var start = 0;
+    for (var x = 0; x < JOBS.length; x++) { if (JOBS[x].k === j.k) break; start += JOBS[x].n; }
+    var cells = ppl.children;
+    for (var n = 0; n < 100; n++) {
+      cells[n].style.background = (n >= start && n < start + j.n) ? j.col : "var(--edge)";
+    }
+    document.getElementById("jobsay").innerHTML =
+      '<div class="jt">' + j.nm + ' — ' + j.n + ' of 100</div><p>' + j.tx + '</p>';
+    jobkey.querySelectorAll("button").forEach(function(b){
+      b.classList.toggle("sel", b.dataset.k === j.k);
+    });
+  }
+
+  /* ---------- 3: name secrets ---------- */
+  var NAMES = [
+    {ch:"豊田", nm2:"TOYOTA", mean:"PLENTIFUL RICE FIELD",
+     why:"豊 means plentiful, 田 means rice field. The largest car company on Earth is named after a good harvest."},
+    {ch:"本田", nm2:"HONDA", mean:"MAIN RICE FIELD",
+     why:"本 means main or root, 田 rice field again. It was the founder's family name — Soichiro Honda."},
+    {ch:"任天堂", nm2:"NINTENDO", mean:"LEAVE LUCK TO HEAVEN",
+     why:"Nobody is quite sure why. The company was founded in 1889 and made playing cards out of bark."},
+    {ch:"三菱", nm2:"MITSUBISHI", mean:"THREE DIAMONDS",
+     why:"三 is three — you can count the strokes. 菱 is a water-chestnut leaf, which is diamond-shaped."},
+    {ch:"松下", nm2:"MATSUSHITA", mean:"UNDER THE PINE TREE",
+     why:"The founder's family name. The company later renamed itself Panasonic so the rest of the world could say it."},
+    {ch:"山葉", nm2:"YAMAHA", mean:"MOUNTAIN LEAF",
+     why:"山 is the mountain kanji you already know. Torakusu Yamaha repaired an organ in 1887 and decided to build his own."}
+  ];
+  var kg = document.getElementById("kgrid");
+  NAMES.forEach(function(w){
+    var b = document.createElement("button");
+    b.className = "kcard"; b.type = "button";
+    b.setAttribute("aria-label", w.nm2 + ". Tap to reveal what the name means.");
+    b.innerHTML =
+      '<div class="kinner">' +
+        '<div class="kface"><div class="ch">' + w.ch + '</div>' +
+          '<div class="nm2">' + w.nm2 + '</div><div class="tap">tap</div></div>' +
+        '<div class="kface kback"><div class="mean">' + w.mean + '</div>' +
+          '<div class="why">' + w.why + '</div></div>' +
+      '</div>';
+    b.addEventListener("click", function(){ b.classList.toggle("flip"); });
+    kg.appendChild(b);
+  });
+
+  /* ---------- stamps ---------- */
+  var KEY = "ws-industry-g2";
+  var got = {};
+  try { got = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch (e) { got = {}; }
+  function save(){ try { localStorage.setItem(KEY, JSON.stringify(got)); } catch (e) {} }
+  function paint(){
+    var n = 0;
+    document.querySelectorAll("[data-stamp]").forEach(function(b){
+      var on = !!got[b.dataset.stamp];
+      b.classList.toggle("got", on);
+      b.textContent = on ? "✓  Stamped" : "Stamp this station";
+    });
+    document.querySelectorAll(".st2").forEach(function(s){
+      var on = !!got[s.dataset.s]; s.classList.toggle("got", on); if (on) n++;
+    });
+    var order = ["hunt","people","names","big","factory","company"];
+    document.querySelectorAll("#rail a").forEach(function(a, i){
+      a.classList.toggle("done", !!got[order[i]]);
+    });
+    document.getElementById("badgeSay").innerHTML = n === 6
+      ? "<strong>All six. You are a Junior Maker.</strong> Now go and show somebody your company, and make them ask you the hard question."
+      : n + " of 6. Collect all six.";
+  }
+  document.querySelectorAll("[data-stamp]").forEach(function(b){
+    b.addEventListener("click", function(){
+      got[b.dataset.stamp] = !got[b.dataset.stamp]; save(); paint();
+    });
+  });
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    got = {}; save(); paint();
+  });
+  paint();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Factory Cup — 4th grade | Wonderschool</title>
+<meta name="description" content="Twelve contests between the five great factory countries. Predict the winner, then see the real numbers.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:900px;}
+.hero{text-align:center;padding:14px 0 4px;}
+.hero h1{font-size:clamp(38px,8.4vw,66px);margin:0 0 8px;
+  background:linear-gradient(112deg,var(--g4),var(--g6) 55%,var(--hot));
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+.hero .sub{font-size:clamp(16px,2.2vw,20px);color:var(--ink-2);max-width:42ch;margin:0 auto 6px;}
+
+/* scoreboard */
+.scorebar2{position:sticky;top:52px;z-index:200;display:flex;gap:10px;flex-wrap:wrap;
+  justify-content:center;align-items:center;padding:11px 14px;margin:0 -6px 22px;
+  background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);
+  border:1px solid var(--edge);border-radius:99px;}
+.sc2{display:flex;align-items:baseline;gap:7px;font-size:13.5px;color:var(--ink-3);}
+.sc2 b{font-family:var(--font-display);font-size:21px;font-weight:800;color:var(--ink);
+  font-variant-numeric:tabular-nums;}
+.sc2.hot b{color:var(--hot);}
+.dots{display:flex;gap:4px;}
+.dots i{width:10px;height:10px;border-radius:50%;background:var(--edge-strong);display:block;}
+.dots i.ok{background:var(--g2-vivid);} .dots i.no{background:var(--hot-vivid);}
+
+.round{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
+  padding:30px 28px;margin-bottom:22px;box-shadow:var(--shadow-sm);}
+.rhead{display:flex;align-items:center;gap:11px;margin-bottom:6px;}
+.rno{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);}
+.rtag{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--g4);background:var(--g4-soft);border-radius:99px;padding:3px 10px;}
+.round h2{margin:0 0 8px;font-size:clamp(23px,3.8vw,32px);}
+.round .ask{font-size:17px;line-height:1.6;color:var(--ink-2);margin:0 0 18px;}
+
+.picks{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:6px;}
+.pick{display:flex;align-items:center;gap:10px;padding:13px 14px;border-radius:var(--r);
+  border:2px solid var(--edge-strong);background:var(--bg-2);cursor:pointer;font:inherit;
+  font-size:16px;color:var(--ink);transition:.18s var(--ease);text-align:left;}
+.pick:hover:not(:disabled){transform:translateY(-2px);border-color:var(--g4);}
+.pick:disabled{cursor:default;}
+.pick .cc{width:30px;height:30px;border-radius:50%;flex:none;display:grid;place-items:center;
+  font-family:var(--font-display);font-weight:800;font-size:12px;color:#fff;letter-spacing:.02em;}
+.pick.right{border-color:var(--g2);background:var(--g2-soft);}
+.pick.wrong{border-color:var(--hot);background:var(--hot-soft);}
+.pick.was{border-color:var(--g2);}
+
+.result{margin-top:18px;display:none;}
+.result.on{display:block;animation:slide .4s var(--ease);}
+@keyframes slide{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.verd{font-family:var(--font-display);font-weight:800;font-size:20px;margin:0 0 12px;}
+.verd.ok{color:var(--g2);} .verd.no{color:var(--hot);}
+
+.rbars{display:grid;gap:8px;margin:0 0 14px;}
+.rb{display:grid;grid-template-columns:7.5em 1fr auto;gap:10px;align-items:center;}
+.rb .rn{font-size:14.5px;color:var(--ink-2);display:flex;align-items:center;gap:7px;}
+.rb .rn .dot{width:11px;height:11px;border-radius:50%;flex:none;}
+.rb .rt{height:20px;border-radius:6px;background:var(--bg-2);border:1px solid var(--edge);overflow:hidden;}
+.rb .rf{display:block;height:100%;width:0;border-radius:5px;transition:width .8s var(--ease);}
+.rb .rv{font-family:var(--font-display);font-weight:700;font-size:14.5px;color:var(--ink);
+  min-width:5.6em;text-align:right;font-variant-numeric:tabular-nums;}
+.rb.jp .rn{color:var(--ink);font-weight:700;}
+.rb.jp .rv{color:var(--g4);}
+
+.mean{background:var(--bg-2);border-radius:var(--r);padding:15px 18px;margin:0 0 10px;}
+.mean p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink);}
+.mean p + p{margin-top:8px;}
+.nextbtn{margin-top:6px;}
+
+/* final */
+.final2{background:linear-gradient(140deg,var(--g4-soft),var(--g6-soft) 70%,var(--hot-soft));
+  border:2px solid var(--g4);border-radius:var(--r-xl);padding:32px 28px;display:none;}
+.final2.on{display:block;animation:slide .45s var(--ease);}
+.final2 h2{margin-top:0;}
+.medal{width:100%;border-collapse:collapse;font-size:14.5px;margin:16px 0 6px;}
+.medal th,.medal td{padding:9px 10px;text-align:left;border-bottom:1px solid var(--edge);color:var(--ink-2);}
+.medal th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);}
+.medal td.w{font-weight:700;color:var(--ink);white-space:nowrap;}
+.medal tr.jpwin td{background:var(--g4-soft);}
+.medal tr.jpwin td.w{color:var(--g4);}
+</style>
+</head>
+<body class="g4">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-4/">4th grade</a>
+  <span class="sep">/</span><a href="/grade-4/industry/">Industry</a>
+  <span class="spacer"></span>
+  <button class="barbtn" id="resetBtn" type="button">New game</button>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="kicker">Fourth grade · lesson 3</p>
+    <h1>The Factory Cup</h1>
+    <p class="sub">Twelve contests. Five countries. Predict first, then see the real numbers.</p>
+  </div>
+
+  <div class="scorebar2">
+    <span class="sc2">Round <b id="sRound">1</b> of 12</span>
+    <span class="sc2">Score <b id="sScore">0</b></span>
+    <span class="sc2 hot">Streak <b id="sStreak">0</b></span>
+    <span class="dots" id="dots"></span>
+  </div>
+
+  <div id="here"></div>
+
+  <section class="final2" id="final">
+    <p class="kicker">Full time</p>
+    <h2 id="fh">The medal table</h2>
+    <p id="fp"></p>
+    <table class="medal" id="ft"></table>
+    <p id="fnote" style="font-size:16px;line-height:1.65;"></p>
+  </section>
+
+  <footer>
+    <a href="/grade-4/industry/">Back to the lesson</a> ·
+    <a href="/together/industry.html">The Cabinet Meeting</a> ·
+    <a href="/grade-4/energy-grid.html">Lesson 2: The Control Room</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+
+  var C = {
+    jp:{nm:"Japan",        col:"#1f68c2", cc:"JP"},
+    cn:{nm:"China",        col:"#bd3f0a", cc:"CN"},
+    us:{nm:"USA",          col:"#6c4bd4", cc:"US"},
+    de:{nm:"Germany",      col:"#8a6209", cc:"DE"},
+    kr:{nm:"South Korea",  col:"#12735a", cc:"KR"},
+    eu:{nm:"Europe",       col:"#57544e", cc:"EU"},
+    tw:{nm:"Taiwan",       col:"#b96d24", cc:"TW"}
+  };
+
+  /* Twelve contests. Every value is real and sourced; `v` is what the bar shows. */
+  var ROUNDS = [
+    { tag:"Cars", q:"Who builds the most cars?",
+      ask:"Every car, van, lorry and bus rolling off a production line in one year.",
+      unit:"million", dp:2, win:"cn",
+      vals:[["cn",34.53],["us",10.24],["jp",8.41],["de",4.15],["kr",4.10]],
+      mean:"China builds more than the other four put together. Twenty years ago it built fewer than Japan. " +
+           "<strong>96.4 million</strong> vehicles were built in the world in 2025.",
+      src:"OICA, 2025", url:"https://oica.net/auto-industry-growth-shifted-east-in-2025-amid-global-repositioning/" },
+
+    { tag:"Cars", q:"Which company sells the most cars?",
+      ask:"Not which country — which single company, anywhere on Earth.",
+      unit:"million", dp:2, win:"jp",
+      vals:[["jp",10.33],["de",8.98],["kr",7.30]],
+      labels:{jp:"Toyota", de:"Volkswagen", kr:"Hyundai + Kia"},
+      mean:"Toyota has been number one for <strong>six years running</strong>. So Japan loses on total cars " +
+           "and wins on the biggest carmaker. Both of those are true at once.",
+      src:"Nippon.com, 2025", url:"https://www.nippon.com/en/japan-data/h02670/" },
+
+    { tag:"Robots", q:"Who puts the most new robots in factories?",
+      ask:"Industrial robots installed in a single year.",
+      unit:"thousand", dp:1, win:"cn",
+      vals:[["cn",295],["jp",44.5],["us",34.2],["kr",30.6],["de",27.0]],
+      mean:"China installed more robots than every other country in the world combined. " +
+           "The world total was <strong>542,000</strong> in one year.",
+      src:"IFR World Robotics, 2024", url:"https://ifr.org/ifr-press-releases/news/global-robot-demand-in-factories-doubles-over-10-years" },
+
+    { tag:"Robots", q:"Whose factories are the most robotic?",
+      ask:"Robots for every 10,000 people working in factories. This is a different question from the last one — think about why.",
+      unit:"per 10,000", dp:0, win:"kr",
+      vals:[["kr",1220],["de",449],["jp",446],["us",307],["cn",166]],
+      mean:"South Korea has nearly three times Germany's robot density and more than seven times China's. " +
+           "China installs the most robots because China has an enormous number of factories — not because each one is more automatic. " +
+           "The world average is <strong>132</strong>.",
+      src:"IFR, 2024", url:"https://ifr.org/ifr-press-releases/news/robot-density-surges-in-europe-asia-and-americas" },
+
+    { tag:"Robots", q:"Who MAKES the world's robots?",
+      ask:"Not who uses them — who builds them and sells them to everybody else.",
+      unit:"% of world", dp:0, win:"jp", mode:"share",
+      opts:["jp","cn","de","us","kr"], share:38,
+      mean:"<strong>Japan wins this one.</strong> More than a third of every industrial robot on Earth " +
+           "is built in Japan — no other country comes close to that single share. " +
+           "Japan is 3rd in the world for <em>using</em> robots and 1st for <em>making</em> them.",
+      src:"IFR, 2025", url:"https://ifr.org/ifr-press-releases/news/japans-car-industry-has-highest-robot-installations-in-five-years" },
+
+    { tag:"Chips", q:"Who sells the most computer chips?",
+      ask:"Share of world chip sales, counted by where the company has its head office.",
+      unit:"% of world", dp:1, win:"us",
+      vals:[["us",50.4],["kr",21.1],["eu",9.2],["jp",8.2],["tw",6.5],["cn",4.5]],
+      mean:"In the late 1980s Japanese companies made close to <strong>half</strong> the world's chips. " +
+           "Now it is 8.2%. That is the single biggest fall in this whole game, and the sixth-grade lesson is largely about why.",
+      src:"SIA Factbook, 2024", url:"https://www.semiconductors.org/wp-content/uploads/2025/05/2025-SIA-Factbook-FINAL.pdf" },
+
+    { tag:"Chips", q:"Who makes the memory inside computers?",
+      ask:"DRAM — the fast, forgetful memory a computer uses while it is switched on.",
+      unit:"% of world", dp:1, win:"kr",
+      vals:[["kr",68.1],["us",22.4],["jp",0]],
+      mean:"Two Korean companies hold more than two thirds of it. Japan holds <strong>nothing at all</strong> — " +
+           "and Japan invented much of this industry. Japan's last memory company went bankrupt in 2012.",
+      src:"TrendForce, Q4 2025", url:"https://www.trendforce.com/presscenter/news/20260226-12937.html" },
+
+    { tag:"Chips", q:"Whose chip is inside your phone's camera?",
+      ask:"Image sensors — the chip that turns light into a picture.",
+      unit:"% of world", dp:0, win:"jp", mode:"share",
+      opts:["jp","kr","us","cn","tw"], share:48,
+      mean:"<strong>Japan wins this one too.</strong> Sony alone makes about 45% of them, and " +
+           "nobody else is anywhere near. You have never bought a Sony image sensor — you bought " +
+           "a phone, and one was hidden inside it.",
+      src:"Yole Group, 2024", url:"https://optics.org/news/16/7/48" },
+
+    { tag:"Machines", q:"Who makes the machines that make everything else?",
+      ask:"Machine tools — the machines that cut and shape metal into parts for other machines.",
+      unit:"% of world", dp:0, win:"cn",
+      vals:[["cn",37],["de",12],["jp",10]],
+      mean:"Japan led the world in machine tools for <strong>27 years</strong>, from 1982 until China passed it in 2009. " +
+           "Every factory on Earth starts with one of these.",
+      src:"VDW, 2025", url:"https://vdw.de/en/german-machine-tool-industry-leveling-off-china-further-dominating-production/" },
+
+    { tag:"Money", q:"Who has the biggest economy?",
+      ask:"Everything a country earns in a year, added up.",
+      unit:"$ trillion", dp:2, win:"us",
+      vals:[["us",30.77],["cn",19.50],["de",5.05],["jp",4.44],["kr",1.87]],
+      mean:"China passed Japan for second place in <strong>2010</strong>. Germany passed Japan for third in " +
+           "<strong>2023</strong> — partly because the Japanese yen had become worth less, not because Japan " +
+           "made less. Measuring in dollars can move a country without anything real changing.",
+      src:"World Bank, 2025", url:"https://data.worldbank.org/indicator/NY.GDP.MKTP.CD" },
+
+    { tag:"Money", q:"Who spends the most on inventing things?",
+      ask:"Research and development, as a share of everything the country earns.",
+      unit:"% of GDP", dp:2, win:"kr",
+      vals:[["kr",4.94],["us",3.45],["jp",3.44],["de",3.15],["cn",2.58]],
+      mean:"South Korea spends a bigger share on research than anyone. Japan and the USA are almost exactly level. " +
+           "Spending it and spending it <em>well</em> are different things — that is the sixth-grade argument.",
+      src:"World Bank, 2023", url:"https://data.worldbank.org/indicator/GB.XPD.RSDV.GD.ZS" },
+
+    { tag:"Factories", q:"Whose factories produce the most?",
+      ask:"The value all a country's factories add in a year. The USA is missing — see if you can work out why.",
+      unit:"$ billion", dp:0, win:"cn",
+      vals:[["cn",4823],["de",890],["jp",788],["kr",514]],
+      mean:"China alone makes more than a quarter of everything manufactured on Earth. " +
+           "<strong>The USA is missing because nobody has published a recent figure for it</strong> — the World Bank's " +
+           "run of numbers stops in 2021. A hole in the data is not the same as a zero, and a good scientist says so.",
+      src:"World Bank, 2024–25", url:"https://data.worldbank.org/indicator/NV.IND.MANF.CD" }
+  ];
+
+  var idx = 0, score = 0, streak = 0, best = 0, results = [];
+
+  var here  = document.getElementById("here");
+  var elFin = document.getElementById("final");
+
+  function cinfo(k, r){
+    return (r.extraC && r.extraC[k]) || C[k];
+  }
+  function label(k, r){
+    return (r.labels && r.labels[k]) || cinfo(k, r).nm;
+  }
+
+  function paintScore(){
+    document.getElementById("sRound").textContent = Math.min(idx + 1, ROUNDS.length);
+    document.getElementById("sScore").textContent = score;
+    document.getElementById("sStreak").textContent = streak;
+    var d = document.getElementById("dots");
+    d.innerHTML = "";
+    for (var i = 0; i < ROUNDS.length; i++) {
+      var s = document.createElement("i");
+      if (results[i]) s.className = results[i].ok ? "ok" : "no";
+      d.appendChild(s);
+    }
+  }
+
+  function draw(){
+    if (idx >= ROUNDS.length) { finish(); return; }
+    var r = ROUNDS[idx];
+    var opts = r.opts || r.vals.map(function(v){ return v[0]; });
+
+    here.innerHTML =
+      '<section class="round">' +
+        '<div class="rhead"><span class="rno">Round ' + (idx + 1) + ' of 12</span>' +
+        '<span class="rtag">' + r.tag + '</span></div>' +
+        '<h2>' + r.q + '</h2>' +
+        '<p class="ask">' + r.ask + '</p>' +
+        '<div class="picks" id="picks"></div>' +
+        '<div class="result" id="res"></div>' +
+      '</section>';
+
+    var picks = document.getElementById("picks");
+    opts.forEach(function(k){
+      var ci = cinfo(k, r);
+      var b = document.createElement("button");
+      b.className = "pick"; b.type = "button"; b.dataset.k = k;
+      b.innerHTML = '<span class="cc" style="background:' + ci.col + '">' + ci.cc + '</span>' +
+                    '<span>' + label(k, r) + '</span>';
+      b.addEventListener("click", function(){ answer(k); });
+      picks.appendChild(b);
+    });
+    paintScore();
+  }
+
+  function answer(k){
+    var r = ROUNDS[idx];
+    var ok = k === r.win;
+    results[idx] = { ok: ok, r: r };
+    if (ok) { score += 10 + streak * 5; streak++; if (streak > best) best = streak; }
+    else { streak = 0; }
+
+    document.querySelectorAll("#picks .pick").forEach(function(b){
+      b.disabled = true;
+      if (b.dataset.k === k) b.classList.add(ok ? "right" : "wrong");
+      if (b.dataset.k === r.win && !ok) b.classList.add("was");
+    });
+
+    var bars;
+    if (r.mode === "share") {
+      /* one country holds the largest single share of a world market: show that
+         share against the whole world, so the winner's bar is the winner's bar */
+      bars =
+        '<div class="rb jp"><span class="rn"><span class="dot" style="background:' + C.jp.col +
+          '"></span>Japan</span>' +
+        '<span class="rt"><span class="rf" data-w="' + r.share + '" style="background:' + C.jp.col +
+          '"></span></span><span class="rv">' + r.share + '%</span></div>' +
+        '<div class="rb"><span class="rn"><span class="dot" style="background:#9a958a"></span>' +
+          'The whole world</span>' +
+        '<span class="rt"><span class="rf" data-w="100" style="background:#d8d4c8"></span></span>' +
+        '<span class="rv">100%</span></div>';
+    } else {
+      var max = Math.max.apply(null, r.vals.map(function(v){ return v[1]; }));
+      bars = r.vals.map(function(v){
+        var ci = cinfo(v[0], r);
+        var w = max > 0 ? Math.max(1.2, v[1] / max * 100) : 1.2;
+        return '<div class="rb' + (v[0] === "jp" ? " jp" : "") + '">' +
+          '<span class="rn"><span class="dot" style="background:' + ci.col + '"></span>' +
+            label(v[0], r) + '</span>' +
+          '<span class="rt"><span class="rf" data-w="' + w + '" style="background:' + ci.col + '"></span></span>' +
+          '<span class="rv">' + (v[1] === 0 ? "none" : v[1].toFixed(r.dp)) + '</span></div>';
+      }).join("");
+    }
+
+    document.getElementById("res").innerHTML =
+      '<p class="verd ' + (ok ? "ok" : "no") + '">' +
+        (ok ? "✓ Correct — " + label(r.win, r) + (streak > 1 ? ". Streak of " + streak + "!" : ".")
+            : "✗ It was " + label(r.win, r) + ".") + '</p>' +
+      '<div class="rbars">' + bars + '</div>' +
+      '<p class="src" style="margin:0 0 12px;">Measured in ' + r.unit + '. Source: ' +
+        '<a href="' + r.url + '" target="_blank" rel="noopener">' + r.src + '</a>.</p>' +
+      '<div class="mean"><p>' + r.mean + '</p></div>' +
+      '<button class="btn nextbtn" id="nextBtn" type="button">' +
+        (idx === ROUNDS.length - 1 ? "See the medal table →" : "Next contest →") + '</button>';
+
+    document.getElementById("res").classList.add("on");
+    setTimeout(function(){
+      document.querySelectorAll("#res .rf[data-w]").forEach(function(f){
+        f.style.width = f.dataset.w + "%";
+      });
+    }, 60);
+
+    document.getElementById("nextBtn").addEventListener("click", function(){
+      idx++; draw();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    paintScore();
+  }
+
+  function finish(){
+    here.innerHTML = "";
+    var jpWins = ROUNDS.filter(function(r){ return r.win === "jp"; });
+    var mine = results.filter(function(x){ return x && x.ok; }).length;
+
+    document.getElementById("fh").textContent = "You got " + mine + " of 12 right";
+    document.getElementById("fp").innerHTML =
+      "Your score: <strong>" + score + "</strong>, best streak <strong>" + best + "</strong>. " +
+      "But here is the score that matters — <strong>Japan won " + jpWins.length +
+      " of the twelve</strong>. Look at which three.";
+
+    var counts = {};
+    ROUNDS.forEach(function(r){ counts[r.win] = (counts[r.win] || 0) + 1; });
+    var order = Object.keys(counts).sort(function(a, b){ return counts[b] - counts[a]; });
+
+    document.getElementById("ft").innerHTML =
+      "<tr><th>Contest</th><th>Winner</th></tr>" +
+      ROUNDS.map(function(r, i){
+        return "<tr" + (r.win === "jp" ? " class='jpwin'" : "") + "><td>" + r.q +
+               "</td><td class='w'>" + label(r.win, r) + "</td></tr>";
+      }).join("") +
+      "<tr><th>Medal table</th><th>" +
+        order.map(function(k){ return C[k].nm + " " + counts[k]; }).join(" · ") +
+      "</th></tr>";
+
+    document.getElementById("fnote").innerHTML =
+      "<strong>Japan's three wins were: the robots that build things, the sensor inside your camera, " +
+      "and one car company.</strong> Two of those three are parts that nobody ever buys on purpose — " +
+      "they are hidden inside somebody else's product.<br><br>" +
+      "Japan almost never wins on <em>biggest</em>. It wins on <em>narrow, difficult and invisible</em>. " +
+      "Now the real question, and it is a hard one: <strong>is that a good place for a country to be, " +
+      "or a dangerous one?</strong> Argue it out with somebody before you look at the sixth-grade lesson.";
+
+    elFin.classList.add("on");
+    paintScore();
+  }
+
+  document.getElementById("resetBtn").addEventListener("click", function(){
+    idx = 0; score = 0; streak = 0; best = 0; results = [];
+    elFin.classList.remove("on");
+    draw();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  draw();
+})();
+</script>
+</body>
+</html>

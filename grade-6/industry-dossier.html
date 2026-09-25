@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Policy File — 6th grade | Wonderschool</title>
+<meta name="description" content="Five case files on whether a government can pick winners, using Japan's eighty-year record.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:900px;}
+.hero{padding:10px 0 4px;}
+.hero h1{font-size:clamp(36px,7.4vw,64px);line-height:1;margin-bottom:16px;}
+.hero h1 em{font-style:normal;display:block;
+  background:linear-gradient(100deg,var(--g6),var(--hot) 75%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;}
+
+.contra{list-style:none;padding:0;margin:26px 0;display:grid;gap:11px;}
+.contra li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start;
+  background:var(--surface);border:1px solid var(--edge);border-radius:var(--r);padding:15px 18px;
+  font-size:16px;color:var(--ink-2);line-height:1.5;}
+.contra li b{color:var(--ink);}
+.contra .vs{font-family:var(--font-display);font-weight:800;font-size:13px;letter-spacing:.1em;
+  color:var(--hot);background:var(--hot-soft);border-radius:8px;padding:4px 9px;white-space:nowrap;}
+
+.casenav{position:sticky;top:52px;z-index:200;display:flex;gap:8px;overflow-x:auto;
+  padding:12px 4px;margin:0 -4px 8px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+  scrollbar-width:none;}
+.casenav::-webkit-scrollbar{display:none;}
+.casenav a{flex:none;font-size:13.5px;font-weight:600;text-decoration:none;white-space:nowrap;
+  padding:8px 15px;border-radius:99px;border:1px solid var(--edge-strong);
+  color:var(--ink-2);background:var(--surface);transition:.18s var(--ease);}
+.casenav a:hover{border-color:var(--g6);color:var(--g6);}
+
+.case{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-xl);
+  padding:34px 32px;margin-bottom:26px;box-shadow:var(--shadow-sm);scroll-margin-top:118px;
+  position:relative;overflow:hidden;}
+.case::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;
+  background:linear-gradient(90deg,var(--g6),var(--g4));}
+.case .cn{display:flex;align-items:center;gap:11px;margin-bottom:10px;}
+.case .cn span{font-size:11.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);}
+.case .cn b{font-family:var(--font-display);font-size:34px;font-weight:800;line-height:1;
+  color:color-mix(in srgb,var(--g6) 30%,transparent);letter-spacing:-.04em;}
+.case h2{margin:0 0 14px;font-size:clamp(25px,4.2vw,36px);}
+.case p{font-size:16.5px;line-height:1.7;}
+.punch{font-size:clamp(18px,2.5vw,21px);line-height:1.5;color:var(--ink);font-weight:500;
+  border-left:4px solid var(--g6);padding-left:18px;margin:18px 0 22px;}
+h3.sec{font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);margin:28px 0 10px;}
+
+.tw{overflow-x:auto;margin:14px 0 8px;}
+table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--edge);}
+th{white-space:nowrap;}
+td:first-child{white-space:normal;min-width:11em;}
+th:first-child,td:first-child{text-align:left;}
+thead th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;border-bottom:2px solid var(--edge-strong);}
+tbody tr:hover{background:var(--bg-2);}
+tr.jp td{background:var(--g6-soft);font-weight:700;color:var(--ink);}
+td.bad{color:var(--hot);font-weight:650;}
+td.good{color:var(--g2);font-weight:650;}
+
+details.obj{border:1px solid color-mix(in srgb,var(--hot) 40%,transparent);
+  background:var(--hot-soft);border-radius:var(--r);margin:22px 0;overflow:hidden;}
+details.obj summary{cursor:pointer;list-style:none;padding:16px 20px;display:flex;
+  align-items:center;gap:12px;font-weight:650;font-size:16px;color:var(--ink);}
+details.obj summary::-webkit-details-marker{display:none;}
+details.obj summary .lbl{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--hot);background:color-mix(in srgb,var(--hot) 18%,transparent);
+  border-radius:99px;padding:4px 11px;}
+details.obj summary .chev{margin-left:auto;transition:transform .25s var(--ease);color:var(--hot);font-size:18px;}
+details.obj[open] summary .chev{transform:rotate(180deg);}
+details.obj .body{padding:0 20px 18px;}
+details.obj .body p{font-size:15.5px;line-height:1.65;margin:0 0 11px;color:var(--ink-2);}
+details.obj .body p:last-child{margin-bottom:0;}
+
+/* myth vs record */
+.myth{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:15px;margin:20px 0;}
+.mcol{border-radius:var(--r);padding:19px 20px;border:1px solid var(--edge);}
+.mcol.story{background:var(--hot-soft);border-color:color-mix(in srgb,var(--hot) 35%,transparent);}
+.mcol.record{background:var(--g2-soft);border-color:color-mix(in srgb,var(--g2) 35%,transparent);}
+.mcol .mh{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;margin-bottom:9px;}
+.mcol.story .mh{color:var(--hot);} .mcol.record .mh{color:var(--g2);}
+.mcol p{font-size:15.5px;line-height:1.6;margin:0 0 9px;color:var(--ink);}
+.mcol p:last-child{margin-bottom:0;}
+
+.quote{border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:0 var(--r) var(--r) 0;
+  padding:17px 20px;margin:20px 0;}
+.quote p{margin:0;font-size:17px;line-height:1.6;color:var(--ink);font-style:italic;}
+.quote cite{display:block;margin-top:9px;font-size:13.5px;color:var(--ink-2);font-style:normal;}
+
+.qs{background:var(--bg-2);border-radius:var(--r);padding:20px 22px;margin:24px 0 0;}
+.qs h3{margin-top:0;}
+.qs ol{margin:0;padding-left:20px;}
+.qs li{font-size:15.5px;line-height:1.65;color:var(--ink-2);margin-bottom:12px;}
+.qs li::marker{color:var(--g6);font-weight:700;}
+
+.tl{position:relative;margin:20px 0 6px;padding-left:26px;list-style:none;}
+.tl::before{content:"";position:absolute;left:8px;top:8px;bottom:8px;width:3px;border-radius:3px;
+  background:linear-gradient(180deg,var(--g6),var(--g4),var(--hot));}
+.tl li{position:relative;margin-bottom:15px;}
+.tl li::before{content:"";position:absolute;left:-22px;top:8px;width:11px;height:11px;border-radius:50%;
+  background:var(--surface);border:3px solid var(--g6);}
+.tl .yr{font-family:var(--font-display);font-weight:800;font-size:16px;color:var(--g6);}
+.tl .wh{font-size:16px;color:var(--ink);}
+.tl .no{display:block;font-size:14.5px;color:var(--ink-3);line-height:1.5;}
+
+/* verdict builder */
+.brief{background:var(--surface);border:2px solid var(--g6);border-radius:var(--r-xl);
+  padding:32px;margin-bottom:26px;scroll-margin-top:118px;}
+.stance{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:11px;margin:16px 0 24px;}
+.stance button{font:inherit;font-size:15.5px;font-weight:600;padding:15px 16px;border-radius:var(--r);
+  border:2px solid var(--edge-strong);background:var(--bg);color:var(--ink);cursor:pointer;
+  text-align:left;line-height:1.4;transition:.18s var(--ease);}
+.stance button:hover{border-color:var(--g6);transform:translateY(-2px);}
+.stance button.on{border-color:var(--g6);background:var(--g6-soft);}
+.bf{margin-bottom:20px;}
+.bf label{display:flex;justify-content:space-between;align-items:baseline;gap:10px;
+  font-size:13.5px;font-weight:650;color:var(--ink);margin-bottom:7px;}
+.bf .hint{font-weight:400;color:var(--ink-3);font-size:12.5px;}
+.bf textarea{width:100%;font:inherit;font-size:15.5px;line-height:1.55;padding:13px 15px;
+  border-radius:12px;border:2px solid var(--edge-strong);background:var(--bg);color:var(--ink);
+  resize:vertical;min-height:62px;transition:border-color .2s;}
+.bf textarea:focus{outline:none;border-color:var(--g6);}
+.bf.ok textarea{border-color:var(--g2);}
+.check{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:6px;color:var(--ink-3);}
+.check.ok{color:var(--g2);font-weight:600;}
+</style>
+</head>
+<body class="g6">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-6/">6th grade</a>
+  <span class="sep">/</span><a href="/grade-6/industry/">Industry &amp; Policy</a>
+  <span class="spacer"></span>
+  <a href="/grade-6/industry-data-desk.html">Data Desk</a>
+</nav>
+
+<main>
+  <div class="hero">
+    <p class="kicker">Sixth grade · lesson 3 · case files</p>
+    <h1>The Policy File<em>Can a government pick winners?</em></h1>
+    <p class="lede">Japan spent eighty years trying. It has the most studied industrial policy in
+    history, and economists who have read the same evidence reach opposite conclusions. Here are
+    five cases. Your job is to reach a verdict they could not.</p>
+
+    <ul class="contra">
+      <li><span class="vs">1963</span><span>The most famous story about Japanese industrial policy
+        is about a law that <b>never existed</b>.</span></li>
+      <li><span class="vs">2009</span><span>Japan put about <b>¥140 billion</b> into its national
+        memory-chip champion. It was bankrupt <b>34 months later</b>.</span></li>
+      <li><span class="vs">2009–24</span><span>Japan's state investment fund made about
+        <b>¥1 trillion</b> of profit across 144 investments — and <b>one</b> of them produced
+        all of it.</span></li>
+      <li><span class="vs">1955–90</span><span>Every instrument of government support flowed
+        <b>towards</b> Japan's slowest-growing industries.</span></li>
+      <li><span class="vs">now</span><span>Japan is spending <b>¥2.35 trillion</b> on a company
+        that has never sold a chip.</span></li>
+    </ul>
+  </div>
+
+  <nav class="casenav" aria-label="Case files">
+    <a href="#c1">01 · The ministry</a>
+    <a href="#c2">02 · The law that wasn't</a>
+    <a href="#c3">03 · The champion that failed</a>
+    <a href="#c4">04 · One win in 144</a>
+    <a href="#c5">05 · The bet now</a>
+    <a href="#verdict">Your verdict</a>
+  </nav>
+
+  <!-- ============ 01 ============ -->
+  <section class="case reveal" id="c1">
+    <div class="cn"><b>01</b><span>Case file · the idea</span></div>
+    <h2>The ministry that was said to run a country</h2>
+
+    <p>In 1982 an American political scientist named Chalmers Johnson published
+    <em>MITI and the Japanese Miracle</em>, and the argument in it changed how the world thought
+    about economic growth. Japan, he said, was not a normal capitalist country that happened to
+    be doing well. It was a different kind of state.</p>
+
+    <p>A Western government, on Johnson's account, is a <strong>regulatory state</strong>: it sets
+    the rules of the game and referees. Japan was a
+    <span class="gl" data-t="developmental-state">developmental state</span>: growth itself was
+    the government's first job, and the market was a tool for producing it. He called the
+    difference <em>market-rational</em> versus <em>plan-rational</em>.</p>
+
+    <p>The agency doing the planning was <span class="gl" data-t="miti">MITI</span> — the Ministry
+    of International Trade and Industry. And it held some remarkable levers.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>The lever</th><th style="text-align:left">What it meant in practice</th></tr></thead>
+        <tbody>
+          <tr><td>Foreign currency</td><td style="text-align:left;font-weight:400">
+            Japan had very little of it after the war, and MITI decided who got some. No currency
+            meant no imported machines.</td></tr>
+          <tr><td>Technology licences</td><td style="text-align:left">
+            Under the Foreign Capital Law, a Japanese company could not buy the rights to a foreign
+            invention without permission. MITI granted it.</td></tr>
+          <tr><td>Cheap loans</td><td style="text-align:left">
+            The Japan Development Bank lent below market rates, and where it led, private banks followed.</td></tr>
+          <tr><td class="jp"><span class="gl" data-t="administrative-guidance">Administrative guidance</span></td>
+            <td style="text-align:left">
+            Simply telling a company what to do. No law required obedience. Firms obeyed anyway,
+            because MITI controlled everything in the rows above.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Chalmers Johnson, <em>MITI and the Japanese Miracle: The Growth of Industrial
+      Policy, 1925–1975</em>, Stanford University Press, 1982.
+      <a href="https://archive.org/details/mitijapanescmira00chal" target="_blank" rel="noopener">Full text</a>
+      · <a href="https://www.sup.org/books/politics/miti-and-japanese-miracle" target="_blank" rel="noopener">Publisher</a>.</p>
+
+    <p class="punch">If that picture is right, then a clever, patient government really can build
+    industries that would not otherwise exist — and every country that is now spending billions
+    trying to do exactly that is following Japan.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Is the picture right? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p><strong>Here is the awkward thing, and almost nobody mentions it.</strong> Johnson's own
+        book is full of MITI <em>losing</em>. The single longest case study in it is a bill MITI
+        wanted and could not get — Case File 02 below. Johnson was arguing that MITI mattered
+        <em>structurally</em>, not that MITI got its way.</p>
+        <p>Second, Johnson was a political scientist. His book contains almost no statistics
+        testing whether the industries MITI helped actually did better than the ones it ignored.
+        That work came later, and Case File 04 is what it found.</p>
+        <p>Third, a hard question about causation. Japan grew at extraordinary speed between 1950
+        and 1973. So did West Germany, which had nothing resembling MITI. If two countries take
+        different routes to the same place, how much credit can the route claim?</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>Which of the four levers in the table would be hardest for a government to use today,
+        and why?</li>
+        <li>Administrative guidance was not law, and companies obeyed it anyway. What made it work —
+        and what does that tell you about where power actually sits?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 02 ============ -->
+  <section class="case reveal" id="c2">
+    <div class="cn"><b>02</b><span>Case file · a myth, corrected</span></div>
+    <h2>The law that never existed</h2>
+
+    <p>You will hear this story. It is in business books, in talks, all over the internet.
+    It is the single most-repeated anecdote about Japanese industrial policy — and in its
+    usual form it is <strong>false</strong>.</p>
+
+    <div class="myth">
+      <div class="mcol story">
+        <div class="mh">The story as usually told</div>
+        <p>MITI passed a law banning new companies from making cars, to force the industry into a
+        few big groups. Honda defied the law, built cars anyway, and went on to become one of the
+        great car companies — proving the bureaucrats were fools.</p>
+      </div>
+      <div class="mcol record">
+        <div class="mh">What the record shows</div>
+        <p><strong>There was no law.</strong> The Specified Industries Promotion Bill was put to
+        the Diet three times in 1963–64 and <strong>died every time</strong> without a completed
+        debate. Honda broke nothing, because there was nothing to break.</p>
+      </div>
+    </div>
+
+    <h3 class="sec">What actually happened</h3>
+    <ul class="tl">
+      <li><span class="yr">May 1961</span> <span class="wh">MITI proposes sorting the car industry
+        into three groups.</span>
+        <span class="no">Two firms for mass-market cars, two or three for luxury and sports cars,
+        two or three for mini-vehicles. This was guidance, not law. The car makers rejected it —
+        as they had rejected MITI's 1955 "people's car" plan.</span></li>
+      <li><span class="yr">Jan 1962</span> <span class="wh">Honda orders crash development of two
+        sports cars and two trucks.</span>
+        <span class="no">Honda made motorcycles. It had never built a car.</span></li>
+      <li><span class="yr">22 Mar 1963</span> <span class="wh">The Cabinet approves the Bill.</span>
+        <span class="no">It would have set "promotion standards" for steel, cars and petrochemicals,
+        with tax breaks for mergers that complied, antitrust exemptions and priority state lending.</span></li>
+      <li><span class="yr">Aug 1963</span> <span class="wh">Honda's T360 mini-truck goes on sale.</span>
+        <span class="no">Its first production automobile. The S500 sports car followed in October.</span></li>
+      <li><span class="yr">1963–64</span> <span class="wh">The Bill dies. Three times.</span>
+        <span class="no">Killed by a coalition: Keidanren's chairman Ishizaka Taizō called it
+        "bureaucratic control in a different form"; the banks opposed it; the opposition parties
+        opposed it; and MITI itself was split down the middle.</span></li>
+    </ul>
+
+    <div class="quote">
+      <p>“To hell with the Specified Industry Promotion Law! I had the right to manufacture
+      automobiles.”</p>
+      <cite>Soichiro Honda, in a 1983 television interview, quoted on Honda's own corporate
+      heritage site.</cite>
+    </div>
+
+    <p class="punch">So the popular story gets the hero right and everything else wrong. Honda did
+    race to build a production record before a <em>proposed</em> law could bite. But the law was
+    then defeated by big business, the banks and parliament — not by one stubborn engineer.</p>
+
+    <h3 class="sec">Why the correction matters more than the myth</h3>
+    <p>The myth says: bureaucrats are stupid, entrepreneurs are brave. The record says something
+    far more useful — that Japan's famously all-powerful ministry <strong>proposed something
+    important and was beaten in public by the people it was supposed to be directing</strong>.
+    A country where that can happen is not the country in the myth. And the United States
+    Congress's own 1991 review of Japanese industrial policy concluded that if MITI's
+    consolidation plan <em>had</em> succeeded it "would by widespread agreement have damaged the
+    industry's long-term competitiveness."</p>
+
+    <p class="src"><a href="https://global.honda/en/heritage/episodes/1962autoproduction.html"
+      target="_blank" rel="noopener">Honda corporate heritage — launching the S360 and T360</a> ·
+      <a href="https://www.princeton.edu/~ota/disk1/1991/9112/911208.PDF" target="_blank" rel="noopener">US
+      Office of Technology Assessment, <em>Japanese Industrial Policy: The Postwar Record</em>, 1991</a> ·
+      <a href="https://ndlsearch.ndl.go.jp/rnavi/db/cabinet/s34_38/bib01418" target="_blank" rel="noopener">National
+      Diet Library record of the Bill</a>. Note that "no new firm could have entered" is
+      <em>Honda's</em> characterisation, published on Honda's site; it is not what the Bill's text says.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Does the correction let MITI off? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p><strong>No, and it would be lazy to think so.</strong> The Bill failed, but the 1961
+        grouping plan was real, and MITI did not need a statute to make life hard for a new
+        entrant — it controlled foreign currency, technology licences and the banks' lending
+        priorities. Honda's fear was rational even though the legal threat evaporated.</p>
+        <p>There is also a sharper version of the criticism. A ministry that <em>tried</em> to
+        block the future Honda, and tried in 1955 to pick a single "people's car", was wrong about
+        the car industry twice in a decade. That it lost both times is lucky, not exculpatory.</p>
+        <p>And the strongest defence of MITI here: its officials were not idiots. In 1961 Japan was
+        about to open to foreign competition, its car firms were tiny by world standards, and
+        nobody knew that scale would arrive on its own. Being wrong about the future is not the
+        same as being foolish — which is a thought worth holding when you judge Case File 05.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>The myth spread because it is a <em>better story</em> than the truth. Name one feature
+        of the false version that makes it stickier than the real one.</li>
+        <li>Honda's own website says the Bill would have kept it out of the market. The Bill's text
+        contains no such rule. Is Honda lying, misremembering, or describing something real that
+        the text does not capture?</li>
+        <li>If MITI had won, Japan would have had two or three car companies instead of eight.
+        Make the best case you can that this would have been <em>good</em> — then say why you do
+        not believe it.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 03 ============ -->
+  <section class="case reveal" id="c3">
+    <div class="cn"><b>03</b><span>Case file · the champion</span></div>
+    <h2>Bankrupt in thirty-four months</h2>
+
+    <p>By the late 1990s Japan was losing the memory-chip business it had invented. The response
+    was textbook industrial policy: combine the survivors into one
+    <span class="gl" data-t="national-champion">national champion</span> big enough to fight.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>When</th><th style="text-align:left">What happened</th></tr></thead>
+        <tbody>
+          <tr><td>Dec 1999</td><td style="text-align:left;font-weight:400">
+            NEC and Hitachi merge their <span class="gl" data-t="dram">DRAM</span> businesses.
+            Renamed Elpida in 2000.</td></tr>
+          <tr><td>2003</td><td style="text-align:left">Mitsubishi Electric's DRAM business is folded in too.</td></tr>
+          <tr class="jp"><td>June 2009</td><td style="text-align:left">
+            <strong>The rescue.</strong> ¥30 billion of new equity from the Development Bank of
+            Japan plus roughly ¥100 billion in loans — about ¥140 billion of support, with the
+            government covering 80% of any losses. Elpida had just lost nearly ¥180 billion in
+            a single quarter.</td></tr>
+          <tr><td>27 Feb 2012</td><td style="text-align:left">
+            <strong>Bankruptcy.</strong> Liabilities ¥448 billion — the largest failure of a
+            Japanese manufacturer since the war. Elpida was the world's number three DRAM maker.</td></tr>
+          <tr><td>31 July 2013</td><td style="text-align:left">
+            Bought by Micron, of the United States. Japan has had no memory-chip maker since.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><a href="https://www.nippon.com/en/currents/d00032/elpida-and-the-failure-of-japan-inc.html"
+      target="_blank" rel="noopener">Nippon.com — Elpida and the failure of Japan Inc.</a> ·
+      <a href="https://www.nippon.com/en/column/l00016/" target="_blank" rel="noopener">Nippon.com —
+      the collapse and industrial policy</a> ·
+      <a href="https://en.wikipedia.org/wiki/Micron_Memory_Japan" target="_blank" rel="noopener">Micron
+      Memory Japan</a>. Today Samsung and SK hynix of South Korea hold 68% of world DRAM between them.</p>
+
+    <p class="punch">Thirty-four months from national rescue to the largest manufacturing
+    bankruptcy in Japan's post-war history.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Too much policy — or not enough? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p><strong>The obvious reading:</strong> the government propped up a loser, delayed the
+        reckoning by three years, and lost public money doing it. Memory chips had become a
+        <span class="gl" data-t="commodity">commodity</span> — every chip identical, so the only
+        thing that matters is building the biggest factory fastest. Japan was trying to defend
+        cleverness in a business that had stopped rewarding cleverness.</p>
+        <p><strong>The opposite reading, and it is held seriously.</strong> Writing in the same
+        publication, one Japanese commentator argued the problem was <em>too little</em> industrial
+        policy, not too much: ¥140 billion is small change against what Samsung was investing
+        with South Korean state backing, and a half-hearted rescue is worse than none. On that
+        view Japan lost because it would not commit.</p>
+        <p><strong>Which reading you prefer determines what you think about Case File 05</strong> —
+        where Japan is now committing ¥2.35 trillion, about seventeen times the Elpida rescue,
+        to a company in the same industry.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>What would you have needed to know in June 2009 to predict February 2012? Was that
+        knowable at the time, or only afterwards?</li>
+        <li>Japan has no memory-chip maker and is perfectly prosperous. Does a rich country
+        actually need to make everything? Give a rule for deciding which industries a country
+        must keep.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 04 ============ -->
+  <section class="case reveal" id="c4">
+    <div class="cn"><b>04</b><span>Case file · the scoreboard</span></div>
+    <h2>One win paid for a hundred and forty-three losses</h2>
+
+    <p>From 2009 to 2024 Japan ran a state-backed investment fund, the
+    <span class="gl" data-t="incj">INCJ</span>, to build the industries it wanted. When it closed,
+    the books looked like a triumph.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>The INCJ, 2009–2024</th><th>Amount</th></tr></thead>
+        <tbody>
+          <tr><td>Invested, across 144 projects</td><td>¥1.296 trillion</td></tr>
+          <tr><td>Returned</td><td>¥2.326 trillion</td></tr>
+          <tr class="jp"><td>Profit</td><td class="good">about ¥1.0 trillion</td></tr>
+          <tr><td>Of which, from <strong>one</strong> investment — Renesas</td><td class="good">over ¥1.25 trillion</td></tr>
+          <tr class="jp"><td>The fund excluding Renesas</td><td class="bad">a loss</td></tr>
+          <tr><td>Lost on Japan Display alone</td><td class="bad">¥154.7 billion</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><a href="https://toyokeizai.net/articles/-/891443" target="_blank" rel="noopener">Toyo
+      Keizai — the INCJ's fifteen years</a> ·
+      <a href="https://www.j-ic.co.jp/en/incj-archive" target="_blank" rel="noopener">INCJ's own summary</a> ·
+      <a href="https://www.netdenjd.com/articles/-/314977" target="_blank" rel="noopener">Dempa Shimbun
+      on the final Japan Display sale, March 2025</a>. Japan Display was formed in 2012 by merging
+      the screen divisions of Sony, Toshiba and Hitachi; roughly ¥462 billion of public money went
+      into it over thirteen years and it still has negative net assets.</p>
+
+    <p class="punch">Read those rows in order. The fund made a trillion yen. The fund also lost
+    money on essentially everything except one investment. <strong>Both sentences are true.</strong></p>
+
+    <h3 class="sec">And now the harder evidence</h3>
+    <p>In 1996 two economists, Richard Beason and David Weinstein, did something nobody had
+    bothered to do: they checked whether the industries the Japanese government supported
+    between 1955 and 1990 actually grew faster. They looked at four instruments across
+    thirteen sectors.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th>Instrument of support</th><th><span class="gl" data-t="correlation">Correlation</span> with growth</th></tr></thead>
+        <tbody>
+          <tr><td>Cheap loans from the Japan Development Bank</td><td class="bad">−0.31</td></tr>
+          <tr><td>Tax breaks</td><td class="bad">−0.33</td></tr>
+          <tr><td>Tariffs (protection from imports)</td><td class="bad">−0.31</td></tr>
+          <tr><td>Direct subsidies</td><td class="bad">−0.13</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Every single one is <strong>negative</strong>. The more help an industry got, the slower it
+    grew. Mining was the number one recipient of cheap loans, subsidies and tax relief, and grew
+    3.8%. Textiles was third, and grew 2.7%. Meanwhile electrical machinery grew
+    <strong>12.2%</strong> while ranking eighth or ninth for support, and cars grew 10.8% while
+    ranking between fourth and eleventh.</p>
+
+    <p class="src">Richard Beason &amp; David E. Weinstein, "Growth, Economies of Scale, and
+      Targeting in Japan (1955–1990)", <em>Review of Economics and Statistics</em> 78(2), 1996.
+      <a href="https://nfap.com/wp-content/uploads/2021/11/Japanese-Industrial-Policy.NFAP-Policy-Brief.November-2021.pdf"
+      target="_blank" rel="noopener">Sectoral figures restated here</a>.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Does that settle it? No — and the reason is beautiful <span class="chev">▾</span></summary>
+      <div class="body">
+        <p>Think about what a government does. Does it hand money to the industry that is already
+        booming — or to the one that is in trouble, laying people off, and filling the newspapers?</p>
+        <p>It helps the one in trouble. <strong>So support flows towards slow-growing industries
+        by construction</strong>, and a negative correlation is exactly what you would see
+        <em>even if every yen of that help worked perfectly.</em> This is a
+        <span class="gl" data-t="selection-effect">selection effect</span>, and it is the same
+        reason hospitals are full of sick people.</p>
+        <p>That is the argument made in 2024 by Réka Juhász, Nathan Lane and Dani Rodrik in the
+        <em>Annual Review of Economics</em>. Their sharpest line: a government that helps losers
+        and a government that helps winners are, in this kind of data, "observationally
+        equivalent" — you cannot tell them apart. Newer studies using better methods, they say,
+        are "much more favourable to industrial policy".</p>
+        <p><strong>But do not over-correct.</strong> The same authors refuse to claim that
+        industrial policy raises a country's overall growth rate. The defensible summary, and you
+        may quote it: <em>the old evidence found money flowing to slow sectors with no
+        productivity payoff; newer methods find real effects on the shape of an economy; nobody
+        has shown it makes a country grow faster overall.</em></p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>A venture capitalist expects most investments to fail and one to pay for everything.
+        By that standard the INCJ did <em>well</em>. Is that the right standard for public money?
+        Say what is different about spending taxes rather than your own savings.</li>
+        <li>Explain the selection-effect problem to somebody in two sentences, without using the
+        words "correlation" or "causation".</li>
+        <li>Design a test that <em>would</em> tell you whether industrial policy worked. What would
+        you need to observe? Why can nobody actually run it?</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ 05 ============ -->
+  <section class="case reveal" id="c5">
+    <div class="cn"><b>05</b><span>Case file · happening now</span></div>
+    <h2>Two bets, same decade, opposite philosophies</h2>
+
+    <p>Japan has decided it must make advanced chips again. It is trying two completely different
+    strategies at once, and you will live to find out which was right.</p>
+
+    <div class="tw">
+      <table>
+        <thead><tr><th></th><th><span class="gl" data-t="rapidus">Rapidus</span></th><th>TSMC in Kumamoto</th></tr></thead>
+        <tbody>
+          <tr><td>The idea</td><td>Build a Japanese national champion from scratch</td><td>Pay the world's best foundry to come and build here</td></tr>
+          <tr><td>Founded</td><td>August 2022</td><td>December 2021</td></tr>
+          <tr class="jp"><td>Public money</td><td>¥2.35 trillion committed</td><td>~¥1.2 trillion of subsidy</td></tr>
+          <tr><td>Private money</td><td>¥267.6 billion</td><td>Majority of ~US$20 billion, from TSMC, Sony, Denso, Toyota</td></tr>
+          <tr><td>Target</td><td><span class="gl" data-t="nanometre">2 nm</span>, jumping from 40 nm</td><td>Proven 12–28 nm, then 6 nm</td></tr>
+          <tr><td>Making chips yet?</td><td class="bad">No. Prototypes, July 2025</td><td class="good">Yes. Volume production since December 2024</td></tr>
+          <tr class="jp"><td>Customers announced</td><td class="bad">None</td><td class="good">Sony and Denso are shareholders and buyers</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><a href="https://www.rieti.go.jp/jp/publications/dp/25e116.pdf" target="_blank" rel="noopener">Negrine,
+      Findlay &amp; Armstrong, "Chips in Japan", RIETI Discussion Paper 25-E-116, December 2025</a> ·
+      <a href="https://www.tomshardware.com/tech-industry/semiconductors/rapidus-fab-roadmap-examined"
+      target="_blank" rel="noopener">Tom's Hardware on the Rapidus roadmap, 2026</a> ·
+      <a href="https://pr.tsmc.com/english/news/3113" target="_blank" rel="noopener">TSMC on the
+      Kumamoto opening</a>. Japan allocated about ¥3.9 trillion to semiconductors in 2021–23 —
+      0.71% of its economy, a larger share than the United States, Germany or France spent.</p>
+
+    <div class="quote">
+      <p>“Think long and hard about skipping nodes… This can only end in tears.”</p>
+      <cite>An industry expert on Rapidus's plan to jump from 40 nanometres to 2, quoted by the
+      Center for Strategic and International Studies, 2023.</cite>
+    </div>
+
+    <p class="punch">One strategy builds a champion and hopes. The other buys proven capability
+    and accepts that the crown jewels belong to somebody else. Japan has tried the first before —
+    that was Case File 03.</p>
+
+    <details class="obj">
+      <summary><span class="lbl">Argue the other side</span>
+        Is Rapidus Elpida again? <span class="chev">▾</span></summary>
+      <div class="body">
+        <p><strong>The case that it is:</strong> a state-assembled champion, in the same industry,
+        against the same competitors, attempting something its engineers have never done, with
+        almost no private money beside it and no customer. Everything that was true of Elpida
+        is true here, only seventeen times more expensive.</p>
+        <p><strong>The case that it is not:</strong> Elpida was defending a commodity where the
+        only weapon is scale. Rapidus is attacking a part of the market where Japan already owns
+        the ground underneath — Japanese firms make roughly half the world's chip
+        <em>materials</em>, over half its silicon wafers, and Tokyo Electron and Advantest sell
+        the machines. A country that supplies the picks and shovels has a reason to think it can
+        mine.</p>
+        <p><strong>And the genuinely uncomfortable argument:</strong> perhaps it does not have to
+        succeed commercially to be worth it. If chips become something countries can be cut off
+        from, then paying ¥2.35 trillion for the <em>ability</em> to make them may be insurance
+        rather than investment — the same reasoning that justifies Japan's 254 days of oil in
+        Lesson 2. Insurance is supposed to lose money.</p>
+      </div>
+    </details>
+
+    <div class="qs">
+      <h3 class="sec">Questions</h3>
+      <ol>
+        <li>Kumamoto is producing chips and Rapidus is not. Does that prove the Kumamoto approach
+        is better, or are they attempting different things with different odds?</li>
+        <li>If Rapidus fails in 2030, what should Japan conclude? And if it succeeds — what should
+        it conclude then? Be careful: your two answers should not be mirror images.</li>
+        <li>Japan spent a larger share of its economy on chips than the USA, Germany or France.
+        Name one thing Japan therefore did <em>not</em> spend that money on.</li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ============ VERDICT ============ -->
+  <section class="brief reveal" id="verdict">
+    <p class="kicker">The deliverable</p>
+    <h2 style="margin-top:0;">Your verdict</h2>
+    <p>Economists have argued about this for forty years without agreeing. You do not get that
+    luxury. <strong>Pick a position, then defend it.</strong></p>
+
+    <div class="stance" id="stance">
+      <button type="button" data-v="yes">Industrial policy works.<br>
+        <span style="font-weight:400;font-size:14px;color:var(--ink-3)">Governments can and should build industries.</span></button>
+      <button type="button" data-v="no">It does not work.<br>
+        <span style="font-weight:400;font-size:14px;color:var(--ink-3)">The money goes to losers and buys nothing.</span></button>
+      <button type="button" data-v="dep">It works for some things only.<br>
+        <span style="font-weight:400;font-size:14px;color:var(--ink-3)">And you will have to say exactly which.</span></button>
+    </div>
+
+    <div class="bf" data-min="80" data-need="number">
+      <label><span>1 · Your verdict in one sentence, with a number in it</span>
+        <span class="hint">commit — no “it depends” unless you chose option three and then say what it depends on</span></label>
+      <textarea rows="2" placeholder="Industrial policy…"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <div class="bf" data-min="110" data-need="case">
+      <label><span>2 · The case file that convinced you, and why</span>
+        <span class="hint">name a case file, give its number, say what it shows</span></label>
+      <textarea rows="3" placeholder="Case File 0_ shows that…"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <div class="bf" data-min="110" data-need="number">
+      <label><span>3 · The evidence that most nearly changed your mind</span>
+        <span class="hint">must have a number and a year — and must point the other way</span></label>
+      <textarea rows="3" placeholder="The strongest fact against me is…"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <div class="bf" data-min="130" data-need="against">
+      <label><span>4 · What would have to happen for you to admit you were wrong?</span>
+        <span class="hint">be specific and be honest — “nothing” is not an allowed answer</span></label>
+      <textarea rows="4" placeholder="I would change my mind if…"></textarea>
+      <div class="check"><span>—</span></div>
+    </div>
+
+    <p id="briefSay" style="font-size:16.5px;color:var(--ink-3);">Choose a position and fill all four.
+    Box 4 is the one that separates thinking from cheering.</p>
+  </section>
+
+  <footer>
+    <a href="/grade-6/industry/">Back to the lesson</a> ·
+    <a href="/grade-6/industry-data-desk.html">The Data Desk</a> ·
+    <a href="/together/industry.html">The Cabinet Meeting</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+  var stance = null;
+  document.querySelectorAll("#stance button").forEach(function(b){
+    b.addEventListener("click", function(){
+      stance = b.dataset.v;
+      document.querySelectorAll("#stance button").forEach(function(x){
+        x.classList.toggle("on", x === b);
+      });
+      tally();
+    });
+  });
+
+  function check(bf){
+    var t = bf.querySelector("textarea").value.trim();
+    var c = bf.querySelector(".check");
+    var min = +bf.dataset.min, need = bf.dataset.need;
+    var msgs = [], ok = true;
+
+    if (t.length < min) { ok = false; msgs.push(t.length + " of " + min + " characters"); }
+    if (need === "number" && !/\d/.test(t)) { ok = false; msgs.push("no number yet"); }
+    if (need === "case" && !/case\s*file\s*0?[1-5]|0[1-5]\b/i.test(t)) {
+      ok = false; msgs.push("name which case file");
+    }
+    if (need === "number" && /\d/.test(t) && t.length >= min &&
+        bf.previousElementSibling === null) { /* no-op */ }
+    if (need === "against") {
+      if (/^\s*(nothing|no|never)\b/i.test(t)) { ok = false; msgs.push("that is not an allowed answer"); }
+      if (t.length >= min && !/\d/.test(t)) msgs.push("a number here would make it much stronger");
+    }
+    if (/it depends/i.test(t) && stance !== "dep") {
+      ok = false; msgs.push("you did not pick the “depends” position — commit");
+    }
+
+    var good = ok && t.length >= min;
+    bf.classList.toggle("ok", good);
+    c.classList.toggle("ok", good);
+    c.querySelector("span").textContent = t.length === 0 ? "—" : (good ? "✓ good" : msgs.join(" · "));
+    return good;
+  }
+
+  var fields = [].slice.call(document.querySelectorAll(".bf"));
+  function tally(){
+    var done = fields.filter(check).length;
+    var el = document.getElementById("briefSay");
+    if (!stance) { el.textContent = "Choose a position first — the boxes are judged against it."; return; }
+    el.innerHTML = done === 4
+      ? "<strong style='color:var(--g2)'>Four of four.</strong> Now find somebody who picked a " +
+        "different position and read them box 4. If they cannot improve on your case against " +
+        "yourself, you have understood this better than most adults."
+      : done + " of 4 boxes ready. Box 4 is the one that separates thinking from cheering.";
+  }
+  fields.forEach(function(bf){
+    bf.querySelector("textarea").addEventListener("input", tally);
+  });
+})();
+</script>
+</body>
+</html>

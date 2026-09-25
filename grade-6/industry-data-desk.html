@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Industry Data Desk — 6th grade | Wonderschool</title>
+<meta name="description" content="Twelve measures of Japan's industry, each with its definition, its year and its source — including three rankings that disagree.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/assets/site.css">
+<style>
+main{max-width:920px;}
+.m{background:var(--surface);border:1px solid var(--edge);border-radius:var(--r-lg);
+  padding:26px 26px 22px;margin-bottom:20px;box-shadow:var(--shadow-sm);scroll-margin-top:112px;}
+.m > h2{margin:0 0 4px;font-size:clamp(20px,3vw,26px);}
+.m .q{font-size:15px;color:var(--ink-3);margin:0 0 16px;line-height:1.5;}
+.m .big{font-family:var(--font-display);font-weight:800;font-size:clamp(34px,6.5vw,52px);
+  letter-spacing:-.035em;line-height:1;color:var(--g6);margin:2px 0 4px;}
+.m .bigu{font-size:14.5px;color:var(--ink-3);margin:0 0 14px;}
+
+.glidx{position:sticky;top:52px;z-index:200;display:flex;gap:8px;overflow-x:auto;
+  padding:12px 4px;margin:0 -4px 14px;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);
+  scrollbar-width:none;}
+.glidx::-webkit-scrollbar{display:none;}
+.glidx a{flex:none;font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;
+  padding:7px 14px;border-radius:99px;border:1px solid var(--edge-strong);
+  color:var(--ink-2);background:var(--surface);transition:.18s var(--ease);}
+.glidx a:hover{border-color:var(--g6);color:var(--g6);}
+
+.tw{overflow-x:auto;margin:12px 0 4px;}
+table{width:100%;border-collapse:collapse;font-size:14.5px;font-variant-numeric:tabular-nums;}
+th,td{padding:9px 11px;text-align:right;border-bottom:1px solid var(--edge);}
+th{white-space:nowrap;}
+td:first-child{white-space:normal;min-width:9em;}
+th:first-child,td:first-child{text-align:left;}
+thead th{font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);
+  font-weight:700;border-bottom:2px solid var(--edge-strong);}
+tbody tr:hover{background:var(--bg-2);}
+tr.jp td{background:var(--g6-soft);font-weight:700;color:var(--ink);}
+td.bad{color:var(--hot);font-weight:650;}
+td.good{color:var(--g2);font-weight:650;}
+td.nd{color:var(--ink-3);font-style:italic;font-weight:400;}
+
+.twocol{display:grid;grid-template-columns:repeat(auto-fit,minmax(275px,1fr));gap:22px;}
+.mini h3{font-size:13px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px;}
+.warnbox{background:var(--hot-soft);border:1px solid color-mix(in srgb,var(--hot) 30%,transparent);
+  border-radius:var(--r);padding:15px 18px;margin:14px 0 4px;}
+.warnbox p{margin:0;font-size:15.5px;line-height:1.6;color:var(--ink);}
+</style>
+</head>
+<body class="g6">
+<nav class="site-bar">
+  <a class="brand" href="/">Wonderschool</a>
+  <span class="sep">/</span><a href="/grade-6/">6th grade</a>
+  <span class="sep">/</span><a href="/grade-6/industry/">Industry &amp; Policy</a>
+  <span class="spacer"></span>
+  <a href="/grade-6/industry-dossier.html">The case files</a>
+</nav>
+
+<main>
+  <p class="kicker">Sixth grade · lesson 3 · data desk</p>
+  <h1>The Industry Data Desk</h1>
+  <p class="lede">Twelve measures. Each carries its definition — hover any
+  <span class="gl" data-t="value-added">dotted term</span> — the year it refers to, and a link to
+  whoever published it. Measure 6 is the important one: three honest rankings of "Japan's biggest
+  companies" that share almost no names.</p>
+
+  <div class="note"><p><strong>Same rule as always.</strong> No comparing across measures, no
+  adding up ranks, no composite scores. Each measure answers its own question. Two of the twelve
+  have holes in them where nobody publishes a number, and those holes are marked rather than filled.</p></div>
+
+  <nav class="glidx" aria-label="Measures">
+    <a href="#m1">Who works where</a><a href="#m2">Biggest employers</a><a href="#m3">Factory share</a>
+    <a href="#m4">Exports</a><a href="#m5">Customers</a><a href="#m6">Biggest companies</a>
+    <a href="#m7">The 500</a><a href="#m8">Still leads</a><a href="#m9">Was passed</a>
+    <a href="#m10">Competitors</a><a href="#m11">Did help help?</a><a href="#m12">Spending now</a>
+  </nav>
+
+  <!-- 1 -->
+  <section class="m reveal" id="m1">
+    <h2>1 · Who works where</h2>
+    <p class="q">Japan's reputation is a country of factories. Its workforce says otherwise.
+      <span class="gl" data-t="services">Definition</span></p>
+    <div class="bars" data-bars='[
+      ["Services","74.0",74.0,"var(--e-hydro)"],
+      ["Industry","23.2",23.2,"var(--e-coal)"],
+      ["Agriculture","2.8",2.8,"var(--e-bio)"]]' data-max="80" data-suffix="%"></div>
+    <p class="src">Share of 68.28 million working people, 2025. "Industry" includes construction,
+      mining and utilities, not just factories — <span class="gl" data-t="manufacturing">manufacturing</span>
+      alone is 15.1%.
+      <a href="https://data.worldbank.org/indicator/SL.SRV.EMPL.ZS" target="_blank" rel="noopener">World
+      Bank, from ILO modelled estimates</a>. These are models, not a headcount, which is why they do
+      not line up exactly with Japan's own survey in measure 2.</p>
+  </section>
+
+  <!-- 2 -->
+  <section class="m reveal" id="m2">
+    <h2>2 · The biggest employing industries</h2>
+    <p class="q">Japan's own Labour Force Survey, by headcount. Millions of people.</p>
+    <div class="bars" data-bars='[
+      ["Making things","10.33",10.33,"var(--e-coal)"],
+      ["Shops and wholesale","10.29",10.29,"var(--e-lng)"],
+      ["Health and care","9.47",9.47,"var(--e-hydro)"],
+      ["Other services","4.82",4.82,"var(--e-wind)"],
+      ["Computers and telecoms","3.02",3.02,"var(--e-nuclear)"]]' data-max="12" data-suffix=" m"></div>
+    <p class="src">2025. Exactly as many Japanese people sell things as make them — 15.1% each.
+      Health and care has added <strong>1.63 million</strong> people in ten years and will pass both
+      before long.
+      <a href="https://www.jef.or.jp/journal/pdf/267th_Economic_Indicators.pdf" target="_blank"
+      rel="noopener">Japan Economic Foundation, from the Labour Force Survey</a>.</p>
+  </section>
+
+  <!-- 3 -->
+  <section class="m reveal" id="m3">
+    <h2>3 · How much of the economy is factories</h2>
+    <p class="q"><span class="gl" data-t="manufacturing">Manufacturing</span> as a share of
+      everything Japan earns, measured as <span class="gl" data-t="value-added">value added</span>.</p>
+    <div class="big">18.8%</div>
+    <p class="bigu">2024 · it was 19.5% in 2023 and 19.7% in 2021</p>
+    <p>Roughly a fifth of the economy, and roughly a seventh of the jobs. Inside that fifth, the
+    biggest single slice by sales is transport equipment — which is mostly cars.</p>
+    <div class="bars" data-bars='[
+      ["Transport equipment","21.1",21.1,"var(--e-oil)"],
+      ["Food","11.2",11.2,"var(--e-bio)"],
+      ["Chemicals","10.6",10.6,"var(--e-geo)"],
+      ["Electronics","7.6",7.6,"var(--e-nuclear)"],
+      ["Electrical machinery","7.1",7.1,"var(--e-wind)"],
+      ["Production machinery","6.4",6.4,"var(--e-coal)"],
+      ["Iron and steel","4.8",4.8,"var(--e-other)"]]' data-max="25" data-suffix="%"></div>
+    <p class="src">Share of GDP: <a href="https://data.worldbank.org/indicator/NV.IND.MANF.ZS"
+      target="_blank" rel="noopener">World Bank, 2024</a>. Sub-sector shares are of manufacturing
+      <em>sales</em>, FY2023, from <a href="https://www.jetro.go.jp/en/invest/attractive_sectors/manufacturing/overview.html"
+      target="_blank" rel="noopener">JETRO</a>, citing the Ministry of Finance. Sales and value added
+      are different measures — do not mix the two columns.</p>
+  </section>
+
+  <!-- 4 -->
+  <section class="m reveal" id="m4">
+    <h2>4 · What Japan sells to the world</h2>
+    <p class="q">Top <span class="gl" data-t="export">export</span> products, share of ¥110.4
+      trillion of goods, 2025.</p>
+    <div class="bars" data-bars='[
+      ["Motor vehicles","16.0",16.0,"var(--e-oil)"],
+      ["Chips and components","4.4",4.4,"var(--e-nuclear)"],
+      ["Chip-making machines","4.1",4.1,"var(--e-coal)"],
+      ["Iron and steel","3.6",3.6,"var(--e-other)"],
+      ["Car parts","3.3",3.3,"var(--e-geo)"],
+      ["Plastics","3.1",3.1,"var(--e-lng)"],
+      ["Power machinery","2.8",2.8,"var(--e-wind)"],
+      ["Optical instruments","2.4",2.4,"var(--e-hydro)"]]' data-max="20" data-suffix="%"></div>
+    <div class="warnbox"><p><strong>Look at third place.</strong> Japan sells nearly as much in
+      <em>machines that make chips</em> as in chips. It lost the product and kept the tools —
+      which is the shape of the whole lesson.</p></div>
+    <p class="src"><a href="https://www.customs.go.jp/toukei/shinbun/trade-st_e/2025/2025_117e.pdf"
+      target="_blank" rel="noopener">Japan Customs, Ministry of Finance, calendar 2025</a>.
+      Japan imported ¥113.3 trillion against ¥110.4 trillion of exports — a
+      <span class="gl" data-t="trade-surplus">trade deficit</span> of about ¥2.9 trillion.</p>
+  </section>
+
+  <!-- 5 -->
+  <section class="m reveal" id="m5">
+    <h2>5 · Who buys it</h2>
+    <p class="q">Destination of Japan's exports, share of value, 2025.</p>
+    <div class="bars" data-bars='[
+      ["United States","18.5",18.5,"var(--e-nuclear)"],
+      ["China","17.0",17.0,"var(--e-geo)"],
+      ["Taiwan","7.2",7.2,"var(--e-lng)"],
+      ["South Korea","6.3",6.3,"var(--e-wind)"],
+      ["Hong Kong","5.8",5.8,"var(--e-bio)"],
+      ["Thailand","3.8",3.8,"var(--e-hydro)"]]' data-max="22" data-suffix="%"></div>
+    <p class="src">Asia as a whole takes 54.3%; the European Union takes 9.1%.
+      <a href="https://www.customs.go.jp/toukei/shinbun/trade-st_e/2025/2025_117e.pdf" target="_blank"
+      rel="noopener">Japan Customs, 2025</a>. Japan's two largest customers are a close ally and a
+      strategic rival, separated by 1.5 percentage points.</p>
+  </section>
+
+  <!-- 6 -->
+  <section class="m reveal" id="m6">
+    <h2>6 · "Japan's biggest companies" — three answers</h2>
+    <p class="q">Three honest rankings of the same country in the same year. Read across the rows,
+      and notice how few names appear twice.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th></th><th>By <span class="gl" data-t="revenue">revenue</span></th>
+          <th>By employees</th><th>By <span class="gl" data-t="market-cap">market value</span></th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Toyota</td><td>AEON</td><td>MUFG (bank)</td></tr>
+          <tr><td>2</td><td>Honda</td><td>Toyota</td><td>SoftBank</td></tr>
+          <tr><td>3</td><td>Mitsubishi Corp</td><td>NTT</td><td>Toyota</td></tr>
+          <tr><td>4</td><td>Itochu</td><td>Sumitomo Electric</td><td>Kioxia</td></tr>
+          <tr><td>5</td><td>Nippon Life</td><td>Hitachi</td><td>Sumitomo Mitsui (bank)</td></tr>
+          <tr><td>6</td><td>MUFG</td><td>Japan Post</td><td>Hitachi</td></tr>
+          <tr><td>7</td><td>NTT</td><td>Honda</td><td>Tokyo Electron</td></tr>
+          <tr><td>8</td><td>Mitsui &amp; Co</td><td>Panasonic</td><td>Advantest</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="warnbox"><p><strong>Only Toyota appears in all three, and never in the same place.</strong>
+      Mitsubishi Corporation is 3rd by revenue with 63,000 staff — a
+      <span class="gl" data-t="sogo-shosha">trading house</span> that moves enormous volumes and
+      employs almost nobody. AEON employs the most people in Japan and is nowhere near either other
+      list. Tokyo Electron and Advantest are 7th and 8th most valuable and appear on <em>neither</em>
+      other list. Sumitomo Electric employs the 4th most people in Japan and ranks
+      <strong>490th in the world</strong> by revenue.</p></div>
+    <p class="src">Revenue and employees: <a href="https://fortune.com/ranking/global500/2026/"
+      target="_blank" rel="noopener">Fortune Global 500, 2026 edition</a>, for financial years
+      ending in 2026. Market value: <a href="https://companiesmarketcap.com/japan/largest-companies-in-japan-by-market-cap/"
+      target="_blank" rel="noopener">companiesmarketcap.com</a>, a live snapshot — it changes daily,
+      and during 2026 four different companies held Japan's top spot, the first time that has
+      happened since 1980. Treat any market-value ranking as dated, not settled.</p>
+  </section>
+
+  <!-- 7 -->
+  <section class="m reveal" id="m7">
+    <h2>7 · The five hundred</h2>
+    <p class="q">Japanese companies in the <span class="gl" data-t="fortune-500">Fortune Global 500</span>.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Companies in the Global 500</th><th>1995</th><th>2023</th></tr></thead>
+        <tbody>
+          <tr><td>United States</td><td>151</td><td>136</td></tr>
+          <tr class="jp"><td>Japan</td><td>149</td><td class="bad">41</td></tr>
+          <tr><td>China (mainland)</td><td>3</td><td class="good">135</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="big" style="font-size:clamp(26px,4.4vw,36px);margin-top:16px;">149 → 40</p>
+    <p class="bigu">Japan's count in the 2026 edition is 40.</p>
+    <p><strong>Read the 1995 column again.</strong> Japan was level with the United States —
+    149 against 151 — and China had three. Within one working lifetime, Japan and China
+    swapped places almost exactly.</p>
+    <p class="src"><a href="https://finance.yahoo.com/news/happened-japan-inc-once-business-100000073.html"
+      target="_blank" rel="noopener">Fortune's own reporting on the decline</a> ·
+      <a href="https://fortune.com/ranking/global500/2026/" target="_blank" rel="noopener">Fortune
+      Global 500, 2026</a>. Two cautions. This list ranks by revenue in <strong>US dollars</strong>,
+      so a weaker yen pushes Japanese firms down it without anything changing inside the companies.
+      And it ranks by <span class="gl" data-t="revenue">revenue</span>, not profit, size or value —
+      a company can fall off it while earning more than ever.</p>
+  </section>
+
+  <!-- 8 -->
+  <section class="m reveal" id="m8">
+    <h2>8 · Where Japan still leads</h2>
+    <p class="q">Global <span class="gl" data-t="market-share">market share</span>. Notice what
+      these have in common before you read the note underneath.</p>
+    <div class="bars" data-bars='[
+      ["Chip testers (Advantest)","58",58,"var(--e-nuclear)"],
+      ["Wafer coating tools","88",88,"var(--e-coal)"],
+      ["Silicon wafers","53",53,"var(--e-other)"],
+      ["Photoresist chemicals","50",50,"var(--e-geo)"],
+      ["Camera image sensors","48",48,"var(--e-hydro)"],
+      ["Zippers (YKK, by value)","40",40,"var(--e-lng)"],
+      ["Industrial robots made","38",38,"var(--e-wind)"],
+      ["Digital pianos (Yamaha)","48",48,"var(--e-bio)"]]' data-max="100" data-suffix="%"></div>
+    <div class="warnbox"><p><strong>Every one of these is a part, a material, a tool or a machine
+      that makes something else.</strong> Not one is a finished product a shopper chooses. Japan
+      stopped selling to you and started selling to the people who sell to you.</p></div>
+    <p class="src">Chip tools and materials: <a href="https://www.brookings.edu/articles/the-renaissance-of-the-japanese-semiconductor-industry/"
+      target="_blank" rel="noopener">Brookings</a> and
+      <a href="https://www.advantest.com/document/en/investors/ir-library/investors-guide/Investors_Guide_2504E.pdf"
+      target="_blank" rel="noopener">Advantest, 2024</a>. Image sensors:
+      <a href="https://optics.org/news/16/7/48" target="_blank" rel="noopener">Yole Group, 2024</a>.
+      Robots: <a href="https://ifr.org/ifr-press-releases/news/japans-car-industry-has-highest-robot-installations-in-five-years"
+      target="_blank" rel="noopener">IFR, 2025</a>. Zippers:
+      <a href="https://theconversation.com/hot-competition-for-the-humble-zipper-113800" target="_blank"
+      rel="noopener">The Conversation</a> — note YKK holds ~40% by value but only ~20% by volume,
+      and the popular "half the world's zippers" is folklore. Pianos:
+      <a href="https://www.yamaha.com/en/ir/library/publications/pdf/an-2025e-003.pdf" target="_blank"
+      rel="noopener">Yamaha's own estimate, FY2025</a>.</p>
+  </section>
+
+  <!-- 9 -->
+  <section class="m reveal" id="m9">
+    <h2>9 · Where Japan was passed</h2>
+    <p class="q">The same industries, from the other end.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Industry</th><th>Japan at its peak</th><th>Japan now</th><th>Who leads now</th></tr></thead>
+        <tbody>
+          <tr class="jp"><td><span class="gl" data-t="semiconductor">Semiconductors</span></td>
+            <td>~50% (late 1980s)</td><td class="bad">8.2% (2024)</td><td>USA 50.4%</td></tr>
+          <tr><td><span class="gl" data-t="dram">Memory chips</span></td><td>~75% (mid 1980s)</td>
+            <td class="bad">none</td><td>South Korea 68.1%</td></tr>
+          <tr><td><span class="gl" data-t="machine-tool">Machine tools</span></td>
+            <td>1st for 27 years</td><td>10% (3rd)</td><td>China 37%</td></tr>
+          <tr><td>Solar panels</td><td>50.4% (2004)</td><td class="bad">under 1%</td><td>China (80%+ of all stages)</td></tr>
+          <tr><td>Shipbuilding</td><td>~50% (around 1970)</td><td class="nd">3rd — no published figure</td><td>China 63%</td></tr>
+          <tr><td>Smartphones</td><td>—</td><td class="bad">none in the top 5</td><td>Samsung 22.7%</td></tr>
+          <tr><td>Vehicle exports</td><td>4.8 m units (2019, 1st)</td><td>4.17 m units</td><td>China 8.32 m</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Semiconductors: <a href="https://www.semiconductors.org/wp-content/uploads/2025/05/2025-SIA-Factbook-FINAL.pdf"
+      target="_blank" rel="noopener">SIA Factbook, 2024</a> — share by company headquarters.
+      Memory: <a href="https://www.trendforce.com/presscenter/news/20260226-12937.html" target="_blank"
+      rel="noopener">TrendForce, Q4 2025</a>. Machine tools:
+      <a href="https://vdw.de/en/german-machine-tool-industry-leveling-off-china-further-dominating-production/"
+      target="_blank" rel="noopener">VDW, 2025</a>. Vehicles:
+      <a href="https://oica.net/auto-industry-growth-shifted-east-in-2025-amid-global-repositioning/"
+      target="_blank" rel="noopener">OICA</a> and national customs data.
+      <strong>Japan's shipbuilding share is left blank because no accessible source publishes it</strong> —
+      every report gives China and Korea and omits Japan. Subtracting to get a residual would be
+      inventing a number.</p>
+  </section>
+
+  <!-- 10 -->
+  <section class="m reveal" id="m10">
+    <h2>10 · Against the competition</h2>
+    <p class="q">Japan, China, the USA, Germany and South Korea on five measures.</p>
+    <div class="twocol">
+      <div class="mini">
+        <h3>Economy, US$ trillion, 2025</h3>
+        <div class="bars" data-bars='[
+          ["USA","30.77",30.77,"var(--e-nuclear)"],
+          ["China","19.50",19.50,"var(--e-geo)"],
+          ["Germany","5.05",5.05,"var(--e-coal)"],
+          ["Japan","4.44",4.44,"var(--e-hydro)"],
+          ["South Korea","1.87",1.87,"var(--e-wind)"]]' data-max="33" data-prefix="$"></div>
+      </div>
+      <div class="mini">
+        <h3>Factory output, US$ billion</h3>
+        <div class="bars" data-bars='[
+          ["China","4,823",4823,"var(--e-geo)"],
+          ["Germany","890",890,"var(--e-coal)"],
+          ["Japan","788",788,"var(--e-hydro)"],
+          ["South Korea","514",514,"var(--e-wind)"],
+          ["USA","no figure",0,"var(--e-other)"]]' data-max="5200" data-suffix=""></div>
+      </div>
+      <div class="mini">
+        <h3>Vehicles built, millions, 2025</h3>
+        <div class="bars" data-bars='[
+          ["China","34.53",34.53,"var(--e-geo)"],
+          ["USA","10.24",10.24,"var(--e-nuclear)"],
+          ["Japan","8.41",8.41,"var(--e-hydro)"],
+          ["Germany","4.15",4.15,"var(--e-coal)"],
+          ["South Korea","4.10",4.10,"var(--e-wind)"]]' data-max="37" data-suffix=" m"></div>
+      </div>
+      <div class="mini">
+        <h3><span class="gl" data-t="robot-density">Robot density</span>, 2024</h3>
+        <div class="bars" data-bars='[
+          ["South Korea","1,220",1220,"var(--e-wind)"],
+          ["Germany","449",449,"var(--e-coal)"],
+          ["Japan","446",446,"var(--e-hydro)"],
+          ["USA","307",307,"var(--e-nuclear)"],
+          ["China","166",166,"var(--e-geo)"]]' data-max="1300" data-suffix=""></div>
+      </div>
+    </div>
+    <div class="bars" style="margin-top:18px;" data-bars='[
+      ["South Korea","4.94",4.94,"var(--e-wind)"],
+      ["USA","3.45",3.45,"var(--e-nuclear)"],
+      ["Japan","3.44",3.44,"var(--e-hydro)"],
+      ["Germany","3.15",3.15,"var(--e-coal)"],
+      ["China","2.58",2.58,"var(--e-geo)"]]' data-max="6" data-suffix="% of GDP"></div>
+    <p class="src" style="margin-top:2px;"><span class="gl" data-t="r-and-d">R&amp;D</span> spending,
+      2023. Economy and factory output: <a href="https://data.worldbank.org/indicator/NV.IND.MANF.CD"
+      target="_blank" rel="noopener">World Bank</a> — Japan's factory figure is 2024 and the others
+      2025, because that is how the series is published; <strong>the USA has no recent figure at all,
+      its run ending in 2021</strong>. Vehicles:
+      <a href="https://oica.net/auto-industry-growth-shifted-east-in-2025-amid-global-repositioning/"
+      target="_blank" rel="noopener">OICA</a> (<span class="gl" data-t="oica">who?</span>). Robots:
+      <a href="https://ifr.org/ifr-press-releases/news/robot-density-surges-in-europe-asia-and-americas"
+      target="_blank" rel="noopener">IFR</a> (<span class="gl" data-t="ifr">who?</span>).
+      China passed Japan for second-largest economy in 2010; Germany passed Japan for third in 2023.</p>
+  </section>
+
+  <!-- 11 -->
+  <section class="m reveal" id="m11">
+    <h2>11 · Did the help help?</h2>
+    <p class="q">How strongly each instrument of Japanese government support was associated with an
+      industry growing, 1955–1990. Negative means support and growth moved <em>opposite</em> ways.
+      <span class="gl" data-t="correlation">Definition</span></p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Instrument</th><th>Correlation with growth</th></tr></thead>
+        <tbody>
+          <tr><td>Tax breaks</td><td class="bad">−0.33</td></tr>
+          <tr><td>Cheap state loans</td><td class="bad">−0.31</td></tr>
+          <tr><td>Tariffs</td><td class="bad">−0.31</td></tr>
+          <tr><td>Direct <span class="gl" data-t="subsidy">subsidies</span></td><td class="bad">−0.13</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Mining was the largest recipient of cheap loans, subsidies and tax relief, and grew 3.8% a
+    year. Electrical machinery grew <strong>12.2%</strong> while ranking eighth or ninth for support.</p>
+    <div class="warnbox"><p><strong>Do not stop reading here.</strong> Governments give money to
+      industries that are <em>in trouble</em> — so support flows towards slow growth by
+      construction, and these numbers would look the same even if every yen worked.
+      That is a <span class="gl" data-t="selection-effect">selection effect</span>, and it is why
+      economists now argue these correlations cannot settle the question either way.</p></div>
+    <p class="src">Beason &amp; Weinstein, <em>Review of Economics and Statistics</em> 78(2), 1996;
+      figures restated in <a href="https://nfap.com/wp-content/uploads/2021/11/Japanese-Industrial-Policy.NFAP-Policy-Brief.November-2021.pdf"
+      target="_blank" rel="noopener">this policy brief</a>. The objection is from
+      <a href="https://drodrik.scholars.harvard.edu/sites/g/files/omnuum7106/files/annurev-economics-081023-0246380-final.pdf"
+      target="_blank" rel="noopener">Juhász, Lane &amp; Rodrik, <em>Annual Review of Economics</em>, 2024</a>,
+      who note that a government helping losers and a government helping winners are
+      "observationally equivalent" in data like this.</p>
+  </section>
+
+  <!-- 12 -->
+  <section class="m reveal" id="m12">
+    <h2>12 · What Japan is spending now</h2>
+    <p class="q">Two figures are quoted constantly and they mean different things. Keep them apart.</p>
+    <div class="tw">
+      <table>
+        <thead><tr><th>Commitment</th><th>Amount</th><th>What it actually is</th></tr></thead>
+        <tbody>
+          <tr class="jp"><td>Chips, 2021–23</td><td>¥3.9 trillion</td>
+            <td style="text-align:left;font-weight:400">Money <strong>allocated</strong>. Equal to 0.71% of GDP —
+            a larger share than the USA, Germany or France spent.</td></tr>
+          <tr><td>Chips and AI, to 2030</td><td>¥10 trillion</td>
+            <td style="text-align:left">A ten-year <strong>pledge</strong> made in November 2024, covering
+            AI as well as chips. Not the same money, and not yet spent.</td></tr>
+          <tr><td><span class="gl" data-t="rapidus">Rapidus</span></td><td>¥2.35 trillion</td>
+            <td style="text-align:left">Government support committed to one company that has not
+            sold a chip. Private investors have put in ¥0.27 trillion.</td></tr>
+          <tr><td>TSMC in Kumamoto</td><td>~¥1.2 trillion</td>
+            <td style="text-align:left">Subsidy for two fabs — about 40% of the cost. Fab 1 has been
+            producing since December 2024.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><a href="https://www.rieti.go.jp/jp/publications/dp/25e116.pdf" target="_blank"
+      rel="noopener">RIETI Discussion Paper 25-E-116, December 2025</a> ·
+      <a href="https://www.scmp.com/news/asia/east-asia/article/3286197/japan-pledges-fresh-us65-billion-chips-ai-help-narrow-gap-china"
+      target="_blank" rel="noopener">the November 2024 pledge</a>. Anyone who says "Japan is spending
+      ¥10 trillion on chips" has merged a pledge with an allocation and dropped the AI half.</p>
+  </section>
+
+  <div class="note"><p><strong>The exercise.</strong> Pick any three measures. Open the source link
+  and find the actual number in the actual document. Time yourself. Then do the same for
+  <em>one number you have heard an adult say about Japan</em> — and see which list it belongs on.</p></div>
+
+  <footer>
+    <a href="/grade-6/industry/">Back to the lesson</a> ·
+    <a href="/grade-6/industry-dossier.html">The case files</a> ·
+    <a href="/grade-6/energy/">Lesson 2: Energy</a>
+  </footer>
+</main>
+
+<script src="/assets/glossary.js"></script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll(".bars[data-bars]").forEach(function(box){
+    var rows, max = parseFloat(box.dataset.max) || 100;
+    var suf = box.dataset.suffix || "", pre = box.dataset.prefix || "";
+    try { rows = JSON.parse(box.dataset.bars); } catch (e) { return; }
+    box.innerHTML = rows.map(function(r){
+      var label = r[0], shown = r[1], val = r[2], col = r[3] || "var(--accent)";
+      var w = Math.max(0.6, Math.min(100, val / max * 100));
+      return '<div class="row">' +
+        '<span class="lbl"><span class="sw" style="background:' + col + '"></span>' + label + '</span>' +
+        '<span class="track"><span class="fill" data-w="' + w + '" style="background:' + col + '"></span></span>' +
+        '<span class="num">' + pre + shown + suf + '</span></div>';
+    }).join("");
+  });
+  function grow(scope){
+    (scope || document).querySelectorAll(".bars .fill[data-w]").forEach(function(f){
+      f.style.width = f.dataset.w + "%";
+    });
+  }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { grow(e.target); io.unobserve(e.target); } });
+    }, { threshold: .15 });
+    document.querySelectorAll(".bars").forEach(function(b){ io.observe(b); });
+    setTimeout(function(){ grow(); }, 2200);
+  } else { grow(); }
+})();
+</script>
+</body>
+</html>
